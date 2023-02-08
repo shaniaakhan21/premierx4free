@@ -1,4 +1,5 @@
 import { useTheme } from '@material-ui/core';
+import Footer from '../../components/Footer';
 import BMAInfo from './components/BMAInfo';
 import NSURInfo from './components/NSURInfo';
 import Partners from './components/Partners';
@@ -14,6 +15,7 @@ function HomePage(): JSX.Element {
 			<BMAInfo />
 			<Partners />
 			<NSURInfo />
+			<Footer />
 		</div>
 	)
 }
