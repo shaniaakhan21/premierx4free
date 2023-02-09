@@ -199,7 +199,7 @@ function ContactForm(): JSX.Element {
 						<img src={usFlag} />
 						{' '}+1 714-651-9510
 					</Typography>
-					<Typography className={classes.contactInfoTitle}>
+					{/* <Typography className={classes.contactInfoTitle}>
 						Would you like to join our newsletter?
 					</Typography>
 					<Grid container>
@@ -227,7 +227,7 @@ function ContactForm(): JSX.Element {
 								<Done style={{ color: "#FFFFFF" }} />
 							</Button>
 						</Grid>
-					</Grid>
+					</Grid> */}
 				</Grid>
 			</Grid>
 		</div>
