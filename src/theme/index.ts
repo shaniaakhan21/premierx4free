@@ -13,7 +13,6 @@ const theme = createTheme({
     },
     text: {
       primary: '#000',
-      white: '#fff',
       secondary: 'rgba(0,0,0,0.6)',
       disabled: 'rgba(0, 0, 0, 0.38)'
     },
