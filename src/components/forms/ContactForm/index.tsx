@@ -188,30 +188,16 @@ function ContactForm(): JSX.Element {
 						Offices
 					</Typography>
 					<Typography className={classes.contactInfoText}>
-						United States
+						2500 Chandler Ave, Suite 11
 						<br />
-						500 5th Avenue Suite 400, NY 10110
-					</Typography>
-					<Typography className={classes.contactInfoText}>
-						United Kingdom
-						<br />
-						High St, Bromley BR1 1DN
-					</Typography>
-					<Typography className={classes.contactInfoText}>
-						France
-						<br />
-						80 avenue des Terroirs de France, Paris
+						Las Vegas, Nevada 89120
 					</Typography>
 					<Typography className={classes.contactInfoTitle}>
 						For Quick Inquiries
 					</Typography>
 					<Typography className={classes.contactInfoText}>
-						<img src={ukFlag} />
-						{' '}+44 7777777777
-					</Typography>
-					<Typography className={classes.contactInfoText}>
 						<img src={usFlag} />
-						{' '}+1 3333333330
+						{' '}+1 714-651-9510
 					</Typography>
 					<Typography className={classes.contactInfoTitle}>
 						Would you like to join our newsletter?
