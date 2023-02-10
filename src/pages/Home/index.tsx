@@ -12,7 +12,6 @@ function HomePage(): JSX.Element {
 	return (
 		<div>
 			<PremierXInfo />
-			<BMAInfo />
 			<Partners />
 			<NSURInfo />
 			<Footer />

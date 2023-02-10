@@ -8,23 +8,12 @@ function NSURInfo(): JSX.Element {
 	const windowSize = useWindowSize()
 	return (
 		<div>
-			<div style={{ display: windowSize.width > COLLAPSE_THRESHOLD ? 'none' : 'block' }}>
+			<div style={{ display: windowSize.width > COLLAPSE_THRESHOLD ? 'none' : 'block', backgroundColor: '#FFFFFF' }}>
 				<NSURCard />
 			</div>
 			<div className={classes.top}>
 				<div className={classes.topInner}>
 					<Typography style={{ color: "#FFFFFF" }}>
-						Unlike traditional prescription discount cards that are only available in physical form, NSURx is a digital card that can be downloaded by installing the NSURx app on Google store or Apple Store. It’s free to download and use. With this digital card, users can get up to 80% off on their prescription drugs as well as earn NSUR tokens as a reward for each prescription filled.
-					</Typography>
-				</div>
-			</div>
-			<Grid container className={classes.bottom}>
-				<div className={classes.nsurCard} style={{ display: windowSize.width <= COLLAPSE_THRESHOLD ? 'none' : 'block' }}>
-					<NSURCard />
-				</div>
-				<Grid item xs={12} md={6} className={classes.nsurCardInfoContainer}>
-					<br />
-					<Typography align='justify'>
 						NSUR Inc. has also build a discount{' '}
 						<a href="https://nsurcoin.com/nsurx" style={{ color: "#00B0F0" }}>
 							medication calculator
@@ -34,20 +23,14 @@ function NSURInfo(): JSX.Element {
 						at the nearest pharmacies to them. This helps users save even more money on their
 						prescription drugs at the closest pharmacies
 					</Typography>
-				</Grid>
-				<Grid item xs={12} md={6} className={classes.nsurShopInfoContainer}>
-					<Typography align="justify">
-						NSUR Inc. is dedicated to providing an innovative and convenient solution
-						for prescription drug savings. By utilizing blockchain technlogy and offering unique rewards,
-						NSURx sets itself apart from traditional prescription discount cards. Not only does it provide discounts,
-						but it also rewards users with NSUR tokens which can be used to purchase products on{' '}
-						<a href="https://nsurcoin.com/shop" style={{ color: "#00B0F0", display: 'inline' }}>
-							the NSUR Marketplace
-						</a>
-					</Typography>
-				</Grid>
+				</div>
+			</div>
+			<Grid container className={classes.bottom}>
+				<div className={classes.nsurCard} style={{ display: windowSize.width <= COLLAPSE_THRESHOLD ? 'none' : 'block' }}>
+					<NSURCard />
+				</div>
 			</Grid>
-		</div >
+		</div>
 	)
 }
 

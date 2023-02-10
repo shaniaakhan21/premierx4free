@@ -153,19 +153,19 @@ const useStyles = makeStyles(() => ({
 	logo: {
 		width: 200,
 		['@media screen and (min-width: 768px)']: {
-			width: 240
+			width: 260
 		},
 		['@media screen and (min-width: 1024px)']: {
-			width: 280
-		},
-		['@media screen and (min-width: 1280px)']: {
 			width: 320
 		},
-		['@media screen and (min-width: 1600px)']: {
+		['@media screen and (min-width: 1280px)']: {
 			width: 360
 		},
-		['@media screen and (min-width: 1930px)']: {
+		['@media screen and (min-width: 1600px)']: {
 			width: 400
+		},
+		['@media screen and (min-width: 1930px)']: {
+			width: 420
 		}
 	}
 }))
