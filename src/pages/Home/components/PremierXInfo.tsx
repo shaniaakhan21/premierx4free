@@ -44,7 +44,26 @@ const useStyles = makeStyles(() => ({
 		},
 	},
 	title: {
-		color: "#FFFFFF"
+		color: "#FFFFFF",
+		fontSize: 18,
+		['@media screen and (max-width: 600px)']: {
+			paddingLeft: '2%',
+		},
+		['@media screen and (min-width: 768px)']: {
+			fontSize: 20
+		},
+		['@media screen and (min-width: 1024px)']: {
+			fontSize: 22
+		},
+		['@media screen and (min-width: 1280px)']: {
+			fontSize: 24
+		},
+		['@media screen and (min-width: 1600px)']: {
+			fontSize: 26
+		},
+		['@media screen and (min-width: 1930px)']: {
+			fontSize: 28
+		}
 	},
 	columns: {
 		marginTop: '1%',
@@ -52,7 +71,23 @@ const useStyles = makeStyles(() => ({
 		paddingRight: '2%',
 	},
 	text: {
-		color: "#FFFFFF"
+		color: "#FFFFFF",
+		fontSize: 16,
+		['@media screen and (min-width: 768px)']: {
+			fontSize: 18
+		},
+		['@media screen and (min-width: 1024px)']: {
+			fontSize: 20
+		},
+		['@media screen and (min-width: 1280px)']: {
+			fontSize: 22
+		},
+		['@media screen and (min-width: 1600px)']: {
+			fontSize: 24
+		},
+		['@media screen and (min-width: 1930px)']: {
+			fontSize: 26
+		}
 	}
 }))
 
