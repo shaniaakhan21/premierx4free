@@ -38,12 +38,16 @@ const useStyles = makeStyles(() => ({
 	},
 	quarter1: {
 		position: "relative",
-		top: 10,
+		display: 'inline-block',
+		zIndex: 4,
+		top: 7,
 		left: 0,
 		transition: "ease 0.5s",
+		cursor: 'pointer',
 		"&:hover": {
-			top: -HOVER_OFFSET,
-			left: -HOVER_OFFSET,
+			marginTop: -HOVER_OFFSET,
+			marginLeft: -HOVER_OFFSET,
+			paddingRight: HOVER_OFFSET,
 			"& .icon": {
 				transform: 'scale(2)',
 				backgroundColor: "#49859A",
@@ -53,12 +57,15 @@ const useStyles = makeStyles(() => ({
 	},
 	quarter2: {
 		position: "relative",
-		top: 10,
+		zIndex: 3,
+		top: 7,
 		right: 0,
 		transition: "ease 0.5s",
+		cursor: 'pointer',
 		"&:hover": {
-			top: -HOVER_OFFSET,
-			right: -HOVER_OFFSET,
+			marginTop: -HOVER_OFFSET,
+			paddingLeft: HOVER_OFFSET,
+			marginRight: -HOVER_OFFSET,
 			"& .icon": {
 				transform: 'scale(2)',
 				backgroundColor: "#5BADC9",
@@ -70,10 +77,13 @@ const useStyles = makeStyles(() => ({
 		position: "relative",
 		bottom: 0,
 		left: 0,
+		zIndex: 2,
 		transition: "  ease 0.5s",
+		cursor: 'pointer',
 		"&:hover": {
-			bottom: -HOVER_OFFSET,
-			left: -HOVER_OFFSET,
+			paddingTop: HOVER_OFFSET,
+			paddingRight: HOVER_OFFSET,
+			marginLeft: -HOVER_OFFSET,
 			"& .icon": {
 				transform: 'scale(2)',
 				backgroundColor: "#00AFEF",
@@ -85,10 +95,13 @@ const useStyles = makeStyles(() => ({
 		position: "relative",
 		bottom: 0,
 		right: 0,
+		zIndex: 1,
 		transition: "  ease 0.5s",
+		cursor: 'pointer',
 		"&:hover": {
-			bottom: -HOVER_OFFSET,
-			right: -HOVER_OFFSET,
+			paddingTop: HOVER_OFFSET,
+			paddingLeft: HOVER_OFFSET,
+			marginRight: -HOVER_OFFSET,
 			"& .icon": {
 				transform: 'scale(2)',
 				backgroundColor: "#136DA7",
@@ -105,7 +118,7 @@ const useStyles = makeStyles(() => ({
 		zIndex: 2,
 		width: '30%',
 		borderRadius: 64,
-		padding: 12,
+		// padding: 12,/
 	},
 	icon2: {
 		backgroundColor: "transparent",
@@ -141,6 +154,7 @@ const useStyles = makeStyles(() => ({
 		padding: 12,
 	},
 	logoContainer: {
+		zIndex: 10,
 		position: 'absolute',
 		alignSelf: 'center',
 		top: '42.5%',
