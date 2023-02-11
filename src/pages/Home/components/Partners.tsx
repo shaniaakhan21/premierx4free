@@ -3,6 +3,7 @@ import { Box, Grid, makeStyles, Typography } from '@material-ui/core';
 import PartnerChart from '../../../components/PartnerChart';
 import useWindowSize from '../../../hooks/useWindowSize';
 import { COLLAPSE_THRESHOLD } from '../Home.constants';
+import NSURInfo from './NSURInfo';
 
 const partellIcon = '/assets/svg/Home/icon-partell-colored.svg'
 const bmaIcon = '/assets/svg/Home/icon-bma-colored.svg'
@@ -145,6 +146,7 @@ function Partners(): JSX.Element {
 	const classes = useStyles();
 	const windowSize = useWindowSize()
 	const [hoveredIdx, setHoveredIdx] = useState(-1);
+	const isCollapsed = windowSize.width < COLLAPSE_THRESHOLD
 
 	return (
 		<div className={classes.container}>
@@ -153,9 +155,9 @@ function Partners(): JSX.Element {
 					STRATEGIC PARTNERS FOR PREMIERx4FREE
 				</Typography>
 			</div>
-			<Grid container className={classes.content} style={{ display: windowSize.width < COLLAPSE_THRESHOLD ? 'none' : 'flex' }}>
+			<Grid container className={classes.content} style={{ display: isCollapsed ? 'none' : 'flex' }}>
 				<Grid item xs={12} lg={5}>
-					<Box className={classes.column} style={{ paddingTop: windowSize.width < COLLAPSE_THRESHOLD ? 0 : '5%' }}>
+					<Box className={classes.column} style={{ paddingTop: isCollapsed ? 0 : '5%', minHeight: '100%' }}>
 						<PartellInfo descriptionVisible={hoveredIdx === 0} />
 						<BMAInfo descriptionVisible={hoveredIdx === 1} />
 						<SwiftMDInfo descriptionVisible={hoveredIdx === 2} />
@@ -168,7 +170,12 @@ function Partners(): JSX.Element {
 					</Box>
 				</Grid>
 			</Grid>
-			<Grid container className={classes.content} style={{ display: windowSize.width >= COLLAPSE_THRESHOLD ? 'none' : 'flex' }}>
+			{
+				!isCollapsed && hoveredIdx === 3 && (
+					<NSURInfo />
+				)
+			}
+			<Grid container className={classes.content} style={{ display: isCollapsed ? 'flex' : 'none' }}>
 				<Grid item className={classes.row}>
 					<div style={{ display: 'flex', justifyContent: 'center' }}>
 						<img src={partellIcon} />
@@ -193,6 +200,7 @@ function Partners(): JSX.Element {
 					</div>
 					<NSURXInfo descriptionVisible />
 				</Grid>
+				<NSURInfo />
 			</Grid>
 		</div >
 	)
@@ -202,7 +210,7 @@ const useStyles = makeStyles(() => ({
 	container: {
 		backgroundColor: "#FFFFFF",
 		background: 'url(/assets/images/partners-bg.png)',
-		backgroundSize: '100%',
+		backgroundSize: 'cover',
 		backgroundRepeat: 'no-repeat',
 		zIndex: 1,
 		paddingTop: 36,

@@ -1,7 +1,5 @@
 import { useTheme } from '@material-ui/core';
 import Footer from '../../components/Footer';
-import BMAInfo from './components/BMAInfo';
-import NSURInfo from './components/NSURInfo';
 import Partners from './components/Partners';
 import PremierXInfo from './components/PremierXInfo';
 import useStyles from './styles';
@@ -13,7 +11,6 @@ function HomePage(): JSX.Element {
 		<div>
 			<PremierXInfo />
 			<Partners />
-			<NSURInfo />
 			<Footer />
 		</div>
 	)
