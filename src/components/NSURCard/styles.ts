@@ -29,7 +29,8 @@ const useStyles = makeStyles(() => ({
 		flex: 1
 	},
 	whiteTxt: {
-		color: '#FFFFFF'
+		color: '#FFFFFF',
+		fontSize: 18,
 	}
 }))
 
