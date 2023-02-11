@@ -2,7 +2,7 @@ import React from 'react'
 import { Typography } from '@material-ui/core'
 import useStyles from './styles'
 
-const nsurCardBg = '/svg/nsurCardBg.svg'
+const nsurCardBg = '/assets/svg/nsurCardBg.svg'
 
 interface NSURCardProps {
 	auth?: string

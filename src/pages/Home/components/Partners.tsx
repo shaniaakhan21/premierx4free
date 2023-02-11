@@ -4,10 +4,10 @@ import PartnerChart from '../../../components/PartnerChart';
 import useWindowSize from '../../../hooks/useWindowSize';
 import { COLLAPSE_THRESHOLD } from '../Home.constants';
 
-const partellIcon = '/svg/Home/icon-partell-colored.svg'
-const bmaIcon = '/svg/Home/icon-bma-colored.svg'
-const nsurxIcon = '/svg/Home/icon-nsurx-colored.svg'
-const swiftMDIcon = '/svg/Home/icon-swiftmd-colored.svg'
+const partellIcon = '/assets/svg/Home/icon-partell-colored.svg'
+const bmaIcon = '/assets/svg/Home/icon-bma-colored.svg'
+const nsurxIcon = '/assets/svg/Home/icon-nsurx-colored.svg'
+const swiftMDIcon = '/assets/svg/Home/icon-swiftmd-colored.svg'
 
 interface InfoProps {
 	descriptionVisible: boolean
@@ -83,10 +83,7 @@ function NSURXInfo(props: InfoProps): JSX.Element {
 	return (
 		<>
 			<Typography className={classes.infoTitle}>
-				NsurX Prescription
-			</Typography>
-			<Typography className={classes.infoTitle}>
-				Savings Card
+				NsurX Prescription Savings Card
 			</Typography>
 			{
 				descriptionVisible && (
@@ -157,15 +154,15 @@ function Partners(): JSX.Element {
 				</Typography>
 			</div>
 			<Grid container className={classes.content} style={{ display: windowSize.width < COLLAPSE_THRESHOLD ? 'none' : 'flex' }}>
-				<Grid item xs={12} md={5}>
-					<Box className={classes.column}>
+				<Grid item xs={12} lg={5}>
+					<Box className={classes.column} style={{ paddingTop: windowSize.width < COLLAPSE_THRESHOLD ? 0 : '5%' }}>
 						<PartellInfo descriptionVisible={hoveredIdx === 0} />
 						<BMAInfo descriptionVisible={hoveredIdx === 1} />
 						<SwiftMDInfo descriptionVisible={hoveredIdx === 2} />
 						<NSURXInfo descriptionVisible={hoveredIdx === 3} />
 					</Box>
 				</Grid>
-				<Grid item xs={12} md={7}>
+				<Grid item xs={12} lg={7}>
 					<Box className={classes.column}>
 						<PartnerChart onHover={setHoveredIdx} onHoverEnd={() => setHoveredIdx(-1)} />
 					</Box>
@@ -197,13 +194,16 @@ function Partners(): JSX.Element {
 					<NSURXInfo descriptionVisible />
 				</Grid>
 			</Grid>
-		</div>
+		</div >
 	)
 }
 
 const useStyles = makeStyles(() => ({
 	container: {
 		backgroundColor: "#FFFFFF",
+		background: 'url(/assets/images/partners-bg.png)',
+		backgroundSize: '100%',
+		backgroundRepeat: 'no-repeat',
 		zIndex: 1,
 		paddingTop: 36,
 		paddingBottom: 36,
@@ -231,7 +231,7 @@ const useStyles = makeStyles(() => ({
 	content: {
 		marginTop: 24,
 		['@media screen and (min-width: 768px)']: {
-			marginTop: '5%'
+			marginTop: '2.5%'
 		},
 	},
 	row: {

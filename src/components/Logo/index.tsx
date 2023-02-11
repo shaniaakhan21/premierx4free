@@ -9,7 +9,7 @@ function Logo(props: LogoProps): JSX.Element {
 	const { textColor = 'white', className } = props
 	const classes = useStyles()
 	return (
-		<img src={textColor === 'white' ? '/svg/logo.svg' : '/svg/logo-black.svg'} className={`${classes.logo} ${className}`} />
+		<img src={textColor === 'white' ? '/assets/svg/logo.svg' : '/assets/svg/logo-black.svg'} className={`${classes.logo} ${className}`} />
 	)
 }
 

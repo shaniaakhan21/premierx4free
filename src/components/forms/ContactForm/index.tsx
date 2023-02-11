@@ -1,13 +1,11 @@
 import { useMemo, useState } from "react";
-import { Done } from "@mui/icons-material";
 import { FormControl, Grid, Typography, Box, TextField, Button, BaseTextFieldProps } from "@material-ui/core"
 import { useForm, } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import useStyles from "./styles";
 
-const ukFlag = '/svg/Contact/flag-uk.svg'
-const usFlag = '/svg/Contact/flag-us.svg'
+const usFlag = '/assets/svg/Contact/flag-us.svg'
 
 type FormFieldSingleRow = {
 	key: string;

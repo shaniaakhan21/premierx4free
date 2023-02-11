@@ -5,7 +5,7 @@ function PremierXInfo(): JSX.Element {
 	const classes = useStyles()
 	return (
 		<div className={classes.container}>
-			<img src="/svg/Home/landing.svg" />
+			<img src="/assets/svg/Home/landing.svg" />
 			<Box style={{ marginTop: '2.5%' }}>
 				<Typography variant='h6' className={classes.title}>
 					Who is PremierX4Free?
@@ -45,25 +45,10 @@ const useStyles = makeStyles(() => ({
 	},
 	title: {
 		color: "#FFFFFF",
-		fontSize: 18,
+		fontSize: 20,
 		['@media screen and (max-width: 600px)']: {
 			paddingLeft: '2%',
 		},
-		['@media screen and (min-width: 768px)']: {
-			fontSize: 20
-		},
-		['@media screen and (min-width: 1024px)']: {
-			fontSize: 22
-		},
-		['@media screen and (min-width: 1280px)']: {
-			fontSize: 24
-		},
-		['@media screen and (min-width: 1600px)']: {
-			fontSize: 26
-		},
-		['@media screen and (min-width: 1930px)']: {
-			fontSize: 28
-		}
 	},
 	columns: {
 		marginTop: '1%',
@@ -72,22 +57,7 @@ const useStyles = makeStyles(() => ({
 	},
 	text: {
 		color: "#FFFFFF",
-		fontSize: 16,
-		['@media screen and (min-width: 768px)']: {
-			fontSize: 18
-		},
-		['@media screen and (min-width: 1024px)']: {
-			fontSize: 20
-		},
-		['@media screen and (min-width: 1280px)']: {
-			fontSize: 22
-		},
-		['@media screen and (min-width: 1600px)']: {
-			fontSize: 24
-		},
-		['@media screen and (min-width: 1930px)']: {
-			fontSize: 26
-		}
+		fontSize: 18,
 	}
 }))
 

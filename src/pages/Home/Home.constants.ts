@@ -1,1 +1,1 @@
-export const COLLAPSE_THRESHOLD = 960
+export const COLLAPSE_THRESHOLD = 1280

@@ -2,15 +2,15 @@ import { Button } from '@material-ui/core';
 import Logo from '../Logo';
 import useStyles from './styles';
 
-const partell = '/svg/Home/ellipse-partell.svg'
-const bma = '/svg/Home/ellipse-bma.svg'
-const nsurx = '/svg/Home/ellipse-nsurx.svg'
-const swiftMD = '/svg/Home/ellipse-swiftmd.svg'
+const partell = '/assets/svg/Home/ellipse-partell.svg'
+const bma = '/assets/svg/Home/ellipse-bma.svg'
+const nsurx = '/assets/svg/Home/ellipse-nsurx.svg'
+const swiftMD = '/assets/svg/Home/ellipse-swiftmd.svg'
 
-const partellIcon = '/svg/Home/icon-partell.svg'
-const bmaIcon = '/svg/Home/icon-bma.svg'
-const nsurxIcon = '/svg/Home/icon-nsurx.svg'
-const swiftMDIcon = '/svg/Home/icon-swiftmd.svg'
+const partellIcon = '/assets/svg/Home/icon-partell.svg'
+const bmaIcon = '/assets/svg/Home/icon-bma.svg'
+const nsurxIcon = '/assets/svg/Home/icon-nsurx.svg'
+const swiftMDIcon = '/assets/svg/Home/icon-swiftmd.svg'
 
 
 interface PartnerChartProps {
@@ -24,7 +24,7 @@ function PartnerChart(props: PartnerChartProps): JSX.Element {
 
 	const onImageHovered = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, idx: number) => {
 		console.log('idx ', idx)
-		// onHover(idx)
+		onHover(idx)
 	}
 
 	return (

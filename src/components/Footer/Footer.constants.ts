@@ -48,15 +48,15 @@ export const FOOTER_ITEMS: FooterColumn[] = [
 
 export const FOOTER_SOCIAL_SHARE_ITEMS: FooterSocialShare[] = [
 	// {
-	// 	icon: '/svg/icons/facebook.svg',
+	// 	icon: '/assets/svg/icons/facebook.svg',
 	// 	link: "/"
 	// },
 	// {
-	// 	icon: '/svg/icons/instagram.svg',
+	// 	icon: '/assets/svg/icons/instagram.svg',
 	// 	link: "/"
 	// },
 	// {
-	// 	icon: '/svg/icons/twitter.svg',
+	// 	icon: '/assets/svg/icons/twitter.svg',
 	// 	link: "/"
 	// }
 ]
