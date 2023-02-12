@@ -13,7 +13,7 @@ function NSURInfo(): JSX.Element {
 			</div>
 			<div className={classes.top}>
 				<div className={classes.topInner}>
-					<Typography style={{ color: "#FFFFFF" }}>
+					<Typography className={classes.descriptionText}>
 						NSUR Inc. has also build a discount{' '}
 						<a href="https://nsurcoin.com/nsurx" style={{ color: "#00B0F0" }}>
 							medication calculator
@@ -37,34 +37,31 @@ function NSURInfo(): JSX.Element {
 const useStyles = makeStyles((theme) => ({
 	top: {
 		display: 'flex',
-		backgroundColor: '#006B92',
 		padding: 24,
 		justifyContent: 'center',
-		[theme.breakpoints.up('md')]: {
+		[`@media screen and (min-width: ${COLLAPSE_THRESHOLD}px)`]: {
+			backgroundColor: '#006B92',
 			padding: '5%',
 			justifyContent: "flex-end"
 		},
 	},
 	topInner: {
 		width: '100%',
-		[theme.breakpoints.up('md')]: {
+		[`@media screen and (min-width: ${COLLAPSE_THRESHOLD}px)`]: {
 			width: "50%"
 		},
 	},
 	bottom: {
 		backgroundColor: '#FFFFFF',
 		position: 'relative',
-		padding: 24,
-		paddingTop: 36,
-		paddingBottom: 36,
-		[theme.breakpoints.up('md')]: {
+		[`@media screen and (min-width: ${COLLAPSE_THRESHOLD}px)`]: {
 			paddingLeft: '5%',
 			paddingRight: '5%',
 			paddingTop: "7.5%",
-			paddingBottom: '7.5%'
+			paddingBottom: '5%'
 		},
 		['@media screen and (min-width: 1600px)']: {
-			paddingTop: "10%",
+			paddingTop: "5%",
 			paddingBottom: '10%'
 		},
 	},
@@ -88,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
 
 	},
 	nsurCardInfoContainer: {
-		[theme.breakpoints.up('md')]: {
+		[`@media screen and (min-width: ${COLLAPSE_THRESHOLD}px)`]: {
 			paddingLeft: '2.5%',
 			paddingRight: '2.5%'
 		},
@@ -96,6 +93,12 @@ const useStyles = makeStyles((theme) => ({
 	nsurShopInfoContainer: {
 		[theme.breakpoints.down('sm')]: {
 			marginTop: '5%',
+		},
+	},
+	descriptionText: {
+		color: "#000000",
+		[`@media screen and (min-width: ${COLLAPSE_THRESHOLD}px)`]: {
+			color: "#FFFFFF"
 		},
 	}
 }))

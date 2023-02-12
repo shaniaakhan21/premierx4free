@@ -59,7 +59,7 @@ function BMAInfo(props: InfoProps): JSX.Element {
 						<Typography className={classes.infoText}>
 							We are a health-centric organization that prides itself on over 20 years of industry expertise and vast national relationships. As a result of this, we specialize in mass marketing and distribution of unparalleled unique product offerings. These offerings include one-of-a-kind non-insurance and scientifically advanced products, many of which were not previously available to our verticals of distribution. Our services do not stop here. Learn more about our Prescription Benefit Program that can help anyone and everyone {`(to save money and have better services)`}
 						</Typography>
-						<Box style={{ justifyContent: windowSize.width >= COLLAPSE_THRESHOLD ? 'center' : 'left', display: 'flex', marginTop: windowSize.width < COLLAPSE_THRESHOLD ? 24 : 0 }}>
+						{/* <Box style={{ justifyContent: windowSize.width >= COLLAPSE_THRESHOLD ? 'center' : 'left', display: 'flex', marginTop: windowSize.width < COLLAPSE_THRESHOLD ? 24 : 0 }}>
 							<Typography className={classes.infoTitle} style={{ textDecoration: 'none' }}>
 								What can we do for you
 							</Typography>
@@ -69,7 +69,7 @@ function BMAInfo(props: InfoProps): JSX.Element {
 						</Typography>
 						<Typography className={classes.infoText}>
 							What we do is Bridge the Gap between our Partners innovative advancements, our National Distribution Marketers and everyday American’s.
-						</Typography>
+						</Typography> */}
 					</div>
 				)
 			}
@@ -95,9 +95,9 @@ function NSURXInfo(props: InfoProps): JSX.Element {
 						<Typography className={classes.infoText}>
 							Unlike traditional prescription discount cards that are only available in physical form, NSURx is a digital card that can be downloaded by installing the NSURx app on Google store or Apple Store. It’s free to download and use. With this digital card, users can get up to 80% off on their prescription drugs as well as earn NSUR tokens as a reward for each prescription filled.
 						</Typography>
-						<Typography className={classes.infoText}>
+						{/* <Typography className={classes.infoText}>
 							NSUR Inc. is dedicated to providing an innovative and convenient solution for prescription drug savings. By utilizing blockchain technology and offering unique rewards, NSURx sets itself apart from traditional prescription discount cards. Not only does it provide discounts, but it also rewards users with NSUR tokens which can be used to purchase products on the NSUR marketplace
-						</Typography>
+						</Typography> */}
 					</div>
 				)
 			}
@@ -123,7 +123,7 @@ function SwiftMDInfo(props: InfoProps): JSX.Element {
 						<Typography className={classes.infoText}>
 							We are leading the modernisation of routine medical care for patients and reducing costs for our clients.Here are four ways SwiftMD is different from other platforms.
 						</Typography>
-						<Typography className={classes.infoText} style={{ marginTop: 32 }}>
+						{/* <Typography className={classes.infoText} style={{ marginTop: 32 }}>
 							People love our online doctor services.
 						</Typography>
 						<Typography className={classes.infoText}>
@@ -131,7 +131,7 @@ function SwiftMDInfo(props: InfoProps): JSX.Element {
 						</Typography>
 						<Typography className={classes.infoText}>
 							Great doctors who work exclusively for SwiftMD.
-						</Typography>
+						</Typography> */}
 						<Typography className={classes.infoText}>
 							We select the best doctors who are passionate about online healthcare services. They work exclusively with us in telemedicine, and they develop relationships with our members through repeat virtual doctor visits.
 						</Typography>
@@ -170,11 +170,6 @@ function Partners(): JSX.Element {
 					</Box>
 				</Grid>
 			</Grid>
-			{
-				!isCollapsed && hoveredIdx === 3 && (
-					<NSURInfo />
-				)
-			}
 			<Grid container className={classes.content} style={{ display: isCollapsed ? 'flex' : 'none' }}>
 				<Grid item className={classes.row}>
 					<div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -200,7 +195,6 @@ function Partners(): JSX.Element {
 					</div>
 					<NSURXInfo descriptionVisible />
 				</Grid>
-				<NSURInfo />
 			</Grid>
 		</div >
 	)
