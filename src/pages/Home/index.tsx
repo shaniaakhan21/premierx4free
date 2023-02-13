@@ -12,7 +12,7 @@ function HomePage(): JSX.Element {
 		<div>
 			<PremierXInfo />
 			<Partners />
-			<NSURInfo />
+			{/* <NSURInfo /> */}
 			<Footer />
 		</div>
 	)
