@@ -1,11 +1,17 @@
-import { BrowserRouter, BrowserRouter as Router, RouterProvider } from 'react-router-dom'
+import { useEffect } from 'react'
+import { BrowserRouter } from 'react-router-dom'
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import theme from './theme'
 import AppRouter from './routes'
 import Navbar from './components/Navbar'
-import Footer from './components/Footer'
+import TaggingService from './utils/TaggingService'
 
 function App() {
+
+  useEffect(() => {
+    TaggingService.init()
+  }, [])
+
   return (
     <div className='App'>
       <ThemeProvider theme={theme}>
