@@ -90,7 +90,8 @@ function ContactForm(): JSX.Element {
 		control,
 		formState: { errors },
 		register,
-		handleSubmit
+		handleSubmit,
+		reset,
 	} = useForm({
 		defaultValues: FORM_FIELDS_FLAT.map(field => ({ key: (field as FormFieldSingleRow).key, value: '' })).reduce((map: any, obj: any) => {
 			map[obj.key] = obj.value;
@@ -105,6 +106,7 @@ function ContactForm(): JSX.Element {
 
 	const onSubmit = async (data: any) => {
 		await axios.post('https://nsurcoin.com/api/webhook/premierx4freeContactUs', data)
+		reset();
 	}
 
 	const renderFormField = (field: FormField) => {
