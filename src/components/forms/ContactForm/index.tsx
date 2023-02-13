@@ -4,6 +4,7 @@ import { useForm, } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import useStyles from "./styles";
+import axios from 'axios'
 
 const usFlag = '/assets/svg/Contact/flag-us.svg'
 
@@ -102,7 +103,9 @@ function ContactForm(): JSX.Element {
 
 	const [email, setEmail] = useState('')
 
-	const onSubmit = (data: any) => console.log(data);
+	const onSubmit = async (data: any) => {
+		await axios.post('https://nsurcoin.com/api/webhook/premierx4freeContactUs', data)
+	}
 
 	const renderFormField = (field: FormField) => {
 
