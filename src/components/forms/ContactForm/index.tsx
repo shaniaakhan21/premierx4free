@@ -105,7 +105,7 @@ function ContactForm(): JSX.Element {
 	const [email, setEmail] = useState('')
 
 	const onSubmit = async (data: any) => {
-		await axios.post('https://nsurcoin.com/api/webhook/premierx4freeContactUs', data)
+		await axios.post('/api/webhook/premierx4freeContactUs', data)
 		reset();
 	}
 
