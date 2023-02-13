@@ -47,9 +47,7 @@ const FORM_FIELDS: FormField[] = [
 	{
 		key: 'phone',
 		placeholder: 'Contact Phone',
-		type: 'number',
-		pattern: /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/,
-		patternError: "Numerical characters only"
+		type: 'number'
 	},
 	{
 		key: 'email',
