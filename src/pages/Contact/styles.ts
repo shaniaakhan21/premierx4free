@@ -1,6 +1,6 @@
-import { makeStyles } from "@material-ui/core";
+import { makeStyles } from "../../utils/makeStyles"
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles()(() => ({
 	container: {
 		backgroundColor: "#006B92",
 	},

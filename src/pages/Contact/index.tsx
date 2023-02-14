@@ -1,10 +1,10 @@
-import { Typography } from "@material-ui/core"
+import { Typography } from "@mui/material"
 import Footer from "../../components/Footer"
 import ContactForm from "../../components/forms/ContactForm"
 import useStyles from "./styles"
 
 function ContactPage(): JSX.Element {
-	const classes = useStyles()
+	const { classes } = useStyles()
 	return (
 		<div className={classes.container}>
 			<div className={classes.content}>

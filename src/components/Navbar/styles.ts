@@ -1,8 +1,7 @@
-import { makeStyles } from "@material-ui/core";
+import { makeStyles } from "../../utils/makeStyles"
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles()(() => ({
 	container: {
-		width: '100%',
 		backgroundColor: '#006B92',
 		display: 'flex',
 		flexDirection: 'row',

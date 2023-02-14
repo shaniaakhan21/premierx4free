@@ -1,9 +1,10 @@
-import { Box, Grid, makeStyles, Typography } from '@material-ui/core';
+import { Box, Grid, Typography } from '@mui/material';
 import useWindowSize from '../../../hooks/useWindowSize';
+import { makeStyles } from '../../../utils/makeStyles';
 const BORDER_RADIUS = 16;
 
 function BMAInfo(): JSX.Element {
-	const classes = useStyles();
+	const { classes } = useStyles();
 	const window = useWindowSize()
 
 	return (
@@ -48,7 +49,7 @@ function BMAInfo(): JSX.Element {
 	)
 }
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles()(() => ({
 	container: {
 		borderBottomRightRadius: BORDER_RADIUS,
 		borderTopRightRadius: BORDER_RADIUS,

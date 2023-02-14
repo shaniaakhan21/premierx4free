@@ -1,8 +1,8 @@
-import { Box, Grid, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { Box, Grid, Typography } from '@mui/material';
+import { makeStyles } from '../../../utils/makeStyles';
 
 function PremierXInfo(): JSX.Element {
-	const classes = useStyles()
+	const { classes } = useStyles()
 	return (
 		<div className={classes.container}>
 			<img src="/assets/svg/Home/landing.svg" />
@@ -31,7 +31,7 @@ function PremierXInfo(): JSX.Element {
 	)
 }
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles()(() => ({
 	container: {
 		display: 'flex',
 		flexDirection: 'column',

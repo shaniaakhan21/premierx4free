@@ -1,11 +1,11 @@
-import { Grid, Link, Typography } from '@material-ui/core';
+import { Grid, Link, Typography } from '@mui/material';
 import Logo from '../Logo';
 import { FOOTER_ITEMS, FOOTER_SOCIAL_SHARE_ITEMS } from './Footer.constants';
 import { FooterItem, FooterColumn, FooterSocialShare } from './Footer.types';
 import useStyles from './styles';
 
 function Footer(): JSX.Element {
-	const classes = useStyles();
+	const { classes } = useStyles();
 
 	const renderFooterItem = (item: FooterItem) => {
 		return (

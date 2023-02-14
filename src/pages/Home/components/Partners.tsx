@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { Box, Grid, makeStyles, Typography } from '@material-ui/core';
+import { Box, Grid, Typography } from '@mui/material';
 import PartnerChart from '../../../components/PartnerChart';
 import useWindowSize from '../../../hooks/useWindowSize';
 import { COLLAPSE_THRESHOLD } from '../Home.constants';
 import NSURInfo from './NSURInfo';
+import { makeStyles } from '../../../utils/makeStyles';
 
 const partellIcon = '/assets/svg/Home/icon-partell-colored.svg'
 const bmaIcon = '/assets/svg/Home/icon-bma-colored.svg'
@@ -16,7 +17,7 @@ interface InfoProps {
 
 function PartellInfo(props: InfoProps): JSX.Element {
 	const { descriptionVisible } = props
-	const classes = useStyles();
+	const { classes } = useStyles();
 
 	return (
 		<>
@@ -41,7 +42,7 @@ function PartellInfo(props: InfoProps): JSX.Element {
 
 function BMAInfo(props: InfoProps): JSX.Element {
 	const { descriptionVisible } = props
-	const classes = useStyles();
+	const { classes } = useStyles();
 	const windowSize = useWindowSize()
 
 	return (
@@ -79,7 +80,7 @@ function BMAInfo(props: InfoProps): JSX.Element {
 
 function NSURXInfo(props: InfoProps): JSX.Element {
 	const { descriptionVisible } = props
-	const classes = useStyles();
+	const { classes } = useStyles();
 
 	return (
 		<>
@@ -107,7 +108,7 @@ function NSURXInfo(props: InfoProps): JSX.Element {
 
 function SwiftMDInfo(props: InfoProps): JSX.Element {
 	const { descriptionVisible } = props
-	const classes = useStyles();
+	const { classes } = useStyles();
 
 	return (
 		<>
@@ -143,7 +144,7 @@ function SwiftMDInfo(props: InfoProps): JSX.Element {
 }
 
 function Partners(): JSX.Element {
-	const classes = useStyles();
+	const { classes } = useStyles();
 	const windowSize = useWindowSize()
 	const [hoveredIdx, setHoveredIdx] = useState(-1);
 	const isCollapsed = windowSize.width < COLLAPSE_THRESHOLD
@@ -200,7 +201,7 @@ function Partners(): JSX.Element {
 	)
 }
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles()(() => ({
 	container: {
 		backgroundColor: "#FFFFFF",
 		background: 'url(/assets/images/partners-bg.png)',

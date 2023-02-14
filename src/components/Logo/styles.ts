@@ -1,6 +1,6 @@
-import { makeStyles } from "@material-ui/core";
+import { makeStyles } from "../../utils/makeStyles"
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles()(() => ({
 	logo: {
 		width: 140,
 		['@media screen and (min-width: 768px)']: {

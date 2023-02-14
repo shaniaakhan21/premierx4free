@@ -1,10 +1,12 @@
 import { useMemo, useState } from "react";
-import { FormControl, Grid, Typography, Box, TextField, Button, BaseTextFieldProps } from "@material-ui/core"
+import { FormControl, Grid, Typography, Box, TextField, BaseTextFieldProps } from "@mui/material"
+import axios from 'axios'
+import { LoadingButton } from '@mui/lab';
 import { useForm, } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import { QueryStatus } from "../../../types/form";
 import useStyles from "./styles";
-import axios from 'axios'
 
 const usFlag = '/assets/svg/Contact/flag-us.svg'
 
@@ -48,7 +50,9 @@ const FORM_FIELDS: FormField[] = [
 	{
 		key: 'phone',
 		placeholder: 'Contact Phone',
-		type: 'number'
+		type: 'number',
+		pattern: /^[0-9]*$/,
+		patternError: "Numerical characters only"
 	},
 	{
 		key: 'email',
@@ -87,11 +91,10 @@ function ContactForm(): JSX.Element {
 
 	const validationSchema = Yup.object().shape(FORM_FIELDS_FLAT.reduce((prev, field) => ({ ...prev, [field.key]: getValidationSchemaFromField(FORM_FIELDS_FLAT_MAP[field.key]) }), {}))
 	const {
-		control,
 		formState: { errors },
 		register,
 		handleSubmit,
-		reset,
+		reset
 	} = useForm({
 		defaultValues: FORM_FIELDS_FLAT.map(field => ({ key: (field as FormFieldSingleRow).key, value: '' })).reduce((map: any, obj: any) => {
 			map[obj.key] = obj.value;
@@ -100,13 +103,23 @@ function ContactForm(): JSX.Element {
 		resolver: yupResolver(validationSchema)
 	});
 
-	const classes = useStyles()
-
-	const [email, setEmail] = useState('')
+	const { classes } = useStyles()
+	const [formStatus, setFormStatus] = useState<QueryStatus>(QueryStatus.IDLE)
 
 	const onSubmit = async (data: any) => {
-		await axios.post('/api/webhook/premierx4freeContactUs', data)
-		reset();
+		try {
+			setFormStatus(QueryStatus.LOADING)
+			await axios.post('/api/webhook/premierx4freeContactUs', data)
+			setFormStatus(QueryStatus.SUCCESS)
+			reset();
+		} catch (error) {
+			setFormStatus(QueryStatus.FAILED)
+		} finally {
+			// give user some time to read confirmation/error message
+			setTimeout(() => {
+				setFormStatus(QueryStatus.IDLE)
+			}, 2000);
+		}
 	}
 
 	const renderFormField = (field: FormField) => {
@@ -140,8 +153,8 @@ function ContactForm(): JSX.Element {
 					className={classes.input}
 					InputProps={{
 						classes: {
-							root: classes.cssOutlinedInput,
-							focused: classes.cssFocused,
+							root: classes.input,
+							focused: classes.focusedInput,
 							notchedOutline: classes.notchedOutline,
 						},
 						inputMode: 'numeric',
@@ -149,16 +162,18 @@ function ContactForm(): JSX.Element {
 					{...register(field.key)}
 					style={{ width: "100%" }}
 				/>
-				{errors && errors[field.key]?.type === 'required' && (
-					<Typography color="error">
-						This field is required
-					</Typography>
-				)}
-				{errors && errors[field.key]?.type === 'matches' && (
-					<Typography color="error">
-						{field.patternError}
-					</Typography>
-				)}
+				<div style={{ marginBottom: '2%', marginTop: '1%' }}>
+					{errors && errors[field.key]?.type === 'required' && (
+						<Typography color="error">
+							This field is required
+						</Typography>
+					)}
+					{errors && errors[field.key]?.type === 'matches' && (
+						<Typography color="error">
+							{field.patternError}
+						</Typography>
+					)}
+				</div>
 			</div>
 		)
 	}
@@ -172,15 +187,28 @@ function ContactForm(): JSX.Element {
 				<Grid item xs={12} sm={6}>
 					<FormControl onSubmit={handleSubmit(onSubmit)} style={{ width: "100%" }}>
 						{FORM_FIELDS.map(renderFormField)}
-						<Button
+						<LoadingButton
+							loading={formStatus === QueryStatus.LOADING}
+							loadingPosition='center'
 							className={classes.submitBtn}
 							variant='contained'
+							loadingIndicator="Submitting..."
 							onSubmit={handleSubmit(onSubmit)}
 							onClick={handleSubmit(onSubmit)}>
 							<Typography>
 								Submit
 							</Typography>
-						</Button>
+						</LoadingButton>
+						{formStatus === QueryStatus.SUCCESS && (
+							<Typography className={classes.confirmationMessage}>
+								Your form has been submitted. A representative from our team will be in touch with you soon!
+							</Typography>
+						)}
+						{formStatus === QueryStatus.FAILED && (
+							<Typography className={classes.confirmationMessage}>
+								Your form has could not be submitted. Please try again!
+							</Typography>
+						)}
 					</FormControl>
 				</Grid>
 				<Grid item xs={12} sm={6} className={classes.contactInfo}>
@@ -200,35 +228,6 @@ function ContactForm(): JSX.Element {
 						<img src={usFlag} />
 						{' '}+1 714-651-9510
 					</Typography>
-					{/* <Typography className={classes.contactInfoTitle}>
-						Would you like to join our newsletter?
-					</Typography>
-					<Grid container>
-						<Grid item xs={8}>
-							<TextField
-								variant="outlined"
-								placeholder='Email'
-								value={email}
-								onChange={(e) => setEmail(e.target.value)}
-								className={classes.input}
-								InputProps={{
-									classes: {
-										root: classes.cssOutlinedInput,
-										focused: classes.cssFocused,
-										notchedOutline: classes.notchedOutline,
-									},
-									inputMode: 'numeric',
-								}}
-								style={{ width: "90%", marginBottom: 0 }}
-							/>
-
-						</Grid>
-						<Grid item alignItems="stretch" style={{ display: "flex" }} xs={4}>
-							<Button variant="contained" className={classes.submitEmailBtn}>
-								<Done style={{ color: "#FFFFFF" }} />
-							</Button>
-						</Grid>
-					</Grid> */}
 				</Grid>
 			</Grid>
 		</div>

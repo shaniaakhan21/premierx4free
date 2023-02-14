@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography } from '@material-ui/core'
+import { Typography } from '@mui/material'
 import useStyles from './styles'
 
 const nsurCardBg = '/assets/svg/nsurCardBg.svg'
@@ -21,7 +21,7 @@ function NSURCard(props: NSURCardProps) {
 		pcn = 'SC1',
 		hideNumbers = false
 	} = props
-	const classes = useStyles()
+	const { classes } = useStyles()
 
 	return (
 		<div className={classes.container}>

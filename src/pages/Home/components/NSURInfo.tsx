@@ -1,10 +1,11 @@
-import { Grid, Link, makeStyles, Typography } from "@material-ui/core"
+import { Grid, Typography } from "@mui/material"
 import NSURCard from "../../../components/NSURCard";
 import useWindowSize from "../../../hooks/useWindowSize";
+import { makeStyles } from "../../../utils/makeStyles";
 import { COLLAPSE_THRESHOLD } from "../Home.constants";
 
 function NSURInfo(): JSX.Element {
-	const classes = useStyles();
+	const { classes } = useStyles();
 	const windowSize = useWindowSize()
 	return (
 		<div>
@@ -34,7 +35,7 @@ function NSURInfo(): JSX.Element {
 	)
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
 	top: {
 		display: 'flex',
 		padding: 24,

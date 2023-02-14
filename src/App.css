@@ -1,6 +1,8 @@
 /*  GLOBAL LAYOUT */
 html, body, #root, .App {
 	height: 100%;
+	margin: 0 !important;
+    padding: 0 !important;
 }
 body {
 	min-height: 100%;

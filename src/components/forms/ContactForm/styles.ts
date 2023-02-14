@@ -1,20 +1,17 @@
-import { makeStyles } from "@material-ui/core";
+import { makeStyles } from "../../../utils/makeStyles"
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
 	title: {
 		color: "#FFFFFF",
 		marginBottom: '5%'
 	},
 	input: {
-		marginBottom: '4%'
-	},
-	cssOutlinedInput: {
 		color: "#FFFFFF",
 		'&$cssFocused $notchedOutline': {
 			borderColor: '#FFFFFF',
 		},
 	},
-	cssFocused: {
+	focusedInput: {
 		color: "#FFFFFF",
 	},
 	notchedOutline: {
@@ -87,6 +84,12 @@ const useStyles = makeStyles((theme) => ({
 	},
 	submitEmailBtn: {
 		backgroundColor: "#00B0F0",
+	},
+	confirmationMessage: {
+		color: "#FFFFFF",
+		fontSize: 16,
+		textAlign: 'center',
+		marginTop: '1%'
 	}
 }))
 

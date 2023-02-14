@@ -1,6 +1,6 @@
-import { makeStyles, Theme } from "@material-ui/core";
+import { makeStyles } from "../../utils/makeStyles";
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme) => ({
 	container: {
 		width: '100%',
 		backgroundColor: '#0E5988',
@@ -42,6 +42,5 @@ const useStyles = makeStyles((theme: Theme) => ({
 	link: {
 		color: "#8BE1FF"
 	},
-}))
-
+}));
 export default useStyles
