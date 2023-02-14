@@ -226,7 +226,7 @@ function ContactForm(): JSX.Element {
 					</Typography>
 					<Typography className={classes.contactInfoText}>
 						<img src={usFlag} />
-						{' '}+1 714-651-9510
+						{' '}+1 833-464-4774
 					</Typography>
 				</Grid>
 			</Grid>
