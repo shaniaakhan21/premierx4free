@@ -41,14 +41,17 @@ const useStyles = makeStyles()(() => ({
 		justifyContent: 'flex-end',
 	  },
 	  link: {
-		color: 'black',
-		padding: '0.5% 1%',
+		color: '#136DA7!important',
+		fontWeight: '400!important',
+		fontSize: '25!important',
+		padding: '10px!important',
+		margin: '5px!important',
 		'&:hover': {
-		  color: 'white',
+		  color: 'white!important',
 		  backgroundColor: '#00B0F0',
 		},
 		'&.active': {
-		  color: 'white',
+		  color: 'white!important',
 		  backgroundColor: '#00B0F0',
 		},
 		marginLeft: '10px',

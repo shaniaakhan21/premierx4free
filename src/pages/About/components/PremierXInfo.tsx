@@ -35,29 +35,35 @@ const useStyles = makeStyles()(() => ({
 	container: {
 		display: 'flex',
 		flexDirection: 'column',
-		backgroundColor: "white",
+		backgroundColor: 'white',
 		padding: '6%',
 		paddingTop: '1%',
 		paddingBottom: '12%',
-		['@media screen and (min-width: 768px)']: {
-			paddingBottom: '12%',
+		'@media screen and (min-width: 768px)': {
+		  paddingBottom: '12%',
 		},
-	},
-	title: {
-		color: "#136DA7",
+	  },
+	  title: {
+		color: '#136DA7',
 		fontSize: 50,
-		['@media screen and (max-width: 600px)']: {
-			paddingLeft: '2%',
+		'@media screen and (max-width: 600px)': {
+		  fontSize: 30,
+		  paddingLeft: '2%',
 		},
-	},
-	columns: {
+	  },
+	  columns: {
 		marginTop: '1%',
-	},
-	text: {
-		color: "#136DA7",
+		display: 'flex',
+		flexWrap: 'wrap',
+		'@media screen and (max-width: 600px)': {
+		  flexDirection: 'column',
+		},
+	  },
+	  text: {
+		color: '#136DA7',
 		fontSize: 18,
-		textAlign:'justify',
-	}
+		textAlign: 'justify',
+	  },
 }))
 
 export default PremierXInfo

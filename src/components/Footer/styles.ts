@@ -42,5 +42,23 @@ const useStyles = makeStyles()((theme) => ({
 	link: {
 		color: "#8BE1FF"
 	},
+	logo: {
+		width: 140,
+		['@media screen and (min-width: 768px)']: {
+			width: 150
+		},
+		['@media screen and (min-width: 1024px)']: {
+			width: 160
+		},
+		['@media screen and (min-width: 1280px)']: {
+			width: 170
+		},
+		['@media screen and (min-width: 1600px)']: {
+			width: 200
+		},
+		['@media screen and (min-width: 1930px)']: {
+			width: 215
+		}
+	},
 }));
 export default useStyles

@@ -45,7 +45,7 @@ function Footer(): JSX.Element {
 		<Grid container className={classes.container} alignItems='center'>
 			<Grid item xs={12} md={2}>
 				<Link href='/'>
-					<Logo />
+				<img src={'/assets/svg/logo.svg'} className={classes.logo} />
 				</Link>
 			</Grid>
 			<Grid item xs={12} md={8}>

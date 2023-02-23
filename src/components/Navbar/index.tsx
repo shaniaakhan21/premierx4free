@@ -1,43 +1,31 @@
-import { Link, Typography, Box } from '@mui/material';
-import useStyles from './styles';
+import { Navbar, Container, Nav } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import Logo from '../Logo';
-import { NavLink } from 'react-router-dom';
+import useStyles from "./styles"
+import { useLocation } from 'react-router-dom';
 
-function Navbar(): JSX.Element {
+function AppNavbar(): JSX.Element {
   const { classes } = useStyles();
-
+  const location = useLocation();
   return (
-    <Box className={classes.container}>
-      <Link href="/" className={classes.logoContainer}>
-        <Logo />
-      </Link>
-      <NavLink to="/" className={classes.link} activeClassName="active" style={{ textDecoration: 'none' }}>
-        <Typography variant="h6" >
-          About Us
-        </Typography>
-      </NavLink>
-      <NavLink to="/team" className={classes.link} activeClassName="active" style={{ textDecoration: 'none' }}>
-        <Typography variant="h6" >
-          Meet the Team
-        </Typography>
-      </NavLink>
-      <NavLink to="/partners" className={classes.link} activeClassName="active" style={{ textDecoration: 'none' }}>
-        <Typography variant="h6" >
-          Strategic Partners
-        </Typography>
-      </NavLink>
-      <NavLink to="/plan-options" className={classes.link} activeClassName="active" style={{ textDecoration: 'none' }}>
-        <Typography variant="h6" >
-          Plan Options
-        </Typography>
-      </NavLink>
-      <NavLink to="/contact" className={classes.link} activeClassName="active" style={{ textDecoration: 'none' }}>
-        <Typography variant="h6" >
-          Contact Us
-        </Typography>
-      </NavLink>
-    </Box>
+    <Navbar bg="white" expand="lg">
+      <Container style={{ padding:'1%'}}>
+        <Link to="/" className="navbar-brand">
+          <Logo/>
+        </Link>
+        <Navbar.Toggle aria-controls="navbar-nav" />
+        <Navbar.Collapse id="navbar-nav">
+          <Nav className="ms-auto">
+            <Link to="/" className={`${classes.link} nav-link ${location.pathname === "/" ? "active" : ""}`} >About Us</Link>
+            <Link to="/team" className={`${classes.link} nav-link ${location.pathname === "/team" ? "active" : ""}`}>Meet the Team</Link>
+            <Link to="/partners" className={`${classes.link} nav-link ${location.pathname ==="/partners"  ? "active" : ""}`}>Strategic Partners</Link>
+            <Link to="/plans" className={`${classes.link} nav-link ${location.pathname ===  "/plans" ? "active" : ""}`}>Plan Options</Link>
+            <Link to="/contact" className={`${classes.link} nav-link ${location.pathname === "/contact" ? "active" : ""}`}>Contact Us</Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 }
 
-export default Navbar;
+export default AppNavbar;

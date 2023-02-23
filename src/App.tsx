@@ -3,10 +3,11 @@ import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from '@mui/material'
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
-import theme from './theme'
-import AppRouter from './routes'
-import Navbar from './components/Navbar'
-import TaggingService from './utils/TaggingService'
+import theme from './theme';
+import AppRouter from './routes';
+import Navbar from './components/Navbar';
+import TaggingService from './utils/TaggingService';
+import  './components/FontawesomeIcons';
 
 export const muiCache = createCache({
   key: 'premierx-theme',
