@@ -3,7 +3,7 @@ import { Box, Grid, Typography } from '@mui/material';
 import PartnerChart from '../../../components/PartnerChart';
 import useWindowSize from '../../../hooks/useWindowSize';
 import { COLLAPSE_THRESHOLD } from '../Home.constants';
-import NSURInfo from './NSURInfo';
+// import NSURInfo from './NSURInfo';
 import { makeStyles } from '../../../utils/makeStyles';
 
 const partellIcon = '/assets/svg/Home/icon-partell-colored.svg'
@@ -43,7 +43,7 @@ function PartellInfo(props: InfoProps): JSX.Element {
 function BMAInfo(props: InfoProps): JSX.Element {
 	const { descriptionVisible } = props
 	const { classes } = useStyles();
-	const windowSize = useWindowSize()
+	//const windowSize = useWindowSize()
 
 	return (
 		<>
