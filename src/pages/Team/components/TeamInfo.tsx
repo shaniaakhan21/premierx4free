@@ -30,7 +30,7 @@ function TeamInfo(): JSX.Element {
 	);
 };
 
-const useStyles = makeStyles()(() => ({
+const useStyles = makeStyles()((theme) => ({
 	container: {
 		display: 'flex',
 		flexDirection: 'column',
@@ -44,17 +44,23 @@ const useStyles = makeStyles()(() => ({
 	},
 	title: {
 		color: "#136DA7",
-		fontSize: 50,
+		fontSize: 'calc(1.8vw + 16px)',
 		['@media screen and (max-width: 600px)']: {
 			paddingLeft: '2%',
 		},
+		[theme.breakpoints.down('sm')]: {
+			fontSize: 'calc(4vw + 12px)',
+		  },
 	},
 	columns: {
 		marginTop: '1%',
 	},
 	text: {
 		color: "#000000",
-		fontSize: 22,
+		fontSize: 'calc(0.5vw + 14px)',
+		[theme.breakpoints.down('sm')]: {
+		  fontSize: 'calc(2vw + 6px)',
+		},
 		textAlign:'justify',
 	}
 }))

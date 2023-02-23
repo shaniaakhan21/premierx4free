@@ -4,12 +4,9 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { makeStyles } from '../../../utils/makeStyles';
 
-interface CarouselProps {
-  title: string;
-  text: string;
-}
 
-const Carousel: React.FC<CarouselProps> = ({ }) => {
+
+function Carousel() {
   const settings = {
     dots: true,
     infinite: true,
@@ -55,51 +52,103 @@ const Carousel: React.FC<CarouselProps> = ({ }) => {
 
 
 const useStyles = makeStyles()(() => ({
-	container: {
-        marginLeft: '20%'
-	},
-
-    heading:{
-        marginTop: 0,
-        fontStyle: 'normal',
-        fontWeight: 700,
-        fontSize: 40,
-        fontFamily: 'Roboto,"Segoe UI",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
+  container: {
+    marginLeft: '20%',
+    '@media (max-width: 1200px)': {
+      marginLeft: '15%',
     },
-
-    ptext: {
+    '@media (max-width: 992px)': {
+      marginLeft: '10%',
+    },
+    '@media (max-width: 768px)': {
+      marginLeft: '5%',
+    },
+    '@media (max-width: 576px)': {
+      marginLeft: '0',
+    },
+  },
+  heading:{
+    marginTop: 0,
+    fontStyle: 'normal',
+    fontWeight: 700,
+    fontSize: 40,
+    fontFamily: 'Roboto,"Segoe UI",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
+    '@media (max-width: 1200px)': {
+      fontSize: '5vw',
+    },
+    '@media (max-width: 768px)': {
+      fontSize: '6vw',
+    },
+  },
+  ptext: {
     paddingRight: '21%',
     fontStyle: 'normal',
     fontWeight: '400',
     fontSize: '19px',
     textAlign:'justify',
     fontFamily: 'Roboto,"Segoe UI",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
+    '@media (max-width: 1200px)': {
+      fontSize: '1.8vw',
     },
-
-    carousel: {
-        '& .slick-dots li button:before': {
-            fontSize: '1px',
-            border: '1px solid black',
-            borderRadius:'50%',
-            background: 'white',
-            color:'white',
-            lineHeight:0,
-            width: '10px',
-            height: '10px',
-        },
-        '& .slick-dots li.slick-active button:before':{
-            fontSize: '1px',
-            border: '1px solid black',
-            borderRadius:'50%',
-            background: '#00B0F0',
-            color:'#00B0F0',
-        },
-        '& .slick-dots':{
-            marginLeft: '10%',
-        }
+    '@media (max-width: 992px)': {
+      paddingRight: '10%',
+    },
+    '@media (max-width: 768px)': {
+      paddingRight: '5%',
+      fontSize: '2.5vw',
+    },
+    '@media (max-width: 576px)': {
+      paddingRight: '2%',
+      fontSize: '3vw',
+    },
+  },
+  carousel: {
+    '& .slick-dots li button:before': {
+      fontSize: '0px',
+      border: '1px solid black',
+      borderRadius:'50%',
+      background: 'white',
+      color:'white',
+      lineHeight:0,
+      width: '15px',
+      height: '15px',
+      '@media (max-width: 768px)': {
+        fontSize: '0px',
+        width: '20px',
+        height: '20px',
       },
-
-
+      '@media (max-width: 576px)': {
+        fontSize: '0px',
+        width: '17px',
+        height: '17px',
+      },
+    },
+    '& .slick-dots li.slick-active button:before':{
+      fontSize: '1px',
+      border: '1px solid black',
+      borderRadius:'50%',
+      background: '#00B0F0',
+      color:'#00B0F0',
+      '@media (max-width: 768px)': {
+        fontSize: '2px',
+      },
+      '@media (max-width: 576px)': {
+        fontSize: '3px',
+      },
+    },
+    '& .slick-dots':{
+      marginLeft: '10%',
+      '@media (max-width: 1200px)': {
+        marginLeft: '5%',
+      },
+      '@media (max-width: 992px)': {
+        marginLeft: '2.5%',
+      },
+      '@media (max-width: 768px)': {
+        marginLeft: '0',
+      },
+    }
+  },
 }))
 
 
