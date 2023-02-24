@@ -12,6 +12,7 @@ const useStyles = makeStyles()(() => ({
           margin: '2%',
           padding: '1%',
         },
+
       },
     col: {
         flex: '0 0 17%',
@@ -33,6 +34,15 @@ const useStyles = makeStyles()(() => ({
         },
 
       },
+      '@media (max-width: 600px)': {
+        flex: '0 0 21%',
+        '&:first-child': {
+        margin: '2%',
+        padding: '1%',
+        flex: '0 0 26%'
+      },
+
+    },
   
     },
     row: {
@@ -43,11 +53,17 @@ const useStyles = makeStyles()(() => ({
     },
     check: {
         color: '#52c41a',
-        height: '1.6em'
+        height: '1.6em',
+        '@media (max-width: 600px)': {
+          height: '1rem!important'
+        },
     },
     times: {
       color: 'red',
-      height: '1.6em'
+      height: '1.6em',
+      '@media (max-width: 600px)': {
+        height: '1rem!important'
+      },
     },
     borderNo:{
         border: 'none!important'
@@ -55,7 +71,11 @@ const useStyles = makeStyles()(() => ({
     h6: {
         fontSize: '1.2rem!important',
         '@media (max-width: 768px)': {
-          fontSize: '1rem!important',
+          fontSize: '0.5rem!important',
+        },
+
+        '@media (max-width: 600px)': {
+          fontSize: '0.5rem!important'
         },
     },
     upgradebtn:{
@@ -64,7 +84,7 @@ const useStyles = makeStyles()(() => ({
         padding: '7px 0px!important',
         border: '1px solid #00B0F0!important',
         background: '#00B0F0!important',
-        display:'none'
+        display:'none',
 
     },
     redbtn: {
@@ -84,7 +104,14 @@ const useStyles = makeStyles()(() => ({
       span: {
         fontWeight: 'bold',
         fontSize: '1.1rem'
-      }
+      },
+
+      '@media (max-width: 600px)': {
+        fontSize: '10px!important',
+        span:{
+        fontSize: '12px!important', 
+        },
+      },
 
     },
 
