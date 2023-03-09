@@ -7,9 +7,9 @@ import useStyles from './styles';
 function Footer(): JSX.Element {
 	const { classes } = useStyles();
 
-	const renderFooterItem = (item: FooterItem) => {
+	const renderFooterItem = (item: FooterItem, index: number) => {
 		return (
-			<Grid item style={{ marginTop: 4 }}>
+			<Grid item style={{ marginTop: 4 }} key={index}>
 				<Link href={item.link}>
 					<Typography variant='subtitle2' className={classes.link}>
 						{item.title}
@@ -19,21 +19,21 @@ function Footer(): JSX.Element {
 		)
 	}
 
-	const renderColumn = (item: FooterColumn) => {
+	const renderColumn = (item: FooterColumn, index: number) => {
 		return (
-			<Grid item sm={4}>
+			<Grid key={index} item sm={4}>
 				<Typography variant='button' className={classes.columnTitle}>
 					{item.title}
 				</Typography>
-				{item.items.map(renderFooterItem)}
+				{item.items.map((item, index) => renderFooterItem(item, index))}
 			</Grid>
 		)
 
 	}
 
-	const renderSocialShare = (item: FooterSocialShare) => {
+	const renderSocialShare = (item: FooterSocialShare, index: number) => {
 		return (
-			<Grid item>
+			<Grid item key={index}>
 				<Link href={item.link}>
 					<img src={item.icon} />
 				</Link>
@@ -50,12 +50,12 @@ function Footer(): JSX.Element {
 			</Grid>
 			<Grid item xs={12} md={8}>
 				<Grid container spacing={1} className={classes.items}>
-					{FOOTER_ITEMS.map(renderColumn)}
+				{FOOTER_ITEMS.map((item, index) => renderColumn(item, index))}
 				</Grid>
 			</Grid>
 			<Grid item xs={12} md={2}>
 				<Grid container spacing={4}>
-					{FOOTER_SOCIAL_SHARE_ITEMS.map(renderSocialShare)}
+					{FOOTER_SOCIAL_SHARE_ITEMS.map((item, index ) => renderSocialShare(item,index))}
 				</Grid>
 			</Grid>
 		</Grid>

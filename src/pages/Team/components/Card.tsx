@@ -37,9 +37,14 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
   },
   button: {
-    marginTop: theme.spacing(2),
     padding: '4% 17%',
     background: '#00B0F0',
+    borderRadius: 0,
+    boxShadow: 'none',
+  },
+
+  buttonMargin: {
+    marginTop: (props: any) => props.marginTop,
   },
 }));
 
@@ -48,10 +53,11 @@ interface Props {
   name: string;
   description:string;
   onClick: () => void;
+  marginTop:number;
 }
 
-const Card: React.FC<Props> = ({ imageSrc, name, description,onClick }) => {
-  const classes = useStyles();
+const Card: React.FC<Props> = ({ imageSrc, name, description,onClick,marginTop}) => {
+  const classes = useStyles({marginTop});
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
@@ -71,7 +77,7 @@ const Card: React.FC<Props> = ({ imageSrc, name, description,onClick }) => {
       <Button
         variant="contained"
         color="primary"
-        className={classes.button}
+        className={`${classes.button} ${classes.buttonMargin}`}
         onClick={handleClick}
       >
         {isOpen ? 'CLOSE PROFILE' : 'READ PROFILE'}
