@@ -70,7 +70,7 @@ function TeamInfo(): JSX.Element {
                 </div>
             </div>
             <div  className={classes.col}  onMouseEnter={() => handleMouseEnter('noPlan')}  onMouseLeave={() => handleMouseLeave('noPlan')}>
-                <div className={classes.row}><h6 className={classes.h6} style={{ fontWeight:'bold'}}>No Plan</h6></div>
+                <div className={classes.row}><h6 className={classes.h6} style={{ fontWeight:'bold'}}>Current Company’s Plan</h6></div>
                 <div className={`${classes.row} ${classes.borderNo}`}><h6  className={classes.h6} style={{ color:'red', fontWeight:'bold'}}>Few</h6></div>
                 <div className={`${classes.row} ${classes.borderNo}`}><h6><FontAwesomeIcon icon="times" className={classes.times} /></h6></div>
                 <div className={`${classes.row} ${classes.borderNo}`}><h6><FontAwesomeIcon icon="times" className={classes.times} /></h6></div>

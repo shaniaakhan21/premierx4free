@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   name: {
     marginTop: theme.spacing(2),
     fontWeight: 800,
-    fontSize: '24px',
+    fontSize: '20px',
     textAlign: 'center',
     fontFamily: 'Roboto,"Segoe UI",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
     color: '#136DA7',
