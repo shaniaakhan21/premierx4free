@@ -70,7 +70,7 @@ const useStyles = makeStyles()(() => ({
     },
     h6: {
         textAlign:'center',
-        fontSize: '1rem!important',
+        fontSize: '1.2rem!important',
         '@media (max-width: 768px)': {
           fontSize: '0.5rem!important',
         },
