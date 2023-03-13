@@ -58,7 +58,7 @@ function TeamInfo(): JSX.Element {
                 </div>
             </div>
             <div  className={classes.col}  onMouseEnter={() => handleMouseEnter('standard')}  onMouseLeave={() => handleMouseLeave('standard')}>
-                <div className={classes.row}><h6 className={classes.h6} style={{ fontWeight:'bold'}}>Standard</h6></div>
+                <div className={classes.row}><h6 className={classes.h6} style={{ fontWeight:'bold'}}>Standard Pack</h6></div>
                 <div className={`${classes.row} ${classes.borderNo}`}><h6><FontAwesomeIcon icon="check" className={classes.check} /></h6></div>
                 <div className={`${classes.row} ${classes.borderNo}`}><h6><FontAwesomeIcon icon="check" className={classes.check} /></h6></div>
                 <div className={`${classes.row} ${classes.borderNo}`}><h6><FontAwesomeIcon icon="times" className={classes.times} /></h6></div>
