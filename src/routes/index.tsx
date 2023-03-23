@@ -5,6 +5,7 @@ import AboutPage from "../pages/About";
 import TeamPage from "../pages/Team";
 import PartnersPage from "../pages/Partners";
 import Planoptions from "../pages/Plans/components/Planoptions";
+import FaqPage from "../pages/FAQ";
 function AppRouter(): JSX.Element {
 	return (
 		<Routes>
@@ -13,6 +14,7 @@ function AppRouter(): JSX.Element {
 			<Route path='/partners' element={<PartnersPage />} />
 			<Route path='/plans' element={<Planoptions />} />
 			<Route path='/contact' element={<ContactPage />} />
+			<Route path='/faq' element={<FaqPage />} />
 		</Routes>
 	)
 }

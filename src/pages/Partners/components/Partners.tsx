@@ -60,17 +60,6 @@ function BMAInfo(props: InfoProps): JSX.Element {
 						<Typography className={classes.infoText}>
 							We are a health-centric organization that prides itself on over 20 years of industry expertise and vast national relationships. As a result of this, we specialize in mass marketing and distribution of unparalleled unique product offerings. These offerings include one-of-a-kind non-insurance and scientifically advanced products, many of which were not previously available to our verticals of distribution. Our services do not stop here. Learn more about our Prescription Benefit Program that can help anyone and everyone {`(to save money and have better services)`}
 						</Typography>
-						{/* <Box style={{ justifyContent: windowSize.width >= COLLAPSE_THRESHOLD ? 'center' : 'left', display: 'flex', marginTop: windowSize.width < COLLAPSE_THRESHOLD ? 24 : 0 }}>
-							<Typography className={classes.infoTitle} style={{ textDecoration: 'none' }}>
-								What can we do for you
-							</Typography>
-						</Box>
-						<Typography className={classes.infoText}>
-							The power of healthcare cutting-edge advancements and mass distribution thereof, have always worked hand-in-hand toward the rapid delivery, impact, and enrichment of the  of American lives.
-						</Typography>
-						<Typography className={classes.infoText}>
-							What we do is Bridge the Gap between our Partners innovative advancements, our National Distribution Marketers and everyday American’s.
-						</Typography> */}
 					</div>
 				)
 			}
@@ -124,15 +113,6 @@ function SwiftMDInfo(props: InfoProps): JSX.Element {
 						<Typography className={classes.infoText}>
 							We are leading the modernisation of routine medical care for patients and reducing costs for our clients.Here are four ways SwiftMD is different from other platforms.
 						</Typography>
-						{/* <Typography className={classes.infoText} style={{ marginTop: 32 }}>
-							People love our online doctor services.
-						</Typography>
-						<Typography className={classes.infoText}>
-							We have the highest utilisation rate in the telemedicine industry.
-						</Typography>
-						<Typography className={classes.infoText}>
-							Great doctors who work exclusively for SwiftMD.
-						</Typography> */}
 						<Typography className={classes.infoText}>
 							We select the best doctors who are passionate about online healthcare services. They work exclusively with us in telemedicine, and they develop relationships with our members through repeat virtual doctor visits.
 						</Typography>
@@ -148,58 +128,67 @@ function Partners(): JSX.Element {
 	const windowSize = useWindowSize()
 	const [hoveredIdx, setHoveredIdx] = useState(-1);
 	const isCollapsed = windowSize.width < COLLAPSE_THRESHOLD
-
+  
 	return (
-		<div className={classes.container}>
-			<div className={classes.titleContainer}>
-				<Typography className={classes.title}>
-					STRATEGIC PARTNERS FOR PREMIERx4FREE
-				</Typography>
+	  <div className={classes.container}>
+		<div className={classes.titleContainer}>
+		  <Typography className={classes.title}>
+			STRATEGIC PARTNERS FOR PREMIERx4FREE
+		  </Typography>
+		</div>
+		<Grid container className={classes.content} style={{ display: isCollapsed ? 'none' : 'flex' }}>
+		  <Grid item xs={12} lg={5}>
+			<Box className={classes.column} style={{ paddingTop: isCollapsed ? 0 : '5%', minHeight: '100%' }}>
+			  <div onMouseEnter={() => setHoveredIdx(0)} onMouseLeave={() => setHoveredIdx(-1)}>
+				<PartellInfo descriptionVisible={hoveredIdx === 0} />
+			  </div>
+			  <div onMouseEnter={() => setHoveredIdx(1)} onMouseLeave={() => setHoveredIdx(-1)}>
+				<BMAInfo descriptionVisible={hoveredIdx === 1} />
+			  </div>
+			  <div onMouseEnter={() => setHoveredIdx(2)} onMouseLeave={() => setHoveredIdx(-1)}>
+				<SwiftMDInfo descriptionVisible={hoveredIdx === 2} />
+			  </div>
+			  <div onMouseEnter={() => setHoveredIdx(3)} onMouseLeave={() => setHoveredIdx(-1)}>
+				<NSURXInfo descriptionVisible={hoveredIdx === 3} />
+			  </div>
+			</Box>
+		  </Grid>
+		  <Grid item xs={12} lg={7}>
+			<Box className={classes.column}>
+			  <PartnerChart onHover={setHoveredIdx} onHoverEnd={() => setHoveredIdx(-1)} />
+			</Box>
+		  </Grid>
+		</Grid>
+		<Grid container className={classes.content} style={{ display: isCollapsed ? 'flex' : 'none' }}>
+		  <Grid item className={classes.row}>
+			<div style={{ display: 'flex', justifyContent: 'center' }}>
+			  <img src={partellIcon} />
 			</div>
-			<Grid container className={classes.content} style={{ display: isCollapsed ? 'none' : 'flex' }}>
-				<Grid item xs={12} lg={5}>
-					<Box className={classes.column} style={{ paddingTop: isCollapsed ? 0 : '5%', minHeight: '100%' }}>
-						<PartellInfo descriptionVisible={hoveredIdx === 0} />
-						<BMAInfo descriptionVisible={hoveredIdx === 1} />
-						<SwiftMDInfo descriptionVisible={hoveredIdx === 2} />
-						<NSURXInfo descriptionVisible={hoveredIdx === 3} />
-					</Box>
-				</Grid>
-				<Grid item xs={12} lg={7}>
-					<Box className={classes.column}>
-						<PartnerChart onHover={setHoveredIdx} onHoverEnd={() => setHoveredIdx(-1)} />
-					</Box>
-				</Grid>
-			</Grid>
-			<Grid container className={classes.content} style={{ display: isCollapsed ? 'flex' : 'none' }}>
-				<Grid item className={classes.row}>
-					<div style={{ display: 'flex', justifyContent: 'center' }}>
-						<img src={partellIcon} />
-					</div>
-					<PartellInfo descriptionVisible />
-				</Grid>
-				<Grid item className={classes.row}>
-					<div style={{ display: 'flex', justifyContent: 'center' }}>
-						<img src={bmaIcon} />
-					</div>
-					<BMAInfo descriptionVisible />
-				</Grid>
-				<Grid item className={classes.row}>
-					<div style={{ display: 'flex', justifyContent: 'center' }}>
-						<img src={swiftMDIcon} />
-					</div>
-					<SwiftMDInfo descriptionVisible />
-				</Grid>
-				<Grid item className={classes.row}>
-					<div style={{ display: 'flex', justifyContent: 'center' }}>
-						<img src={nsurxIcon} />
-					</div>
-					<NSURXInfo descriptionVisible />
-				</Grid>
-			</Grid>
-		</div >
+			<PartellInfo descriptionVisible />
+		  </Grid>
+		  <Grid item className={classes.row}>
+			<div style={{ display: 'flex', justifyContent: 'center' }}>
+			  <img src={bmaIcon} />
+			</div>
+			<BMAInfo descriptionVisible />
+		  </Grid>
+		  <Grid item className={classes.row}>
+			<div style={{ display: 'flex', justifyContent: 'center' }}>
+			  <img src={swiftMDIcon} />
+			</div>
+			<SwiftMDInfo descriptionVisible />
+		  </Grid>
+		  <Grid item className={classes.row}>
+			<div style={{ display: 'flex', justifyContent: 'center' }}>
+			  <img src={nsurxIcon} />
+			</div>
+			<NSURXInfo descriptionVisible />
+		  </Grid>
+		</Grid>
+	  </div >
 	)
-}
+  }
+  
 
 const useStyles = makeStyles()(() => ({
 	container: {

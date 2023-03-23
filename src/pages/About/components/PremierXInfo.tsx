@@ -14,7 +14,7 @@ function PremierXInfo(): JSX.Element {
 							How Can Premierx4Free Work for You?
 							</Typography>
 							<Typography className={classes.text}>
-							Premierx4Free saves Corporations, Unions, Governments, Sole Proprietors and individuals more than 50% on their prescription and healthcare costs. PR4F is confident that we will provide you better services at a significant savings over what you are currently paying.
+							Premierx4Free saves corporations, unions, governments, sole proprietors and individuals more than 50% on their prescription and healthcare costs. PR4F is confident that we will provide you better services at a significant savings over what you are currently paying.
 							</Typography>
 						</Grid>
 						<Grid item xs={12} sm={6}>
@@ -51,10 +51,10 @@ function PremierXInfo(): JSX.Element {
 							What are the Cost and Benefits for Employees/ Members?
 							</Typography>
 							<Typography className={classes.text}>
-							Monthly Membership fee - $59.95 <br></br>
+							Monthly Membership Fee - $59.95 <br></br>
 							Our membership fee includes access to the following:<br></br>
 								<ul>
-									<li> FREE prescription delivery to your doorstep every 90 days (Choose from the top 1088 most prescribed generic medications) </li>
+									<li>Free prescription delivery to your doorstep every 90 days (Choose from the top 1088 most prescribed generic medications) </li>
 									<li>No other hidden costs or expenses.</li>
 									<li>Every member receives an NSURx prescription benefit card for additional savings on your prescriptions in person.</li>
 									<li>24/7 access to US based telehealth services with 100% dedicated doctors on call for your consultation needs.</li>
