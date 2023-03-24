@@ -31,7 +31,7 @@ function PartellInfo(props: InfoProps): JSX.Element {
 							We care about our community
 						</Typography>
 						<Typography className={classes.infoText}>
-							At Partell Pharmacy, we've made it our mission to provide unique and high-quality solutions for physicians and patients with customized, compound medications. We're here to better your health, together.
+						At Partell Pharmacy, we've made it our mission to provide unique and high-quality solutions for physicians and patients with customized, compound medications. We're here to better your health, together. With licenses and/or relationships in all 50 States, we can deliver your medications to your doorstep anywhere in the US.
 						</Typography>
 					</div>
 				)
@@ -58,7 +58,7 @@ function BMAInfo(props: InfoProps): JSX.Element {
 							Who is BMA
 						</Typography>
 						<Typography className={classes.infoText}>
-							We are a health-centric organization that prides itself on over 20 years of industry expertise and vast national relationships. As a result of this, we specialize in mass marketing and distribution of unparalleled unique product offerings. These offerings include one-of-a-kind non-insurance and scientifically advanced products, many of which were not previously available to our verticals of distribution. Our services do not stop here. Learn more about our Prescription Benefit Program that can help anyone and everyone {`(to save money and have better services)`}
+						We are a health-centric organization that prides itself on over 20 years of industry expertise and vast national relationships. As a result of this, we specialize in mass marketing and distribution of unparalleled unique product offerings. These offerings include one-of-a-kind non-insurance and scientifically advanced products, many of which were not previously available to our verticals of distribution. Our services do not stop here. Learn more about our Prescription Benefit Program through PremieRx4free that can help anyone and everyone save money on their prescription drugs and have better services.
 						</Typography>
 					</div>
 				)
@@ -74,7 +74,7 @@ function NSURXInfo(props: InfoProps): JSX.Element {
 	return (
 		<>
 			<Typography className={classes.infoTitle}>
-				NsurX Prescription Savings Card
+				NSURx Prescription Savings Card
 			</Typography>
 			{
 				descriptionVisible && (
@@ -83,7 +83,7 @@ function NSURXInfo(props: InfoProps): JSX.Element {
 							The revolutionary prescription discount
 						</Typography>
 						<Typography className={classes.infoText}>
-							Unlike traditional prescription discount cards that are only available in physical form, NSURx is a digital card that can be downloaded by installing the NSURx app on Google store or Apple Store. It’s free to download and use. With this digital card, users can get up to 80% off on their prescription drugs as well as earn NSUR tokens as a reward for each prescription filled.
+						Unlike traditional prescription discount cards that are only available in physical form, NSURx is a digital card that can be downloaded by installing the NSURx app on Google store or Apple Store. It’s free to download and use. With this digital card, users can get up to 80% off on their prescription drugs as well as earn NSUR tokens as a reward for each prescription filled.
 						</Typography>
 						{/* <Typography className={classes.infoText}>
 							NSUR Inc. is dedicated to providing an innovative and convenient solution for prescription drug savings. By utilizing blockchain technology and offering unique rewards, NSURx sets itself apart from traditional prescription discount cards. Not only does it provide discounts, but it also rewards users with NSUR tokens which can be used to purchase products on the NSUR marketplace
@@ -111,10 +111,11 @@ function SwiftMDInfo(props: InfoProps): JSX.Element {
 							What difference it from other tele-health services?
 						</Typography>
 						<Typography className={classes.infoText}>
-							We are leading the modernisation of routine medical care for patients and reducing costs for our clients.Here are four ways SwiftMD is different from other platforms.
+							We are leading the modernization of routine medical care for patients and reducing costs for our clients. Here are the ways SwiftMD is different from all the other platforms.
 						</Typography>
 						<Typography className={classes.infoText}>
-							We select the best doctors who are passionate about online healthcare services. They work exclusively with us in telemedicine, and they develop relationships with our members through repeat virtual doctor visits.
+						We select the best doctors who are passionate about online healthcare services and work only for SwiftMD. They work exclusively with us in telemedicine, and they develop relationships with our members through repeat virtual doctor visits. Their doctors are available 24/7 with an average wait time of 9 minutes to speak to
+						a doctor. There are no additional fees above the PremieRx4free membership costs for each consultation, savings significant $$$ on every call. The end result for companies, is that they save untold thousands to hundreds of thousands of dollars every year on unnecessary ER visits.
 						</Typography>
 					</div>
 				)
@@ -133,7 +134,7 @@ function Partners(): JSX.Element {
 	  <div className={classes.container}>
 		<div className={classes.titleContainer}>
 		  <Typography className={classes.title}>
-			STRATEGIC PARTNERS FOR PREMIERx4FREE
+			STRATEGIC PARTNERS FOR PremieRx4Free
 		  </Typography>
 		</div>
 		<Grid container className={classes.content} style={{ display: isCollapsed ? 'none' : 'flex' }}>

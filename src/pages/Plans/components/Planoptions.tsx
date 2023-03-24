@@ -39,11 +39,11 @@ function TeamInfo(): JSX.Element {
             <div className={classes.col} >
                 <div className={`${classes.row} ${classes.borderNo}`}><h6 style={{ opacity:0}}>Hi</h6></div>
                 <div className={classes.row}><h6 className={classes.h6}>Telehealth Included</h6></div>
-                <div className={classes.row}><h6 className={classes.h6}>No fee Telehealth Doctor Consulations</h6></div>
+                <div className={classes.row}><h6 className={classes.h6}>No Fee Telehealth Doctor Consulations</h6></div>
                 <div className={classes.row}><h6 className={classes.h6}>1,088 Free Generic Medications</h6></div>
-                <div className={classes.row}><h6 className={classes.h6}>Free Delivery on 90 Day Prescription Supply</h6></div>
+                <div className={classes.row}><h6 className={classes.h6}>Free Delivery On 90 Day Prescription Supply</h6></div>
                 <div className={classes.row}><h6 className={classes.h6}>NSURx Prescription Discount Card</h6></div>
-                <div className={classes.row}><h6 className={classes.h6}>Dedicated Pharmacy with nationside Delivery</h6></div>
+                <div className={classes.row}><h6 className={classes.h6}>Dedicated Pharmacy With Nationwide Delivery</h6></div>
             </div>
             <div  className={classes.col}  onMouseEnter={() => handleMouseEnter('premium')}  onMouseLeave={() => handleMouseLeave('premium')}>
                 <div className={classes.row}><h6 className={classes.h6} style={{ fontWeight:'bold'}}>Premium Pack</h6></div>
@@ -84,7 +84,7 @@ function TeamInfo(): JSX.Element {
       </div>
       <div className={classes.container1} style={{ textAlign: 'center'}}>
         <p className={classes.para}>
-          <span>Note:</span> Discounts are available for Veterans and Senior Citizens. Please reach out to Premierx4Free to discuss those options. 
+          <span>Note:</span> Discounts are available for Veterans and Senior Citizens. Please reach out to PremieRx4Free to discuss those options. 
         </p>   
       </div>
     </div>

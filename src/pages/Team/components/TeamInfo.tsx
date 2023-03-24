@@ -14,7 +14,7 @@ function TeamInfo(): JSX.Element {
 					<Grid container spacing={4}>
 						<Grid item xs={12} sm={6}>
 							<Typography className={classes.text}>
-							Welcome to the Premierx4Free team page, where you can get to know the talented individuals who are working hard to develop and bring you the best products and services. <br></br> <br></br>
+							Welcome to the PremieRx4Free team page, where you can get to know the talented individuals who are working hard to develop and bring you the best products and services. <br></br> <br></br>
 							Our team is comprised of experienced professionals from diverse backgrounds, each bringing unique skills and perspectives to the table. We share a passion for innovation, collaboration, and delivering exceptional value to our customers.<br></br> <br></br>
 							Let us introduce you to some of our key team members:
 							</Typography>

@@ -69,13 +69,17 @@ const useStyles = makeStyles()(() => ({
         border: 'none!important'
     },
     h6: {
-        textAlign:'center',
+        textAlign:'start',
         fontSize: '1.2rem!important',
         '@media (max-width: 768px)': {
-          fontSize: '0.5rem!important',
+          fontSize: '1rem!important',
         },
 
         '@media (max-width: 600px)': {
+          fontSize: '0.7rem!important'
+        },
+
+        '@media (max-width: 527px)': {
           fontSize: '0.5rem!important'
         },
     },

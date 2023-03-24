@@ -11,15 +11,15 @@ function PremierXInfo(): JSX.Element {
 					<Grid container spacing={4}>
 						<Grid item xs={12} sm={6}>
 							<Typography variant='h6' className={classes.subtitle} >
-							How Can Premierx4Free Work for You?
+							How Can PremieRx4Free Work for You?
 							</Typography>
 							<Typography className={classes.text}>
-							Premierx4Free saves corporations, unions, governments, sole proprietors and individuals more than 50% on their prescription and healthcare costs. PR4F is confident that we will provide you better services at a significant savings over what you are currently paying.
+							PremieRx4Free saves corporations, unions, governments, sole proprietors and individuals more than 50% on their prescription and healthcare costs. PR4F is confident that we will provide you better services at a significant savings over what you are currently paying.
 							</Typography>
 						</Grid>
 						<Grid item xs={12} sm={6}>
 						<Typography variant='h6' className={classes.subtitle} >
-							Premierx4Free's Health Management Program:
+							PremieRx4Free's Health Management Program:
 							</Typography>
 							<Typography className={classes.text}>
 								<ul>
@@ -38,12 +38,12 @@ function PremierXInfo(): JSX.Element {
 					<Grid container spacing={4}>
 						<Grid item xs={12} sm={6}>
 							<Typography variant='h6' className={classes.subtitle} >
-							Why Choose Premierx4Free?
+							Why Choose PremieRx4Free?
 							</Typography>
 							<Typography className={classes.text}>
-							Premierx4Free can save you and your company more than 50% on your Prescription Benefit Management Program (“PBMP”). The average employer cost for their PBMP is $130- $180 per month per employee (bundled into total employee health insurance premium).
+							PremieRx4Free can save you and your company more than 50% on your Prescription Benefit Management Program (“PBMP”). The average employer cost for their PBMP is $130- $180 per month per employee (bundled into total employee health insurance premium).
 
-							These costs can increase annually regardless of employee/employer specific utilization. Premierx4Free can offer a better PBMP to employees for less than half the cost of a bundled insurance program.
+							These costs can increase annually regardless of employee/employer specific utilization. PremieRx4Free can offer a better PBMP to employees for less than half the cost of a bundled insurance program.
 							</Typography>
 						</Grid>
 						<Grid item xs={12} sm={6}>

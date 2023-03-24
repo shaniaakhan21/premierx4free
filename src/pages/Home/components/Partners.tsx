@@ -153,7 +153,7 @@ function Partners(): JSX.Element {
 		<div className={classes.container}>
 			<div className={classes.titleContainer}>
 				<Typography className={classes.title}>
-					STRATEGIC PARTNERS FOR PREMIERx4FREE
+					STRATEGIC PARTNERS FOR PremieRx4Free
 				</Typography>
 			</div>
 			<Grid container className={classes.content} style={{ display: isCollapsed ? 'none' : 'flex' }}>

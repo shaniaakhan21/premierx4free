@@ -1,4 +1,5 @@
 import Accordion from 'react-bootstrap/Accordion';
+import Footer from '../../components/Footer';
 import '../FAQ/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap';
@@ -55,17 +56,13 @@ const faqData = [
   {
     question: '90% of the scripts are generic but the cost of generics is usually less then 10-15% of the cost.',
     answer: 'Big savings on generic less savings on Branded you are correct!'
-  },
-  {
-    question: 'Clearly seems to be some gaps in the coverage.',
-    answer: 'Maybe my answers have filled in the gaps in your understanding, if you have more questions let us know.'
   }
 ];
 
 function FaqPage(): JSX.Element {
   return (
     <>
-      <h1 className='heading'>How can we help you?</h1>
+      <h1 className='heading'>Please see below for  Frequently Asked Questions</h1>
       <Accordion defaultActiveKey="0" className='accordionContainer'>
         {faqData.map((item, index) => (
           <Accordion.Item eventKey={index.toString()} key={index}>
@@ -74,6 +71,7 @@ function FaqPage(): JSX.Element {
           </Accordion.Item>
         ))}
       </Accordion>
+      <Footer />
     </>
   );
 }

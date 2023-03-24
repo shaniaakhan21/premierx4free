@@ -109,7 +109,7 @@ function ContactForm(): JSX.Element {
 	const onSubmit = async (data: any) => {
 		try {
 			setFormStatus(QueryStatus.LOADING)
-			await axios.post('/api/webhook/premierx4freeContactUs', data)
+			await axios.post('/api/webhook/PremieRx4FreeContactUs', data)
 			setFormStatus(QueryStatus.SUCCESS)
 			reset();
 		} catch (error) {
