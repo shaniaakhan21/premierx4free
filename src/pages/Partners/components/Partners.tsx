@@ -134,7 +134,7 @@ function Partners(): JSX.Element {
 	  <div className={classes.container}>
 		<div className={classes.titleContainer}>
 		  <Typography className={classes.title}>
-			STRATEGIC PARTNERS FOR PremieRx4Free
+			STRATEGIC PARTNERS FOR <img src={'/assets/svg/logo-black.svg'} />
 		  </Typography>
 		</div>
 		<Grid container className={classes.content} style={{ display: isCollapsed ? 'none' : 'flex' }}>
@@ -220,6 +220,11 @@ const useStyles = makeStyles()(() => ({
 		['@media screen and (min-width: 1024px)']: {
 			fontSize: 36
 		},
+
+		img:{
+			width: '35%'
+		}
+
 	},
 	content: {
 		marginTop: 24,
