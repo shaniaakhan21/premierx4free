@@ -57,7 +57,7 @@ function TeamInfo(): JSX.Element {
                 {isHovered.premium && (<Button variant="primary" className={classes.upgradebtn}>Upgrade</Button>)}
                 </div>
             </div>
-            <div  className={classes.col}  onMouseEnter={() => handleMouseEnter('standard')}  onMouseLeave={() => handleMouseLeave('standard')}>
+            {/* <div  className={classes.col}  onMouseEnter={() => handleMouseEnter('standard')}  onMouseLeave={() => handleMouseLeave('standard')}>
                 <div className={classes.row}><h6 className={classes.h6} style={{ fontWeight:'bold'}}>Standard Pack</h6></div>
                 <div className={`${classes.row} ${classes.borderNo}`}><h6><FontAwesomeIcon icon="check" className={classes.check} /></h6></div>
                 <div className={`${classes.row} ${classes.borderNo}`}><h6><FontAwesomeIcon icon="check" className={classes.check} /></h6></div>
@@ -68,7 +68,7 @@ function TeamInfo(): JSX.Element {
                 <div className={`${classes.row} ${classes.borderNo}  ${classes.btnp}`}>
                    {isHovered.standard && ( <Button variant="primary" className={classes.upgradebtn}>Upgrade</Button> ) }
                 </div>
-            </div>
+            </div> */}
             <div  className={classes.col}  onMouseEnter={() => handleMouseEnter('noPlan')}  onMouseLeave={() => handleMouseLeave('noPlan')}>
                 <div className={classes.row}><h6 className={classes.h6} style={{ fontWeight:'bold'}}>Current Plan</h6></div>
                 <div className={`${classes.row} ${classes.borderNo}`}><h6  className={classes.h6} style={{ color:'red', fontWeight:'bold'}}>Few</h6></div>

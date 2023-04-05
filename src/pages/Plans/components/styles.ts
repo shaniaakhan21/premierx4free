@@ -6,7 +6,7 @@ const useStyles = makeStyles()(() => ({
         justifyContent: 'space-between',
         alignItems: 'center',
         flexWrap: 'wrap',
-        margin: '1% 15%',
+        margin: '1% 17%',
         padding: '2%',
         '@media (max-width: 768px)': {
           margin: '2%',
@@ -23,7 +23,7 @@ const useStyles = makeStyles()(() => ({
         margin:'1%',
         '&:first-child': {
           alignItems: 'flex-start',
-          flex: '0 0 40%',
+          flex: '0 0 44%',
           
       },
 
