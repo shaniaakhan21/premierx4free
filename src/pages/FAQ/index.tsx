@@ -56,7 +56,23 @@ const faqData = [
   {
     question: '90% of the scripts are generic but the cost of generics is usually less then 10-15% of the cost.',
     answer: 'Big savings on generic less savings on Branded you are correct!'
-  }
+  },
+  {
+    question: 'What level of formulary customization is available here? What happens if we have a change to your suggested formulary based upon our employee needs?',
+    answer: 'We strive to do apples and apples comparison, we would provide their current formulary and improve on that we will use their existing formulary with improvements (when I say improvements I mean free or cheaper drugs, there is no reason for us to switch to anything that is not free or cheaper) Fees:Besides the PMPM charges.'
+  },
+  {
+    question: 'What else will the employer and employees be paying (deductibles etc.)?',
+    answer: 'We strive to do apples and apples comparison, we would utilize their existing pay structure with deductibles, the employer would decide how the savings is distributed, i.e. do they reduce copays or just the employer expense side outsourced services.'
+  },
+  {
+    question: 'Who does your claims processing / adjudication Who is your rebate aggregator?',
+    answer: 'It is out to bid right now we are evaluating Procare who is our current provider. We have several companies we are reviewing this with now, we can update you when we choose.'
+  },
+  {
+    question: 'What % of the rebate is getting passed back through to us?',
+    answer: '100% of rebate is reflected in price/cost/copay so the employer decides how it is distributed.'
+  },
 ];
 
 function FaqPage(): JSX.Element {
