@@ -1,24 +1,39 @@
-import useStyles from './styles'
-const imgSignin = '/assets/svg/SignIn/sigin-img.svg'
+import useStyles from './styles';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap';
-import React, { useState } from "react";
+import { useState } from "react";
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useNavigate } from 'react-router-dom';
+const imgSignin = '/assets/svg/SignIn/sigin-img.svg';
 
-
-function SignIn(): JSX.Element {
+function SignIn() : JSX.Element{
     const { classes } = useStyles();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword1, setShowPassword1] = useState(false);
+    const [errorMsg, setErrorMsg] = useState("");
+    const history=useNavigate();
 
-  
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      console.log("Email:", email);
-      console.log("Password:", password);
-    };
+    async function submit(e: { preventDefault: () => void; }){
+        e.preventDefault();
+
+        try {
+            const response = await fetch("http://localhost:8000/signin", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email, password }) });
+            const result = await response.json();
+      
+            if (result === "exists") {
+              // login successful, redirect to home page
+              history("/");
+            } else {
+              // login failed, show error message
+              setErrorMsg("Invalid email or password");
+            }
+          } catch (error) {
+            console.error("Error:", error);
+            setErrorMsg("An error occurred, please try again later.");
+          }
+        };
   
 	return (
 		<div className={classes.container}>
@@ -27,7 +42,12 @@ function SignIn(): JSX.Element {
             </div>
             <div className={classes.siginform}>
                 <h1>Welcome back! <br></br>Please, log in to continue</h1>
-                <form onSubmit={handleSubmit} className={classes.formhere}>
+                <form action='POST' className={classes.formhere}>
+                    {errorMsg && (
+                        <div className="alert alert-danger" role="alert">
+                            {errorMsg}
+                        </div>
+                    )}
                     <div className="form-group">
                         <label className={classes.label} htmlFor="email">Email Address</label>
                         <input
@@ -35,8 +55,8 @@ function SignIn(): JSX.Element {
                         className={`${classes.formControl} form-control`}
                         id="email"
                         placeholder="Enter your email address"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        value={email || errorMsg}
+                        onChange={(e) =>{ setEmail(e.target.value)}}
                         />
                     </div>
                     <div className="form-group">
@@ -48,7 +68,7 @@ function SignIn(): JSX.Element {
                             id="password"
                             placeholder="Input Password"
                             value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            onChange={(e) => { setPassword(e.target.value)} }
                             />
                             <div className="input-group-append">
                                 <button
@@ -62,7 +82,7 @@ function SignIn(): JSX.Element {
                         </div>
                     </div>
 
-                    <button type="submit" className={`${classes.buttonstyle} btn btn-primary`}>
+                    <button type="submit" onClick={submit} className={`${classes.buttonstyle} btn btn-primary`}>
                         Log In
                     </button>
                     <div className={classes.linktosignindiv}>

@@ -1,11 +1,12 @@
-import useStyles from './styles'
-const imgSignin = '/assets/svg/SignIn/sigin-img.svg'
+import useStyles from './styles';
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap';
 import React, { useState } from "react";
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import { useNavigate } from 'react-router-dom';
+const imgSignin = '/assets/svg/SignIn/sigin-img.svg';
 
 function SignUp(): JSX.Element {
     const { classes } = useStyles();
@@ -16,36 +17,55 @@ function SignUp(): JSX.Element {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [showPassword1, setShowPassword1] = useState(false);
     const [showPassword2, setShowPassword2] = useState(false);
+    const [errorMsg, setErrorMsg] = useState("");
+    const history = useNavigate();
 
+    async function submit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+
+        try{
+            const res = await axios.post("http://localhost:8000/signup", {
+                fullName,
+                email,
+                phoneNumber,
+                password,
+                confirmPassword,
+            });
+            if (res.data === "exists") {
+                setErrorMsg("User already exists");
+            } else if (res.data === "notexists") {
+               history("/signin");
+            }
+        } catch (e) {
+            setErrorMsg("Something went wrong try again later");
+            console.log(e);
+        }
+    }
   
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      console.log("Full Name:", fullName);
-      console.log("Email:", email);
-      console.log("Phone Number:", phoneNumber);
-      console.log("Password:", password);
-      console.log("Confirm Password:", confirmPassword);
-    };
-  
-	return (
-		<div className={classes.container}>
-			<div className={classes.imagesigin}>
+    return (
+        <div className={classes.container}>
+            <div className={classes.imagesigin}>
                 <img src={imgSignin} />
             </div>
             <div className={classes.siginform}>
                 <h1>Please register to have an account</h1>
-                <form onSubmit={handleSubmit} className={classes.formhere}>
+                <form onSubmit={submit} className={classes.formhere}>
                     <div className="form-group">
                         <label className={classes.label} htmlFor="fullName">Full Name</label>
                         <input
-                        type="text"
-                        className={`${classes.formControl} form-control`}
-                        id="fullName"
-                        placeholder="Enter your full name"
-                        value={fullName}
-                        onChange={(e) => setFullName(e.target.value)}
+                            type="text"
+                            className={`${classes.formControl} form-control`}
+                            id="fullName"
+                            placeholder="Enter your full name"
+                            value={fullName || errorMsg}
+                            onChange={(e) => { setFullName(e.target.value)}}
                         />
                     </div>
+                    {errorMsg && (
+                        <div className="alert alert-danger" role="alert">
+                            {errorMsg}
+                        </div>
+                    )}
                     <div className="form-group">
                         <label className={classes.label} htmlFor="email">Email Address</label>
                         <input
@@ -54,7 +74,7 @@ function SignUp(): JSX.Element {
                         id="email"
                         placeholder="Enter your email address"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(e) => { setEmail(e.target.value) }}
                         />
                                 <small id="emailHelp" className="form-text text-muted">
                                 We’ll send a confirmation email to your inbox, make sure you have access to this email address.
@@ -68,7 +88,7 @@ function SignUp(): JSX.Element {
                         id="phoneNumber"
                         placeholder="Enter your phone number"
                         value={phoneNumber}
-                        onChange={(e) => setPhoneNumber(e.target.value)}
+                        onChange={(e) =>{ setPhoneNumber(e.target.value)}}
                         />
                     </div>
                     <div className="form-group">
@@ -79,7 +99,7 @@ function SignUp(): JSX.Element {
                             id="password"
                             placeholder="Input Password"
                             value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            onChange={(e) => { setPassword(e.target.value)} }
                             />
                             <div className="input-group-append">
                                 <button
@@ -101,7 +121,7 @@ function SignUp(): JSX.Element {
                             id="confirmPassword"
                             placeholder="Confirm Password"
                             value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            onChange={(e) =>{ setConfirmPassword(e.target.value)}}
                             />
                             <div className="input-group-append">
                                 <button
@@ -114,7 +134,7 @@ function SignUp(): JSX.Element {
                             </div>
                         </div>
                     </div>
-                    <button type="submit" className={`${classes.buttonstyle} btn btn-primary`}>
+                    <button type="submit"  className={`${classes.buttonstyle} btn btn-primary`}>
                         Register
                     </button>
                     <div className={classes.linktosignindiv}>

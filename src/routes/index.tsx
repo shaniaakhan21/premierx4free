@@ -7,6 +7,7 @@ import Planoptions from "../pages/Plans/components/Planoptions";
 import FaqPage from "../pages/FAQ";
 import SignUpPage from "../pages/SignUp";
 import SignInPage from "../pages/SignIn";
+import ForgotPassword from "../pages/ForgotPassword";
 function AppRouter(): JSX.Element {
 	return (
 		<Routes>
@@ -18,6 +19,7 @@ function AppRouter(): JSX.Element {
 			<Route path='/faq' element={<FaqPage />} />
 			<Route path='/signup' element={<SignUpPage />} />
 			<Route path='/signin' element={<SignInPage />} />
+			<Route path='/resetpassword' element={<ForgotPassword />} />
 		</Routes>
 	)
 }
