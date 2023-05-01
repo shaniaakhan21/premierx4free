@@ -26,7 +26,7 @@ function App() {
       <CacheProvider value={muiCache}>
         <ThemeProvider theme={theme}>
           <BrowserRouter>
-            <Navbar />
+            {/* <Navbar /> */}
             <AppRouter />
           </BrowserRouter>
         </ThemeProvider>

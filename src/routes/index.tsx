@@ -6,6 +6,7 @@ import TeamPage from "../pages/Team";
 import PartnersPage from "../pages/Partners";
 import Planoptions from "../pages/Plans/components/Planoptions";
 import FaqPage from "../pages/FAQ";
+import AdminDashboard from "../pages/Admin";
 function AppRouter(): JSX.Element {
 	return (
 		<Routes>
@@ -15,6 +16,7 @@ function AppRouter(): JSX.Element {
 			<Route path='/plans' element={<Planoptions />} />
 			<Route path='/contact' element={<ContactPage />} />
 			<Route path='/faq' element={<FaqPage />} />
+			<Route path='/admin' element={<AdminDashboard />} />
 		</Routes>
 	)
 }
