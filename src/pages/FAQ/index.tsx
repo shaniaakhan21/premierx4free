@@ -1,5 +1,6 @@
 import Accordion from 'react-bootstrap/Accordion';
 import Footer from '../../components/Footer';
+import Navbar from '../../components/Navbar';
 import '../FAQ/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap';
@@ -78,6 +79,7 @@ const faqData = [
 function FaqPage(): JSX.Element {
   return (
     <>
+    <Navbar />
       <h1 className='heading'>Please see below for  Frequently Asked Questions</h1>
       <Accordion defaultActiveKey="0" className='accordionContainer'>
         {faqData.map((item, index) => (

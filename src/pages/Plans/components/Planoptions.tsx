@@ -4,6 +4,7 @@ import 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from 'react-bootstrap';
 import { useState } from 'react';
+import React from 'react';
 
 function TeamInfo(): JSX.Element {
   const { classes } = useStyles();
