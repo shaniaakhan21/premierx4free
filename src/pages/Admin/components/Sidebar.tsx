@@ -10,7 +10,7 @@ function Sidebar():JSX.Element{
         <div className={classes.sidebar_mainContainer}>
             <div className={classes.sidebar_topRectangle}>
                 <div className={classes.topRectangle_logo}>
-                    <Logo className={classes.logo} />
+                    <img src='/assets/svg/logo_bold.svg' className={classes.logo} />
                 </div>
                 <div className={classes.topRectangle_displayImage}>
                     <img src='/assets/svg/Team/randy.svg' className={classes.displayImage} />
@@ -22,10 +22,22 @@ function Sidebar():JSX.Element{
             </div>
             
             <div className={classes.sidebar_navigation}>
-                        <div className={classes.navigation_li}>Agent Documents</div>
-                        <div className={classes.navigation_li}>Calculation Page</div>
-                        <div className={classes.navigation_li}>Marketing Materials</div>
-                        <div className={classes.navigation_li}>Settings</div>
+                        <div className={classes.navigation_li}>
+                            <img src='/assets/svg/documents.svg' className={classes.navigation_img} />
+                            <p>Agent Documents</p>
+                        </div>
+                        <div className={classes.navigation_li}>
+                            <img src='/assets/svg/calculator.svg' className={classes.navigation_img} />
+                            <p>Calculation Page</p>
+                        </div>
+                        <div className={classes.navigation_li}>
+                            <img src='/assets/svg/marketing.svg' className={classes.navigation_img} />
+                            <p>Marketing Materials</p>
+                        </div>
+                        <div className={classes.navigation_li}>
+                            <img src='/assets/svg/setting.svg' className={classes.navigation_img} />
+                            <p>Settings</p>
+                        </div>
             </div>
         </div>
     )
@@ -82,6 +94,9 @@ const useStyles = makeStyles() (() => ({
         listStyleType:"none"
     },
     navigation_li:{
+        display:"flex",
+        flexDirection:"row",
+        gap:"10px",
         width:"100%",
         fontFamily:"Nunito Sans",
         fontWeight:400,
@@ -94,6 +109,12 @@ const useStyles = makeStyles() (() => ({
             cursor:"pointer",
             color:"#000000"
         }
+    },
+    navigation_img:{
+        width:"20px",
+        height:"17.5px",
+        marginTop:"5px"
+        // filter:"invert(0.5) sepia(1) saturate(5) hue-rotate(175deg)"
     }
 }))
 

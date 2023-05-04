@@ -5,7 +5,8 @@ function TopBar(): JSX.Element{
     return(
         <div className={classes.topbar}>
             <div className={classes.logoutButton}>
-                <p>Logout</p>
+                <div></div>
+                <p><img className={classes.buttonIcon} src="/assets/svg/logout.svg" /> Logout</p>
             </div>
         </div>
     )
@@ -19,12 +20,19 @@ const useStyles = makeStyles() (() => ({
         background:"#FFFFFF"
     },
     logoutButton:{
+        didplay:"flex",
+        flexDirection:"row",
         margin:"5px 50px 0px 0px",
         fontFamily:"Nunito Sans",
         fontWeight:600,
         fontSize:"18px",
         lineHeight:"24.55px",
         color:"#0556A7"
+    },
+    buttonIcon:{
+        width:"15px",
+        height:"17.14px",
+        marginBottom:"5px"
     }
 }))
 
