@@ -2,7 +2,7 @@ import { makeStyles } from "../../utils/makeStyles"
 
 const useStyles = makeStyles()(() => ({
 	container: {
-		backgroundColor: "#006B92",
+		backgroundColor: "#0556A7",
 	},
 	content: {
 		paddingTop: '5%',
@@ -11,7 +11,7 @@ const useStyles = makeStyles()(() => ({
 		paddingRight: '10%'
 	},
 	title: {
-		color: "#FFFFFF",
+		color: "#FFFFFF!important",
 		fontWeight: 700,
 		fontSize: 24,
 		['@media screen and (min-width: 768px)']: {

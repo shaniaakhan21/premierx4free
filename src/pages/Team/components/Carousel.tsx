@@ -25,7 +25,7 @@ function Carousel() {
           <p className={classes.ptext}>We believe every person should have access to affordable prescription medications if not completely free. We will always strive to have the lowest prices as compared to all of our competitors.</p>
         </div>
         <div className={classes.container}>
-          <h3 className={classes.heading }  style={{ color: '#00B0F0' }}>Flexibility</h3>
+          <h3 className={classes.heading }  style={{ color: '#64B5F6' }}>Flexibility</h3>
           <p className={classes.ptext}>We believe that being flexible in a difficult world should always be a top priority. We will work with those Companies/Individuals that need special attention because of medical needs and circumstances.</p>
         </div>
         <div className={classes.container}>
@@ -126,8 +126,8 @@ const useStyles = makeStyles()(() => ({
       fontSize: '1px',
       border: '1px solid black',
       borderRadius:'50%',
-      background: '#00B0F0',
-      color:'#00B0F0',
+      background: '#64B5F6',
+      color:'#64B5F6',
       '@media (max-width: 768px)': {
         fontSize: '2px',
       },

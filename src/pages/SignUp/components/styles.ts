@@ -4,6 +4,7 @@ const useStyles = makeStyles()(() => ({
     container: {
         display: 'flex',
         width: '100%',
+        paddingBottom: '6%',
     },
     imagesigin: {
         width: '61%',
@@ -15,7 +16,7 @@ const useStyles = makeStyles()(() => ({
     siginform: {
         marginTop: '3%',
         h1: {
-                color:'#136DA7',
+                color:'#0556A7',
                 fontStyle: 'normal',
                 fontWeight: '800',
                 fontSize: '30px',
@@ -44,11 +45,11 @@ const useStyles = makeStyles()(() => ({
     },
 
     formhere: {
-        padding: '0 25% 0 10%!important',
+        padding: '0 10% 0 15%!important',
     },
 
     buttonstyle: {
-        background:'#00B0F0!important',
+        background:'#64B5F6!important',
         border:'none!important',
         borderRadius:'2px!important',
         width:'100%!important',
@@ -85,8 +86,9 @@ const useStyles = makeStyles()(() => ({
         fontWeight:'600',
         fontSize:'14px',
         lineHeight:'22px',
-        color:'#00B0F0',
-        textDecoration:'none',
+        color:'#0556A7',
+        textDecoration:'underline',
+        marginBottom: '3%!important',
         
         '&:hover': {
             color: '#0e5988!important'
@@ -100,7 +102,19 @@ const useStyles = makeStyles()(() => ({
     linktosignindiv: {
         textAlign:'center',
         marginTop: '6%!important',
+    },
+    extrapadding: {
+        marginTop: '4%!important',
+        padding:'3%',
+        background:'#a1b0b51a'
+    },
+
+    notalink: {
+        fontSize:'13px',
+        color:'#93a4aa',
+        fontWeight:'400'
     }
+
 
 
 

@@ -16,7 +16,7 @@ function NSURInfo(): JSX.Element {
 				<div className={classes.topInner}>
 					<Typography className={classes.descriptionText}>
 						NSUR Inc. has also build a discount{' '}
-						<a href="https://nsurcoin.com/nsurx" style={{ color: "#00B0F0" }}>
+						<a href="https://nsurcoin.com/nsurx" style={{ color: "#64B5F6" }}>
 							medication calculator
 						</a>
 						{' '}
@@ -41,7 +41,7 @@ const useStyles = makeStyles()((theme) => ({
 		padding: 24,
 		justifyContent: 'center',
 		[`@media screen and (min-width: ${COLLAPSE_THRESHOLD}px)`]: {
-			backgroundColor: '#006B92',
+			backgroundColor: '#0556A7',
 			padding: '5%',
 			justifyContent: "flex-end"
 		},

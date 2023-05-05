@@ -16,7 +16,7 @@ const useStyles = makeStyles()(() => ({
 		marginRight: 'auto',
 	  },
 	  logo: {
-		backgroundColor: '#006B92',
+		backgroundColor: '#0556A7',
 		width: 140,
 		['@media screen and (min-width: 768px)']: {
 		  width: 150,
@@ -41,18 +41,18 @@ const useStyles = makeStyles()(() => ({
 		justifyContent: 'flex-end',
 	  },
 	  link: {
-		color: '#136DA7!important',
+		color: '#0556A7!important',
 		fontWeight: '400!important',
 		fontSize: '25!important',
 		padding: '10px!important',
 		margin: '5px!important',
 		'&:hover': {
 		  color: 'white!important',
-		  backgroundColor: '#00B0F0',
+		  backgroundColor: '#64B5F6',
 		},
 		'&.active': {
 		  color: 'white!important',
-		  backgroundColor: '#00B0F0',
+		  backgroundColor: '#64B5F6',
 		},
 		marginLeft: '10px',
 	  },

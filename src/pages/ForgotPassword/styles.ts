@@ -18,7 +18,7 @@ const useStyles = makeStyles()(() => ({
         marginRight: '0%',
         padding: '0 8% 0 13%',
         h1: {
-                color:'#136DA7',
+                color:'#0556A7',
                 fontStyle: 'normal',
                 fontWeight: '800',
                 fontSize: '30px',
@@ -47,10 +47,11 @@ const useStyles = makeStyles()(() => ({
 
     formhere: {
         padding: '0',
+        width:'100%!important',
     },
 
     buttonstyle: {
-        background:'#00B0F0!important',
+        background:'#64B5F6!important',
         border:'none!important',
         borderRadius:'4px!important',
         width:'100%!important',
@@ -86,7 +87,7 @@ const useStyles = makeStyles()(() => ({
         fontWeight:'600',
         fontSize:'14px',
         lineHeight:'22px',
-        color:'#00B0F0',
+        color:'#64B5F6',
         marginBottom: '3%!important',
         textDecoration:'underline',
         

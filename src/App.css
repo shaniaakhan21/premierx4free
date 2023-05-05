@@ -7,3 +7,11 @@ html, body, #root, .App {
 body {
 	min-height: 100%;
 }
+
+/* h1, h2, h3, h4, h5, h6 {
+	color:black!important;
+} */
+
+p{
+	color:#667B8B!important;
+}

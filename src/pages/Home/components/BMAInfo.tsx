@@ -9,7 +9,7 @@ function BMAInfo(): JSX.Element {
 
 	return (
 		<Grid container className={classes.container}>
-			<Box style={{ position: 'absolute', height: 20, backgroundColor: '#006B92', width: '100%', zIndex: 1 }} />
+			<Box style={{ position: 'absolute', height: 20, backgroundColor: '#0556A7', width: '100%', zIndex: 1 }} />
 			<Grid item xs={12} sm={6} style={{
 				zIndex: 2,
 			}}>
@@ -119,7 +119,7 @@ const useStyles = makeStyles()(() => ({
 		},
 	},
 	infoText: {
-		color: "#136DA7",
+		color: "#0556A7",
 		fontSize: 20,
 	},
 	textSeparator: {

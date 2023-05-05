@@ -23,7 +23,7 @@ function SignUp(): JSX.Element {
     async function submit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        try{
+        try {
             const res = await axios.post("http://localhost:8000/signup", {
                 fullName,
                 email,
@@ -34,14 +34,14 @@ function SignUp(): JSX.Element {
             if (res.data === "exists") {
                 setErrorMsg("User already exists");
             } else if (res.data === "notexists") {
-               history("/signin");
+                history("/signin");
             }
         } catch (e) {
             setErrorMsg("Something went wrong try again later");
             console.log(e);
         }
     }
-  
+
     return (
         <div className={classes.container}>
             <div className={classes.imagesigin}>
@@ -58,7 +58,7 @@ function SignUp(): JSX.Element {
                             id="fullName"
                             placeholder="Enter your full name"
                             value={fullName || errorMsg}
-                            onChange={(e) => { setFullName(e.target.value)}}
+                            onChange={(e) => { setFullName(e.target.value) }}
                         />
                     </div>
                     {errorMsg && (
@@ -69,37 +69,76 @@ function SignUp(): JSX.Element {
                     <div className="form-group">
                         <label className={classes.label} htmlFor="email">Email Address</label>
                         <input
-                        type="email"
-                        className={`${classes.formControl} form-control`}
-                        id="email"
-                        placeholder="Enter your email address"
-                        value={email}
-                        onChange={(e) => { setEmail(e.target.value) }}
+                            type="email"
+                            className={`${classes.formControl} form-control`}
+                            id="email"
+                            placeholder="Enter your email address"
+                            value={email}
+                            onChange={(e) => { setEmail(e.target.value) }}
                         />
-                                <small id="emailHelp" className="form-text text-muted">
-                                We’ll send a confirmation email to your inbox, make sure you have access to this email address.
-                                </small>
+                        <small id="emailHelp" className="form-text text-muted">
+                            We’ll send a confirmation email to your inbox, make sure you have access to this email address.
+                        </small>
                     </div>
                     <div className="form-group">
                         <label className={classes.label} htmlFor="phoneNumber">Phone Number</label>
-                        <input style={{ marginBottom: '7%' }} 
-                        type="tel"
-                        className={`${classes.formControl} form-control`}
-                        id="phoneNumber"
-                        placeholder="Enter your phone number"
-                        value={phoneNumber}
-                        onChange={(e) =>{ setPhoneNumber(e.target.value)}}
+                        <input
+                            type="tel"
+                            className={`${classes.formControl} form-control`}
+                            id="phoneNumber"
+                            placeholder="Enter your phone number"
+                            value={phoneNumber}
+                            onChange={(e) => { setPhoneNumber(e.target.value) }}
                         />
                     </div>
                     <div className="form-group">
+                        <label className={classes.label} htmlFor="fullName">Address</label>
+                        <input style={{ height: '100px'}}
+                            type="text"
+                            className={`${classes.formControl} form-control`}
+                            id="fullName"
+                            placeholder=""
+                            onChange={(e) => { setFullName(e.target.value) }}
+                        />
+                        <input
+                            type="text"
+                            className={`${classes.formControl} form-control`}
+                            id="fullName"
+                            placeholder="City"
+                            onChange={(e) => { setFullName(e.target.value) }}
+                        />
+                        <input
+                            type="text"
+                            className={`${classes.formControl} form-control`}
+                            id="fullName"
+                            placeholder="State"
+                            onChange={(e) => { setFullName(e.target.value) }}
+                        />
+                        <input
+                            type="text"
+                            className={`${classes.formControl} form-control`}
+                            id="fullName"
+                            placeholder="Zip Code"
+                            onChange={(e) => { setFullName(e.target.value) }}
+                        />
+                        <input
+                            type="text"
+                            className={`${classes.formControl} form-control`}
+                            id="fullName"
+                            placeholder="Referral Link"
+                            onChange={(e) => { setFullName(e.target.value) }}
+                        />
+                    </div>
+
+                    <div className="form-group">
                         <div className={` ${classes.cstmpsdbox} "input-group" `}>
                             <input
-                            type={showPassword1 ? "text" : "password"}
-                            className={`${classes.formControl} ${classes.custompsd} form-control`}
-                            id="password"
-                            placeholder="Input Password"
-                            value={password}
-                            onChange={(e) => { setPassword(e.target.value)} }
+                                type={showPassword1 ? "text" : "password"}
+                                className={`${classes.formControl} ${classes.custompsd} form-control`}
+                                id="password"
+                                placeholder="Input Password"
+                                value={password}
+                                onChange={(e) => { setPassword(e.target.value) }}
                             />
                             <div className="input-group-append">
                                 <button
@@ -116,12 +155,12 @@ function SignUp(): JSX.Element {
                     <div className="form-group">
                         <div className={` ${classes.cstmpsdbox} "input-group" `}>
                             <input
-                            type={showPassword2 ? "text" : "password"}
-                            className={`${classes.formControl} ${classes.custompsd} form-control`}
-                            id="confirmPassword"
-                            placeholder="Confirm Password"
-                            value={confirmPassword}
-                            onChange={(e) =>{ setConfirmPassword(e.target.value)}}
+                                type={showPassword2 ? "text" : "password"}
+                                className={`${classes.formControl} ${classes.custompsd} form-control`}
+                                id="confirmPassword"
+                                placeholder="Confirm Password"
+                                value={confirmPassword}
+                                onChange={(e) => { setConfirmPassword(e.target.value) }}
                             />
                             <div className="input-group-append">
                                 <button
@@ -134,17 +173,18 @@ function SignUp(): JSX.Element {
                             </div>
                         </div>
                     </div>
-                    <button type="submit"  className={`${classes.buttonstyle} btn btn-primary`}>
+                    <button type="submit" className={`${classes.buttonstyle} btn btn-primary`}>
                         Register
                     </button>
-                    <div className={classes.linktosignindiv}>
-                        <a className={classes.linktosignin}>Already have an Account? Log in</a>
+                    <div className={`${classes.linktosignindiv} ${classes.extrapadding}`}>
+                        <span className={classes.notalink}>Already have an account? </span>
+                        <a href='/signin' className={classes.linktosignin}>Log in</a>
                     </div>
 
                 </form>
             </div>
-		</div>
-	)
+        </div>
+    )
 }
 
 export default SignUp

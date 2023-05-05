@@ -7,37 +7,37 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
 const imgSignin = '/assets/svg/SignIn/sigin-img.svg';
 
-function SignIn() : JSX.Element{
+function SignIn(): JSX.Element {
     const { classes } = useStyles();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword1, setShowPassword1] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
-    const history=useNavigate();
+    const history = useNavigate();
 
-    async function submit(e: { preventDefault: () => void; }){
+    async function submit(e: { preventDefault: () => void; }) {
         e.preventDefault();
 
         try {
             const response = await fetch("http://localhost:8000/signin", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email, password }) });
             const result = await response.json();
-      
+
             if (result === "exists") {
-              // login successful, redirect to home page
-              history("/");
+                // login successful, redirect to home page
+                history("/");
             } else {
-              // login failed, show error message
-              setErrorMsg("Invalid email or password");
+                // login failed, show error message
+                setErrorMsg("Invalid email or password");
             }
-          } catch (error) {
+        } catch (error) {
             console.error("Error:", error);
             setErrorMsg("An error occurred, please try again later.");
-          }
-        };
-  
-	return (
-		<div className={classes.container}>
-			<div className={classes.imagesigin}>
+        }
+    };
+
+    return (
+        <div className={classes.container}>
+            <div className={classes.imagesigin}>
                 <img src={imgSignin} />
             </div>
             <div className={classes.siginform}>
@@ -51,24 +51,24 @@ function SignIn() : JSX.Element{
                     <div className="form-group">
                         <label className={classes.label} htmlFor="email">Email Address</label>
                         <input
-                        type="email"
-                        className={`${classes.formControl} form-control`}
-                        id="email"
-                        placeholder="Enter your email address"
-                        value={email || errorMsg}
-                        onChange={(e) =>{ setEmail(e.target.value)}}
+                            type="email"
+                            className={`${classes.formControl} form-control`}
+                            id="email"
+                            placeholder="Enter your email address"
+                            value={email || errorMsg}
+                            onChange={(e) => { setEmail(e.target.value) }}
                         />
                     </div>
                     <div className="form-group">
                         <label className={classes.label} htmlFor="password">Password</label>
                         <div className={` ${classes.cstmpsdbox} "input-group" `}>
                             <input
-                            type={showPassword1 ? "text" : "password"}
-                            className={`${classes.formControl} ${classes.custompsd} form-control`}
-                            id="password"
-                            placeholder="Input Password"
-                            value={password}
-                            onChange={(e) => { setPassword(e.target.value)} }
+                                type={showPassword1 ? "text" : "password"}
+                                className={`${classes.formControl} ${classes.custompsd} form-control`}
+                                id="password"
+                                placeholder="Input Password"
+                                value={password}
+                                onChange={(e) => { setPassword(e.target.value) }}
                             />
                             <div className="input-group-append">
                                 <button
@@ -86,16 +86,17 @@ function SignIn() : JSX.Element{
                         Log In
                     </button>
                     <div className={classes.linktosignindiv}>
-                        <a className={classes.linktosignin}>I can’t remember my password</a>
+                        <a href='/resetpassword' className={classes.linktosignin}>I can’t remember my password</a>
                     </div>
                     <div className={`${classes.linktosignindiv} ${classes.extrapadding}`}>
-                        <a className={classes.linktosignin}>Don’t have an account yet? Register here</a>
+                        <span className={classes.notalink}>Don’t have an account yet? </span>
+                        <a href='/signup' className={classes.linktosignin}>Register</a>
                     </div>
 
                 </form>
             </div>
-		</div>
-	)
+        </div>
+    )
 }
 
 export default SignIn

@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '20px',
     textAlign: 'center',
     fontFamily: 'Roboto,"Segoe UI",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
-    color: '#136DA7',
+    color: '#0556A7',
   },
   text: {
     marginTop: theme.spacing(2),
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     padding: '4% 17%',
-    background: '#00B0F0',
+    background: '#64B5F6',
     borderRadius: 0,
     boxShadow: 'none',
   },

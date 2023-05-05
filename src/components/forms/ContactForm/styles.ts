@@ -2,20 +2,20 @@ import { makeStyles } from "../../../utils/makeStyles"
 
 const useStyles = makeStyles()((theme) => ({
 	title: {
-		color: "#FFFFFF",
+		color: "#FFFFFF!important",
 		marginBottom: '5%'
 	},
 	input: {
-		color: "#FFFFFF",
+		color: "#FFFFFF!important",
 		'&$cssFocused $notchedOutline': {
 			borderColor: '#FFFFFF',
 		},
 	},
 	focusedInput: {
-		color: "#FFFFFF",
+		color: "#FFFFFF!important",
 	},
 	notchedOutline: {
-		color: "#FFFFFF",
+		color: "#FFFFFF!important",
 		borderRadius: 0,
 		borderWidth: 0,
 		borderBottomWidth: 1,
@@ -25,8 +25,8 @@ const useStyles = makeStyles()((theme) => ({
 		marginTop: '15%',
 		paddingTop: 12,
 		paddingBottom: 12,
-		backgroundColor: "#00B0F0",
-		color: "#FFFFFF"
+		backgroundColor: "#64B5F6",
+		color: "#FFFFFF!important"
 	},
 	contactInfo: {
 		[theme.breakpoints.down('sm')]: {
@@ -37,7 +37,7 @@ const useStyles = makeStyles()((theme) => ({
 		},
 	},
 	contactInfoTitle: {
-		color: "#FFFFFF",
+		color: "#FFFFFF!important",
 		fontWeight: 700,
 		fontSize: 16,
 		marginBottom: '5%',
@@ -58,7 +58,7 @@ const useStyles = makeStyles()((theme) => ({
 		}
 	},
 	contactInfoText: {
-		color: "#FFFFFF",
+		color: "#FFFFFF!important",
 		fontWeight: 400,
 		fontSize: 14,
 		marginBottom: '5%',
@@ -83,10 +83,10 @@ const useStyles = makeStyles()((theme) => ({
 		alignItems: 'center'
 	},
 	submitEmailBtn: {
-		backgroundColor: "#00B0F0",
+		backgroundColor: "#64B5F6",
 	},
 	confirmationMessage: {
-		color: "#FFFFFF",
+		color: "#FFFFFF!important",
 		fontSize: 16,
 		textAlign: 'center',
 		marginTop: '1%'
