@@ -58,11 +58,6 @@ function AgentTabs(): JSX.Element {
         // You can send a request to update the profile here
     };
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { id, value } = event.target;
-        setProfile((prevProfile) => ({ ...prevProfile, [id]: value }));
-    };
-
     return (
         <Tab.Container id="left-tabs-example" defaultActiveKey="first" >
             <Row>
@@ -131,7 +126,6 @@ function AgentTabs(): JSX.Element {
                                     confirmNewPassword={profile.confirmNewPassword}
                                     onCancel={handleCancel}
                                     onSave={handleSave}
-                                    onChange={handleChange}
                                 />
                             </div>
                         </Tab.Pane>
