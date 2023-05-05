@@ -8,12 +8,12 @@ const imgSignin = '/assets/svg/SignIn/sigin-img.svg';
 function ForgotPassword(): JSX.Element {
     const { classes } = useStyles();
     const [email, setEmail] = useState("");
-    const [isSent, setIsSent] = useState(false); // new state variable
+    const [isSent, setIsSent] = useState(false);
 
-    const handleSend = (e) => {
+    const handleSend = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         setIsSent(true);
-        // send reset password email logic here
+        
     }
 
     return (
