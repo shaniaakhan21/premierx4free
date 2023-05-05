@@ -27,7 +27,7 @@ const useStyles = makeStyles()(() => ({
           
       },
 
-      '&:last-child, &:nth-last-child(2), &:nth-last-child(3)': {
+      '&:last-child, &:nth-last-child(2)': {
         '&:hover': {
           transform: 'scale(1.1)',
           boxShadow: '0px 0px 20px 7px #8080805e',

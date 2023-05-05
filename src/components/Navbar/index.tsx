@@ -22,6 +22,8 @@ function AppNavbar(): JSX.Element {
             <Link to="/plans" className={`${classes.link} nav-link ${location.pathname ===  "/plans" ? "active" : ""}`}>Plan Options</Link>
             <Link to="/contact" className={`${classes.link} nav-link ${location.pathname === "/contact" ? "active" : ""}`}>Contact Us</Link>
             <Link to="/faq" className={`${classes.link} nav-link ${location.pathname === "/faq" ? "active" : ""}`}>FAQ</Link>
+            <Link to="/signup" className={`${classes.link} nav-link ${location.pathname === "/signup" ? "active" : ""}`}>Register</Link>
+            <Link to="/signin" className={`${classes.link} nav-link ${location.pathname === "/signin" ? "active" : ""}`}>Log In</Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
