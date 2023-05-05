@@ -1,24 +1,25 @@
-  .box-main{
+  .box-main {
     padding: 2% 3% 0;
   }
+
   .textCustom {
     font-weight: 400;
     font-size: 24px;
     line-height: 33px;
-    font-family: Roboto,"Segoe UI",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-family: Roboto, "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   }
-  
+
   .table-responsive {
     border-radius: 10px !important;
     margin-top: 1%;
     border: 1px solid #D6D9DB;
   }
-  
+
   .table {
     border-color: #F4F6F8;
-    margin: 0!important;
+    margin: 0 !important;
   }
-  
+
   .table-bordered {
     border-width: 1px;
   }
@@ -32,19 +33,51 @@
     color: var(--bs-table-hover-color);
   }
 
-  td{
+  td {
     color: #667B8B;
     font-size: 15px;
   }
 
-  th{
+  th {
     font-weight: 400;
     font-size: 18px;
     line-height: 27px;
-    padding: 1% 1% 1% 8px!important;
+    padding: 1% 1% 1% 8px !important;
   }
 
-  .color-link{
+  .color-link {
     color: #0556A7;
     text-decoration: none;
+  }
+
+  .boxModal .modal-content {
+    width: 216%;
+  }
+
+  .boxModal .modal-dialog {
+    margin: 10% 16%;
+  }
+
+  .modalFooter {
+    border-top: none !important;
+  }
+
+  .buttonWhite {
+    background: #FFFFFF !important;
+    border: 1px solid #86A9B8 !important;
+    border-radius: 10px !important;
+    color: #48748D !important;
+    padding: 1% 7% !important;
+  }
+
+  .buttonBlue {
+    background: #64B5F6 !important;
+    border: 1px solid #86A9B8 !important;
+    border-radius: 10px !important;
+    color: white !important;
+    padding: 1% 7% !important;
+  }
+
+  .boxModal {
+    background: #1e3e485e;
   }

@@ -1,0 +1,63 @@
+.MarketingMaterials-documents {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.MarketingMaterials-document-card {
+    width: 17.8%;
+    margin: 1%;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    flex-wrap: nowrap;
+    height: 100%;
+}
+
+.MarketingMaterials-document-icon img {
+    width: 100%;
+}
+
+.MarketingMaterials-document-details{
+    padding: 5%;
+}
+
+.MarketingMaterials-document-name{
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.MarketingMaterials-document-preview{
+    font-size: 15px;
+}
+
+.MarketingMaterials-filter-button {
+    border: 1px solid #86A9B8;
+    box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.25);
+    background-color: transparent;
+    border-radius: 70px;
+    color: #000000;
+}
+
+.MarketingMaterials-filter-button:hover , .MarketingMaterials-filter-button:active, .MarketingMaterials-filter-button:focus-visible, .active-filter{
+    border: 1px solid #64B5F6!important;
+    box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.25)!important;
+    background-color:  #64B5F6!important;
+    border-radius: 70px!important;
+    color: white!important;
+}
+
+.MarketingMaterials-filters{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.MarketingMaterials{
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+.MarketingMaterials .textCustom{
+    line-height: 5rem;
+}

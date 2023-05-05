@@ -10,6 +10,7 @@ import AgentReport from '../agent-report/AgentReport';
 import AgentSubHeader from '../agent-header/component/AgentSubHeader';
 import AgentSubmitCompany from '../agent-submit-company/AgentSubmitCompany';
 import AgentSettings from '../agent-settings/AgentSettings';
+import MarketingMaterials from '../agent-marketing-materials/MarketingMaterials';
 
 
 const initialProfile = {
@@ -114,8 +115,8 @@ function AgentTabs(): JSX.Element {
                         <Tab.Pane eventKey="third" className="tab-pane-third">
                             <AgentReport data={reportdata} spanText="Reports" col1head='Representative' col2head='Contract Status' col3head='Contract End Date' col4head='Pay Date' col5head='Company Name' col6head='Active Employees' col7head='Payment Date' col8head='Payment Amount' col9head='Level' />
                         </Tab.Pane>
-                        <Tab.Pane eventKey="fourth">
-                            <h1>Hey!</h1>
+                        <Tab.Pane eventKey="fourth" className='tab-pane-fourth'>
+                            <MarketingMaterials />
                         </Tab.Pane>
                         <Tab.Pane eventKey="fifth" className='tab-pane-fifth'>
                             <div className="container mt-4">

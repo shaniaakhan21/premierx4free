@@ -9,8 +9,7 @@ const useStyles = makeStyles()(() => ({
         top: '14px',
         padding: '5% 5% 4%',
         border: '1px solid #D6D9DB',
-        borderTop: 0,
-
+        borderTop: 0
     },
 
     subcontainer: {
@@ -70,6 +69,46 @@ const useStyles = makeStyles()(() => ({
         borderRight: "2px solid #DEE1EB", 
         height: "40px",
         paddingLeft: '9%'
+    },
+
+    areaCustom: {
+        width: '100%',
+        height: '100px',
+        border: '1px solid #D6D9DB',
+        padding: '2%'
+    },
+
+    modalHeader: {
+        borderBottom: 'none!important'
+    },
+
+    modalFooter: {
+        borderTop: 'none!important'
+    },
+        
+    buttonWhite: {
+        background: '#FFFFFF!important',
+        border: '1px solid #86A9B8!important',
+        borderRadius: '10px!important',
+        color: '#48748D!important',
+        padding: '1% 7%!important'
+    },
+
+    buttonBlue: {
+        background: '#64B5F6!important',
+        border: '1px solid #86A9B8!important',
+        borderRadius: '10px!important',
+        color: 'white!important',
+        padding: '1% 7%!important'
+    },
+
+    boxModal: {
+        background: '#1e3e485e',
+        paddingTop: '11%'
+    },
+
+    modalTitle: {
+        fontSize: '23px!important'
     }
 
 }));
