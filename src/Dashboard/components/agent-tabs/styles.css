@@ -28,31 +28,22 @@
     color: black!important;
 }
 
-.tab-pane-first{
-    position: relative;
-    right: 12px;
-    bottom: 18.7rem;
+.phone-row{
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2%;
 }
 
-.tab-pane-third {
-    position: relative;
-    right: 12px;
-    bottom: 18rem;
+.phone-logo{
+    width: 57%;
+    padding: 3%;
 }
 
-.tab-pane-second{
-    position: relative;
-    right: 12px;
-    bottom: 18rem;
+.phone-hamburger{
+    width: 15%;
 }
 
-.tab-pane-fifth{
-    position: relative;
-    left: 22px;
-    bottom: 18rem;
-}
-
-.tab-pane-fourth{
-    position: relative;
-    bottom: 16rem;
+.phone-hamburger img{
+    width: 100%;
 }

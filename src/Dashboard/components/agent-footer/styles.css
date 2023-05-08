@@ -11,4 +11,8 @@
     margin-top: 2%;
     padding: 2%;
     margin-bottom: 0;
+
+    @media (max-width: 600px) {
+        font-size: 12px !important;
+    }
 }

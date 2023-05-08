@@ -28,7 +28,7 @@ const Comission = ({ spanText }: Props) => {
         }
     }
     return (
-        <div className="box-main">
+        <div className="box-main-commission">
             <div className="box-it">
                 <span className='textCustom'>{spanText}</span>
                 <div className="tab-options">

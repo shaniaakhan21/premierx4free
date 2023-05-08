@@ -9,7 +9,7 @@ function AppNavbar(): JSX.Element {
   const location = useLocation();
   return (
     <Navbar bg="white" expand="lg">
-      <Container style={{ padding:'1%'}}>
+      <div className={ `${classes.container} container`}>
         <Link to="/" className="navbar-brand">
           <Logo/>
         </Link>
@@ -26,7 +26,7 @@ function AppNavbar(): JSX.Element {
             <Link to="/signin" className={`${classes.link} nav-link ${location.pathname === "/signin" ? "active" : ""}`}>Log In</Link>
           </Nav>
         </Navbar.Collapse>
-      </Container>
+      </div>
     </Navbar>
   );
 }

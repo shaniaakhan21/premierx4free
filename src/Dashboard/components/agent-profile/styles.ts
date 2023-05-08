@@ -2,7 +2,7 @@ import { makeStyles } from "../../../utils/makeStyles"
 
 const useStyles = makeStyles()(() => ({
     profileBody: {
-        background: 'linear-gradient(205.19deg, #64B5F6 1.82%, #0556A7 100%)',
+        background: 'linear-gradient(210deg, #64B5F6 1.82%, #0556A7 100%)',
         padding: '8%',
 
     },

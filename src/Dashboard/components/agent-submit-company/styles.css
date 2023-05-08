@@ -1,6 +1,10 @@
 form {
     width: 80%;
     padding: 3%;
+
+    @media (max-width: 600px) {
+        width: 100%;
+    }
 }
 
 .box-with-shadow {
@@ -11,44 +15,99 @@ form {
     margin-top: 2%;
 }
 
-form .row{
+.company-form .first-phone-row {
+    @media (max-width: 600px) {
+        flex-direction: column;
+    }
+}
+
+.form-label {
+    @media (max-width: 600px) {
+        flex-direction: column;
+    }
+}
+
+.company-form .textCustom {
+    font-weight: 500 !important;
+    font-size: 24px !important;
+}
+
+form .row {
     margin-bottom: 2%;
 }
 
-.long-text-area{
+.long-text-area {
     height: 233px;
+
+    @media (max-width: 600px) {
+        height: 110px;
+    }
 }
 
-.flex-box-it{
+.flex-box-it {
     display: flex;
     align-items: center;
     justify-content: flex-start;
 }
 
-.box-with-shadow .btn-secondary{
-    background: #FFFFFF!important;
-    border: 1px solid #86A9B8!important;
-    border-radius: 10px!important;
-    color: #48748D!important;
-    padding: 10% 35%!important;
-    text-align: center!important;
+.box-with-shadow .btn-secondary {
+    background: #FFFFFF !important;
+    border: 1px solid #86A9B8 !important;
+    border-radius: 10px !important;
+    color: #48748D !important;
+    padding: 10% 35% !important;
+    text-align: center !important;
+
+    @media (max-width: 600px) {
+        padding: 10% 45% !important;
+    }
 }
 
-.box-with-shadow .btn-primary{
-    background: #64B5F6!important;
-    border: 1px solid #86A9B8!important;
-    border-radius: 10px!important;
-    color: white!important;
-    padding: 10% 45%!important;
-    text-align: center!important;
+.box-with-shadow .btn-primary {
+    background: #64B5F6 !important;
+    border: 1px solid #86A9B8 !important;
+    border-radius: 10px !important;
+    color: white !important;
+    padding: 10% 45% !important;
+    text-align: center !important;
+
+    @media (max-width: 600px) {
+        padding: 10% 45% !important;
+    }
 }
 
-.Btn-Custom{
+.Btn-Custom {
     text-align: end;
+
+    @media (max-width: 600px) {
+        width: 25%;
+        margin: 0 2% 1% 7%;
+    }
 }
 
-.align-it-end{
+.align-it-end {
     justify-content: flex-end;
     margin-top: 4%;
     margin-right: 2%;
+
+    @media (max-width: 600px) {
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: flex-end;
+    }
+}
+
+.another-flex {
+    @media (max-width: 600px) {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.another-flex .form-label {
+
+    @media (max-width: 600px) {
+        margin-right: 10%;
+    }
 }

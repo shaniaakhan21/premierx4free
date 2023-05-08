@@ -3,12 +3,10 @@ import { makeStyles } from "../../utils/makeStyles"
 const useStyles = makeStyles()(() => ({
 
 	  container: {
-		backgroundColor: 'white',
-		display: 'flex',
-		flexDirection: 'row',
-		alignItems: 'center',
-		justifyContent: 'space-between',
-		padding:'2%',
+		padding:'1%!important',
+		'@media (max-width:600px)': {
+			padding:'4%!important',
+		},
 	  },
 	  logoContainer: {
 		alignSelf: 'flex-start',

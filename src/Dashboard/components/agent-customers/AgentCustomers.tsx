@@ -33,7 +33,7 @@ const AgentCustomers = ({ data, spanText, col1head, col2head, col3head, col4head
         }
     };
 	return (
-		<div className="box-main">
+		<div className="box-main box-main-customer">
             <span className='textCustom'>{spanText}</span>
             <Table bordered hover responsive style={{ borderRadius: '5%' }} className='tableDesign'>
                 <thead>

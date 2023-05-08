@@ -25,7 +25,7 @@ const AgentNetwork = ({ spanText }: Props) => {
     }
 
     return (
-        <div className="box-main">
+        <div className="box-main-network">
             <span className='textCustom'>{spanText}</span>
             <Tabs
                 defaultActiveKey="directrefferals"

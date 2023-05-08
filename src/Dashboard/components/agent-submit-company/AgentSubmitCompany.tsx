@@ -17,11 +17,11 @@ function AgentSubmitCompany(): JSX.Element {
     return (
         <>
 
-            <Form noValidate validated={validated} onSubmit={handleSubmit}>
+            <Form noValidate validated={validated} onSubmit={handleSubmit}  className='company-form'>
                 <span className='textCustom'>Submit New Companies </span>
                 <div className="box-with-shadow">
-                    <Row>
-                        <Col>
+                    <Row className='first-phone-row'>
+                        <Col lg={6}>
                             <Form.Group controlId="companyName">
                                 <Form.Label>Company Name</Form.Label>
                                 <Form.Control required type="text" />
@@ -30,7 +30,7 @@ function AgentSubmitCompany(): JSX.Element {
                                 </Form.Control.Feedback>
                             </Form.Group>
                         </Col>
-                        <Col>
+                        <Col lg={6}>
                             <Form.Group controlId="phoneNumber">
                                 <Form.Label>Phone Number</Form.Label>
                                 <Form.Control required type="text" />
@@ -51,7 +51,7 @@ function AgentSubmitCompany(): JSX.Element {
                             </Form.Group>
                         </Col>
                     </Row>
-                    <Row>
+                    <Row  className='first-phone-row'>
                         <Col>
                             <Form.Group controlId="contactPersonName">
                                 <Form.Label>Contact Person Name</Form.Label>
@@ -71,7 +71,7 @@ function AgentSubmitCompany(): JSX.Element {
                             </Form.Group>
                         </Col>
                     </Row>
-                    <Row>
+                    <Row  className='first-phone-row'>
                         <Col>
                             <Form.Group controlId="currentNumberOfEmployees">
                                 <Form.Label>Current Number of Employees</Form.Label>
@@ -100,7 +100,7 @@ function AgentSubmitCompany(): JSX.Element {
                             </Form.Group>
                         </Col>
                     </Row>
-                    <Row>
+                    <Row className='first-phone-row'>
                         <Col lg={6}>
                             <Form.Group controlId="insuranceInfo">
                                 <Form.Label>Insurance Info</Form.Label>
@@ -111,11 +111,11 @@ function AgentSubmitCompany(): JSX.Element {
                             </Form.Group>
                         </Col>
                     </Row>
-                    <Row className="flex-box-it">
+                    <Row className="flex-box-it first-phone-row">
                         <Col >
-                            <Form.Group controlId="fullInsured">
+                            <Form.Group controlId="fullInsured" className='another-flex'>
                                 <Form.Label>Full Insured</Form.Label>
-                                <div key="inline-radio">
+                                <div key="inline-radio" >
                                     <Form.Check
                                         inline
                                         label="Yes"
@@ -134,7 +134,7 @@ function AgentSubmitCompany(): JSX.Element {
                             </Form.Group>
                         </Col>
                         <Col >
-                            <Form.Group controlId="selfInsured">
+                            <Form.Group controlId="selfInsured" className='another-flex'>
                                 <Form.Label>Self Insured</Form.Label>
                                 <div key="inline-radio">
                                     <Form.Check
@@ -155,7 +155,7 @@ function AgentSubmitCompany(): JSX.Element {
                             </Form.Group>
                         </Col>
                         <Col >
-                            <Form.Group controlId="noInsured">
+                            <Form.Group controlId="noInsured" className='another-flex'>
                                 <Form.Label>No Insured</Form.Label>
                                 <div key="inline-radio">
                                     <Form.Check
@@ -186,12 +186,12 @@ function AgentSubmitCompany(): JSX.Element {
                         </Col>
                     </Row>
                     <Row className='align-it-end'> 
-                        <Col lg={2} className="Btn-Custom">
+                        <Col lg={2} sm={1} className="Btn-Custom">
                             <Button variant="secondary" type="button" >
                                 Cancel
                             </Button>
                         </Col>
-                        <Col lg={2} className="Btn-Custom">
+                        <Col lg={2} sm={1} className="Btn-Custom">
                             <Button variant="primary" type="submit">
                                 Save
                             </Button>
