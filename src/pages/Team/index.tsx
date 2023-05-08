@@ -2,6 +2,7 @@ import Footer from '../../components/Footer';
 import TeamInfo from './components/TeamInfo';
 import Card from './components/Card';
 import { makeStyles } from '@material-ui/core/styles';
+import Navbar from '../../components/Navbar';
 
 const people = [
   {name: 'Randy Case - CEO', marginTop:47, imageSrc: '/assets/svg/Team/randy.svg', description:'Randy founded PremieRx4Free in 2023 to be a disruptor in the prescription drug industry. His background and knowledge in the subject area make him the perfect person to get prescription medications and tele-health programs to the masses. In 2020, Randy co-founded NSUR, Inc. a crypto based company that specializes in the health and wellness sectors and applying the blockchain technology to it. Randy played a major role in energy deregulation in the 2010-2020 time frame forming Strategic Energy Marketing. Previous to that, Randy founded Strategic Realty Group, Inc. and was responsible for the renovation and development of Palm Desert Country Club (PDCC) in Palm Desert, Ca. As a result of that renovation and development, PDCC was awarded the golf course renovation of the year in the US in 2007 by Golf, Inc. magazine. Randy also served as Director of Real Estate for The Metropolitan Water District of Southern California (MWD), the world’s largest water agency. Randy was responsible for all real estate activities related to approximately 10,000 properties owned by MWD throughout Southern California and a $4.1 billion capital expansion program— The largest ever undertaken by the MWD.' },
@@ -35,6 +36,7 @@ function TeamPage(): JSX.Element {
   const classes = useStyles();
   return (
     <div>
+      <Navbar />
       <TeamInfo />
       <div className={classes.container}>
         {people.map((person) => (

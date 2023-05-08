@@ -5,7 +5,6 @@ import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
 import theme from './theme';
 import AppRouter from './routes';
-import Navbar from './components/Navbar';
 import TaggingService from './utils/TaggingService';
 import  './components/FontawesomeIcons';
 
@@ -26,7 +25,6 @@ function App() {
       <CacheProvider value={muiCache}>
         <ThemeProvider theme={theme}>
           <BrowserRouter>
-            <Navbar />
             <AppRouter />
           </BrowserRouter>
         </ThemeProvider>

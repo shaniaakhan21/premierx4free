@@ -1,7 +1,11 @@
 import { makeStyles } from '../../../../utils/makeStyles';
-
-function CalculationPageSecondTable () : JSX.Element{
+interface agentData {
+    agentCalculationData:any
+}
+function CalculationPageSecondTable (props:agentData) : JSX.Element{
     const {classes} = useStyles()
+    const {agentCalculationData} = props
+    console.log("integralTable",agentCalculationData[0]?.integralTable)
     return(
         <>
         <div className={classes.calculationPage_heading}>
@@ -22,22 +26,26 @@ function CalculationPageSecondTable () : JSX.Element{
           </tr>
         </thead>
         <tbody>
-          <tr className={classes.table_row}>
+            { agentCalculationData[0]?.integralTable?.map((dt:any) => (
+             <tr className={classes.table_row}>
+                <td className={classes.table_data_first}>{dt.ReferralAgentName}</td>
+                <td className={classes.table_data}>2023-04-30</td>
+                <td className={classes.table_data}>2023-04-30</td>
+                <td className={classes.table_data}>{dt.membershipPaid}</td>
+                <td className={classes.table_data}>{dt.membershipNo}</td>
+                <td className={classes.table_data}>{dt.totalPay}</td>
+              </tr>
+            ))
+          
+            }
+          {/* <tr className={classes.table_row}>
             <td className={classes.table_data_first}>Table cell</td>
             <td className={classes.table_data}>Table cell</td>
             <td className={classes.table_data}>Table cell</td>
             <td className={classes.table_data}>Table cell</td>
             <td className={classes.table_data}>Table cell</td>
             <td className={classes.table_data}>Table cell</td>
-          </tr>
-          <tr className={classes.table_row}>
-            <td className={classes.table_data_first}>Table cell</td>
-            <td className={classes.table_data}>Table cell</td>
-            <td className={classes.table_data}>Table cell</td>
-            <td className={classes.table_data}>Table cell</td>
-            <td className={classes.table_data}>Table cell</td>
-            <td className={classes.table_data}>Table cell</td>
-          </tr>
+          </tr> */}
         </tbody>
       </table>
 

@@ -4,7 +4,12 @@ import { Height } from '@material-ui/icons';
 import { BorderRight } from '@mui/icons-material';
 import { color, fontFamily } from '@mui/system';
 
-function Sidebar():JSX.Element{
+interface event {
+    eventNumber:number
+    setEventNumber:any
+}
+function Sidebar(props:event):JSX.Element{
+    const {eventNumber,setEventNumber} = props
     const {classes} = useStyles()
     return(
         <div className={classes.sidebar_mainContainer}>
@@ -13,7 +18,7 @@ function Sidebar():JSX.Element{
                     <img src='/assets/svg/logo_bold.svg' className={classes.logo} />
                 </div>
                 <div className={classes.topRectangle_displayImage}>
-                    <img src='/assets/svg/Team/randy.svg' className={classes.displayImage} />
+                    <img src='/assets/svg/Dashboard/dummy.svg' className={classes.displayImage} />
                 </div>
                 <div className={classes.topRectangle_text}>
                     <p className={classes.nameText}>Edwin Zam</p>
@@ -22,20 +27,20 @@ function Sidebar():JSX.Element{
             </div>
             
             <div className={classes.sidebar_navigation}>
-                        <div className={classes.navigation_li}>
+                        <div className={eventNumber ==1 ?classes.navigation_li_selected:classes.navigation_li} onClick={() => {setEventNumber(1)}}>
                             <img src='/assets/svg/documents.svg' className={classes.navigation_img} />
                             <p>Agent Documents</p>
                         </div>
-                        <div className={classes.navigation_li}>
+                        <div className={eventNumber ==2 ?classes.navigation_li_selected:classes.navigation_li} onClick={() => {setEventNumber(2)}}>
                             <img src='/assets/svg/calculator.svg' className={classes.navigation_img} />
                             <p>Calculation Page</p>
                         </div>
-                        <div className={classes.navigation_li}>
-                            <img src='/assets/svg/marketing.svg' className={classes.navigation_img} />
+                        <div className={classes.navigation_li} onClick={() => {setEventNumber(3)}}>
+                            <img src='/assets/svg/marketing.svg' className={classes.navigation_img}/>
                             <p>Marketing Materials</p>
                         </div>
-                        <div className={classes.navigation_li}>
-                            <img src='/assets/svg/setting.svg' className={classes.navigation_img} />
+                        <div className={classes.navigation_li} onClick={() => {setEventNumber(4)}}>
+                            <img src='/assets/svg/setting.svg' className={classes.navigation_img}/>
                             <p>Settings</p>
                         </div>
             </div>
@@ -104,6 +109,24 @@ const useStyles = makeStyles() (() => ({
         lineHeight:"23.19px",
         color:"#667B8B",
         padding:"10px",
+        "&:hover":{
+            backgroundColor:"#F4F6F8",
+            cursor:"pointer",
+            color:"#000000"
+        }
+    },
+    navigation_li_selected:{
+        display:"flex",
+        flexDirection:"row",
+        gap:"10px",
+        width:"100%",
+        fontFamily:"Nunito Sans",
+        fontWeight:400,
+        fontSize:"17px",
+        lineHeight:"23.19px",
+        color:"#000000",
+        padding:"10px",
+        backgroundColor:"#F4F6F8",
         "&:hover":{
             backgroundColor:"#F4F6F8",
             cursor:"pointer",

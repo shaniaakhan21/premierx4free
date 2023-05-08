@@ -1,0 +1,14 @@
+.agent-foot p {
+    font-weight: 400;
+    font-size: 16px;
+    border-top: 1px solid #D6D9DB;
+    line-height: 24px;
+    text-align: center;
+    position: relative;
+    color: #AAB1B6;
+    left: -12px;
+    width: 100%;
+    margin-top: 2%;
+    padding: 2%;
+    margin-bottom: 0;
+}

@@ -1,6 +1,11 @@
 import { makeStyles } from '../../../../utils/makeStyles';
 
-function CalculationPageFirstTable () : JSX.Element{
+interface agentData {
+    agentCalculationData:any
+}
+
+function CalculationPageFirstTable (props:agentData) : JSX.Element{
+    const {agentCalculationData} = props
     const {classes} = useStyles()
     return(
         <>
@@ -21,20 +26,24 @@ function CalculationPageFirstTable () : JSX.Element{
           </tr>
         </thead>
         <tbody>
-          <tr className={classes.table_row}>
+            { agentCalculationData?.map((dt:any) => (
+                <tr className={classes.table_row}>
+                <td className={classes.table_data_first}>{dt.agentName}</td>
+                <td className={classes.table_data}>{dt.customerInfo}</td>
+                <td className={classes.table_data}>{dt.companyName}</td>
+                <td className={classes.table_data}>{dt.contractStartDate}</td>
+                <td className={classes.table_data}>{dt.contractEndDate}</td>
+              </tr>
+            ))
+          
+            }
+          {/* <tr className={classes.table_row}>
             <td className={classes.table_data_first}>Table cell</td>
             <td className={classes.table_data}>Table cell</td>
             <td className={classes.table_data}>Table cell</td>
             <td className={classes.table_data}>Table cell</td>
             <td className={classes.table_data}>Table cell</td>
-          </tr>
-          <tr className={classes.table_row}>
-            <td className={classes.table_data_first}>Table cell</td>
-            <td className={classes.table_data}>Table cell</td>
-            <td className={classes.table_data}>Table cell</td>
-            <td className={classes.table_data}>Table cell</td>
-            <td className={classes.table_data}>Table cell</td>
-          </tr>
+          </tr> */}
         </tbody>
       </table>
 
@@ -119,7 +128,8 @@ const useStyles = makeStyles() (() =>({
         fontSize:"18px",
         lineHeight:"24.55px",
         color:"#667B8B",
-        padding:"23px 0 20px 0"
+        padding:"23px 0 20px 0",
+        width:"25%"
     },
     table_data_first:{
         fontFamily:"Nunito Sans",
@@ -127,7 +137,8 @@ const useStyles = makeStyles() (() =>({
         fontSize:"18px",
         lineHeight:"24.55px",
         color:"#667B8B",
-        padding:"23px 0 20px 20px"
+        padding:"23px 0 20px 20px",
+        width:"15%"
     }
 }))
 
