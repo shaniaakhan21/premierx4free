@@ -1,17 +1,21 @@
 /*  GLOBAL LAYOUT */
 html, body, #root, .App {
-	height: 100%;
 	margin: 0 !important;
     padding: 0 !important;
 }
+
+.App {
+	height: 100%;
+}
 body {
 	min-height: 100%;
+	font-family: "Nunito Sans";
 }
 
-/* h1, h2, h3, h4, h5, h6 {
-	color:black!important;
-} */
-
 p{
-	color:#667B8B!important;
+	font-family: "Nunito Sans";
+}
+
+.MuiButton-containedPrimary:hover {
+    background-color: #136DA7!important;
 }

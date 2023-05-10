@@ -255,7 +255,7 @@ const useStyles = makeStyles()(() => ({
 		['@media screen and (min-width: 1024px)']: {
 			fontSize: 28
 		},
-		color: "#64B5F6!important",
+		color: "#136DA7!important",
 		textDecoration: 'underline'
 	},
 	infoSubtitle: {
@@ -268,7 +268,7 @@ const useStyles = makeStyles()(() => ({
 		['@media screen and (min-width: 1024px)']: {
 			fontSize: 20
 		},
-		color: "#64B5F6!important",
+		color: "#136DA7!important",
 	},
 	infoText: {
 		fontWeight: 400,
@@ -283,7 +283,7 @@ const useStyles = makeStyles()(() => ({
 	},
 	partnerDescription: {
 		animation: '$fade 1s linear',
-		color: "#64B5F6!important",
+		color: "#136DA7!important",
 	},
 	'@keyframes fade': {
 		'0%': {

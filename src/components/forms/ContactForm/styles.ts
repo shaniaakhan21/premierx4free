@@ -3,7 +3,8 @@ import { makeStyles } from "../../../utils/makeStyles"
 const useStyles = makeStyles()((theme) => ({
 	title: {
 		color: "#FFFFFF!important",
-		marginBottom: '5%'
+		marginBottom: '5%',
+		fontWeight:'600',
 	},
 	input: {
 		color: "#FFFFFF!important",

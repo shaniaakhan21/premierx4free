@@ -43,8 +43,9 @@ const useStyles = makeStyles()((theme) => ({
 		},
 	},
 	title: {
-		color: "#0556A7",
+		color: "#136DA7",
 		fontSize: 'calc(1.8vw + 16px)',
+		fontWeight:'700',
 		['@media screen and (max-width: 600px)']: {
 			paddingLeft: '2%',
 		},
@@ -56,7 +57,7 @@ const useStyles = makeStyles()((theme) => ({
 		marginTop: '1%',
 	},
 	text: {
-		color: "#000000",
+		color: "#000000!important",
 		fontSize: 'calc(0.5vw + 14px)',
 		[theme.breakpoints.down('sm')]: {
 		  fontSize: 'calc(2vw + 6px)',

@@ -18,18 +18,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: [
-      'Roboto',
-      '"Segoe UI"',
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"'
-    ].join(',')
+    fontFamily: 'Nunito Sans'
   }
 })
 

@@ -1,4 +1,5 @@
 .box-img-bg{
     background: linear-gradient(353deg, #64B5F6 1.82%, #0556A7 100%);
     padding: 16px 44px;
+    border-right: 1px solid #D6D9DB;
 }

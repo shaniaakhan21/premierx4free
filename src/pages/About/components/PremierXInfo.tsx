@@ -19,13 +19,13 @@ function PremierXInfo(): JSX.Element {
 							<Typography variant='h6' className={classes.subtitle} >
 								PremieRx4Free's Health Management Program:
 							</Typography>
-							<Typography className={classes.text}>
+							<div className={classes.text}>
 								<ul>
 									<li>90-day supply of maintenance medications delivered directly to your doorstep. </li>
 									<li>Unlimited access to US based telehealth services with no copays or additional cost.</li>
 									<li>Prescription discount card for all brick and mortar pharmacies.</li>
 								</ul>
-							</Typography><br></br>
+							</div><br></br>
 							<Typography variant='h6' className={classes.subtitle} >
 								Why Choose PremieRx4Free?
 							</Typography>
@@ -37,7 +37,7 @@ function PremierXInfo(): JSX.Element {
 							<Typography variant='h6' className={classes.subtitle} >
 								What are the Cost and Benefits for Employees/ Members?
 							</Typography>
-							<Typography className={classes.text}>
+							<div className={classes.text}>
 								Monthly Membership Fee - $59.95 <br></br>
 								Our membership fee includes access to the following:<br></br>
 								<ul>
@@ -46,7 +46,7 @@ function PremierXInfo(): JSX.Element {
 									<li>Every member receives an NSURx prescription benefit card for additional savings on your prescriptions in person.</li>
 									<li>24/7 access to US based telehealth services with 100% dedicated doctors on call for your consultation needs.</li>
 								</ul>
-							</Typography>
+							</div>
 
 						</Grid>
 						<Grid item xs={12} sm={6}>
@@ -61,7 +61,7 @@ function PremierXInfo(): JSX.Element {
 							<Typography variant='h6' className={classes.subtitle} >
 								How We Do It?
 							</Typography>
-							<Typography className={classes.text}>
+							<div className={classes.text}>
 								<ul>
 									<li>Your current PBM is charging you between $130-180 per person per month for your PBM benefits package. Premier-Rx has a monthly membership-based fee of just $59.95 per person per month with more benefits, comparable Brand pricing, and no additional hidden fees or costs as compared to your current PBM.</li>
 									<li>Premier-Rx has developed a formulary of 1100 generic drugs that are free and will be delivered to your employee/members doorstep at NO cost to them in 90-day supplies (NO co-pay and NO shipping costs). </li>
@@ -71,7 +71,7 @@ function PremierXInfo(): JSX.Element {
 									<li>Premier-Rx exclusive tele-medicine partner offers 24/7 unlimited access to 100% dedicated doctors trained in the US. We will save your members both time and money on acquiring their prescriptions. Additionally, significant savings will be realized in fewer doctors, urgent care and emergency room visits. </li>
 									<li>Every member of Premier-Rx receives a NSURx prescription benefit card powered by Single Care that allows for additional savings on their prescriptions that are picked-up at their local pharmacy. </li>
 								</ul>
-							</Typography>
+							</div>
 						</Grid>
 					</Grid>
 				</Box>
@@ -94,8 +94,9 @@ const useStyles = makeStyles()(() => ({
 		},
 	},
 	subtitle: {
-		color: '#64B5F6!important',
+		color: '#136DA7!important',
 		fontSize: 33,
+		fontWeight:'700',
 		lineHeight: 1.2,
 		'@media screen and (max-width: 600px)': {
 			fontSize: 27,
@@ -110,9 +111,11 @@ const useStyles = makeStyles()(() => ({
 		},
 	},
 	text: {
-		color: '#64B5F6!important',
+		color: '#136DA7!important',
 		fontSize: 18,
 		textAlign: 'justify',
+		fontFamily: 'Nunito Sans',
+    	fontWeight: 400
 	},
 
 }))

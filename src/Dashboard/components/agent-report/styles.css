@@ -1,14 +1,14 @@
+#report .Active-icon,
+#report .Inactive-icon {
+  padding: 3.5% !important;
+}
 
-.report .Active-icon, .report .Inactive-icon{
-    padding: 3.5%!important;
+#report .tableDesign {
+  @media (max-width: 600px) {
+    width: 300%!important;
   }
+}
 
-  .report table{
-    @media (max-width: 600px) {
-      width: 250%!important;
-    }
-  }
-
-  .report .textCustom{
-    font-weight: 500;
-  }
+#report .textCustom {
+  font-weight: 500;
+}

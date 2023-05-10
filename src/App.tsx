@@ -7,6 +7,7 @@ import theme from './theme';
 import AppRouter from './routes';
 import TaggingService from './utils/TaggingService';
 import  './components/FontawesomeIcons';
+import '@fontsource/nunito-sans';
 
 export const muiCache = createCache({
   key: 'premierx-theme',

@@ -29,8 +29,8 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 800,
     fontSize: '20px',
     textAlign: 'center',
-    fontFamily: 'Roboto,"Segoe UI",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
-    color: '#0556A7',
+    fontFamily: 'Nunito Sans',
+    color: '#136DA7',
   },
   text: {
     marginTop: theme.spacing(2),
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     padding: '4% 17%',
     background: '#64B5F6',
     borderRadius: 0,
-    boxShadow: 'none',
+    boxShadow: 'none'
   },
 
   buttonMargin: {
@@ -51,13 +51,13 @@ const useStyles = makeStyles((theme) => ({
 interface Props {
   imageSrc: string;
   name: string;
-  description:string;
+  description: string;
   onClick: () => void;
-  marginTop:number;
+  marginTop: number;
 }
 
-const Card: React.FC<Props> = ({ imageSrc, name, description,onClick,marginTop}) => {
-  const classes = useStyles({marginTop});
+const Card: React.FC<Props> = ({ imageSrc, name, description, onClick, marginTop }) => {
+  const classes = useStyles({ marginTop });
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
@@ -71,7 +71,7 @@ const Card: React.FC<Props> = ({ imageSrc, name, description,onClick,marginTop})
       <div className={classes.name}>{name}</div>
       {isOpen && (
         <div className={classes.text}>
-          <p style={{ fontSize: '10px', textAlign: 'justify'}}>{description}</p>
+          <p style={{ fontSize: '10px', textAlign: 'justify' }}>{description}</p>
         </div>
       )}
       <Button

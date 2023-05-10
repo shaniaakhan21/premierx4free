@@ -1,5 +1,5 @@
 .heading{
-    color:#0556A7;
+    color:#136DA7!important;
     font-style: normal;
     font-weight: 800;
     font-size: 50px;
@@ -14,7 +14,7 @@
 }
 
 .accordion-button:not(.collapsed) {
-          color: #0556A7!important;
+          color: #136DA7!important;
           background-color: #0556A717!important;
           box-shadow: inset 0 calc(-1 * var(--bs-accordion-border-width)) 0 var(--bs-accordion-border-color);
 }

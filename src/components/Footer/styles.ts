@@ -3,7 +3,7 @@ import { makeStyles } from "../../utils/makeStyles";
 const useStyles = makeStyles()((theme) => ({
 	container: {
 		width: '100%',
-		backgroundColor: '#0E5988',
+		backgroundColor: 'rgb(14, 89, 136)',
 		boxShadow: "0px 4px 91px rgba(0, 0, 0, 0.25)",
 		borderTopLeftRadius: 36,
 		borderTopRightRadius: 36,

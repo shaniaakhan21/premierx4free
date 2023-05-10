@@ -45,63 +45,65 @@ const AgentSettings: React.FC<Props> = ({
                         </div>
                     </Col>
 
-                    <Col lg={10}>
+                    <Col lg={10} className='profile-text'>
                         <h3 className="card-title">John Smith</h3>
                         <p className="card-text">johnsmith@gmail.com</p>
                     </Col>
 
                 </Row>
                 <div className="form-box">
-                    <Row>
-                        <Col xs={6}>
+                    <Row className="form-row">
+                        <Col lg={6} md={6} xs={12} sm={12}>
                             <Form.Group controlId="fullName">
                                 <Form.Label>Full Name</Form.Label>
                                 <Form.Control type="text" defaultValue={fullName} />
                             </Form.Group>
                         </Col>
-                        <Col xs={6}>
+                        <Col lg={6} md={6} xs={12} sm={12}>
                             <Form.Group controlId="email">
                                 <Form.Label>Email Address</Form.Label>
                                 <Form.Control type="email" defaultValue={email} />
                             </Form.Group>
                         </Col>
                     </Row>
-                    <Row>
-                        <Col xs={6}>
+                    <Row className="form-row">
+                        <Col lg={6} md={6} xs={12} sm={12}>
                             <Form.Group controlId="phone">
                                 <Form.Label>Phone Number</Form.Label>
                                 <Form.Control type="tel" defaultValue={phone} />
                             </Form.Group>
                         </Col>
-                        <Col xs={6}>
+                        <Col lg={6} md={6} xs={12} sm={12}>
                             <Form.Group controlId="zip">
                                 <Form.Label>Zip Code</Form.Label>
                                 <Form.Control type="text" defaultValue={zip} />
                             </Form.Group>
                         </Col>
                     </Row>
-                    <Row>
-                        <Col xs={12} lg={6}>
-                            <Form.Group controlId="currentPassword">
-                                <Form.Label>Current Password</Form.Label>
-                                <Form.Control type="password" defaultValue={currentPassword} />
-                            </Form.Group>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col xs={6}>
-                            <Form.Group controlId="newPassword">
-                                <Form.Label>New Password</Form.Label>
-                                <Form.Control type="password" defaultValue={newPassword} />
-                            </Form.Group>
-                        </Col>
-                        <Col xs={6}>
-                            <Form.Group controlId="confirmNewPassword">
-                                <Form.Label>Confirm Password</Form.Label>
-                                <Form.Control type="password" defaultValue={confirmNewPassword} />
-                            </Form.Group>
-                        </Col>
-                    </Row>
+                    <div className="bg-section">
+                        <Row className="form-row">
+                            <Col lg={6} md={6} xs={12} sm={12}>
+                                <Form.Group controlId="currentPassword">
+                                    <Form.Label>Current Password</Form.Label>
+                                    <Form.Control type="password" defaultValue={currentPassword} />
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                        <Row className="form-row">
+                            <Col lg={6} md={6} xs={12} sm={12}>
+                                <Form.Group controlId="newPassword">
+                                    <Form.Label>New Password</Form.Label>
+                                    <Form.Control type="password" defaultValue={newPassword} />
+                                </Form.Group>
+                            </Col>
+                            <Col lg={6} md={6} xs={12} sm={12}>
+                                <Form.Group controlId="confirmNewPassword">
+                                    <Form.Label>Confirm Password</Form.Label>
+                                    <Form.Control type="password" defaultValue={confirmNewPassword} />
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                    </div>
                     <Row className='align-it-end'>
                         <Col lg={2} className="Btn-Custom">
                             <Button variant="secondary" type="button" onClick={onCancel}>

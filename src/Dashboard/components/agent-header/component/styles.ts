@@ -7,7 +7,7 @@ const useStyles = makeStyles()(() => ({
         display: 'flex',
         position: 'relative',
         top: '15px',
-        padding: '5% 5% 4%',
+        padding: '6%',
         borderBottom: '1px solid #D6D9DB',
         borderTop: 0,
         
@@ -25,7 +25,7 @@ const useStyles = makeStyles()(() => ({
         alignItems: 'stretch',
         '& span': {
             fontSize: '24px',
-            fontFamily: ' Roboto,"Segoe UI",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol" ',
+            fontFamily: ' Nunito Sans ',
         }
     },
 
@@ -72,7 +72,7 @@ const useStyles = makeStyles()(() => ({
         alignItems: 'center',
         '& a': {
             fontSize: '20px',
-            fontFamily: ' Roboto,"Segoe UI",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol" ',
+            fontFamily: ' Nunito Sans ',
             '@media (max-width:600px)': {
                 fontSize: '17px',
             },

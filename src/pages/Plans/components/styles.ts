@@ -21,13 +21,13 @@ const useStyles = makeStyles()(() => ({
         flexDirection: 'column',
         alignItems: 'center',
         margin:'1%',
-        '&:first-child': {
+        '&:first-of-type': {
           alignItems: 'flex-start',
           flex: '0 0 44%',
           
       },
 
-      '&:last-child, &:nth-last-child(2)': {
+      '&:last-child, &:nth-last-of-type(2)': {
         '&:hover': {
           transform: 'scale(1.1)',
           boxShadow: '0px 0px 20px 7px #8080805e',
@@ -36,7 +36,7 @@ const useStyles = makeStyles()(() => ({
       },
       '@media (max-width: 600px)': {
         flex: '0 0 21%',
-        '&:first-child': {
+        '&:first-of-type': {
         margin: '2%',
         padding: '1%',
         flex: '0 0 26%'
@@ -106,6 +106,7 @@ const useStyles = makeStyles()(() => ({
       padding: '2%',
       boxShadow: '0px 0px 11px 4px #80808024',
       border: '0.1px solid #00000017',
+      width: '100%',
       span: {
         fontWeight: 'bold',
         fontSize: '1.1rem'
@@ -119,6 +120,10 @@ const useStyles = makeStyles()(() => ({
       },
 
     },
+
+    containspage: {
+      height: '80vh'
+    }
 
   }));
 
