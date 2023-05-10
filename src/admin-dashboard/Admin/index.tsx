@@ -27,7 +27,7 @@ function AdminDashboard(): JSX.Element{
             <div className='sidebar'>
             <Sidebar eventNumber={eventNumber} setEventNumber={setEventNumber} />
             </div>
-            <div>
+            <div style={{width:"100%"}}>
             <MainArea eventNumber={eventNumber} />
             </div>
         </div>
