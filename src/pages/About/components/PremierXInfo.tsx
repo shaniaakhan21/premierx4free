@@ -101,6 +101,11 @@ const useStyles = makeStyles()(() => ({
 		background: 'linear-gradient(210deg, #64B5F6 1.82%, #0556A7 100%)',
 		flexDirection: 'column',
 		flexWrap: 'nowrap',
+		'@media screen and (max-width: 600px)': {
+			padding: '5% 3%!important',
+			margin: '13%!important',
+			width: '100%!important'
+		},
 		p: {
 			fontSize: '22px',
 			fontWeight: '100',
