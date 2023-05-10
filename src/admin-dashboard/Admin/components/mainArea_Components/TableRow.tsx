@@ -5,17 +5,19 @@ import Col from 'react-bootstrap/Col';
 import {useState} from 'react'
 
 interface data {
-    agentData:any
+    agentData:any,
+    index:number,
+    dataLength:number
 }
 
 function TableRow(props:data):JSX.Element{
-    const {agentData} = props
+    const {agentData,index,dataLength} = props
     const {classes} = useStyles()
     const [toggle,setToggle] = useState(false)
-    console.log('agent data from table row',agentData.firstName)
+    console.log('agent data from table row',index,dataLength)
     return(
         <>
-        <div className={classes.tablerow}>
+        <div className={index==0?classes.firstTablerow:index==dataLength-1?classes.lastTablerow:classes.tablerow}>
             <div className={classes.headingDescription}>
                 <div><img src='/assets/svg/icons/icon_person.svg' className={classes.headingIcon} /></div>
                 <p className={classes.headingText}>{agentData.firstName} {agentData.lastName}</p>
@@ -140,8 +142,26 @@ const useStyles = makeStyles() (() => ({
         flexDirection:"row",
         fontFamily:"Nunito Sans",
         border:"1px solid #D6D9DB",
-        borderRadius:"10px 10px 0 0",
+        //borderRadius:"10px 10px 0 0",
+        borderBottom:"0px",
         padding:"22px 29px 23.62px 36px"
+    },
+    firstTablerow:{
+        display:"flex",
+        flexDirection:"row",
+        fontFamily:"Nunito Sans",
+        border:"1px solid #D6D9DB",
+        borderBottom:"0px",
+        borderRadius:"10px 10px 0 0",
+        padding:"22px 29px 23.62px 36px" 
+    },
+    lastTablerow:{
+        display:"flex",
+        flexDirection:"row",
+        fontFamily:"Nunito Sans",
+        border:"1px solid #D6D9DB",
+        borderRadius:"0 0 10px 10px",
+        padding:"22px 29px 23.62px 36px" 
     },
     tablerow_extension:{
         border:"1px solid #D6D9DB",

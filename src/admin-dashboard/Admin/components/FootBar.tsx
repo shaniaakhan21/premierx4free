@@ -12,7 +12,8 @@ function FootBar() : JSX.Element{
 const useStyles = makeStyles() (() => ({
     footbar:{
         textAlign:"center",
-        borderTop:"1px solid #D6D9DB"
+        borderTop:"1px solid #D6D9DB",
+        marginTop:"200px"
     },
     footbar_text:{
         fontFamily:"Nunito Sans",

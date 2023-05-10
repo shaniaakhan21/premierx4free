@@ -20,6 +20,17 @@ export const agentData = [
         state:"CA",
         zip:"560090",
         referralLink:"https://peterRefers/ca/mortown"
+    },
+    {
+        firstName:"lois",
+        lastName:"Griffin",
+        email:"petergriffin@gmail.com",
+        phoneNum:"7789334562",
+        address:"71 spooner street",
+        city:"Downtown",
+        state:"CA",
+        zip:"560090",
+        referralLink:"https://peterRefers/ca/mortown"
     }
 ]
 

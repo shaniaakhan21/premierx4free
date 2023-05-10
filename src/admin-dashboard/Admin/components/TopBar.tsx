@@ -17,7 +17,10 @@ const useStyles = makeStyles() (() => ({
         display:"flex",
         flexDirection:"row-reverse",
         boxShadow:"1px 0px 34px rgba(0, 0, 0, 0.15)",
-        background:"#FFFFFF"
+        background:"#FFFFFF",
+        '@media(max-width: 600px)':{
+                display:"none",
+        }
     },
     logoutButton:{
         didplay:"flex",
@@ -33,7 +36,8 @@ const useStyles = makeStyles() (() => ({
         width:"15px",
         height:"17.14px",
         marginBottom:"5px"
-    }
+    },
+    
 }))
 
 export default TopBar
