@@ -10,6 +10,7 @@ import { useState } from 'react';
 import ReplaceModal from './modal_popups/ReplaceModal';
 import UploadMoreModal from './modal_popups/UploadMore';
 import AddCategoryModal from './modal_popups/AddCategory';
+import * as React from 'react';
 
 
 function MarketingMaterials():JSX.Element{

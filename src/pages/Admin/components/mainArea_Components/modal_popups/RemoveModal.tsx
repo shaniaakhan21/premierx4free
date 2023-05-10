@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { makeStyles } from '../../../../../utils/makeStyles'
 import './removeModal.css'
+import * as React from 'react';
 
 interface modalvars {
     removeModalOpen:any

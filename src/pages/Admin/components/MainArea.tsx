@@ -7,6 +7,7 @@ import CalculationPage from './mainArea_Components/CalculationPage';
 import AdminSettings from './mainArea_Components/AdminSettings';
 import {useEffect, useState} from 'react';
 import MarketingMaterials from './mainArea_Components/MarketingMaterials';
+import * as React from 'react';
 interface event {
     eventNumber:number
     // setEventNumber:any
