@@ -140,3 +140,11 @@
 .bg-section  .form-label{
     color: #758B93;
 }
+
+.form-box {
+    padding: 0;
+}
+
+.form-control {
+    color: #758B93;
+}

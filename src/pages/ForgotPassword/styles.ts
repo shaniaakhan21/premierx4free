@@ -26,7 +26,7 @@ const useStyles = makeStyles()(() => ({
             padding: '5% 8%!important'
         },
         h1: {
-            color: '#0556A7',
+            color: '#136DA7!important',
             fontStyle: 'normal',
             fontWeight: '800',
             textAlign: 'center',
@@ -112,7 +112,7 @@ const useStyles = makeStyles()(() => ({
         fontWeight: '600',
         fontSize: '14px',
         lineHeight: '22px',
-        color: '#0556A7',
+        color: '#136DA7!important',
         textDecoration: 'underline',
         marginBottom: '3%!important',
 

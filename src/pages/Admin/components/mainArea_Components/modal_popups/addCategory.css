@@ -1,9 +1,6 @@
 .modal-footer
 {
-    background-color: teal;
-}
-.removeModal{
-   
+    background-color: white;
 }
 
 .modal{
@@ -23,7 +20,7 @@
     flex-direction: row;
     background: #FFFFFF;
     border: 1px solid #D6D9DB;
-    border-radius: 6px;
+    border-radius: 10px;
     width:100%;
 }
 .uploadDocument_form_input
@@ -112,3 +109,7 @@
     color: #000000;
     /* font-family: 'Nunito Sans'; */
 }
+
+.modal-content {
+    border-radius: 10px!important;
+  }

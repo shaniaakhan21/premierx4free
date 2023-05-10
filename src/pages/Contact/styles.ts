@@ -2,7 +2,7 @@ import { makeStyles } from "../../utils/makeStyles"
 
 const useStyles = makeStyles()(() => ({
 	container: {
-		backgroundColor: "#0556A7",
+		backgroundColor: "rgb(0, 107, 146)",
 	},
 	content: {
 		paddingTop: '5%',

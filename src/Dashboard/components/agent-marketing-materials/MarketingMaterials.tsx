@@ -23,7 +23,7 @@ const MarketingMaterials: React.FC = () => {
             name: 'Lorem Ipsum is simply',
             kind: 'Elevator Pitch',
             type: 'pdf',
-            img: 'assets/svg/Dashboard/pdf-icon.svg' ,
+            img: 'assets/svg/Dashboard/pdf-icon.png' ,
             preview: 'Lorem Ipsum is simply dummy...',
         },
         {
@@ -47,7 +47,7 @@ const MarketingMaterials: React.FC = () => {
             name: 'Lorem Ipsum is simply',
             kind: 'Elevator Pitch',
             type: 'pdf',
-            img: 'assets/svg/Dashboard/ppt-icon.svg' ,
+            img: 'assets/svg/Dashboard/ppt-icon.png' ,
             preview: 'Lorem Ipsum is simply dummy...',
         },
         {
@@ -55,7 +55,7 @@ const MarketingMaterials: React.FC = () => {
             name: 'Lorem Ipsum is simply',
             kind: 'Elevator Pitch',
             type: 'pdf',
-            img: 'assets/svg/Dashboard/ppt-icon.svg' ,
+            img: 'assets/svg/Dashboard/ppt-icon.png' ,
             preview: 'Lorem Ipsum is simply dummy...',
         },
         {
@@ -71,7 +71,7 @@ const MarketingMaterials: React.FC = () => {
             name: 'Lorem Ipsum is simply',
             kind: 'Elevator Pitch',
             type: 'pdf',
-            img: 'assets/svg/Dashboard/pdf-icon.svg' ,
+            img: 'assets/svg/Dashboard/pdf-icon.png' ,
             preview: 'Lorem Ipsum is simply dummy...',
         },
         {
@@ -103,7 +103,7 @@ const MarketingMaterials: React.FC = () => {
             name: 'Lorem Ipsum is simply',
             kind: 'Elevator Pitch',
             type: 'pdf',
-            img: 'assets/svg/Dashboard/pdf-icon.svg' ,
+            img: 'assets/svg/Dashboard/pdf-icon.png' ,
             preview: 'Lorem Ipsum is simply dummy...',
         },
         {
@@ -127,7 +127,7 @@ const MarketingMaterials: React.FC = () => {
             name: 'Lorem Ipsum is simply',
             kind: 'Elevator Pitch',
             type: 'pdf',
-            img: 'assets/svg/Dashboard/ppt-icon.svg' ,
+            img: 'assets/svg/Dashboard/ppt-icon.png' ,
             preview: 'Lorem Ipsum is simply dummy...',
         },
         {
@@ -135,7 +135,7 @@ const MarketingMaterials: React.FC = () => {
             name: 'Lorem Ipsum is simply',
             kind: 'Prospect Reps',
             type: 'pdf',
-            img: 'assets/svg/Dashboard/ppt-icon.svg' ,
+            img: 'assets/svg/Dashboard/ppt-icon.png' ,
             preview: 'Lorem Ipsum is simply dummy...',
         },
         {
@@ -143,7 +143,7 @@ const MarketingMaterials: React.FC = () => {
             name: 'Lorem Ipsum is simply',
             kind: 'Prospect Reps',
             type: 'pdf',
-            img: 'assets/svg/Dashboard/ppt-icon.svg' ,
+            img: 'assets/svg/Dashboard/ppt-icon.png' ,
             preview: 'Lorem Ipsum is simply dummy...',
         },
         {
@@ -151,7 +151,7 @@ const MarketingMaterials: React.FC = () => {
             name: 'Lorem Ipsum is simply',
             kind: 'Prospect Reps',
             type: 'pdf',
-            img: 'assets/svg/Dashboard/pdf-icon.svg' ,
+            img: 'assets/svg/Dashboard/pdf-icon.png' ,
             preview: 'Lorem Ipsum is simply dummy...',
         },
         {
@@ -159,7 +159,7 @@ const MarketingMaterials: React.FC = () => {
             name: 'Lorem Ipsum is simply',
             kind: 'Prospect Reps',
             type: 'pdf',
-            img: 'assets/svg/Dashboard/ppt-icon.svg' ,
+            img: 'assets/svg/Dashboard/ppt-icon.png' ,
             preview: 'Lorem Ipsum is simply dummy...',
         },
         {
@@ -167,7 +167,7 @@ const MarketingMaterials: React.FC = () => {
             name: 'Lorem Ipsum is simply',
             kind: 'Prospect Reps',
             type: 'pdf',
-            img: 'assets/svg/Dashboard/ppt-icon.svg' ,
+            img: 'assets/svg/Dashboard/ppt-icon.png' ,
             preview: 'Lorem Ipsum is simply dummy...',
         },
         {
@@ -175,7 +175,7 @@ const MarketingMaterials: React.FC = () => {
             name: 'Lorem Ipsum is simply',
             kind: 'Prospect Reps',
             type: 'pdf',
-            img: 'assets/svg/Dashboard/ppt-icon.svg' ,
+            img: 'assets/svg/Dashboard/ppt-icon.png' ,
             preview: 'Lorem Ipsum is simply dummy...',
         },
         {
@@ -183,7 +183,7 @@ const MarketingMaterials: React.FC = () => {
             name: 'Lorem Ipsum is simply',
             kind: 'Prospect Reps',
             type: 'pdf',
-            img: 'assets/svg/Dashboard/ppt-icon.svg' ,
+            img: 'assets/svg/Dashboard/ppt-icon.png' ,
             preview: 'Lorem Ipsum is simply dummy...',
         },
         {
@@ -191,7 +191,7 @@ const MarketingMaterials: React.FC = () => {
             name: 'Lorem Ipsum is simply',
             kind: 'Prospect Reps',
             type: 'pdf',
-            img: 'assets/svg/Dashboard/pdf-icon.svg' ,
+            img: 'assets/svg/Dashboard/pdf-icon.png' ,
             preview: 'Lorem Ipsum is simply dummy...',
         },
         {
@@ -199,7 +199,7 @@ const MarketingMaterials: React.FC = () => {
             name: 'Lorem Ipsum is simply',
             kind: 'Prospect Reps',
             type: 'pdf',
-            img: 'assets/svg/Dashboard/ppt-icon.svg' ,
+            img: 'assets/svg/Dashboard/ppt-icon.png' ,
             preview: 'Lorem Ipsum is simply dummy...',
         },
         {
@@ -207,7 +207,7 @@ const MarketingMaterials: React.FC = () => {
             name: 'Lorem Ipsum is simply',
             kind: 'Prospect Reps',
             type: 'pdf',
-            img: 'assets/svg/Dashboard/pdf-icon.svg' ,
+            img: 'assets/svg/Dashboard/pdf-icon.png' ,
             preview: 'Lorem Ipsum is simply dummy...',
         },
         {
@@ -231,7 +231,7 @@ const MarketingMaterials: React.FC = () => {
             name: 'Lorem Ipsum is simply',
             kind: 'Case Studies',
             type: 'pdf',
-            img: 'assets/svg/Dashboard/pdf-icon.svg' ,
+            img: 'assets/svg/Dashboard/pdf-icon.png' ,
             preview: 'Lorem Ipsum is simply dummy...',
         },
         {
@@ -271,7 +271,7 @@ const MarketingMaterials: React.FC = () => {
             name: 'Lorem Ipsum is simply',
             kind: 'Case Studies',
             type: 'pdf',
-            img: 'assets/svg/Dashboard/pdf-icon.svg' ,
+            img: 'assets/svg/Dashboard/pdf-icon.png' ,
             preview: 'Lorem Ipsum is simply dummy...',
         },
         {
@@ -311,7 +311,7 @@ const MarketingMaterials: React.FC = () => {
             name: 'Lorem Ipsum is simply',
             kind: 'Case Studies',
             type: 'pdf',
-            img: 'assets/svg/Dashboard/pdf-icon.svg' ,
+            img: 'assets/svg/Dashboard/pdf-icon.png' ,
             preview: 'Lorem Ipsum is simply dummy...',
         },
         {
@@ -351,7 +351,7 @@ const MarketingMaterials: React.FC = () => {
             name: 'Lorem Ipsum is simply',
             kind: 'Case Studies',
             type: 'pdf',
-            img: 'assets/svg/Dashboard/pdf-icon.svg' ,
+            img: 'assets/svg/Dashboard/pdf-icon.png' ,
             preview: 'Lorem Ipsum is simply dummy...',
         },
         {
@@ -391,7 +391,7 @@ const MarketingMaterials: React.FC = () => {
             name: 'Lorem Ipsum is simply',
             kind: 'Case Studies',
             type: 'pdf',
-            img: 'assets/svg/Dashboard/pdf-icon.svg' ,
+            img: 'assets/svg/Dashboard/pdf-icon.png' ,
             preview: 'Lorem Ipsum is simply dummy...',
         },
         {

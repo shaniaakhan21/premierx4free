@@ -9,8 +9,13 @@ html, body, #root, .App {
 }
 body {
 	min-height: 100%;
+	font-family: "Nunito Sans";
 }
 
 p{
-	color:#667B8B!important;
+	font-family: "Nunito Sans";
+}
+
+.MuiButton-containedPrimary:hover {
+    background-color: #136DA7!important;
 }

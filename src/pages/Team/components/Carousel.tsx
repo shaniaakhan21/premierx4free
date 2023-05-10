@@ -71,7 +71,7 @@ const useStyles = makeStyles()(() => ({
     fontStyle: 'normal',
     fontWeight: 700,
     fontSize: 40,
-    fontFamily: 'Roboto,"Segoe UI",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
+    fontFamily: 'Nunito Sans',
     '@media (max-width: 1200px)': {
       fontSize: '5vw',
     },
@@ -85,7 +85,8 @@ const useStyles = makeStyles()(() => ({
     fontWeight: '400',
     fontSize: '19px',
     textAlign:'justify',
-    fontFamily: 'Roboto,"Segoe UI",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
+    color:'black!important',
+    fontFamily: 'Nunito Sans',
     '@media (max-width: 1200px)': {
       fontSize: '1.8vw',
     },

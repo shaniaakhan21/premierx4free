@@ -120,7 +120,7 @@ function AgentTabs(): JSX.Element {
                             </Nav>
                         </Col>
                     {/* )} */}
-                    <Col sm={10} style={{ paddingRight: 0 }}>
+                    <Col sm={10} style={{ padding: 0 }}>
                         <Tab.Content>
                             <Tab.Pane eventKey="first" className="tab-pane-first">
                                 <AgentSubHeader />

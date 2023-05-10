@@ -94,8 +94,9 @@ const useStyles = makeStyles()(() => ({
 		},
 	},
 	subtitle: {
-		color: '#64B5F6!important',
+		color: '#136DA7!important',
 		fontSize: 33,
+		fontWeight:'700',
 		lineHeight: 1.2,
 		'@media screen and (max-width: 600px)': {
 			fontSize: 27,
@@ -110,9 +111,11 @@ const useStyles = makeStyles()(() => ({
 		},
 	},
 	text: {
-		color: '#64B5F6!important',
+		color: '#136DA7!important',
 		fontSize: 18,
 		textAlign: 'justify',
+		fontFamily: 'Nunito Sans',
+    	fontWeight: 400
 	},
 
 }))

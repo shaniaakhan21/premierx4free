@@ -1,6 +1,5 @@
 
 import { makeStyles } from '../../../utils/makeStyles';
-import TopBar from './TopBar';
 import FootBar from './FootBar';
 import AgentDocuments from './mainArea_Components/AgentDocuments';
 import CalculationPage from './mainArea_Components/CalculationPage';

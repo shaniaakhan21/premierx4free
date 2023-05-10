@@ -97,35 +97,35 @@ function SignUp(): JSX.Element {
                         <input style={{ height: '100px'}}
                             type="text"
                             className={`${classes.formControl} form-control`}
-                            id="fullName"
+                            id="address"
                             placeholder=""
                             onChange={(e) => { setFullName(e.target.value) }}
                         />
                         <input
                             type="text"
                             className={`${classes.formControl} form-control`}
-                            id="fullName"
+                            id="city"
                             placeholder="City"
                             onChange={(e) => { setFullName(e.target.value) }}
                         />
                         <input
                             type="text"
                             className={`${classes.formControl} form-control`}
-                            id="fullName"
+                            id="state"
                             placeholder="State"
                             onChange={(e) => { setFullName(e.target.value) }}
                         />
                         <input
                             type="text"
                             className={`${classes.formControl} form-control`}
-                            id="fullName"
+                            id="zipcode"
                             placeholder="Zip Code"
                             onChange={(e) => { setFullName(e.target.value) }}
                         />
                         <input
                             type="text"
                             className={`${classes.formControl} form-control`}
-                            id="fullName"
+                            id="link-ref"
                             placeholder="Referral Link"
                             onChange={(e) => { setFullName(e.target.value) }}
                         />

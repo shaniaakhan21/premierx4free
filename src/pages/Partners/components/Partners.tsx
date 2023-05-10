@@ -27,7 +27,7 @@ function PartellInfo(props: InfoProps): JSX.Element {
 			{
 				descriptionVisible && (
 					<div className={classes.partnerDescription}>
-						<Typography className={classes.infoSubtitle} style={{ color: '#64B5F6!important' }}>
+						<Typography className={classes.infoSubtitle} style={{ color: '#136DA7!important' }}>
 							We care about our community
 						</Typography>
 						<Typography className={classes.infoText} >
@@ -210,7 +210,7 @@ const useStyles = makeStyles()(() => ({
 		justifyContent: 'center',
 		display: 'flex',
 		' & p':{
-			color: '#006B92!important',
+			color: 'black!important',
 		}
 	},
 	title: {
@@ -253,7 +253,7 @@ const useStyles = makeStyles()(() => ({
 		['@media screen and (min-width: 1024px)']: {
 			fontSize: 28
 		},
-		color: '#006B92!important',
+		color: '#136DA7!important',
 		textDecoration: 'underline'
 	},
 	infoSubtitle: {
@@ -266,7 +266,7 @@ const useStyles = makeStyles()(() => ({
 		['@media screen and (min-width: 1024px)']: {
 			fontSize: 20
 		},
-		color: "#0556A7!important",
+		color: "#136DA7!important",
 	},
 	infoText: {
 		fontWeight: 400,

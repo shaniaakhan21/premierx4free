@@ -63,7 +63,7 @@ function MarketingMaterials():JSX.Element{
                 </div>
 
                 <div className={classes.containerContent_contentUnitPdfPpt}>
-                    <img src='/assets/svg/Dashboard/pdf-icon.svg' className={classes.containerContent_PdfPptIcon} />
+                    <img src='/assets/svg/Dashboard/pdf-icon.png' className={classes.containerContent_PdfPptIcon} />
                     <div className={classes.contentUnit_buttons}>
                         <div className={classes.delete_button}>
                             <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image}/>
@@ -77,7 +77,7 @@ function MarketingMaterials():JSX.Element{
                 </div>
 
                 <div className={classes.containerContent_contentUnitPdfPpt}>
-                    <img src='/assets/svg/Dashboard/ppt-icon.svg' className={classes.containerContent_PdfPptIcon} />
+                    <img src='/assets/svg/Dashboard/ppt-icon.png' className={classes.containerContent_PdfPptIcon} />
                     <div className={classes.contentUnit_buttons}>
                         <div className={classes.delete_button}>
                             <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image}/>
@@ -142,7 +142,7 @@ function MarketingMaterials():JSX.Element{
                 </div>
 
                 <div className={classes.containerContent_contentUnitPdfPpt}>
-                    <img src='/assets/svg/Dashboard/pdf-icon.svg' className={classes.containerContent_PdfPptIcon} />
+                    <img src='/assets/svg/Dashboard/pdf-icon.png' className={classes.containerContent_PdfPptIcon} />
                     <div className={classes.contentUnit_buttons}>
                         <div className={classes.delete_button}>
                             <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image}/>
@@ -156,7 +156,7 @@ function MarketingMaterials():JSX.Element{
                 </div>
 
                 <div className={classes.containerContent_contentUnitPdfPpt}>
-                    <img src='/assets/svg/Dashboard/ppt-icon.svg' className={classes.containerContent_PdfPptIcon} />
+                    <img src='/assets/svg/Dashboard/ppt-icon.png' className={classes.containerContent_PdfPptIcon} />
                     <div className={classes.contentUnit_buttons}>
                         <div className={classes.delete_button}>
                             <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image}/>
@@ -220,7 +220,7 @@ function MarketingMaterials():JSX.Element{
                 </div>
 
                 <div className={classes.containerContent_contentUnitPdfPpt}>
-                    <img src='/assets/svg/Dashboard/pdf-icon.svg' className={classes.containerContent_PdfPptIcon} />
+                    <img src='/assets/svg/Dashboard/pdf-icon.png' className={classes.containerContent_PdfPptIcon} />
                     <div className={classes.contentUnit_buttons}>
                         <div className={classes.delete_button}>
                             <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image}/>
@@ -234,7 +234,7 @@ function MarketingMaterials():JSX.Element{
                 </div>
 
                 <div className={classes.containerContent_contentUnitPdfPpt}>
-                    <img src='/assets/svg/Dashboard/ppt-icon.svg' className={classes.containerContent_PdfPptIcon} />
+                    <img src='/assets/svg/Dashboard/ppt-icon.png' className={classes.containerContent_PdfPptIcon} />
                     <div className={classes.contentUnit_buttons}>
                         <div className={classes.delete_button}>
                             <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image}/>
@@ -353,7 +353,7 @@ const useStyles = makeStyles() (() => ({
         borderRadius:"10px"
     },
     containerContent_contentUnitPdfPpt:{
-        // background:"url(/assets/svg/Dashboard/pdf-icon.svg)",
+        // background:"url(/assets/svg/Dashboard/pdf-icon.png)",
         // backgroundRepeat:"no-repeat",
         // backgroundSize:"cover",
         width:"240px",
