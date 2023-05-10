@@ -74,6 +74,9 @@
 
   .boxModal .modal-content {
     width: 216%;
+    @media (max-width: 600px) {
+      width: 100%;!important;
+    }
   }
 
   .boxModal .modal-dialog {
@@ -102,4 +105,10 @@
 
   .boxModal {
     background: #1e3e485e;
+  }
+
+  .boxModal .modal-content table{
+    @media (max-width: 600px) {
+      width: 260%;!important;
+    }
   }

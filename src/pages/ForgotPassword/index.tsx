@@ -4,6 +4,7 @@ import 'react-bootstrap';
 import { useState } from "react";
 import Navbar from '../../components/Navbar';
 const imgSignin = '/assets/svg/SignIn/sigin-img.svg';
+import { Row, Col } from 'react-bootstrap';
 
 function ForgotPassword(): JSX.Element {
     const { classes } = useStyles();
@@ -19,11 +20,11 @@ function ForgotPassword(): JSX.Element {
     return (
         <>
             <Navbar />
-            <div className={classes.container}>
-                <div className={classes.imagesigin}>
+            <Row className={classes.container} >
+                <Col className={classes.imagesigin} lg="8" md="6">
                     <img src={imgSignin} />
-                </div>
-                <div className={classes.siginform}>
+                </Col>
+                <Col className={classes.siginform} lg="4" md="6">
                     <h1>Did you forgot your password?</h1>
                     {isSent ? (
                         <div>
@@ -57,8 +58,8 @@ function ForgotPassword(): JSX.Element {
                             </div>
                         </form>
                     )}
-                </div>
-            </div>
+                </Col>
+            </Row>
         </>
     )
 }

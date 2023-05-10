@@ -39,7 +39,7 @@ const Report = ({ data, spanText, col1head, col2head, col3head, col4head, col5he
         }
     };
 	return (
-		<div className="report box-main-network">
+		<div className="box-main-network" id='report'>
             <span className='textCustom'>{spanText}</span>
             <Table bordered hover responsive style={{ borderRadius: '5%' }} className='tableDesign'>
                 <thead>
