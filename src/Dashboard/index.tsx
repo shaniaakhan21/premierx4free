@@ -1,19 +1,20 @@
 import AgentHeader from '../Dashboard/components/agent-header/AgentHeader';
-import AgentProfile from './components/agent-profile/AgentProfile';
+import {Row, Col } from 'react-bootstrap';
 import './styles.css';
 import AgentTabs from './components/agent-tabs/AgentTabs';
 
 function AgentDashboard(): JSX.Element {
   return (
     <div>
-      <div className='row'>
-        <div className='col-2' style={{ padding: '0' }}>
-          <AgentProfile />
-        </div>
-        <div className='col-10' style={{ padding: '0' }}>
+      <Row >
+        <Col className='box-img-bg' lg="2" sm="6">
+          <img className="card-img-top" src={"/assets/svg/Dashboard/logo-dash.svg"} alt="Card image cap" />
+        </Col>
+
+        <Col  style={{ padding: '0' }} lg="10" sm="6">
           <AgentHeader />
-        </div>
-      </div>
+        </Col>
+      </Row>
       <AgentTabs />
     </div>
   );

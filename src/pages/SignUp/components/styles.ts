@@ -9,21 +9,48 @@ const useStyles = makeStyles()(() => ({
     imagesigin: {
         width: '61%',
         img: {
-            padding: '12% 12% 20%'
+            padding: '12% 12% 20%',
+            width: '100%',
+ 
+            '@media (max-width:600px)': {
+                display: 'none'
+            },
+
         },
     },
-    
+
     siginform: {
-        marginTop: '3%',
+        marginTop: '3%!important',
+        paddingRight: '8%!important',
+        '@media (max-width:600px)': {
+            padding: '3% 8%!important'
+        },
+        
         h1: {
-                color:'#0556A7',
-                fontStyle: 'normal',
-                fontWeight: '800',
-                fontSize: '30px',
-                lineHeight: '36px',
-                textAlign:'center',
-                margin:'3% 0',
-                padding: '0 35% 0 20%'
+            color: '#0556A7',
+            fontStyle: 'normal',
+            fontWeight: '800',
+            textAlign: 'center',
+            margin: '3% 15%',
+
+            fontSize: '30px', // default for xs screens
+            '@media (max-width:600px)': {
+                textAlign: 'left',
+                width:'70%',
+                margin:0,
+            },
+            '@media (min-width:600px)': {
+                fontSize: '16px', // for sm screens and up
+            },
+            '@media (min-width:960px)': {
+                fontSize: '22px', // for md screens and up
+            },
+            '@media (min-width:1280px)': {
+                fontSize: '30px', // for lg screens and up
+            },
+            '@media (min-width:1920px)': {
+                fontSize: '37px', // for xl screens and up
+            },
         }
     },
 
@@ -31,7 +58,7 @@ const useStyles = makeStyles()(() => ({
         border: '1px solid #D9D9D9!important',
         borderRadius: '2px!important',
         margin: '2% 0',
-        ' &:placeholder':{
+        ' &:placeholder': {
             color: 'red!important'
         }
     },
@@ -44,75 +71,76 @@ const useStyles = makeStyles()(() => ({
         fontWeight: '500!important'
     },
 
-    formhere: {
-        padding: '0 10% 0 15%!important',
+    buttonstyle: {
+        background: '#64B5F6!important',
+        border: 'none!important',
+        borderRadius: '2px!important',
+        width: '100%!important',
+        color: 'white!important',
+        marginTop: '4%!important',
+        '&:hover': {
+            background: '#0e5988!important',
+        }
     },
 
-    buttonstyle: {
-        background:'#64B5F6!important',
-        border:'none!important',
-        borderRadius:'2px!important',
-        width:'100%!important',
-        color:'white!important',
-        marginTop:'4%!important',
-        '&:hover' :{
-            background:'#0e5988!important',
-            }
-        },
-    
     eyebtn: {
-        top:'6px!important',
-        border:'none!important',
+        top: '6px!important',
+        border: 'none!important',
         '&:hover': {
             color: '#0e5988!important',
             background: 'transparent!important'
-          },
+        },
     },
 
     custompsd: {
-        border:'none!important',
-        margin:'0'
+        border: 'none!important',
+        margin: '0'
     },
 
     cstmpsdbox: {
-        borderRadius:'2px!important',
-        border:'1px solid #ced4da!important',
+        borderRadius: '2px!important',
+        border: '1px solid #ced4da!important',
         display: 'flex',
         marginBottom: '5%!important',
     },
 
     linktosignin: {
-        fontStyle:'normal',
-        fontWeight:'600',
-        fontSize:'14px',
-        lineHeight:'22px',
-        color:'#0556A7',
-        textDecoration:'underline',
+        fontStyle: 'normal',
+        fontWeight: '600',
+        fontSize: '14px',
+        lineHeight: '22px',
+        color: '#0556A7',
+        textDecoration: 'underline',
         marginBottom: '3%!important',
-        
+
         '&:hover': {
             color: '#0e5988!important'
         },
-        
+
         '&:active': {
             color: '#0e5988!important'
         }
     },
 
     linktosignindiv: {
-        textAlign:'center',
+        textAlign: 'center',
         marginTop: '6%!important',
     },
     extrapadding: {
         marginTop: '4%!important',
-        padding:'3%',
-        background:'#a1b0b51a'
+        padding: '3%',
+        background: '#a1b0b51a'
     },
 
     notalink: {
-        fontSize:'13px',
-        color:'#93a4aa',
-        fontWeight:'400'
+        fontSize: '13px',
+        color: '#93a4aa',
+        fontWeight: '400'
+    },
+
+    formhere: {
+        padding: '0',
+        width: '100%!important',
     }
 
 

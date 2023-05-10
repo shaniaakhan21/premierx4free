@@ -2,6 +2,7 @@ import useStyles from './styles';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import React, { useState } from "react";
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -43,13 +44,13 @@ function SignUp(): JSX.Element {
     }
 
     return (
-        <div className={classes.container}>
-            <div className={classes.imagesigin}>
+        <Row className={classes.container}>
+            <Col className={classes.imagesigin} lg="8" md="7" sm="8" xs="12">
                 <img src={imgSignin} />
-            </div>
-            <div className={classes.siginform}>
+            </Col>
+            <Col className={classes.siginform} lg="4" md="5" sm="4" xs="12">
                 <h1>Please register to have an account</h1>
-                <form onSubmit={submit} className={classes.formhere}>
+                <form onSubmit={submit}  className={classes.formhere}>
                     <div className="form-group">
                         <label className={classes.label} htmlFor="fullName">Full Name</label>
                         <input
@@ -182,8 +183,8 @@ function SignUp(): JSX.Element {
                     </div>
 
                 </form>
-            </div>
-        </div>
+            </Col>
+        </Row>
     )
 }
 

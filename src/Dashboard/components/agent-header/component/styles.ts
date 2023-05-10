@@ -6,10 +6,17 @@ const useStyles = makeStyles()(() => ({
         background: '#F9F9F9',
         display: 'flex',
         position: 'relative',
-        top: '14px',
+        top: '15px',
         padding: '5% 5% 4%',
-        border: '1px solid #D6D9DB',
-        borderTop: 0
+        borderBottom: '1px solid #D6D9DB',
+        borderTop: 0,
+        
+        '@media (max-width:600px)': {
+            flexDirection: 'column',
+        },
+
+
+
     },
 
     subcontainer: {
@@ -24,6 +31,10 @@ const useStyles = makeStyles()(() => ({
 
     customit: {
         paddingLeft: '10%',
+        '@media (max-width:600px)': {
+            paddingLeft: '0',
+        },
+
     },
 
     refercontainer: {
@@ -62,6 +73,14 @@ const useStyles = makeStyles()(() => ({
         '& a': {
             fontSize: '20px',
             fontFamily: ' Roboto,"Segoe UI",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol" ',
+            '@media (max-width:600px)': {
+                fontSize: '17px',
+            },
+    
+        },
+                
+        '@media (max-width:600px)': {
+            padding:'2% 10% 2% 24%',
         },
     },
 

@@ -6,6 +6,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
 const imgSignin = '/assets/svg/SignIn/sigin-img.svg';
+import { Row, Col } from 'react-bootstrap';
 
 function SignIn(): JSX.Element {
     const { classes } = useStyles();
@@ -36,11 +37,11 @@ function SignIn(): JSX.Element {
     };
 
     return (
-        <div className={classes.container}>
-            <div className={classes.imagesigin}>
+        <Row className={classes.container}>
+            <Col className={classes.imagesigin} lg="8" md="6">
                 <img src={imgSignin} />
-            </div>
-            <div className={classes.siginform}>
+            </Col>
+            <Col className={classes.siginform} lg="4" md="6">
                 <h1>Welcome back! <br></br>Please, log in to continue</h1>
                 <form action='POST' className={classes.formhere}>
                     {errorMsg && (
@@ -94,8 +95,8 @@ function SignIn(): JSX.Element {
                     </div>
 
                 </form>
-            </div>
-        </div>
+            </Col>
+        </Row>
     )
 }
 

@@ -1,12 +1,20 @@
-  .box-main {
+  .team-box {
     padding: 2% 3% 0;
+
+    @media (max-width: 600px) {
+      padding: 2% 3% !important;
+    }
   }
 
-  .textCustom {
+  .team-box .textCustom {
     font-weight: 400;
     font-size: 24px;
     line-height: 33px;
     font-family: Roboto, "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  
+    @media (max-width: 600px) {
+      font-size: 20px!important;
+    }
   }
 
   .table-responsive {
@@ -18,6 +26,10 @@
   .table {
     border-color: #F4F6F8;
     margin: 0 !important;
+
+    @media (max-width: 600px) {
+      width: 150%;
+    }
   }
 
   .table-bordered {
@@ -33,16 +45,26 @@
     color: var(--bs-table-hover-color);
   }
 
-  td {
+  .team-box td {
     color: #667B8B;
     font-size: 15px;
+
+    @media (max-width: 600px) {
+      font-size: 13px!important;
+    }
   }
 
-  th {
+  .team-box th {
     font-weight: 400;
     font-size: 18px;
     line-height: 27px;
     padding: 1% 1% 1% 8px !important;
+
+    @media (max-width: 600px) {
+      font-size: 16px!important;
+      font-weight: 500!important;
+      line-height: 18px!important;    
+    }
   }
 
   .color-link {

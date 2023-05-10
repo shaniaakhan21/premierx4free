@@ -64,7 +64,7 @@ const AgentSubHeader = (props: AgentSubHeaderProps): JSX.Element => {
 
   return (
     <div className={`{ ${classes.classes.mainConatiner} "row" `}>
-      <div className="col-6">
+      <div className="col-lg-6 col-sm-12">
         <div className={classes.classes.subcontainer}>
           <span>Documents</span>
           <div className={classes.classes.subsubcontainer}>
@@ -74,7 +74,7 @@ const AgentSubHeader = (props: AgentSubHeaderProps): JSX.Element => {
           </div>
         </div>
       </div>
-      <div className="col-6">
+      <div className="col-lg-6 col-sm-12">
         <div
           className={` ${classes.classes.subcontainer} ${classes.classes.customit} `}
         >
