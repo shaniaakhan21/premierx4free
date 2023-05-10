@@ -1,0 +1,33 @@
+.topBarMobile
+{
+    display:none
+}
+
+.sidebarMobile{
+    display: none;
+}
+
+@media only screen and (max-width:600px)
+{
+    .topBarMobile
+    {
+        display:block
+    }
+    .sidebar
+    {
+        display: none;
+    }
+    .sidebarMobile
+    {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: #FFFFFF;
+        opacity: 1;
+        height: 100vh;
+        border-right:1px solid #D6D9DB;
+        width: 361px;
+        z-index: 1;
+    }
+}

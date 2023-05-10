@@ -5,7 +5,7 @@ import TeamPage from "../pages/Team";
 import PartnersPage from "../pages/Partners";
 import Plan from "../pages/Plans";
 import FaqPage from "../pages/FAQ";
-import AdminDashboard from "../pages/Admin";
+import AdminDashboard from "../admin-dashboard/Admin";
 import SignUpPage from "../pages/SignUp";
 import SignInPage from "../pages/SignIn";
 import ForgotPassword from "../pages/ForgotPassword";

@@ -12,7 +12,7 @@ function AgentDocuments():JSX.Element{
                 <p className={classes.agentdocuments_text}>Upload Documents</p>
                 <div className={classes.agentTable}>
                     {agentData?.map((dt,i)=>(
-                        <TableRow agentData={dt}/>
+                        <TableRow agentData={dt} index={i} dataLength={agentData.length} />
                     ))}
                 </div>
             </div>
@@ -43,6 +43,9 @@ const useStyles = makeStyles() (() => ({
     },
     agentTable:{
         margin:"25px 59px 0 0",
+        '@media(max-width: 600px)':{
+            display:"none",
+    }
         // backgroundColor:"yellow"
     }
 }))

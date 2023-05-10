@@ -8,6 +8,7 @@ import {useEffect, useState} from 'react';
 import MarketingMaterials from './mainArea_Components/MarketingMaterials';
 import * as React from 'react';
 import AgentHeader from '../../../Dashboard/components/agent-header/AgentHeader';
+import TopBar from './TopBar'
 interface event {
     eventNumber:number
     // setEventNumber:any
@@ -38,7 +39,9 @@ function MainArea(props:event): JSX.Element{
     },[eventNumber])
     return(
         <div className={classes.mainArea_mainContainer}>
+            <div className={classes.agentHeader}>
             <AgentHeader />
+            </div>
             <div className={classes.mainContainer_mainContent}>
                 {/* <AgentDocuments /> */}
                 {/* <CalculationPage /> */}
@@ -61,7 +64,13 @@ const useStyles = makeStyles() (() => ({
     },
     mainContainer_mainContent:{
         //height:"90%",
-        margin:"30px 20px 0px 30px"
+        margin:"30px 20px 0px 30px",
+        // width:"100%"
+    },
+    agentHeader:{
+        '@media(max-width:600px)':{
+            display:"none"
+        }
     }
 }))
 
