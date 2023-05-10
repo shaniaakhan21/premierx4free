@@ -43,7 +43,6 @@ const useStyles = makeStyles()(() => ({
 	  link: {
 		color: '#136DA7!important',
 		fontWeight: '400!important',
-		fontSize: '20px!important',
 		padding: '10px!important',
 		margin: '5px!important',
 		'&:hover': {
