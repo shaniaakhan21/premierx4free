@@ -5,6 +5,7 @@ import { useState } from "react";
 import Navbar from '../../components/Navbar';
 const imgSignin = '/assets/svg/SignIn/sigin-img.svg';
 import { Row, Col } from 'react-bootstrap';
+import Footer from '../../components/Footer';
 
 function ForgotPassword(): JSX.Element {
     const { classes } = useStyles();
@@ -14,7 +15,7 @@ function ForgotPassword(): JSX.Element {
     const handleSend = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         setIsSent(true);
-        
+
     }
 
     return (
@@ -60,6 +61,7 @@ function ForgotPassword(): JSX.Element {
                     )}
                 </Col>
             </Row>
+            <Footer />
         </>
     )
 }

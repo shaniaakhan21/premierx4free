@@ -35,7 +35,7 @@ function TeamInfo(): JSX.Element {
     });
   };
   return (
-    <div>
+    <div className={classes.containspage}>
         <div className={classes.container1}>
             <div className={classes.col} >
                 <div className={`${classes.row} ${classes.borderNo}`}><h6 style={{ opacity:0}}>Hi</h6></div>

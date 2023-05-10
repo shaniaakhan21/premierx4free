@@ -8,6 +8,7 @@ import AdminSettings from './mainArea_Components/AdminSettings';
 import {useEffect, useState} from 'react';
 import MarketingMaterials from './mainArea_Components/MarketingMaterials';
 import * as React from 'react';
+import AgentHeader from '../../../Dashboard/components/agent-header/AgentHeader';
 interface event {
     eventNumber:number
     // setEventNumber:any
@@ -38,7 +39,7 @@ function MainArea(props:event): JSX.Element{
     },[eventNumber])
     return(
         <div className={classes.mainArea_mainContainer}>
-            <TopBar />
+            <AgentHeader />
             <div className={classes.mainContainer_mainContent}>
                 {/* <AgentDocuments /> */}
                 {/* <CalculationPage /> */}

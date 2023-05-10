@@ -4,6 +4,8 @@ const useStyles = makeStyles()(() => ({
 
 	  container: {
 		padding:'1%!important',
+		maxWidth: '100%!important',
+		margin: '0 15%!important',
 		'@media (max-width:600px)': {
 			padding:'4%!important',
 		},
@@ -41,7 +43,7 @@ const useStyles = makeStyles()(() => ({
 	  link: {
 		color: '#0556A7!important',
 		fontWeight: '400!important',
-		fontSize: '25!important',
+		fontSize: '20px!important',
 		padding: '10px!important',
 		margin: '5px!important',
 		'&:hover': {
@@ -52,7 +54,6 @@ const useStyles = makeStyles()(() => ({
 		  color: 'white!important',
 		  backgroundColor: '#64B5F6',
 		},
-		marginLeft: '10px',
 	  },
 	}));
 	
