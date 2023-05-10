@@ -5,7 +5,8 @@ import FootBar from './FootBar';
 import AgentDocuments from './mainArea_Components/AgentDocuments';
 import CalculationPage from './mainArea_Components/CalculationPage';
 import AdminSettings from './mainArea_Components/AdminSettings';
-import {useEffect, useState} from 'react'
+import {useEffect, useState} from 'react';
+import MarketingMaterials from './mainArea_Components/MarketingMaterials';
 interface event {
     eventNumber:number
     // setEventNumber:any
@@ -24,6 +25,10 @@ function MainArea(props:event): JSX.Element{
         if (eventNumber == 2)
         {
             setMainAreaContent(<CalculationPage />)
+        }
+        if (eventNumber == 3)
+        {
+            setMainAreaContent(<MarketingMaterials />)
         }
         if (eventNumber == 4)
         {
@@ -55,7 +60,7 @@ const useStyles = makeStyles() (() => ({
     },
     mainContainer_mainContent:{
         //height:"90%",
-        margin:"30px 20px 0px 61px"
+        margin:"30px 20px 0px 30px"
     }
 }))
 

@@ -109,7 +109,7 @@ const useStyles = makeStyles()(() => ({
 			marginRight: -HOVER_OFFSET,
 			"& .icon": {
 				transform: 'scale(2)',
-				backgroundColor: "#136DA7",
+				backgroundColor: "#0556A7",
 				bottom: '25%'
 			}
 		},

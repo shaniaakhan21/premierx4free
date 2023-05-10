@@ -10,10 +10,13 @@ const useStyles = makeStyles()(() => ({
         display:'flex',
         flexDirection:'column',
         textAlign: 'center',
-        color: 'white',
+        color: 'white!important',
         img: {
             padding: '10%'
         }
+    },
+    cardText:{
+        color: 'white!important',
     }
 
 

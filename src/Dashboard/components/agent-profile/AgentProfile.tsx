@@ -10,7 +10,7 @@ function AgentProfile(): JSX.Element {
                 <div className={` ${classes.classes.cardCustBody} "card-body" `}>
                     <img className="rounded-circle img-fluid" src={"/assets/svg/Dashboard/dummy.svg"} alt="Card image cap"/>
                     <h3 className="card-title">John Smith</h3>
-                    <p className="card-text">johnsmith@gmail.com</p>
+                    <span style={{ color:'white!important'}} className="card-text">johnsmith@gmail.com</span>
                 </div>
             </div>
 		</div>

@@ -27,7 +27,7 @@ const useStyles = makeStyles()(() => ({
           
       },
 
-      '&:last-child, &:nth-last-child(2), &:nth-last-child(3)': {
+      '&:last-child, &:nth-last-child(2)': {
         '&:hover': {
           transform: 'scale(1.1)',
           boxShadow: '0px 0px 20px 7px #8080805e',
@@ -87,8 +87,8 @@ const useStyles = makeStyles()(() => ({
         borderRadius: '0!important',
         width: '100%!important',
         padding: '7px 0px!important',
-        border: '1px solid #00B0F0!important',
-        background: '#00B0F0!important',
+        border: '1px solid #64B5F6!important',
+        background: '#64B5F6!important',
         display:'none',
 
     },

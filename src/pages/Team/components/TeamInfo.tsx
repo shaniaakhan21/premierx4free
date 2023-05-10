@@ -43,7 +43,7 @@ const useStyles = makeStyles()((theme) => ({
 		},
 	},
 	title: {
-		color: "#136DA7",
+		color: "#0556A7",
 		fontSize: 'calc(1.8vw + 16px)',
 		['@media screen and (max-width: 600px)']: {
 			paddingLeft: '2%',

@@ -27,10 +27,10 @@ function PartellInfo(props: InfoProps): JSX.Element {
 			{
 				descriptionVisible && (
 					<div className={classes.partnerDescription}>
-						<Typography className={classes.infoSubtitle}>
+						<Typography className={classes.infoSubtitle} style={{ color: '#64B5F6!important' }}>
 							We care about our community
 						</Typography>
-						<Typography className={classes.infoText}>
+						<Typography className={classes.infoText} >
 						At Partell Pharmacy, we've made it our mission to provide unique and high-quality solutions for physicians and patients with customized, compound medications. We're here to better your health, together. With licenses and/or relationships in all 50 States, we can deliver your medications to your doorstep anywhere in the US.
 						</Typography>
 					</div>
@@ -79,7 +79,7 @@ function NSURXInfo(props: InfoProps): JSX.Element {
 			{
 				descriptionVisible && (
 					<div className={classes.partnerDescription}>
-						<Typography className={classes.infoSubtitle} style={{ color: "#136DA7" }}>
+						<Typography className={classes.infoSubtitle} style={{ color: "#64B5F6" }}>
 							The revolutionary prescription discount
 						</Typography>
 						<Typography className={classes.infoText}>
@@ -107,7 +107,7 @@ function SwiftMDInfo(props: InfoProps): JSX.Element {
 			{
 				descriptionVisible && (
 					<div className={classes.partnerDescription}>
-						<Typography className={classes.infoSubtitle}>
+						<Typography className={classes.infoSubtitle}  style={{ color: "#64B5F6" }}>
 							What difference it from other tele-health services?
 						</Typography>
 						<Typography className={classes.infoText}>
@@ -209,6 +209,9 @@ const useStyles = makeStyles()(() => ({
 		alignItems: 'center',
 		justifyContent: 'center',
 		display: 'flex',
+		' & p':{
+			color: '#006B92!important',
+		}
 	},
 	title: {
 		fontWeight: 800,
@@ -250,7 +253,7 @@ const useStyles = makeStyles()(() => ({
 		['@media screen and (min-width: 1024px)']: {
 			fontSize: 28
 		},
-		color: "#006B92",
+		color: '#006B92!important',
 		textDecoration: 'underline'
 	},
 	infoSubtitle: {
@@ -263,7 +266,7 @@ const useStyles = makeStyles()(() => ({
 		['@media screen and (min-width: 1024px)']: {
 			fontSize: 20
 		},
-		color: "#136DA7",
+		color: "#0556A7!important",
 	},
 	infoText: {
 		fontWeight: 400,

@@ -51,3 +51,8 @@
     left: 22px;
     bottom: 18rem;
 }
+
+.tab-pane-fourth{
+    position: relative;
+    bottom: 16rem;
+}

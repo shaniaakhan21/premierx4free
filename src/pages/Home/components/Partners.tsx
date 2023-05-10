@@ -90,7 +90,7 @@ function NSURXInfo(props: InfoProps): JSX.Element {
 			{
 				descriptionVisible && (
 					<div className={classes.partnerDescription}>
-						<Typography className={classes.infoSubtitle} style={{ color: "#136DA7" }}>
+						<Typography className={classes.infoSubtitle} style={{ color: "#0556A7" }}>
 							The revolutionary prescription discount
 						</Typography>
 						<Typography className={classes.infoText}>
@@ -255,7 +255,7 @@ const useStyles = makeStyles()(() => ({
 		['@media screen and (min-width: 1024px)']: {
 			fontSize: 28
 		},
-		color: "#006B92",
+		color: "#64B5F6!important",
 		textDecoration: 'underline'
 	},
 	infoSubtitle: {
@@ -268,7 +268,7 @@ const useStyles = makeStyles()(() => ({
 		['@media screen and (min-width: 1024px)']: {
 			fontSize: 20
 		},
-		color: "#136DA7",
+		color: "#64B5F6!important",
 	},
 	infoText: {
 		fontWeight: 400,
@@ -283,6 +283,7 @@ const useStyles = makeStyles()(() => ({
 	},
 	partnerDescription: {
 		animation: '$fade 1s linear',
+		color: "#64B5F6!important",
 	},
 	'@keyframes fade': {
 		'0%': {
