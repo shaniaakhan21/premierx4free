@@ -5,7 +5,7 @@ import AgentTabs from './components/agent-tabs/AgentTabs';
 
 function AgentDashboard(): JSX.Element {
   return (
-    <div>
+    <div className='main-div'>
       <Row >
         <Col className='box-img-bg' lg="2" sm="6">
           <img className="card-img-top" src={"/assets/svg/Dashboard/logo-dash.svg"} alt="Card image cap" />

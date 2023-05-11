@@ -5,6 +5,10 @@ form {
     @media (max-width: 600px) {
         width: 100%;
     }
+
+    @media (max-width: 400px) {
+        width: 100%;
+    }
 }
 
 .box-with-shadow {
@@ -83,6 +87,11 @@ form .row {
         width: 25%;
         margin: 0 2% 1% 7%;
     }
+
+    @media (max-width: 400px) {
+        width: 25%;
+        margin: 0 6% 1% 11%;
+    }
 }
 
 .align-it-end {
@@ -109,5 +118,12 @@ form .row {
 
     @media (max-width: 600px) {
         margin-right: 10%;
+    }
+}
+
+.company-form{
+    
+    @media (max-width: 400px) {
+       padding: 6% 6% 6% 8%;
     }
 }
