@@ -35,11 +35,11 @@ const useStyles = makeStyles()(() => ({
 
       },
       '@media (max-width: 600px)': {
-        flex: '0 0 18%',
+        flex: '0 0 17%',
         '&:first-of-type': {
         margin: '2%',
         padding: '1%',
-        flex: '0 0 56%'
+        flex: '0 0 57%'
       },
 
     },
@@ -55,7 +55,7 @@ const useStyles = makeStyles()(() => ({
         color: '#52c41a',
         height: '1.6em',
         '@media (max-width: 600px)': {
-          height: '1rem!important'
+          height: '0.8rem!important'
         },
     },
     times: {
@@ -85,7 +85,7 @@ const useStyles = makeStyles()(() => ({
         textAlign:'start',
         fontSize: '1.2rem!important',
         '@media (max-width: 600px)': {
-          fontSize: '0.56rem!important',
+          fontSize: '0.52rem!important',
           fontWeight: 'bold'
         },
     },
