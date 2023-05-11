@@ -83,6 +83,10 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+
+    @media (max-width: 600px) {
+        justify-content: space-evenly;
+    }
 }
 
 .cookie-banner-overlay .modal-dialog .modal-content .cookie-banner-btns button {
