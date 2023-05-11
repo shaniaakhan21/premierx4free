@@ -76,7 +76,7 @@ const useStyles = makeStyles()(() => ({
 		},
 	},
 	columns: {
-		margin: '2.5% 28% 0',
+		margin: '2.5% 16% 0',
 		display: 'flex',
 		flexWrap: 'wrap',
 		'@media screen and (max-width: 600px)': {
