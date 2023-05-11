@@ -105,11 +105,9 @@
       left: 0rem;
       width: 33%;
       padding: 0px 11px;
-    }
-
-    @media (max-width: 400px) {
       display: none;
     }
+
   }
 
   .box-main-commission .tab-options img {
