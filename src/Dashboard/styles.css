@@ -11,6 +11,6 @@
 
 .main-div{
     @media (max-width: 400px) {
-        overflow-x:none;
+        overflow-x:hidden;
     }
 }
