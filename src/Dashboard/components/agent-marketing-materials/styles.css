@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .MarketingMaterials-document-card {
@@ -61,7 +62,7 @@
 .MarketingMaterials-filters{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
     @media (max-width:600px) {
         flex-wrap: wrap;
         justify-content: space-evenly;
@@ -75,10 +76,8 @@
 }
 
 .MarketingMaterials .textCustom{
-    line-height: 5rem;
-}
-
-.MarketingMaterials .textCustom{
-    font-weight: 500;
+    font-weight: 600;
     font-size: 24px;
+    line-height: 5rem;
+    margin-left: 9px;
 }

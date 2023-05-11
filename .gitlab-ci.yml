@@ -1,0 +1,12 @@
+master:
+  stage: deploy
+  only:
+    - master
+  tags:
+    - nsur-runner-1
+  script:
+    - cd /home/gitlab-runner/publicwebsite
+    - git reset --hard HEAD
+    - git pull
+    - npm i --force
+    - npm run build
