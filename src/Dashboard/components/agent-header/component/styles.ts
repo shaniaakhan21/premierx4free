@@ -10,7 +10,7 @@ const useStyles = makeStyles()(() => ({
         padding: '6%',
         borderBottom: '1px solid #D6D9DB',
         borderTop: 0,
-        
+
         '@media (max-width:600px)': {
             flexDirection: 'column',
         },
@@ -26,7 +26,13 @@ const useStyles = makeStyles()(() => ({
         '& span': {
             fontSize: '24px',
             fontFamily: ' Nunito Sans ',
-        }
+
+            ['@media screen and (max-width: 600px)']: {
+                fontSize: '20px',
+                fontWeight: '600'
+            },
+        },
+
     },
 
     customit: {
@@ -38,20 +44,20 @@ const useStyles = makeStyles()(() => ({
     },
 
     refercontainer: {
-        display:'flex',
-        padding:'2%',
-        justifyContent:'flex-start',
+        display: 'flex',
+        padding: '2%',
+        justifyContent: 'flex-start',
     },
 
     agentbox: {
-        padding:'4%',
-        width:'100%',
+        padding: '4%',
+        width: '100%',
     },
 
     copylinkit: {
         display: 'flex',
         alignItems: 'center',
-        '& img':{
+        '& img': {
             paddingRight: '3%'
         },
         '& a': {
@@ -62,13 +68,13 @@ const useStyles = makeStyles()(() => ({
     subsubcontainer: {
         display: 'flex',
         justifyContent: 'space-between',
-        marginTop:'2%',
-        marginBottom:'10px',
-        padding:'4% 10% 4% 24%',
-        borderRadius:'100px',
-        background:'white',
-        boxShadow:'1px 0px 34px rgba(0, 0, 0, 0.15)',
-        border:'1px solid #DEE1EB',
+        marginTop: '2%',
+        marginBottom: '10px',
+        padding: '4% 10% 4% 24%',
+        borderRadius: '100px',
+        background: 'white',
+        boxShadow: '1px 0px 34px rgba(0, 0, 0, 0.15)',
+        border: '1px solid #DEE1EB',
         alignItems: 'center',
         '& a': {
             fontSize: '20px',
@@ -76,16 +82,19 @@ const useStyles = makeStyles()(() => ({
             '@media (max-width:600px)': {
                 fontSize: '17px',
             },
-    
+            '@media (max-width:400px)': {
+                fontSize: '12px',
+            },
+
         },
-                
+
         '@media (max-width:600px)': {
-            padding:'2% 10% 2% 24%',
+            padding: '2% 10% 2% 24%',
         },
     },
 
-    line:{
-        borderRight: "2px solid #DEE1EB", 
+    line: {
+        borderRight: "2px solid #DEE1EB",
         height: "40px",
         paddingLeft: '9%'
     },
@@ -104,7 +113,7 @@ const useStyles = makeStyles()(() => ({
     modalFooter: {
         borderTop: 'none!important'
     },
-        
+
     buttonWhite: {
         background: '#FFFFFF!important',
         border: '1px solid #86A9B8!important',

@@ -2,7 +2,11 @@
   padding: 2% 3% 0;
 
   @media (max-width: 600px) {
-    padding: 6% 3% 1%!important;
+    padding: 4% 3%!important;
+  }
+
+  @media (max-width: 400px) {
+    padding: 6%!important;
   }
 }
 
@@ -28,6 +32,10 @@
 
   @media (max-width: 600px) {
     width: 210%;
+  }
+
+  @media (max-width: 400px) {
+    width: 300%;
   }
 }
 

@@ -63,27 +63,27 @@ function AgentTabs(): JSX.Element {
 
     const handleSave = () => {
         console.log('Saving profile:', profile);
-        // You can send a request to update the profile here
     };
 
     return (
-        
-        // <>  <Row className='phone-row'>
-        //         <Col sm="2" lg="12" className='phone-logo'>
-        //             <img className="card-img-top" src={"/assets/svg/Dashboard/logo-dash.svg"} alt="Card image cap" />
-        //         </Col>
-        //         <Col sm="1" lg="12"  className='phone-hamburger'>
-        //             <div>
-        //                 <a onClick={handleToggleTabs}>
-        //                     <img src='/assets/svg/Dashboard/hamburger.svg' alt="" />
-        //                 </a>
-        //             </div>
-        //         </Col>
-        //     </Row>
+
+        <>
+            <Row className='phone-row'>
+                <Col sm="2" lg="12" className='phone-logo'>
+                    <img className="card-img-top" src={"/assets/svg/Dashboard/logo-dash.svg"} alt="Card image cap" />
+                </Col>
+                <Col sm="1" lg="12" className='phone-hamburger'>
+                    <div>
+                        <a onClick={handleToggleTabs}>
+                            <img src='/assets/svg/Dashboard/hamburger.svg' alt="" />
+                        </a>
+                    </div>
+                </Col>
+            </Row>
 
             <Tab.Container id="left-tabs-example" defaultActiveKey="first" >
                 <Row>
-                    {/* {showTabs && ( */}
+                    {showTabs && (
                         <Col sm={2} className='tab-contains'>
                             <AgentProfile />
                             <Nav variant="pills" className="flex-column" >
@@ -117,9 +117,50 @@ function AgentTabs(): JSX.Element {
                                         <span>Settings</span>
                                     </Nav.Link>
                                 </Nav.Item>
+                                <Nav.Item>
+                                    <Nav.Link eventKey="sixth">
+                                        <img src={'/assets/svg/Dashboard/logout.svg'} alt="logout" />
+                                        <span>Logout</span>
+                                    </Nav.Link>
+                                </Nav.Item>
                             </Nav>
                         </Col>
-                    {/* )} */}
+                    )}
+                    <Col sm={2} className='tab-contains mobile-hide'>
+                        <AgentProfile />
+                        <Nav variant="pills" className="flex-column" >
+                            <Nav.Item>
+                                <Nav.Link eventKey="first">
+                                    <img src={"/assets/svg/Dashboard/dashboard-icon.svg"} alt="dashboard" />
+                                    <span>Dashboard</span>
+                                </Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link eventKey="second">
+                                    <img src={"/assets/svg/Dashboard/submit-icon.svg"} alt="submit" />
+                                    <span>Submit Company</span>
+                                </Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link eventKey="third">
+                                    <img src={"/assets/svg/Dashboard/report-icon.svg"} alt="report" />
+                                    <span>Report</span>
+                                </Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link eventKey="fourth">
+                                    <img src={"/assets/svg/Dashboard/marketing-icon.svg"} alt="Marketing Materials" />
+                                    <span>Marketing Materials</span>
+                                </Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link eventKey="fifth">
+                                    <img src={"/assets/svg/Dashboard/setting-icon.svg"} alt="setting" />
+                                    <span>Settings</span>
+                                </Nav.Link>
+                            </Nav.Item>
+                        </Nav>
+                    </Col>
                     <Col sm={10} style={{ padding: 0 }}>
                         <Tab.Content>
                             <Tab.Pane eventKey="first" className="tab-pane-first">
@@ -154,12 +195,15 @@ function AgentTabs(): JSX.Element {
                                     />
                                 </div>
                             </Tab.Pane>
+                            <Tab.Pane eventKey="sixth" className='tab-pane-sixth'>
+                                Logout
+                            </Tab.Pane>
                         </Tab.Content>
                         <AgentFooter />
                     </Col>
                 </Row>
             </Tab.Container>
-        // </>
+        </>
     );
 }
 

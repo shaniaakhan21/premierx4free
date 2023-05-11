@@ -4,6 +4,10 @@
     @media (max-width: 600px) {
       padding: 2% 3% !important;
     }
+
+    @media (max-width: 400px) {
+      padding: 2% 6%!important;
+    }
   }
 
   .team-box .textCustom {
@@ -29,6 +33,10 @@
 
     @media (max-width: 600px) {
       width: 150%;
+    }
+
+    @media (max-width: 600px) {
+      width: 210%;
     }
   }
 
