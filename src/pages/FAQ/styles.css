@@ -19,6 +19,13 @@
           box-shadow: inset 0 calc(-1 * var(--bs-accordion-border-width)) 0 var(--bs-accordion-border-color);
 }
 
+@media (max-width: 400px) {
+  .heading {
+    font-size: 20px!important;
+    line-height: 24px!important;
+    }
+}
+
 /* Media query for screens smaller than 768px */
 @media (max-width: 767px) {
     .heading {

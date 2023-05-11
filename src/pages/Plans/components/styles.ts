@@ -26,6 +26,11 @@ const useStyles = makeStyles()(() => ({
           flex: '0 0 44%',
           
       },
+      '&:nth-last-of-type(2)': {
+        '@media (max-width: 400px)': {
+          paddingTop: '18px!important'
+        }
+      },
 
       '&:last-child, &:nth-last-of-type(2)': {
         '&:hover': {
@@ -40,6 +45,14 @@ const useStyles = makeStyles()(() => ({
         margin: '2%',
         padding: '1%',
         flex: '0 0 57%'
+      }},
+
+      '@media (max-width: 400px)': {
+        flex: '0 0 19%',
+        '&:first-of-type': {
+        margin: '2%',
+        padding: '1%',
+        flex: '0 0 54%'
       },
 
     },
@@ -84,6 +97,7 @@ const useStyles = makeStyles()(() => ({
     h6: {
         textAlign:'start',
         fontSize: '1.2rem!important',
+        fontWeight: '600',
         '@media (max-width: 600px)': {
           fontSize: '0.52rem!important',
           fontWeight: 'bold'
