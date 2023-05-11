@@ -49,6 +49,12 @@
         margin-bottom:1%;
         padding: 5px 15px;
     }
+
+    @media (max-width:400px) {
+        font-size: 9px!important;
+        margin-bottom:1%;
+        padding: 5px 6px;
+    }
 }
 
 .MarketingMaterials-filter-button:hover , .MarketingMaterials-filter-button:active, .MarketingMaterials-filter-button:focus-visible, .active-filter{
@@ -73,6 +79,9 @@
 .MarketingMaterials{
     padding-left: 3%;
     padding-right: 3%;
+    @media (max-width:400px) {
+        padding: 0 5%;
+    }
 }
 
 .MarketingMaterials .textCustom{

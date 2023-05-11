@@ -30,11 +30,11 @@ const AgentSettings: React.FC<Props> = ({
     onSave,
 }) => {
     return (
-        <div >
+        <div className='settings-main-box'>
             <span className='textCustom'>Settings</span>
             <div className="box-with-shadow after-it">
                 <Row className='row-design'>
-                    <Col xs={3} lg={2} className='profile-position' >
+                    <Col xs={5} lg={2} className='profile-position' >
                         <Image className="img-in-circle" src={imageUrl} roundedCircle />
                         <div className="edit-icon" style={{
 
