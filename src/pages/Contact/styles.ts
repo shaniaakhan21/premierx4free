@@ -23,7 +23,7 @@ const useStyles = makeStyles()(() => ({
 		['@media screen and (min-width: 1280px)']: {
 			fontSize: 30,
 		},
-		['@media screen and (min-width: 1600px)']: {
+		['@media screen and (min-width: 1768px)']: {
 			fontSize: 32,
 		},
 		['@media screen and (min-width: 1930px)']: {

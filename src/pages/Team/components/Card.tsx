@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     fontFamily: 'Nunito Sans',
     color: '#136DA7',
-    ['@media screen and (max-width: 600px)']: {
+    ['@media screen and (max-width: 768px)']: {
 			marginBottom: '2%',
 		},
   },
@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     background: '#64B5F6',
     borderRadius: 0,
     boxShadow: 'none',
-    ['@media screen and (max-width: 600px)']: {
+    ['@media screen and (max-width: 768px)']: {
 			padding: '3% 12%',
 		},
   },

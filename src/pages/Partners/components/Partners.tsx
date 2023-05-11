@@ -239,7 +239,7 @@ const useStyles = makeStyles()(() => ({
 		marginBottom: 24,
 		paddingLeft: 24,
 		paddingRight: 24,
-		['@media screen and (max-width: 600px)']: {
+		['@media screen and (max-width: 768px)']: {
 			paddingLeft: 10,
 			paddingRight: 10,
 			textAlign: 'justify'

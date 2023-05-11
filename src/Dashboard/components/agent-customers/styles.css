@@ -1,7 +1,7 @@
 .box-main-customer{
   padding: 2% 3% 0;
 
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     padding: 4% 3%!important;
   }
 
@@ -15,7 +15,7 @@
   font-size: 24px;
   line-height: 33px;
   font-family: "Nunito Sans";
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     font-size: 20px!important;
   }
 }
@@ -30,7 +30,7 @@
   border-color: #F4F6F8;
   margin: 0 !important;
 
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     width: 210%;
   }
 
@@ -55,7 +55,7 @@
 .box-main-customer td {
   color: #667B8B;
   font-size: 15px;
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     font-size: 13px;
   }
 }
@@ -66,7 +66,7 @@
   line-height: 27px;
   padding: 1% 1% 1% 8px !important;
 
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     font-size: 16px!important;
     font-weight: 500!important;
     line-height: 18px!important;    
@@ -81,7 +81,7 @@
   padding: 3% !important;
   border-radius: 50% !important;
 
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     width: 20px!important;
     height: 20px!important;
   }
@@ -95,7 +95,7 @@
   padding: 3% !important;
   border-radius: 50% !important;
   
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     width: 20px!important;
     height: 20px!important;
   }
@@ -107,7 +107,7 @@
   height: 23px !important;
 
   
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     width: 20px!important;
     height: 20px!important;
   }

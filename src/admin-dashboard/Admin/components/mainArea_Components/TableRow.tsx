@@ -175,7 +175,7 @@ const useStyles = makeStyles() (() => ({
         color:"#667B8B"
     },
     detailText:{
-        fontWeight:"600px",
+        fontWeight:"768px",
         fontSize:"18px",
         lineHeight:"24.55px",
         color:"#000000"
@@ -216,7 +216,7 @@ const useStyles = makeStyles() (() => ({
         flexDirection:"row",
         alignItems:"center",
         gap:"10px",
-        fontWeight:'600px',
+        fontWeight:'768px',
         fontSize:"18px",
         lineHeight:"24.55px",
         fontFamily:"Nunito Sans"

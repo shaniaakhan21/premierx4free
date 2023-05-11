@@ -39,7 +39,7 @@ const useStyles = makeStyles()(() => ({
         },
 
       },
-      '@media (max-width: 600px)': {
+      '@media (max-width: 768px)': {
         flex: '0 0 17%',
         '&:first-of-type': {
         margin: '2%',
@@ -67,21 +67,21 @@ const useStyles = makeStyles()(() => ({
     check: {
         color: '#52c41a',
         height: '1.6em',
-        '@media (max-width: 600px)': {
+        '@media (max-width: 768px)': {
           height: '0.8rem!important'
         },
     },
     times: {
       color: 'red',
       height: '1.6em',
-      '@media (max-width: 600px)': {
+      '@media (max-width: 768px)': {
         height: '1rem!important'
       },
     },
     borderNo:{
         border: 'none!important',
         h6: {
-          '@media (max-width: 600px)': {
+          '@media (max-width: 768px)': {
             margin: '0!important'
           },
         }
@@ -89,7 +89,7 @@ const useStyles = makeStyles()(() => ({
 
     firstCol:{
       h6 : {
-        '@media (max-width: 600px)': {
+        '@media (max-width: 768px)': {
         marginBottom: '0.4rem!important'}
       }
     },
@@ -98,7 +98,7 @@ const useStyles = makeStyles()(() => ({
         textAlign:'start',
         fontSize: '1.2rem!important',
         fontWeight: '600',
-        '@media (max-width: 600px)': {
+        '@media (max-width: 768px)': {
           fontSize: '0.52rem!important',
           fontWeight: 'bold'
         },
@@ -111,7 +111,7 @@ const useStyles = makeStyles()(() => ({
         border: '1px solid #64B5F6!important',
         background: '#64B5F6!important',
         display:'none',
-        '@media (max-width: 600px)': {
+        '@media (max-width: 768px)': {
           fontSize: '0.6rem!important'
         },
 
@@ -136,7 +136,7 @@ const useStyles = makeStyles()(() => ({
         fontSize: '1.1rem'
       },
 
-      '@media (max-width: 600px)': {
+      '@media (max-width: 768px)': {
         fontSize: '10px!important',
         span:{
         fontSize: '12px!important', 
@@ -151,7 +151,7 @@ const useStyles = makeStyles()(() => ({
 
     secondcol: {
       check: {
-        '@media (max-width: 600px)': {
+        '@media (max-width: 768px)': {
           margin: '0px 0px -1px 0px!important'
         }
       },

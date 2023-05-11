@@ -12,7 +12,7 @@ const useStyles = makeStyles()(() => ({
             padding: '6% 12%',
             width: '100%',
 
-            '@media (max-width:600px)': {
+            '@media (max-width:768px)': {
                 display: 'none'
             },
 
@@ -22,7 +22,7 @@ const useStyles = makeStyles()(() => ({
     siginform: {
         marginTop: '9%',
         paddingRight: '8%!important',
-        '@media (max-width:600px)': {
+        '@media (max-width:768px)': {
             padding: '5% 8% 5% 12%!important'
         },
         h1: {
@@ -33,12 +33,12 @@ const useStyles = makeStyles()(() => ({
             margin: '3% 0',
 
             fontSize: '30px', // default for xs screens
-            '@media (max-width:600px)': {
+            '@media (max-width:768px)': {
                 textAlign: 'left',
                 width: '100%',
                 margin: 0,
             },
-            '@media (min-width:600px)': {
+            '@media (min-width:768px)': {
                 fontSize: '16px', // for sm screens and up
             },
             '@media (min-width:960px)': {

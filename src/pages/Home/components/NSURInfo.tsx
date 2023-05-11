@@ -61,7 +61,7 @@ const useStyles = makeStyles()((theme) => ({
 			paddingTop: "7.5%",
 			paddingBottom: '5%'
 		},
-		['@media screen and (min-width: 1600px)']: {
+		['@media screen and (min-width: 1768px)']: {
 			paddingTop: "5%",
 			paddingBottom: '10%'
 		},
@@ -79,7 +79,7 @@ const useStyles = makeStyles()((theme) => ({
 		['@media screen and (min-width: 1280px)']: {
 			top: -220
 		},
-		['@media screen and (min-width: 1600px)']: {
+		['@media screen and (min-width: 1768px)']: {
 			width: '40%',
 			top: -240
 		},

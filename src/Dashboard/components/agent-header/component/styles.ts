@@ -11,7 +11,7 @@ const useStyles = makeStyles()(() => ({
         borderBottom: '1px solid #D6D9DB',
         borderTop: 0,
 
-        '@media (max-width:600px)': {
+        '@media (max-width:768px)': {
             flexDirection: 'column',
         },
 
@@ -27,7 +27,7 @@ const useStyles = makeStyles()(() => ({
             fontSize: '24px',
             fontFamily: ' Nunito Sans ',
 
-            ['@media screen and (max-width: 600px)']: {
+            ['@media screen and (max-width: 768px)']: {
                 fontSize: '20px',
                 fontWeight: '600'
             },
@@ -37,7 +37,7 @@ const useStyles = makeStyles()(() => ({
 
     customit: {
         paddingLeft: '10%',
-        '@media (max-width:600px)': {
+        '@media (max-width:768px)': {
             paddingLeft: '0',
         },
 
@@ -79,7 +79,7 @@ const useStyles = makeStyles()(() => ({
         '& a': {
             fontSize: '20px',
             fontFamily: ' Nunito Sans ',
-            '@media (max-width:600px)': {
+            '@media (max-width:768px)': {
                 fontSize: '17px',
             },
             '@media (max-width:400px)': {
@@ -88,7 +88,7 @@ const useStyles = makeStyles()(() => ({
 
         },
 
-        '@media (max-width:600px)': {
+        '@media (max-width:768px)': {
             padding: '2% 10% 2% 24%',
         },
     },

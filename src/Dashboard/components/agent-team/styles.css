@@ -1,7 +1,7 @@
   .team-box {
     padding: 2% 3% 0;
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       padding: 2% 3% !important;
     }
 
@@ -16,7 +16,7 @@
     line-height: 33px;
     font-family: "Nunito Sans";
   
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       font-size: 20px!important;
     }
   }
@@ -31,11 +31,11 @@
     border-color: #F4F6F8;
     margin: 0 !important;
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       width: 150%;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       width: 210%;
     }
   }
@@ -57,7 +57,7 @@
     color: #667B8B;
     font-size: 15px;
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       font-size: 13px!important;
     }
   }
@@ -68,7 +68,7 @@
     line-height: 27px;
     padding: 1% 1% 1% 8px !important;
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       font-size: 16px!important;
       font-weight: 500!important;
       line-height: 18px!important;    
@@ -83,7 +83,7 @@
   .boxModal .modal-content {
     width: 216%;
     border-radius: 10px!important;
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       width: 100%!important;
     }
   }
@@ -117,7 +117,7 @@
   }
 
   .boxModal .modal-content table{
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       width: 260%!important;
     }
   }

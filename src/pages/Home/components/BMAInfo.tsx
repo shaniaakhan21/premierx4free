@@ -68,7 +68,7 @@ const useStyles = makeStyles()(() => ({
 			paddingLeft: '10%',
 			paddingRight: '10%'
 		},
-		['@media screen and (max-width: 600px)']: {
+		['@media screen and (max-width: 768px)']: {
 			borderTopLeftRadius: 0,
 			borderBottomLeftRadius: 0,
 		},
@@ -101,7 +101,7 @@ const useStyles = makeStyles()(() => ({
 			paddingLeft: '10%',
 			paddingRight: '10%'
 		},
-		['@media screen and (max-width: 600px)']: {
+		['@media screen and (max-width: 768px)']: {
 			borderTopRightRadius: 0,
 			borderBottomLeftRadius: 0,
 			borderBottomRightRadius: 0,
