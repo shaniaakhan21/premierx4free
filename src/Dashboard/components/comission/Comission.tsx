@@ -31,7 +31,7 @@ const Comission = ({ spanText }: Props) => {
         <div className="box-main-commission">
             <div className="box-it">
                 <span className='textCustom'>{spanText}</span>
-                <div className="tab-options">
+                {/* <div className="tab-options">
                     <div>
                         <img src='assets/svg/Dashboard/filter.svg' />
                         <span>Filter</span>
@@ -44,7 +44,7 @@ const Comission = ({ spanText }: Props) => {
                             <img src='assets/svg/Dashboard/down-sort.svg' />
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
 
             <Tabs
