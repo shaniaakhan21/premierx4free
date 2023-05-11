@@ -101,7 +101,7 @@
     left: 62rem;
     top: 33px;
 
-    @media (max-width: 600px) {
+    @media (max-width: 1000px) {
       left: 0rem;
       width: 33%;
       padding: 0px 11px;
