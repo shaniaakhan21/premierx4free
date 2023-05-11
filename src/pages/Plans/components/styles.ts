@@ -29,17 +29,17 @@ const useStyles = makeStyles()(() => ({
 
       '&:last-child, &:nth-last-of-type(2)': {
         '&:hover': {
-          transform: 'scale(1.1)',
+          transform: 'scale(1)',
           boxShadow: '0px 0px 20px 7px #8080805e',
         },
 
       },
       '@media (max-width: 600px)': {
-        flex: '0 0 21%',
+        flex: '0 0 18%',
         '&:first-of-type': {
         margin: '2%',
         padding: '1%',
-        flex: '0 0 26%'
+        flex: '0 0 56%'
       },
 
     },
@@ -48,7 +48,7 @@ const useStyles = makeStyles()(() => ({
     row: {
       display: 'flex',
       alignItems: 'center',
-      margin: '5px 0',
+      margin: '4px 0',
       borderBottom:'0.5px solid #8080802e',
     },
     check: {
@@ -66,23 +66,30 @@ const useStyles = makeStyles()(() => ({
       },
     },
     borderNo:{
-        border: 'none!important'
+        border: 'none!important',
+        h6: {
+          '@media (max-width: 600px)': {
+            margin: '0!important'
+          },
+        }
     },
+
+    firstCol:{
+      h6 : {
+        '@media (max-width: 600px)': {
+        marginBottom: '0.4rem!important'}
+      }
+    },
+
     h6: {
         textAlign:'start',
         fontSize: '1.2rem!important',
-        '@media (max-width: 768px)': {
-          fontSize: '1rem!important',
-        },
-
         '@media (max-width: 600px)': {
-          fontSize: '0.7rem!important'
-        },
-
-        '@media (max-width: 527px)': {
-          fontSize: '0.5rem!important'
+          fontSize: '0.56rem!important',
+          fontWeight: 'bold'
         },
     },
+
     upgradebtn:{
         borderRadius: '0!important',
         width: '100%!important',
@@ -90,6 +97,9 @@ const useStyles = makeStyles()(() => ({
         border: '1px solid #64B5F6!important',
         background: '#64B5F6!important',
         display:'none',
+        '@media (max-width: 600px)': {
+          fontSize: '0.6rem!important'
+        },
 
     },
     redbtn: {
@@ -123,7 +133,18 @@ const useStyles = makeStyles()(() => ({
 
     containspage: {
       height: '80vh'
-    }
+    },
+
+    secondcol: {
+      check: {
+        '@media (max-width: 600px)': {
+          margin: '0px 0px -1px 0px!important'
+        }
+      },
+    },
+
+
+
 
   }));
 

@@ -23,7 +23,7 @@ const useStyles = makeStyles()(() => ({
         marginTop: '9%',
         paddingRight: '8%!important',
         '@media (max-width:600px)': {
-            padding: '5% 8%!important'
+            padding: '5% 8% 5% 12%!important'
         },
         h1: {
             color: '#136DA7!important',

@@ -23,7 +23,7 @@ const useStyles = makeStyles()(() => ({
         marginTop: '9%',
         paddingRight: '8%!important',
         '@media (max-width:600px)': {
-            padding: '5% 8%!important'
+            padding: '3% 6% 3% 9%!important'
         },
         h1: {
             color: '#136DA7!important',
@@ -37,6 +37,7 @@ const useStyles = makeStyles()(() => ({
                 textAlign: 'left',
                 width: '100%',
                 margin: 0,
+                fontSize: '28px'
             },
             '@media (min-width:600px)': {
                 fontSize: '16px', // for sm screens and up

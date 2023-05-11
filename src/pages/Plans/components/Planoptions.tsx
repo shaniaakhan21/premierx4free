@@ -4,7 +4,6 @@ import 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from 'react-bootstrap';
 import { useState } from 'react';
-import React from 'react';
 
 function TeamInfo(): JSX.Element {
   const { classes } = useStyles();
@@ -37,7 +36,7 @@ function TeamInfo(): JSX.Element {
   return (
     <div className={classes.containspage}>
         <div className={classes.container1}>
-            <div className={classes.col} >
+            <div className={ `${classes.col} ${classes.firstCol}`}>
                 <div className={`${classes.row} ${classes.borderNo}`}><h6 style={{ opacity:0}}>Hi</h6></div>
                 <div className={classes.row}><h6 className={classes.h6}>Telehealth Included</h6></div>
                 <div className={classes.row}><h6 className={classes.h6}>No Fee Telehealth Doctor Consulations</h6></div>
@@ -46,7 +45,7 @@ function TeamInfo(): JSX.Element {
                 <div className={classes.row}><h6 className={classes.h6}>NSURx Prescription Discount Card</h6></div>
                 <div className={classes.row}><h6 className={classes.h6}>Dedicated Pharmacy With Nationwide Delivery</h6></div>
             </div>
-            <div  className={classes.col}  onMouseEnter={() => handleMouseEnter('premium')}  onMouseLeave={() => handleMouseLeave('premium')}>
+            <div  className={`${classes.col} ${classes.secondcol}`}  onMouseEnter={() => handleMouseEnter('premium')}  onMouseLeave={() => handleMouseLeave('premium')}>
                 <div className={classes.row}><h6 className={classes.h6} style={{ fontWeight:'bold'}}>Premium Pack</h6></div>
                 <div className={`${classes.row} ${classes.borderNo}`}><h6><FontAwesomeIcon icon="check" className={classes.check} /></h6></div>
                 <div className={`${classes.row} ${classes.borderNo}`}><h6><FontAwesomeIcon icon="check" className={classes.check} /></h6></div>

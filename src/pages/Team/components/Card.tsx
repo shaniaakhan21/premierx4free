@@ -31,6 +31,9 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     fontFamily: 'Nunito Sans',
     color: '#136DA7',
+    ['@media screen and (max-width: 600px)']: {
+			marginBottom: '2%',
+		},
   },
   text: {
     marginTop: theme.spacing(2),
@@ -40,7 +43,10 @@ const useStyles = makeStyles((theme) => ({
     padding: '4% 17%',
     background: '#64B5F6',
     borderRadius: 0,
-    boxShadow: 'none'
+    boxShadow: 'none',
+    ['@media screen and (max-width: 600px)']: {
+			padding: '3% 12%',
+		},
   },
 
   buttonMargin: {

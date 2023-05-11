@@ -23,7 +23,7 @@ const useStyles = makeStyles()(() => ({
         marginTop: '3%!important',
         paddingRight: '8%!important',
         '@media (max-width:600px)': {
-            padding: '3% 8%!important'
+            padding: '3% 8% 3% 11%!important'
         },
         
         h1: {
@@ -36,8 +36,9 @@ const useStyles = makeStyles()(() => ({
             fontSize: '30px', // default for xs screens
             '@media (max-width:600px)': {
                 textAlign: 'left',
-                width:'70%',
+                width:'99%',
                 margin:0,
+                fontSize: '28px'
             },
             '@media (min-width:600px)': {
                 fontSize: '16px', // for sm screens and up

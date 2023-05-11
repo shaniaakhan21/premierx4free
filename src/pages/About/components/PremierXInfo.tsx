@@ -109,7 +109,11 @@ const useStyles = makeStyles()(() => ({
 		p: {
 			fontSize: '22px',
 			fontWeight: '100',
-			color: '#ffffffd2'
+			color: '#ffffffd2',
+			'@media screen and (max-width: 600px)': {
+				fontSize: '17px'
+			}
+
 		},
 		h3: {
 			fontWeight: '900',
