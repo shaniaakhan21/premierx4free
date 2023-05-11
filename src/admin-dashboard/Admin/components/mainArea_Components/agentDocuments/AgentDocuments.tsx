@@ -1,5 +1,5 @@
-import { makeStyles } from '../../../../utils/makeStyles';
-import {agentData} from './customData'
+import { makeStyles } from '../../../../../utils/makeStyles';
+import {agentData} from '../customData'
 import TableRow from './TableRow';
 
 function AgentDocuments():JSX.Element{

@@ -1,4 +1,4 @@
-import { makeStyles } from '../../../../utils/makeStyles';
+import { makeStyles } from '../../../../../utils/makeStyles';
 
 interface agentData {
     agentCalculationData:any

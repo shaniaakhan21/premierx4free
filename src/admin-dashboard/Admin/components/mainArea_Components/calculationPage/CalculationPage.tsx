@@ -1,10 +1,10 @@
-import { makeStyles } from '../../../../utils/makeStyles';
+import { makeStyles } from '../../../../../utils/makeStyles';
 import Button from 'react-bootstrap/Button';
-import {agentData} from './customData'
+import {agentData} from '../customData'
 import Table from 'react-bootstrap/Table';
 import CalculationPageSecondTable from './CalculationPageSecondTable';
 import CalculationPageFirstTable from './CalculationPageFirstTable';
-import { agentCalculationData } from './customData';
+import { agentCalculationData } from '../customData';
 import { useEffect, useState } from 'react';
 
 function CalculationPage(): JSX.Element{

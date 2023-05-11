@@ -1,27 +1,23 @@
-import { makeStyles } from '../../../utils/makeStyles';
-import Logo from '../../../components/Logo';
+import { makeStyles } from '../../../../utils/makeStyles';
+import Logo from '../../../../components/Logo';
 import { Height } from '@material-ui/icons';
 import { BorderRight } from '@mui/icons-material';
 import { color, fontFamily } from '@mui/system';
 import * as React from 'react';
 
 interface event {
-    eventNumber:number,
-    setEventNumber:any,
-    sidebarToggle:boolean,
-    setSidebarToggle:any
+    eventNumber:number
+    setEventNumber:any
 }
-function SidebarMobile(props:event):JSX.Element{
+function Sidebar(props:event):JSX.Element{
     const {eventNumber,setEventNumber} = props
     const {classes} = useStyles()
     return(
-        
-            
         <div className={classes.sidebar_mainContainer}>
             <div className={classes.sidebar_topRectangle}>
-                {/* <div className={classes.topRectangle_logo}>
+                <div className={classes.topRectangle_logo}>
                     <img src='/assets/svg/logo_bold.svg' className={classes.logo} />
-                </div> */}
+                </div>
                 <div className={classes.topRectangle_displayImage}>
                     <img src='/assets/svg/Dashboard/dummy.svg' className={classes.displayImage} />
                 </div>
@@ -48,10 +44,6 @@ function SidebarMobile(props:event):JSX.Element{
                             <img src='/assets/svg/setting.svg' className={classes.navigation_img}/>
                             <p>Settings</p>
                         </div>
-                        <div className={classes.navigation_li} onClick={() => {setEventNumber(4)}}>
-                            <img src='/assets/svg/logout.svg' className={classes.navigation_img}/>
-                            <p>Logout</p>
-                        </div>
             </div>
         </div>
     )
@@ -59,7 +51,7 @@ function SidebarMobile(props:event):JSX.Element{
 
 const useStyles = makeStyles() (() => ({
     sidebar_mainContainer:{
-        width:"100%",
+        width:"275px",
         borderRight:"1px solid #D6D9DB"
     },
     sidebar_topRectangle:{
@@ -150,4 +142,4 @@ const useStyles = makeStyles() (() => ({
     }
 }))
 
-export default SidebarMobile
+export default Sidebar

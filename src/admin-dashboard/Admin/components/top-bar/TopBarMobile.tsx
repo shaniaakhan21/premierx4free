@@ -1,6 +1,6 @@
 
 import { padding } from '@mui/system'
-import { makeStyles } from '../../../utils/makeStyles'
+import { makeStyles } from '../../../../utils/makeStyles'
 
 interface props {
     sidebarToggle:boolean,

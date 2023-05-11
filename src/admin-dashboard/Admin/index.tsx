@@ -1,8 +1,8 @@
 import { makeStyles } from '../../utils/makeStyles';
-import Sidebar from './components/Sidebar'
+import Sidebar from './components/sidebar/Sidebar'
 import MainArea from './components/MainArea';
-import TopBarMobile from './components/TopBarMobile';
-import SidebarMobile from './components/SidebarMobile';
+import TopBarMobile from './components/top-bar/TopBarMobile';
+import SidebarMobile from './components/sidebar/SidebarMobile';
 import { useState } from 'react';
 import './index.css'
 
