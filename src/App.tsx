@@ -6,8 +6,9 @@ import createCache from '@emotion/cache';
 import theme from './theme';
 import AppRouter from './routes';
 import TaggingService from './utils/TaggingService';
-import  './components/FontawesomeIcons';
+import './components/FontawesomeIcons';
 import '@fontsource/nunito-sans';
+import CookieBanner from './components/cookie';
 
 export const muiCache = createCache({
   key: 'premierx-theme',
@@ -26,6 +27,7 @@ function App() {
       <CacheProvider value={muiCache}>
         <ThemeProvider theme={theme}>
           <BrowserRouter>
+            <CookieBanner />
             <AppRouter />
           </BrowserRouter>
         </ThemeProvider>
