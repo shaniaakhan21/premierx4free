@@ -90,3 +90,45 @@
 {
     width: 100%;
 }
+
+@media only screen and (max-width:600px)
+{
+    .modal{
+        --bs-modal-width:378px;
+        --bs-modal-height:209px;
+        --bs-modal-border-radius:20px;
+    }
+    /* .modalTrashIcon{
+        margin:49px 35% 0 ;
+    } */
+    .replace_save_button
+    {
+    padding: 9px 39px 9px 40px;
+    }
+    .replace_cancel_button
+    {
+    padding: 9px 39px 9px 40px;
+    }
+    .replaceModal_content{
+        display: flex;
+        flex-direction: column;
+        gap:29px;
+        margin-top: 24px;
+        color: #667B8B;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 21.82px;
+        /* justify-content: center; */
+    }
+    .modal-heading{
+        font-weight: 600px;
+        font-size: 19px;
+        line-height: 30px;
+        color: #000000;
+        /* font-family: 'Nunito Sans'; */
+    }
+    .uploadFile_form_button{
+        font-size: 16px;
+    }
+    
+}

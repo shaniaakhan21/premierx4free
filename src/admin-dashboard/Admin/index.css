@@ -27,7 +27,7 @@
         opacity: 1;
         height: 100vh;
         border-right:1px solid #D6D9DB;
-        width: 361px;
+        width: 80%;
         z-index: 1;
     }
 }

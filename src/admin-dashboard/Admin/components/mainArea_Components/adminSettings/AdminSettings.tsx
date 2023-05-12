@@ -98,7 +98,7 @@ function AdminSettings(): JSX.Element {
                             </Form.Group>
                         </div>
                     </div>
-                    <div className='form-box-buttonContainer'>
+                    <div className='form-box-buttonContainer d-flex justify-content-end'>
                         <div>
                             <button className='form-box-cancelButton'  onClick={() => {}}>
                                 Cancel

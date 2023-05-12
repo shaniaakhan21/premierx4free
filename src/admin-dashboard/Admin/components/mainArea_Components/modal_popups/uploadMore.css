@@ -112,3 +112,43 @@
     color: #000000;
     /* font-family: 'Nunito Sans'; */
 }
+
+@media only screen and (max-width:600px)
+{
+    .uploadDocument_form_button {
+        background-color: #64B5F6;
+        border-radius: 0 6px 6px 0px;
+        text-align: center;
+        color: #FFFFFF;
+        padding: 9px 12px 8px 12px;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 24.55px;
+        width:80%
+    }
+    .modal{
+        --bs-modal-width:378px;
+        --bs-modal-height:209px;
+        --bs-modal-border-radius:20px;
+    }
+    .uploadMore_save_button
+    {
+    padding: 9px 56px 9px 56px;
+    }
+    .uploadMore_cancel_button
+    {
+    padding: 9px 56px 9px 56px;
+    }
+    .modal-content{
+        margin-top: 150px;
+    }
+    .modal_button_container
+    {
+        margin-bottom: 29px;
+    }
+    .uploadFile_span
+    {
+        font-size: 14px;
+    }
+   
+}

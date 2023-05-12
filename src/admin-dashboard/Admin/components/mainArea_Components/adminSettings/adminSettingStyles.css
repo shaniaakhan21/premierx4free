@@ -3,9 +3,10 @@
 }
 
 .profile-position{
-    position: relative;
+    /* position: relative;
     top: 27px;
-    left: 27px;
+    left: 27px; */
+    width: min-content;
     margin-right: 4%;
 }
 .card-container
@@ -50,6 +51,9 @@
 }
 
 .mainBox .img-in-circle{
+    /* position: absolute;
+    top: 0;
+    right: 0; */
     width: 145PX;
     height: 145PX;
     filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.25));
@@ -83,10 +87,11 @@
 
 .mainBox .edit-icon{
     position: absolute;
-    top: 0;
-    left: 80px;
+    top: 50%;
+    /* bottom:100%; */
+    right: 2%;
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
     background-color: transparent;
     display: flex;
     align-items: flex-end;
@@ -103,10 +108,10 @@
 }
 
 .form-box-buttonContainer{
-    display: flex;
+    /* display: flex;
     flex-direction: row;
-    justify-content: flex-end;
-    margin:51px 31px 36px 31px;
+    justify-content: flex-end;*/
+    margin:51px 31px 36px 31px; 
 }
 
 .mainBox{
@@ -191,4 +196,64 @@ background: #64B5F6;
 border-radius: 10px;
 padding: 15px 61px;
 margin-left: 18px;
+}
+
+@media only screen and (max-width:600px)
+{
+    .mainBox{
+        width: 100%;
+    }
+    .settings-container{
+        margin:0;
+    }
+    .profile-position{
+        position: relative;
+        top: 0;
+        left: 0;
+        margin-left: 8%;
+    }
+    .card-container {
+            /* position: relative;
+        top:27px;
+        left:175px; */
+            padding: 0;
+            text-align: center;
+        }
+        .mainBox .img-in-circle{
+            width: 84PX;
+            height: 84PX;
+        }
+        .mainBox .edit-icon button{
+            width: 24.87px;
+            height: 25px;
+        }
+        .mainBox .edit-icon{
+            /* position: absolute; */
+            right:2%;
+
+        }
+        .form-box-cancelButton{
+            
+            padding: 7px 42px;
+            }
+            
+            .form-box-saveButton{
+           
+            padding: 7px 42px;
+            
+            }
+            .form-box-buttonContainer{
+                text-align: center;
+                margin:51px 5px 36px 0px; 
+            }
+            .form-box-field {
+                margin: 33px 15px 0 17px;
+            }
+            
+            .form-box-field-top {
+                margin: 18px 16px 0 17px;
+            }
+    /* .col-3{
+        width:0
+    } */
 }
