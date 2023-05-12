@@ -35,7 +35,7 @@ function UploadMoreModal(props:modalvars):JSX.Element {
                     <label className='formLabel'> Upload Documents</label>
                       <div className='uploadDocument_form_container'>
                           <input className='uploadDocument_form_input' />
-                          <div className='uploadDocument_form_button'><span className='uploadFile_span'>Upload File</span></div>
+                          <div className='uploadDocument_form_button'>Upload File</div>
                       </div>
                     </div>
 

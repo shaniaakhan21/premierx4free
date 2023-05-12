@@ -52,32 +52,3 @@
     color: #FFFFFF;
     border:none;
 }
-
-@media only screen and (max-width:600px)
-{
-    .modal{
-        --bs-modal-width:378px;
-        --bs-modal-height:209px;
-        --bs-modal-border-radius:20px;
-    }
-    .modalTrashIcon{
-        width: initial;
-        height: initial;
-        margin:25px 25% 0 ;
-    }
-    .yes_button
-    {
-    padding: 9px 56px 9px 56px;
-    }
-    .no_button
-    {
-    padding: 9px 56px 9px 56px;
-    }
-    .modal-content{
-        margin-top: 150px;
-    }
-    .modal_button_container
-    {
-        margin-bottom: 29px;
-    }
-}

@@ -1,18 +1,16 @@
 import { makeStyles } from '../../../../../utils/makeStyles';
 interface agentData {
-    agentCalculationData:any,
-    table:number,
-    setTable:any
+    agentCalculationData:any
 }
 function CalculationPageSecondTable (props:agentData) : JSX.Element{
     const {classes} = useStyles()
-    const {agentCalculationData,setTable} = props
+    const {agentCalculationData} = props
     console.log("integralTable",agentCalculationData[0]?.integralTable)
     return(
         <>
         <div className={classes.calculationPage_heading}>
             <p className={classes.calculationPage_headingText}>Calculation</p>
-            <button className={classes.calculationPage_headingButton} onClick={() => {setTable(1)}}>Back</button>
+            <button className={classes.calculationPage_headingButton}>Back</button>
             </div>
             <div className={classes.calculationPage_tableContainer}>
 
@@ -87,15 +85,13 @@ const useStyles = makeStyles() (() =>({
         border:"1px solid #D6D9DB",
        // borderBottom:"0",
         //borderTop:"0",
-        borderRight:"0px",
         borderRadius:"10px",
-        overflow:"auto",
     },
     calculationPage_table:{
        border:"1px solid #D6D9DB",
        width:"100%",
        borderRadius:"10px",
-       overflow:"auto"
+       overflow:"hidden"
        //borderCollapse:"separate"
     },
     table_header:{
@@ -112,8 +108,7 @@ const useStyles = makeStyles() (() =>({
         fontSize:"20px",
         lineHeight:"27.28px",
         color:"#000000",
-        padding:"23px 0px 20px 20px",
-        minWidth:"200px"
+        padding:"23px 0 20px 0"
     },
     table_headingText_first:{
         fontFamily:"Nunito Sans",
@@ -121,8 +116,7 @@ const useStyles = makeStyles() (() =>({
         fontSize:"20px",
         lineHeight:"27.28px",
         color:"#000000",
-        padding:"23px 0px 20px 20px",
-        minWidth:"200px"
+        padding:"23px 0 20px 20px"
     },
     table_row:{
         border:"1px solid #D6D9DB",
@@ -136,8 +130,7 @@ const useStyles = makeStyles() (() =>({
         fontSize:"18px",
         lineHeight:"24.55px",
         color:"#667B8B",
-        padding:"23px 20px 20px 0",
-        minWidth:"200px"
+        padding:"23px 0 20px 0"
     },
     table_data_first:{
         fontFamily:"Nunito Sans",
@@ -145,8 +138,7 @@ const useStyles = makeStyles() (() =>({
         fontSize:"18px",
         lineHeight:"24.55px",
         color:"#667B8B",
-        padding:"23px 20px 20px 20px",
-        minWidth:"200px"
+        padding:"23px 0 20px 20px"
     }
 }))
 
