@@ -2,4 +2,15 @@
     background: linear-gradient(353deg, #64B5F6 1.82%, #0556A7 100%);
     padding: 16px 44px;
     border-right: 1px solid #D6D9DB;
+    display: block;
+
+    @media (max-width: 768px) {
+        display: none;
+    }
+}
+
+.main-div{
+    @media (max-width: 400px) {
+        overflow-x:hidden;
+    }
 }

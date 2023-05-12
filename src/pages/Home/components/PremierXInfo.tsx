@@ -46,7 +46,7 @@ const useStyles = makeStyles()(() => ({
 	title: {
 		color: "#FFFFFF",
 		fontSize: 24,
-		['@media screen and (max-width: 600px)']: {
+		['@media screen and (max-width: 768px)']: {
 			paddingLeft: '2%',
 		},
 	},

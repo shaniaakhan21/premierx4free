@@ -18,7 +18,7 @@ const useStyles = makeStyles() (() => ({
         flexDirection:"row-reverse",
         boxShadow:"1px 0px 34px rgba(0, 0, 0, 0.15)",
         background:"#FFFFFF",
-        '@media(max-width: 600px)':{
+        '@media(max-width: 768px)':{
                 display:"none",
         }
     },

@@ -57,7 +57,7 @@ const useStyles = makeStyles() (() => ({
     },
     agentTable:{
         margin:"25px 59px 0 0",
-        '@media(max-width: 600px)':{
+        '@media(max-width: 768px)':{
             display:"none",
     }
         // backgroundColor:"yellow"

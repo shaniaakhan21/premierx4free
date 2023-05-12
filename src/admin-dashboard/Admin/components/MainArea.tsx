@@ -83,7 +83,7 @@ const useStyles = makeStyles() (() => ({
         }
     },
     agentHeader:{
-        '@media(max-width:600px)':{
+        '@media(max-width:768px)':{
             display:"none"
         }
     }

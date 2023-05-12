@@ -23,7 +23,7 @@ const useStyles = makeStyles(() => ({
     paddingRight: '2%',
     marginTop: '0%',
     flexWrap: 'wrap',
-    ['@media (min-width: 600px)']: {
+    ['@media (min-width: 768px)']: {
       gap: 2,
     },
     ['@media (min-width: 960px)']: {

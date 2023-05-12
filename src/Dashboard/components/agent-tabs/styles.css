@@ -1,12 +1,12 @@
-.nav-item a{
-    border-radius: 0!important;
-    color: #667B8B!important;
-    display: flex!important;
-    padding-left: 12%!important;
-    flex-direction: row!important;
-    font-size: 16px!important;
-    justify-content: flex-start!important;
-    align-items: center!important;
+.nav-item a {
+    border-radius: 0 !important;
+    color: #667B8B !important;
+    display: flex !important;
+    padding-left: 12% !important;
+    flex-direction: row !important;
+    font-size: 16px !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
     padding: 6% 6% 5% 6%;
 }
 
@@ -14,36 +14,50 @@
     padding-right: 6%;
 }
 
-.tab-contains{
-    padding: 0!important;
+.tab-contains {
+    padding: 0 !important;
     border-right: 1px solid #D6D9DB;
 }
 
-.nav{
-    flex-wrap: nowrap!important;
+.nav {
+    flex-wrap: nowrap !important;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link{
-    background-color: #F4F6F8!important;
-    color: black!important;
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+    background-color: #F4F6F8 !important;
+    color: black !important;
 }
 
-.phone-row{
+.phone-row {
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
-    padding: 2%;
+    padding: 6% 6% 1% 6%;
+    display: none;
+
+    @media (max-width: 768px) {
+        display: flex;
+    }
 }
 
-.phone-logo{
+.phone-logo {
     width: 57%;
     padding: 3%;
 }
 
-.phone-hamburger{
-    width: 15%;
+.phone-hamburger {
+    width: 19%;
 }
 
-.phone-hamburger img{
+.phone-hamburger img {
     width: 100%;
+}
+
+.mobile-hide{
+    display: block;
+
+    @media (max-width: 768px) {
+        display:none;
+    }
 }

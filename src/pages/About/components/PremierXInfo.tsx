@@ -71,15 +71,15 @@ const useStyles = makeStyles()(() => ({
 		fontSize: '33px',
 		fontWeight: '700',
 		lineHeight: 1.2,
-		'@media screen and (max-width: 600px)': {
+		'@media screen and (max-width: 768px)': {
 			fontSize: 27,
 		},
 	},
 	columns: {
-		margin: '2.5% 28% 0',
+		margin: '2.5% 16% 0',
 		display: 'flex',
 		flexWrap: 'wrap',
-		'@media screen and (max-width: 600px)': {
+		'@media screen and (max-width: 768px)': {
 			flexDirection: 'column',
 			margin: '5%',
 		},
@@ -101,7 +101,7 @@ const useStyles = makeStyles()(() => ({
 		background: 'linear-gradient(210deg, #64B5F6 1.82%, #0556A7 100%)',
 		flexDirection: 'column',
 		flexWrap: 'nowrap',
-		'@media screen and (max-width: 600px)': {
+		'@media screen and (max-width: 768px)': {
 			padding: '5% 3%!important',
 			margin: '13%!important',
 			width: '100%!important'
@@ -109,7 +109,11 @@ const useStyles = makeStyles()(() => ({
 		p: {
 			fontSize: '22px',
 			fontWeight: '100',
-			color: '#ffffffd2'
+			color: '#ffffffd2',
+			'@media screen and (max-width: 768px)': {
+				fontSize: '17px'
+			}
+
 		},
 		h3: {
 			fontWeight: '900',

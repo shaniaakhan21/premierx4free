@@ -30,7 +30,7 @@ const useStyles = makeStyles()(() => ({
 		['@media screen and (min-width: 1280px)']: {
 			width: 240
 		},
-		['@media screen and (min-width: 1600px)']: {
+		['@media screen and (min-width: 1768px)']: {
 			width: 270,
 		},
 		['@media screen and (min-width: 1930px)']: {
@@ -180,7 +180,7 @@ const useStyles = makeStyles()(() => ({
 		['@media screen and (min-width: 1280px)']: {
 			width: 360
 		},
-		['@media screen and (min-width: 1600px)']: {
+		['@media screen and (min-width: 1768px)']: {
 			width: 400
 		},
 		['@media screen and (min-width: 1930px)']: {

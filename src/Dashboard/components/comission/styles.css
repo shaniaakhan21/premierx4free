@@ -1,5 +1,9 @@
   .box-main-commission {
     padding: 2% 3% 0;
+
+    @media (max-width: 400px) {
+      padding: 6% !important;
+    }
   }
 
   .box-main-commission .textCustom {
@@ -8,7 +12,7 @@
     line-height: 33px;
     font-family: "Nunito Sans";
   
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       font-size: 20px!important;
     }
   }
@@ -23,8 +27,12 @@
     border-color: #F4F6F8;
     margin: 0 !important;
     
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       width: 200%;
+    }
+
+    @media (max-width: 400px) {
+      width: 370%;
     }
   }
 
@@ -45,7 +53,7 @@
     color: #667B8B;
     font-size: 15px;
     
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       font-size: 13px;
     }
   }
@@ -57,7 +65,7 @@
     padding: 1% 1% 1% 8px !important;
 
     
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       font-size: 16px !important;
       font-weight: 500 !important;
       line-height: 18px !important;
@@ -93,15 +101,17 @@
     left: 62rem;
     top: 33px;
 
-    @media (max-width: 600px) {
+    @media (max-width: 1000px) {
       left: 0rem;
       width: 33%;
       padding: 0px 11px;
+      display: none;
     }
+
   }
 
   .box-main-commission .tab-options img {
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       width: 30%;
     }
   }
@@ -114,7 +124,7 @@
 
   .box-main-commission .tab-options span {
     margin-left: 5px;
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       font-size:10px!important;
     }
   }
@@ -126,7 +136,7 @@
 
   .box-main-commission .sort-arrows img {
     padding-top: 2px;
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       width: 70%;
     }
   }
@@ -134,7 +144,7 @@
   .box-main-commission .box-it {
     display: flex;
     flex-direction: row;
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       justify-content: space-between;
     }
   }

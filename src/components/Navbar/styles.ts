@@ -6,8 +6,9 @@ const useStyles = makeStyles()(() => ({
 		padding:'1%!important',
 		maxWidth: '100%!important',
 		margin: '0 15%!important',
-		'@media (max-width:600px)': {
+		'@media screen and (max-width: 768px)': {
 			padding:'4%!important',
+			margin: '0 1%!important'
 		},
 	  },
 	  logoContainer: {
@@ -27,7 +28,7 @@ const useStyles = makeStyles()(() => ({
 		['@media screen and (min-width: 1280px)']: {
 		  width: 170,
 		},
-		['@media screen and (min-width: 1600px)']: {
+		['@media screen and (min-width: 1768px)']: {
 		  width: 200,
 		},
 		['@media screen and (min-width: 1930px)']: {
