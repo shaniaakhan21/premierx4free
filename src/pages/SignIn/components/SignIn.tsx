@@ -20,16 +20,16 @@ function SignIn(): JSX.Element {
         e.preventDefault();
 
         try {
-            const response = await fetch("http://localhost:8000/signin", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email, password }) });
+            const response = await fetch("http://localhost:4000/api/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email, password }) });
             const result = await response.json();
 
-            if (result === "exists") {
+            if (response.ok && result.message === 'Login successful') {
                 // login successful, redirect to home page
-                history("/");
-            } else {
+                history('/');
+              } else {
                 // login failed, show error message
-                setErrorMsg("Invalid email or password");
-            }
+                setErrorMsg('Invalid email or password');
+              }              
         } catch (error) {
             console.error("Error:", error);
             setErrorMsg("An error occurred, please try again later.");
