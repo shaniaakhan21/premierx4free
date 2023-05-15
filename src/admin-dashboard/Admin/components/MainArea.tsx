@@ -8,7 +8,7 @@ import {useEffect, useState} from 'react';
 import MarketingMaterials from './mainArea_Components/marketingMaterials/MarketingMaterials';
 import * as React from 'react';
 import AgentHeader from '../../../Dashboard/components/agent-header/AgentHeader';
-import MarketinMaterialsMobile from './mainArea_Components/marketingMaterials/MarketingMaterialsMobile';
+// import MarketinMaterialsMobile from './mainArea_Components/marketingMaterials/MarketingMaterialsMobile';
 import TopBar from './top-bar/TopBar'
 import MarketingMaterialsMobile from './mainArea_Components/marketingMaterials/MarketingMaterialsMobile';
 import './mainArea.css'

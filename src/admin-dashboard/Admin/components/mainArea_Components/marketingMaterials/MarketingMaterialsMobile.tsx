@@ -40,9 +40,11 @@ function MarketingMaterialsMobile():JSX.Element{
                     <p className={classes.heading_text}>Elevator Pitch for Prospect Clients</p>
                     <p onClick={() => {setElevatorPitchToggle(!elevatorPitchToggle)}}><a href='#' className={classes.heading_link}>View More</a></p>
                 </div>
-
+                
+                <div className='contentContainer'>
                 <Row className={classes.contentContainer_row}>
-                <Col lg={containerWidth} sm={6} xs={6}  className={classes.containerContent_contentUnit}>
+                
+                <Col lg={containerWidth} sm={6} xs={6}  className={classes.containerContent_contentUnit} style={{padding:0}} >
                     <div className={classes.contentUnit_buttons}>
                         <div className={classes.delete_button} onClick={() => {setRemoveModalOpen(true)}}>
                             <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image} />
@@ -63,7 +65,7 @@ function MarketingMaterialsMobile():JSX.Element{
                 </Col>
                 { elevatorPitchToggle ?
                     <>
-                <Col lg={containerWidth} sm={6} xs={6} className={classes.containerContent_contentUnitPyramid}>
+                <Col lg={containerWidth} sm={6} xs={6} className={classes.containerContent_contentUnitPyramid} style={{padding:0}} >
                     <div className={classes.contentUnit_buttons}>
                         <div className={classes.delete_button} onClick={() => {setRemoveModalOpen(true)}}>
                             <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image}/>
@@ -76,7 +78,7 @@ function MarketingMaterialsMobile():JSX.Element{
                     </div>
                 </Col>
 
-                <Col lg={containerWidth} sm={6} xs={6} className={classes.containerContent_contentUnitPdfPpt}>
+                <Col lg={containerWidth} sm={6} xs={6} className={classes.containerContent_contentUnitPdfPpt} style={{padding:0}} >
                     <img src='/assets/svg/Dashboard/pdf-icon.png' className={classes.containerContent_PdfPptIcon} />
                     <div className={classes.contentUnit_buttons}>
                         <div className={classes.delete_button} onClick={() => {setRemoveModalOpen(true)}}>
@@ -90,7 +92,7 @@ function MarketingMaterialsMobile():JSX.Element{
                     </div>
                 </Col>
 
-                <Col lg={containerWidth} sm={6} xs={6} className={classes.containerContent_contentUnitPdfPpt}>
+                <Col lg={containerWidth} sm={6} xs={6} className={classes.containerContent_contentUnitPdfPpt} style={{padding:0}} >
                     <img src='/assets/svg/Dashboard/ppt-icon.png' className={classes.containerContent_PdfPptIcon} />
                     <div className={classes.contentUnit_buttons}>
                         <div className={classes.delete_button} onClick={() => {setRemoveModalOpen(true)}}>
@@ -109,6 +111,7 @@ function MarketingMaterialsMobile():JSX.Element{
 
             </Row>
             </div>
+            </div>
 
 
 
@@ -119,9 +122,9 @@ function MarketingMaterialsMobile():JSX.Element{
                     <p className={classes.heading_text}>Prospect Reps</p>
                     <p onClick={() => { setProspectRepsToggle(!prospectRepsToggle) }}><a href='#' className={classes.heading_link}>View More</a></p>
                 </div>
-
+                <div className='contentContainer'>
                 <Row className={classes.contentContainer_row}>
-                    <Col lg={containerWidth} sm={6} xs={6} className={classes.containerContent_contentUnit}>
+                    <Col lg={containerWidth} sm={6} xs={6} className={classes.containerContent_contentUnit} style={{padding:0}} >
                         <div className={classes.contentUnit_buttons}>
                             <div className={classes.delete_button} onClick={() => { setRemoveModalOpen(true) }}>
                                 <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image} />
@@ -142,7 +145,7 @@ function MarketingMaterialsMobile():JSX.Element{
                     </Col>
                     {prospectRepsToggle ?
                         <>
-                            <Col lg={containerWidth} sm={6} xs={6} className={classes.containerContent_contentUnitPyramid}>
+                            <Col lg={containerWidth} sm={6} xs={6} className={classes.containerContent_contentUnitPyramid} style={{padding:0}} >
                                 <div className={classes.contentUnit_buttons}>
                                     <div className={classes.delete_button} onClick={() => { setRemoveModalOpen(true) }}>
                                         <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image} />
@@ -155,7 +158,7 @@ function MarketingMaterialsMobile():JSX.Element{
                                 </div>
                             </Col>
 
-                            <Col lg={containerWidth} sm={6} xs={6} className={classes.containerContent_contentUnitPdfPpt}>
+                            <Col lg={containerWidth} sm={6} xs={6} className={classes.containerContent_contentUnitPdfPpt} style={{padding:0}} >
                                 <img src='/assets/svg/Dashboard/pdf-icon.png' className={classes.containerContent_PdfPptIcon} />
                                 <div className={classes.contentUnit_buttons}>
                                     <div className={classes.delete_button} onClick={() => { setRemoveModalOpen(true) }}>
@@ -169,7 +172,7 @@ function MarketingMaterialsMobile():JSX.Element{
                                 </div>
                             </Col>
 
-                            <Col lg={containerWidth} sm={6} xs={6} className={classes.containerContent_contentUnitPdfPpt}>
+                            <Col lg={containerWidth} sm={6} xs={6} className={classes.containerContent_contentUnitPdfPpt} style={{padding:0}} >
                                 <img src='/assets/svg/Dashboard/ppt-icon.png' className={classes.containerContent_PdfPptIcon} />
                                 <div className={classes.contentUnit_buttons}>
                                     <div className={classes.delete_button} onClick={() => { setRemoveModalOpen(true) }}>
@@ -187,6 +190,7 @@ function MarketingMaterialsMobile():JSX.Element{
 
 
                 </Row>
+                </div>
             </div>
 
 
@@ -197,9 +201,10 @@ function MarketingMaterialsMobile():JSX.Element{
                     <p className={classes.heading_text}> Prospect Clients</p>
                     <p onClick={() => { setProspectClientToggle(!prospectClientToggle) }}><a href='#' className={classes.heading_link}>View More</a></p>
                 </div>
-
-                <Row className={classes.contentContainer_row}>
-                    <Col lg={containerWidth} sm={6} xs={6} className={classes.containerContent_contentUnit}>
+                <div className='contentContainer'>
+                <Row className={classes.contentContainer_row} >
+                    <Col lg={containerWidth} sm={6} xs={6} className={classes.containerContent_contentUnit} style={{padding:0}} >
+                    
                         <div className={classes.contentUnit_buttons}>
                             <div className={classes.delete_button} onClick={() => { setRemoveModalOpen(true) }}>
                                 <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image} />
@@ -220,7 +225,7 @@ function MarketingMaterialsMobile():JSX.Element{
                     </Col>
                     {prospectClientToggle ?
                         <>
-                            <Col lg={containerWidth} sm={6} xs={6} className={classes.containerContent_contentUnitPyramid}>
+                            <Col lg={containerWidth} sm={6} xs={6} className={classes.containerContent_contentUnitPyramid} style={{padding:0}}  >
                                 <div className={classes.contentUnit_buttons}>
                                     <div className={classes.delete_button} onClick={() => { setRemoveModalOpen(true) }}>
                                         <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image} />
@@ -233,7 +238,7 @@ function MarketingMaterialsMobile():JSX.Element{
                                 </div>
                             </Col>
 
-                            <Col lg={containerWidth} sm={6} xs={6} className={classes.containerContent_contentUnitPdfPpt}>
+                            <Col lg={containerWidth} sm={6} xs={6} className={classes.containerContent_contentUnitPdfPpt} style={{padding:0}}  >
                                 <img src='/assets/svg/Dashboard/pdf-icon.png' className={classes.containerContent_PdfPptIcon} />
                                 <div className={classes.contentUnit_buttons}>
                                     <div className={classes.delete_button} onClick={() => { setRemoveModalOpen(true) }}>
@@ -247,7 +252,7 @@ function MarketingMaterialsMobile():JSX.Element{
                                 </div>
                             </Col>
 
-                            <Col lg={containerWidth} sm={6} xs={6} className={classes.containerContent_contentUnitPdfPpt}>
+                            <Col lg={containerWidth} sm={6} xs={6} className={classes.containerContent_contentUnitPdfPpt} style={{padding:0}}  >
                                 <img src='/assets/svg/Dashboard/ppt-icon.png' className={classes.containerContent_PdfPptIcon} />
                                 <div className={classes.contentUnit_buttons}>
                                     <div className={classes.delete_button} onClick={() => { setRemoveModalOpen(true) }}>
@@ -265,6 +270,8 @@ function MarketingMaterialsMobile():JSX.Element{
 
 
                 </Row>
+                </div>
+                
             </div>
 
 
@@ -524,7 +531,8 @@ const useStyles = makeStyles() (() => ({
         border:"1px solid #D6D9DB",
         display:"flex",
         flexDirection:"column-reverse",
-        borderRadius:"10px"
+        borderRadius:"10px",
+        width:"47% !important"
 
     },
     containerContent_contentUnitPyramid:{
@@ -537,7 +545,8 @@ const useStyles = makeStyles() (() => ({
         border:"1px solid #D6D9DB",
         display:"flex",
         flexDirection:"column-reverse",
-        borderRadius:"10px"
+        borderRadius:"10px",
+        width:"47% !important"
     },
     containerContent_contentUnitPdfPpt:{
         // background:"url(/assets/svg/Dashboard/pdf-icon.png)",
@@ -551,7 +560,8 @@ const useStyles = makeStyles() (() => ({
         flexDirection:"column",
         justifyContent:"space-between",
         borderRadius:"10px",
-        backgroundColor:"#F8F8F8"
+        backgroundColor:"#F8F8F8",
+        width:"47% !important"
     },
     containerContent_contentUnitUploadMore:{
         // maxWidth:"10px",
@@ -567,7 +577,8 @@ const useStyles = makeStyles() (() => ({
         boxShadow:"0px 0px 34px rgba(125, 141, 148, 0.25)",
         "&:hover":{
             cursor:"pointer"
-        }
+        },
+        width:"47% !important"
     },
     contentUnit_buttons:{
         backgroundColor:"#172D39",

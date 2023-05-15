@@ -51,7 +51,7 @@ function TableRowMobile(props:data):JSX.Element{
                             </Col>
                         </Row>
                     </div>
-                    <div>
+                    <div className={classes.tableExtension_middleRow}>
                     <Row>
                         <Col md={3}>
                             <p className={classes.detailHeading}>First Name <br /> <span className={classes.detailText}>{agentData.firstName}</span></p>
@@ -171,6 +171,9 @@ const useStyles = makeStyles() (() => ({
         borderRadius:"10px 10px 0 0",
         padding:"22px 21px 23px 16px" 
     },
+    tableExtension_middleRow:{
+        paddingLeft:"10px"
+    },
     lastTablerow:{
         display:"flex",
         flexDirection:"row",
@@ -205,6 +208,7 @@ const useStyles = makeStyles() (() => ({
         //padding:"20px",
         fontFamily:"Nunito Sans",
         border:"1px solid #D6D9DB",
+        margin:"0 !important"
        // borderRadius:"10px"
     },
     upload_file:{
@@ -293,7 +297,8 @@ const useStyles = makeStyles() (() => ({
     mobileViewTopRow:{
         backgroundColor:"#F5F5F5",
         border:"1px solid #D6D9DB",
-        color:"#596778"
+        color:"#596778",
+        paddingLeft:"10px"
     }
 }))
 
