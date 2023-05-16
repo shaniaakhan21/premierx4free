@@ -70,7 +70,7 @@ function AgentTabs(): JSX.Element {
         <>
             <Row className='phone-row'>
                 <Col sm="2" lg="12" className='phone-logo'>
-                    <img className="card-img-top" src={"/assets/svg/Dashboard/logo-dash.svg"} alt="Card image cap" />
+                   <a  href='/'><img className="card-img-top" src={"/assets/svg/Dashboard/logo-dash.svg"} alt="Card image cap" /></a> 
                 </Col>
                 <Col sm="1" lg="12" className='phone-hamburger'>
                     <div>
