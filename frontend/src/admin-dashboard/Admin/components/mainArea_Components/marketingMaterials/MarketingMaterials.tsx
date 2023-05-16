@@ -12,6 +12,7 @@ import UploadMoreModal from '../modal_popups/UploadMore';
 import AddCategoryModal from '../modal_popups/AddCategory';
 import * as React from 'react';
 import './marketingMaterials.css'
+import axios from 'axios'
 
 
 function MarketingMaterials():JSX.Element{
@@ -22,13 +23,22 @@ function MarketingMaterials():JSX.Element{
     const [addCategoryModalOpen,setAddCategoryModalOpen] = useState(false)
     const containerWidth = 2
     const containerSm = 6
+    const addCategory = async() => {
+        await axios.post('/api/user/signin')
+        .then((res) => {
+            console.log("result from api is",res)
+        })
+    }
     return(
         <div className={classes.marketing_mainContainer}>
             <p className={classes.mainContainer_heading}>Marketing Materials</p>
 
             <div className={classes.marketing_headerContainer}>
                 <p className={classes.headerContainer_heading}>Upload Documents</p>
-                <button className={classes.headerContainer_button} onClick={() => {setAddCategoryModalOpen(true)}}>+ Add Category</button>
+                <button className={classes.headerContainer_button} onClick={() => {
+                    setAddCategoryModalOpen(true)
+                    addCategory()
+                    }}>+ Add Category</button>
             </div>
 
             <div className={classes.marketing_contentContainer}>
