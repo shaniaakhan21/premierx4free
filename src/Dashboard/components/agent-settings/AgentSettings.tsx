@@ -15,112 +15,109 @@ interface Props {
     onSave: () => void;
 }
 
-
-
 const AgentSettings: React.FC<Props> = ({
-    imageUrl,
-    fullName,
-    email,
-    phone,
-    zip,
-    currentPassword,
-    newPassword,
-    confirmNewPassword,
-    onCancel,
-    onSave,
+  imageUrl,
+  fullName,
+  email,
+  phone,
+  zip,
+  currentPassword,
+  newPassword,
+  confirmNewPassword,
+  onCancel,
+  onSave,
 }) => {
-    return (
-        <div className='settings-main-box'>
-            <span className='textCustom'>Settings</span>
-            <div className="box-with-shadow after-it">
-                <Row className='row-design'>
-                    <Col xs={5} lg={2} className='profile-position' >
-                        <Image className="img-in-circle" src={imageUrl} roundedCircle />
-                        <div className="edit-icon" style={{
+  return (
+    <div className='settings-main-box'>
+      <span className='textCustom'>Settings</span>
+      <div className="box-with-shadow after-it">
+        <Row className='row-design'>
+          <Col xs={5} lg={2} className='profile-position' >
+            <Image className="img-in-circle" src={imageUrl} roundedCircle />
+            <div className="edit-icon" style={{
 
-                        }}>
-                            <button >
-                                <img src='assets/svg/Dashboard/pencil-icon.svg' />
-                            </button>
-                        </div>
-                    </Col>
-
-                    <Col lg={10} className='profile-text'>
-                        <h3 className="card-title">John Smith</h3>
-                        <p className="card-text">johnsmith@gmail.com</p>
-                    </Col>
-
-                </Row>
-                <div className="form-box">
-                    <Row className="form-row">
-                        <Col lg={6} md={6} xs={12} sm={12}>
-                            <Form.Group controlId="fullName">
-                                <Form.Label>Full Name</Form.Label>
-                                <Form.Control type="text" defaultValue={fullName} />
-                            </Form.Group>
-                        </Col>
-                        <Col lg={6} md={6} xs={12} sm={12}>
-                            <Form.Group controlId="email">
-                                <Form.Label>Email Address</Form.Label>
-                                <Form.Control type="email" defaultValue={email} />
-                            </Form.Group>
-                        </Col>
-                    </Row>
-                    <Row className="form-row">
-                        <Col lg={6} md={6} xs={12} sm={12}>
-                            <Form.Group controlId="phone">
-                                <Form.Label>Phone Number</Form.Label>
-                                <Form.Control type="tel" defaultValue={phone} />
-                            </Form.Group>
-                        </Col>
-                        <Col lg={6} md={6} xs={12} sm={12}>
-                            <Form.Group controlId="zip">
-                                <Form.Label>Zip Code</Form.Label>
-                                <Form.Control type="text" defaultValue={zip} />
-                            </Form.Group>
-                        </Col>
-                    </Row>
-                    <div className="bg-section">
-                        <Row className="form-row">
-                            <Col lg={6} md={6} xs={12} sm={12}>
-                                <Form.Group controlId="currentPassword">
-                                    <Form.Label>Current Password</Form.Label>
-                                    <Form.Control type="password" defaultValue={currentPassword} />
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                        <Row className="form-row">
-                            <Col lg={6} md={6} xs={12} sm={12}>
-                                <Form.Group controlId="newPassword">
-                                    <Form.Label>New Password</Form.Label>
-                                    <Form.Control type="password" defaultValue={newPassword} />
-                                </Form.Group>
-                            </Col>
-                            <Col lg={6} md={6} xs={12} sm={12}>
-                                <Form.Group controlId="confirmNewPassword">
-                                    <Form.Label>Confirm Password</Form.Label>
-                                    <Form.Control type="password" defaultValue={confirmNewPassword} />
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                    </div>
-                    <Row className='align-it-end'>
-                        <Col lg={2} className="Btn-Custom">
-                            <Button variant="secondary" type="button" onClick={onCancel}>
-                                Cancel
-                            </Button>
-                        </Col>
-                        <Col lg={2} className="Btn-Custom">
-                            <Button variant="primary" type="submit" onClick={onSave}>
-                                Save
-                            </Button>
-                        </Col>
-                    </Row>
-                </div>
+            }}>
+              <button >
+                <img src='assets/svg/Dashboard/pencil-icon.svg' />
+              </button>
             </div>
-        </div>
-    );
-};
+          </Col>
 
+          <Col lg={10} className='profile-text'>
+            <h3 className="card-title">John Smith</h3>
+            <p className="card-text">johnsmith@gmail.com</p>
+          </Col>
+
+        </Row>
+        <div className="form-box">
+          <Row className="form-row">
+            <Col lg={6} md={6} xs={12} sm={12}>
+              <Form.Group controlId="fullName">
+                <Form.Label>Full Name</Form.Label>
+                <Form.Control type="text" defaultValue={fullName} />
+              </Form.Group>
+            </Col>
+            <Col lg={6} md={6} xs={12} sm={12}>
+              <Form.Group controlId="email">
+                <Form.Label>Email Address</Form.Label>
+                <Form.Control type="email" defaultValue={email} />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row className="form-row">
+            <Col lg={6} md={6} xs={12} sm={12}>
+              <Form.Group controlId="phone">
+                <Form.Label>Phone Number</Form.Label>
+                <Form.Control type="tel" defaultValue={phone} />
+              </Form.Group>
+            </Col>
+            <Col lg={6} md={6} xs={12} sm={12}>
+              <Form.Group controlId="zip">
+                <Form.Label>Zip Code</Form.Label>
+                <Form.Control type="text" defaultValue={zip} />
+              </Form.Group>
+            </Col>
+          </Row>
+          <div className="bg-section">
+            <Row className="form-row">
+              <Col lg={6} md={6} xs={12} sm={12}>
+                <Form.Group controlId="currentPassword">
+                  <Form.Label>Current Password</Form.Label>
+                  <Form.Control type="password" defaultValue={currentPassword} />
+                </Form.Group>
+              </Col>
+            </Row>
+            <Row className="form-row">
+              <Col lg={6} md={6} xs={12} sm={12}>
+                <Form.Group controlId="newPassword">
+                  <Form.Label>New Password</Form.Label>
+                  <Form.Control type="password" defaultValue={newPassword} />
+                </Form.Group>
+              </Col>
+              <Col lg={6} md={6} xs={12} sm={12}>
+                <Form.Group controlId="confirmNewPassword">
+                  <Form.Label>Confirm Password</Form.Label>
+                  <Form.Control type="password" defaultValue={confirmNewPassword} />
+                </Form.Group>
+              </Col>
+            </Row>
+          </div>
+          <Row className='align-it-end'>
+            <Col lg={2} className="Btn-Custom">
+              <Button variant="secondary" type="button" onClick={onCancel}>
+                                Cancel
+              </Button>
+            </Col>
+            <Col lg={2} className="Btn-Custom">
+              <Button variant="primary" type="submit" onClick={onSave}>
+                                Save
+              </Button>
+            </Col>
+          </Row>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default AgentSettings;

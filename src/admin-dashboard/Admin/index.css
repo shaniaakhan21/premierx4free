@@ -1,24 +1,21 @@
-.topBarMobile
-{
-    display:none
+.topBarMobile {
+    display: none
 }
 
-.sidebarMobile{
+.sidebarMobile {
     display: none;
 }
 
-@media only screen and (max-width:768px)
-{
-    .topBarMobile
-    {
-        display:block
+@media only screen and (max-width:768px) {
+    .topBarMobile {
+        display: block
     }
-    .sidebar
-    {
+
+    .sidebar {
         display: none;
     }
-    .sidebarMobile
-    {
+
+    .sidebarMobile {
         display: block;
         position: absolute;
         top: 0;
@@ -26,7 +23,7 @@
         background-color: #FFFFFF;
         opacity: 1;
         height: 100vh;
-        border-right:1px solid #D6D9DB;
+        border-right: 1px solid #D6D9DB;
         width: 361px;
         z-index: 1;
     }

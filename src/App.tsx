@@ -1,6 +1,6 @@
-import { useEffect } from 'react'
-import { BrowserRouter } from 'react-router-dom'
-import { ThemeProvider } from '@mui/material'
+import { useEffect } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from '@mui/material';
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
 import theme from './theme';
@@ -15,12 +15,11 @@ export const muiCache = createCache({
   prepend: true,
 });
 
-
 function App() {
 
   useEffect(() => {
-    TaggingService.init()
-  }, [])
+    TaggingService.init();
+  }, []);
 
   return (
     <div className='App'>
@@ -33,7 +32,7 @@ function App() {
         </ThemeProvider>
       </CacheProvider>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

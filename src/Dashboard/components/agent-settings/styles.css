@@ -10,7 +10,7 @@
     }
 }
 
-.settings-main-box{
+.settings-main-box {
     @media (max-width:400px) {
         padding: 3%;
     }
@@ -142,7 +142,7 @@
     padding: 1% 0;
 }
 
-.bg-section  .form-label{
+.bg-section .form-label {
     color: #758B93;
 }
 

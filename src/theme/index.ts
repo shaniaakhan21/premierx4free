@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material"
+import { createTheme } from '@mui/material';
 
 const theme = createTheme({
   palette: {
@@ -20,6 +20,6 @@ const theme = createTheme({
   typography: {
     fontFamily: 'Nunito Sans'
   }
-})
+});
 
-export default theme
+export default theme;

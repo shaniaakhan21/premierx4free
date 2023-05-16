@@ -1,9 +1,6 @@
-import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Modal from 'react-bootstrap/Modal';
-import { makeStyles } from '../../../../../utils/makeStyles'
-import './removeModal.css'
-import * as React from 'react';
+import './removeModal.css';
 
 interface modalvars {
     removeModalOpen:any
@@ -11,20 +8,12 @@ interface modalvars {
 }
 
 function RemoveModal(props:modalvars):JSX.Element {
-  const [show, setShow] = useState(false);
-  const {classes} = useStyles()
-
-  const {removeModalOpen,setRemoveModalOpen} = props
-
+  const {removeModalOpen,setRemoveModalOpen} = props;
   const handleClose = () => setRemoveModalOpen(false);
-  const handleShow = () => setShow(true);
 
   return (
     <>
       <Modal show={removeModalOpen} onHide={handleClose} animation={false} className='removeModal'>
-        {/* <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header> */}
         <Modal.Body>
           <div>
             <img src='/assets/svg/Dashboard/modal_icon_trash.svg' className='modalTrashIcon' />
@@ -46,23 +35,9 @@ function RemoveModal(props:modalvars):JSX.Element {
           </div>
 
         </Modal.Body>
-        {/* <Modal.Footer className='removeModal_footer'>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer> */}
       </Modal>
     </>
   );
 }
-
-const useStyles = makeStyles() (() => ({
-  removeModal_footer:{
-    // backgroundColor:"teal"
-  },
-}))
 
 export default RemoveModal;

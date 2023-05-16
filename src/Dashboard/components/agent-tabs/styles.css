@@ -54,10 +54,10 @@
     width: 100%;
 }
 
-.mobile-hide{
+.mobile-hide {
     display: block;
 
     @media (max-width: 768px) {
-        display:none;
+        display: none;
     }
 }

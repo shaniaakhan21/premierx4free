@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { Modal, Button } from "react-bootstrap";
-import useStyles from "./styles"
+import { useState } from 'react';
+import { Modal, Button } from 'react-bootstrap';
+import useStyles from './styles';
 
 interface PopupProps {
   show: boolean;
@@ -11,7 +11,7 @@ interface PopupProps {
 }
 
 const Popup = ({ show, onClose, onSave, title, content }: PopupProps) => {
-    const classes = useStyles();
+  const classes = useStyles();
   return (
     <Modal show={show} onHide={onClose} className={classes.classes.boxModal}>
       <Modal.Header className={classes.classes.modalHeader}>
@@ -30,13 +30,10 @@ const Popup = ({ show, onClose, onSave, title, content }: PopupProps) => {
   );
 };
 
-interface AgentSubHeaderProps {}
-
-const AgentSubHeader = (props: AgentSubHeaderProps): JSX.Element => {
+const AgentSubHeader = (): JSX.Element => {
   const classes = useStyles();
   const [showNdaPopup, setShowNdaPopup] = useState(false);
   const [showCaPopup, setShowCaPopup] = useState(false);
-  
 
   const handleNdaClick = () => {
     setShowNdaPopup(true);
@@ -80,11 +77,11 @@ const AgentSubHeader = (props: AgentSubHeaderProps): JSX.Element => {
         >
           <span>Referral Link</span>
           <div className={classes.classes.refercontainer}>
-            <img src={"/assets/svg/Dashboard/referrals.svg"} />
+            <img src={'/assets/svg/Dashboard/referrals.svg'} />
             <div className={classes.classes.agentbox}>
               <span>Refer Agent</span>
               <div className={classes.classes.copylinkit}>
-                <img src={"/assets/svg/Dashboard/copy-link.svg"} />
+                <img src={'/assets/svg/Dashboard/copy-link.svg'} />
                 <a href="#">Copy Referral Link </a>
               </div>
             </div>
@@ -95,14 +92,14 @@ const AgentSubHeader = (props: AgentSubHeaderProps): JSX.Element => {
         show={showNdaPopup}
         onClose={handleNdaCancel}
         onSave={handleNdaSave}
-        title={"Upload NDA Documents"}
+        title={'Upload NDA Documents'}
         content={<textarea placeholder="Sign in here" className={classes.classes.areaCustom}></textarea>}
       />
-        <Popup
+      <Popup
         show={showCaPopup}
         onClose={handleCaCancel}
         onSave={handleCaSave}
-        title={"Upload Commission Agreement Documents"}
+        title={'Upload Commission Agreement Documents'}
         content={<textarea placeholder="Sign in here" className={classes.classes.areaCustom}></textarea>}
       />
     </div>

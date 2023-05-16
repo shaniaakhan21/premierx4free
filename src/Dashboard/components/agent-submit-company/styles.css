@@ -121,9 +121,9 @@ form .row {
     }
 }
 
-.company-form{
-    
+.company-form {
+
     @media (max-width: 400px) {
-       padding: 6% 6% 6% 8%;
+        padding: 6% 6% 6% 8%;
     }
 }

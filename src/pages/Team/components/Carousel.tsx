@@ -3,8 +3,6 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { makeStyles } from '../../../utils/makeStyles';
 
-
-
 function Carousel() {
   const settings = {
     dots: true,
@@ -12,11 +10,11 @@ function Carousel() {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: true, 
+    autoplay: true,
     autoplaySpeed: 3000,
   };
-  const { classes } = useStyles()
-  
+  const { classes } = useStyles();
+
   return (
     <div className={classes.carousel}>
       <Slider {...settings}>
@@ -47,8 +45,7 @@ function Carousel() {
       </Slider>
     </div>
   );
-};
-
+}
 
 const useStyles = makeStyles()(() => ({
   container: {
@@ -149,7 +146,6 @@ const useStyles = makeStyles()(() => ({
       },
     }
   },
-}))
-
+}));
 
 export default Carousel;

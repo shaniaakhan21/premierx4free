@@ -6,7 +6,7 @@
     }
 
     @media (max-width: 400px) {
-      padding: 2% 6%!important;
+      padding: 2% 6% !important;
     }
   }
 
@@ -15,9 +15,9 @@
     font-size: 24px;
     line-height: 33px;
     font-family: "Nunito Sans";
-  
+
     @media (max-width: 768px) {
-      font-size: 20px!important;
+      font-size: 20px !important;
     }
   }
 
@@ -58,7 +58,7 @@
     font-size: 15px;
 
     @media (max-width: 768px) {
-      font-size: 13px!important;
+      font-size: 13px !important;
     }
   }
 
@@ -69,9 +69,9 @@
     padding: 1% 1% 1% 8px !important;
 
     @media (max-width: 768px) {
-      font-size: 16px!important;
-      font-weight: 500!important;
-      line-height: 18px!important;    
+      font-size: 16px !important;
+      font-weight: 500 !important;
+      line-height: 18px !important;
     }
   }
 
@@ -82,9 +82,10 @@
 
   .boxModal .modal-content {
     width: 216%;
-    border-radius: 10px!important;
+    border-radius: 10px !important;
+
     @media (max-width: 768px) {
-      width: 100%!important;
+      width: 100% !important;
     }
   }
 
@@ -116,8 +117,8 @@
     background: #1e3e485e;
   }
 
-  .boxModal .modal-content table{
+  .boxModal .modal-content table {
     @media (max-width: 768px) {
-      width: 260%!important;
+      width: 260% !important;
     }
   }

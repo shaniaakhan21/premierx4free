@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -32,8 +33,8 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Nunito Sans',
     color: '#136DA7',
     ['@media screen and (max-width: 768px)']: {
-			marginBottom: '2%',
-		},
+      marginBottom: '2%',
+    },
   },
   text: {
     marginTop: theme.spacing(2),
@@ -45,8 +46,8 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 0,
     boxShadow: 'none',
     ['@media screen and (max-width: 768px)']: {
-			padding: '3% 12%',
-		},
+      padding: '3% 12%',
+    },
   },
 
   buttonMargin: {

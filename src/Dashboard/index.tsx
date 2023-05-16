@@ -9,7 +9,7 @@ function AgentDashboard(): JSX.Element {
       <Row >
         <Col className='box-img-bg' lg="2" sm="6">
           <a href='/'>
-            <img className="card-img-top" src={"/assets/svg/Dashboard/logo-dash.svg"} alt="Card image cap" />
+            <img className="card-img-top" src={'/assets/svg/Dashboard/logo-dash.svg'} alt="Card image cap" />
           </a>
         </Col>
 

@@ -2,9 +2,6 @@
 {
     background-color: teal;
 }
-.removeModal{
-   
-}
 
 .modal{
     --bs-modal-width:596px;
@@ -20,7 +17,6 @@
 
 .modal_text_container{
     text-align: center;
-    /* font-family: 'Nunito Sans'; */
     font-weight: 400px;
     font-size: 22px;
     line-height: 30.01px;

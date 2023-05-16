@@ -2,9 +2,6 @@
 {
     background-color: teal;
 }
-.removeModal{
-   
-}
 
 .modal{
     --bs-modal-width:596px;
@@ -26,7 +23,6 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 21.82px;
-    /* justify-content: center; */
 }
 
 .uploadFile_form_container{
@@ -84,7 +80,6 @@
     font-size: 22px;
     line-height: 30px;
     color: #000000;
-    /* font-family: 'Nunito Sans'; */
 }
 .upload_newDocument_container
 {
