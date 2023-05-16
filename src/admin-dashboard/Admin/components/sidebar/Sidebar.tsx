@@ -52,7 +52,7 @@ function Sidebar(props:event):JSX.Element{
 const useStyles = makeStyles() (() => ({
     sidebar_mainContainer:{
         width:"275px",
-        borderRight:"1px solid #D6D9DB"
+        
     },
     sidebar_topRectangle:{
         width:"100%",
