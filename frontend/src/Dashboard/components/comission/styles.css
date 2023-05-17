@@ -62,7 +62,7 @@
     font-weight: 400;
     font-size: 18px;
     line-height: 27px;
-    padding: 1% 1% 1% 8px !important;
+    padding: 1% 1% 1% 8px;
 
     
     @media (max-width: 768px) {

@@ -1,0 +1,26 @@
+.grid-for-total{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.box-for-total{
+    display: flex;
+    width: 14%;
+    flex-direction: row;
+    align-items: center;
+    background: #F4F6F8;
+    border: 1px solid #D6D9DB;
+    border-radius: 0px 0px 10px 10px;
+    justify-content: flex-end;
+}
+
+.grid-for-text{
+    margin: 5% 10%;
+}
+
+.grid-for-number{
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 5% 9%;
+}

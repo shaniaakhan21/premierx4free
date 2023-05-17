@@ -7,15 +7,21 @@ type Props = {
 }
 
 const comissiondata = [
-    { col1: 'Acme Corporation', col2: '2022-01-10', col3: '2023-01-12', col4: '5000', col5: '$ 1,200,000' },
-    { col1: 'Vehement Capital.Inc', col2: '2022-01-10', col3: '2023-01-12', col4: '4000', col5: '$ 960,000' },
-    { col1: 'Massive Dynamic.LLC', col2: '2022-01-10', col3: '2023-01-12', col4: '5000', col5: '$ 1,200,000' },
+    { col1: 'Acme Corporation', col2: '2022-01-10', col3: '2023-01-12', col4: '5000', col5: 1200000 },
+    { col1: 'Vehement Capital.Inc', col2: '2022-01-10', col3: '2023-01-12', col4: '4000', col5: 960000 },
+    { col1: 'Massive Dynamic.LLC', col2: '2022-01-10', col3: '2023-01-12', col4: '5000', col5: 1200000 },
 ]
 
 const comission2data = [
-    { col1: 'Acme Corporation', col2: 'Agent Name A', col3: '2023-01-03', col4: '2023-01-12', col5: '$ 50 (1)', col6: '$ 1,200,000' },
-    { col1: 'Vehement Capital.Inc', col2: 'Agent Name B', col3: '2023-01-03', col4: '2023-01-12', col5: '$ 50 (2)', col6: '$ 960,000' },
-    { col1: 'Massive Dynamic.LLC', col2: 'Agent Name C', col3: '2023-01-03', col4: '2023-01-12', col5: '$ 50 (3)', col6: '$ 1,200,000' },
+    { col1: 'Acme Corporation', col2: 'Agent Name A', col3: '2023-01-03', col4: '2023-01-12', col5: '$ 50 (1)', col6: 1200000 },
+    { col1: 'Vehement Capital.Inc', col2: 'Agent Name B', col3: '2023-01-03', col4: '2023-01-12', col5: '$ 50 (2)', col6: 960000 },
+    { col1: 'Massive Dynamic.LLC', col2: 'Agent Name C', col3: '2023-01-03', col4: '2023-01-12', col5: '$ 50 (3)', col6: 1200952 },
+]
+
+const comission3data = [
+    { col1: 'Clients', col2: 6000 },
+    { col1: 'Direct', col2: 2052},
+    { col1: 'Referrals ', col2: 303650},
 ]
 
 const Comission = ({ spanText }: Props) => {
@@ -60,7 +66,12 @@ const Comission = ({ spanText }: Props) => {
                 </Tab>
                 <Tab eventKey="refferalscustomers" title="Referral Customers">
                     <div id="customers-tab-content">
-                        <TablesComp data={comission2data}  col1head= 'Company Name' col2head= 'Referral Agent' col3head= 'Contact Start Date' col4head= 'Contact End Date' col5head= 'Monthly Membership paid Number' col6head='Commission Due'/>
+                        <TablesComp data={comission2data}  col1head= 'Customer Name' col2head= 'Referral Agent' col3head= 'Contact Start Date' col4head= 'Contact End Date' col5head= 'Monthly Membership paid Number' col6head='Commission Due'/>
+                    </div>
+                </Tab>
+                <Tab eventKey="summary" title="Summary">
+                    <div id="customers-tab-content">
+                        <TablesComp data={comission3data} col1head=' ' col2head= 'Commission Due' />
                     </div>
                 </Tab>
             </Tabs>

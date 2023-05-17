@@ -7,7 +7,6 @@ type TableData = {
     col1: string;
     col2: string;
     col3: string;
-    col4: string;
 }
 
 type Props = {
@@ -16,14 +15,13 @@ type Props = {
     col1head: string;
     col2head: string;
     col3head: string;
-    col4head: string;
 }
 
-const AgentTeam = ({ data, spanText, col1head, col2head, col3head, col4head }: Props) => {
+const AgentTeam = ({ data, spanText, col1head, col2head, col3head }: Props) => {
     const hydata = [
-        { col1: 'Acme Corporation', col2: '50', col3: '500', col4: 'Approved', col5: 'Lorem Ipsum is simply dummy text of the printing ...' },
-        { col1: 'Vehement Capital.Inc', col2: '50', col3: '500', col4: 'Rejected', col5: 'Lorem Ipsum is simply dummy text of the printing ...' },
-        { col1: 'Massive Dynamic.LLC', col2: '50', col3: '500', col4: 'Pending', col5: 'Lorem Ipsum is simply dummy text of the printing ...' },
+        { col1: 'Acme Corporation', col2: '50', col3: '$ 500', col4: 'Approved', col5: 'Lorem Ipsum is simply dummy text of the printing ...' },
+        { col1: 'Vehement Capital.Inc', col2: '50', col3: '$ 500', col4: 'Rejected', col5: 'Lorem Ipsum is simply dummy text of the printing ...' },
+        { col1: 'Massive Dynamic.LLC', col2: '50', col3: '$ 400', col4: 'Pending', col5: 'Lorem Ipsum is simply dummy text of the printing ...' },
     ]
     const [showPopup, setShowPopup] = useState(false);
 
@@ -45,7 +43,6 @@ const AgentTeam = ({ data, spanText, col1head, col2head, col3head, col4head }: P
                         <th>{col1head}</th>
                         <th>{col2head}</th>
                         <th>{col3head}</th>
-                        <th>{col4head}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,15 +50,14 @@ const AgentTeam = ({ data, spanText, col1head, col2head, col3head, col4head }: P
                         <tr key={index} style={{ backgroundColor: 'white' }}>
                             <td>{row.col1}</td>
                             <td>{row.col2}</td>
-                            <td>{row.col3}</td>
-                            <td ><a onClick={handleClick} className="color-link">{row.col4}</a></td>
+                            <td ><a onClick={handleClick} className="color-link">{row.col3}</a></td>
                         </tr>
                     ))}
                 </tbody>
             </Table>
             <Modal show={showPopup} onHide={handleCancel} className='boxModal'>
                 <Modal.Body>
-                <AgentCustomers data={hydata} col1head='Company Name' col2head='Employers Number' col3head='Payment' col4head='Approval Status' col5head='Comments' spanText="View Personal Customers List " />
+                <AgentCustomers data={hydata} col1head='Company Name' col2head='Number of Employees /Members' col3head='Commission Rate' col4head='Status (Active/Pending)' col5head='Comments' spanText="View Direct Clients " />
                 </Modal.Body>
                 <Modal.Footer className='modalFooter'>
                     <Button variant="secondary" onClick={handleCancel} className='buttonBlue'>
