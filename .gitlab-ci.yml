@@ -8,7 +8,7 @@ frontend:
     changes:
       - /home/gitlab-runner/publicwebsite/frontend
   script:
-    - cd /home/gitlab-runner/publicwebsite
+    - cd /home/gitlab-runner/publicwebsite/frontend
     - git reset --hard HEAD
     - git pull
     - npm i --force
@@ -21,7 +21,7 @@ deploy:
   tags:
     - nsur-runner-1
   script:
-    - cd /home/gitlab-runner/publicwebsite
+    - cd /home/gitlab-runner/publicwebsite/frontend
     - git reset --hard HEAD
     - git pull
     - npm i --force
