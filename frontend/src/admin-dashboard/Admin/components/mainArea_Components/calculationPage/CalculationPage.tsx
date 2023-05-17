@@ -15,15 +15,15 @@ function CalculationPage(): JSX.Element{
     useEffect(() => {
         if(table == 1)
         {
-            setTableData(<CalculationPageFirstTable agentCalculationData={agentCalculationData} table={table} setTable={setTable} />)
+            setTableData(<CalculationPageFirstTable agentCalculationData={agentCalculationData} />)
         }
         if(table == 2)
         {
-            setTableData(<CalculationPageSecondTable agentCalculationData = {agentCalculationData} table={table} setTable={setTable} />)
+            setTableData(<CalculationPageSecondTable agentCalculationData = {agentCalculationData} />)
         }
     },[table])
     return(
-        <div className={classes.calculationPage_mainContainer} >
+        <div className={classes.calculationPage_mainContainer} onClick={() => {setTable(2)}}>
             {/* <CalculationPageSecondTable /> */}
             {/* <CalculationPageFirstTable agentCalculationData={agentCalculationData} /> */}
             {tableData}

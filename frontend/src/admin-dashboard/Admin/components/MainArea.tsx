@@ -8,10 +8,7 @@ import {useEffect, useState} from 'react';
 import MarketingMaterials from './mainArea_Components/marketingMaterials/MarketingMaterials';
 import * as React from 'react';
 import AgentHeader from '../../../Dashboard/components/agent-header/AgentHeader';
-// import MarketinMaterialsMobile from './mainArea_Components/marketingMaterials/MarketingMaterialsMobile';
 import TopBar from './top-bar/TopBar'
-import MarketingMaterialsMobile from './mainArea_Components/marketingMaterials/MarketingMaterialsMobile';
-import './mainArea.css'
 interface event {
     eventNumber:number
     // setEventNumber:any
@@ -33,16 +30,7 @@ function MainArea(props:event): JSX.Element{
         }
         if (eventNumber == 3)
         {
-            setMainAreaContent(
-            <>
-            <div className='marketing_materials_desktopView'>
-            <MarketingMaterials />
-            </div>
-            <div className='marketing_materials_mobileView'>
-            <MarketingMaterialsMobile />
-            </div>
-            </>
-            )
+            setMainAreaContent(<MarketingMaterials />)
         }
         if (eventNumber == 4)
         {
@@ -78,9 +66,6 @@ const useStyles = makeStyles() (() => ({
         //height:"90%",
         margin:"30px 20px 0px 30px",
         // width:"100%"
-        '@media(max-width:600px)':{
-            margin:"20px 26px 0px 26px",
-        }
     },
     agentHeader:{
         '@media(max-width:768px)':{

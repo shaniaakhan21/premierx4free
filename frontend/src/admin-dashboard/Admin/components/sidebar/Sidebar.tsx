@@ -16,7 +16,7 @@ function Sidebar(props:event):JSX.Element{
         <div className={classes.sidebar_mainContainer}>
             <div className={classes.sidebar_topRectangle}>
                 <div className={classes.topRectangle_logo}>
-                    <img src='/assets/svg/logo_bold.svg' className={classes.logo} />
+                    <a  href='/'><img src='/assets/svg/logo_bold.svg' className={classes.logo} /></a>
                 </div>
                 <div className={classes.topRectangle_displayImage}>
                     <img src='/assets/svg/Dashboard/dummy.svg' className={classes.displayImage} />

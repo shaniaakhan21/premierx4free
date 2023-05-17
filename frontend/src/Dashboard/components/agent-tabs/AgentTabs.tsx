@@ -35,17 +35,17 @@ function AgentTabs(): JSX.Element {
     };
 
     const data = [
-        { col1: 'Acme Corporation', col2: '50', col3: '500', col4: 'Approved', col5: 'Lorem Ipsum is simply dummy text of the printing ...' },
-        { col1: 'Vehement Capital.Inc', col2: '50', col3: '500', col4: 'Rejected', col5: 'Lorem Ipsum is simply dummy text of the printing ...' },
-        { col1: 'Massive Dynamic.LLC', col2: '50', col3: '500', col4: 'Pending', col5: 'Lorem Ipsum is simply dummy text of the printing ...' },
+        { col1: 'Acme Corporation', col2: '50', col3: '$ 500', col4: 'Approved', col5: 'Lorem Ipsum is simply dummy text of the printing ...' },
+        { col1: 'Vehement Capital.Inc', col2: '50', col3: '$ 500', col4: 'Rejected', col5: 'Lorem Ipsum is simply dummy text of the printing ...' },
+        { col1: 'Massive Dynamic.LLC', col2: '50', col3: '$ 400', col4: 'Pending', col5: 'Lorem Ipsum is simply dummy text of the printing ...' },
     ]
 
     const teamdata = [
-        { col1: 'Level 1', col2: 'John Smith', col3: '5', col4: 'View More' },
-        { col1: 'Level 1', col2: 'William Oliver', col3: '3', col4: 'View More' },
-        { col1: 'Level 2', col2: 'Benjamin Lucas', col3: '8', col4: 'View More' },
-        { col1: 'Level 3', col2: 'Benjamin Lucas', col3: '12', col4: 'View More' },
-        { col1: 'Level 3', col2: 'Benjamin Lucas', col3: '10', col4: 'View More' }
+        { col1: 'John Smith', col2: '$ 5', col3: 'View More' },
+        { col1: 'William Oliver', col2: '$ 3', col3: 'View More' },
+        { col1: 'Benjamin Lucas', col2: '$ 8', col3: 'View More' },
+        { col1: 'Benjamin Lucas', col2: '$ 12', col3: 'View More' },
+        { col1: 'Benjamin Lucas', col2: '$ 10', col3: 'View More' }
     ]
 
     const reportdata = [
@@ -70,7 +70,7 @@ function AgentTabs(): JSX.Element {
         <>
             <Row className='phone-row'>
                 <Col sm="2" lg="12" className='phone-logo'>
-                    <img className="card-img-top" src={"/assets/svg/Dashboard/logo-dash.svg"} alt="Card image cap" />
+                   <a  href='/'><img className="card-img-top" src={"/assets/svg/Dashboard/logo-dash.svg"} alt="Card image cap" /></a> 
                 </Col>
                 <Col sm="1" lg="12" className='phone-hamburger'>
                     <div>
@@ -97,12 +97,6 @@ function AgentTabs(): JSX.Element {
                                     <Nav.Link eventKey="second">
                                         <img src={"/assets/svg/Dashboard/submit-icon.svg"} alt="submit" />
                                         <span>Submit Company</span>
-                                    </Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item>
-                                    <Nav.Link eventKey="third">
-                                        <img src={"/assets/svg/Dashboard/report-icon.svg"} alt="report" />
-                                        <span>Report</span>
                                     </Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
@@ -142,12 +136,6 @@ function AgentTabs(): JSX.Element {
                                 </Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link eventKey="third">
-                                    <img src={"/assets/svg/Dashboard/report-icon.svg"} alt="report" />
-                                    <span>Report</span>
-                                </Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
                                 <Nav.Link eventKey="fourth">
                                     <img src={"/assets/svg/Dashboard/marketing-icon.svg"} alt="Marketing Materials" />
                                     <span>Marketing Materials</span>
@@ -165,9 +153,8 @@ function AgentTabs(): JSX.Element {
                         <Tab.Content>
                             <Tab.Pane eventKey="first" className="tab-pane-first">
                                 <AgentSubHeader />
-                                <AgentCustomers data={data} col1head='Company Name' col2head='Employers Number' col3head='Payment' col4head='Approval Status' col5head='Comments' spanText="My Personal Customers" />
-                                <AgentTeam data={teamdata} col1head='Level' col2head='Customer Name' col3head='Companies Number' col4head='View Personal Customers List ' spanText="My Teams" />
-                                <AgentNetwork spanText="My Network" />
+                                <AgentCustomers data={data} col1head='Company Name' col2head='Number of Employees /Members' col3head='Commission Rate' col4head='Status (Active/Pending)' col5head='Comments' spanText="Direct Clients" />
+                                <AgentTeam data={teamdata} col1head='Representative Name' col2head='Commission Rate' col3head='View Client List ' spanText="Referral Clients" />
                                 <Comission spanText="Commission Summary" />
                             </Tab.Pane>
                             <Tab.Pane eventKey="second" className="tab-pane-second">

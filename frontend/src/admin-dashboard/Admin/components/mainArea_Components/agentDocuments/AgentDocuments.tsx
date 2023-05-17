@@ -1,7 +1,6 @@
 import { makeStyles } from '../../../../../utils/makeStyles';
 import {agentData} from '../customData'
 import TableRow from './TableRow';
-import TableRowMobile from './TableRowMobile'
 
 function AgentDocuments():JSX.Element{
     const {classes} = useStyles()
@@ -14,11 +13,6 @@ function AgentDocuments():JSX.Element{
                 <div className={classes.agentTable}>
                     {agentData?.map((dt,i)=>(
                         <TableRow agentData={dt} index={i} dataLength={agentData.length} />
-                    ))}
-                </div>
-                <div className={classes.agentTableMobile}>
-                    {agentData?.map((dt,i)=>(
-                        <TableRowMobile agentData={dt} index={i} dataLength={agentData.length} />
                     ))}
                 </div>
             </div>
@@ -34,22 +28,14 @@ const useStyles = makeStyles() (() => ({
         fontWeight:"600",
         fontSize:"24px",
         lineHeight:"32.74px",
-        color:"#000000",
-        '@media (max-width:600px)':{
-            fontSize:"19px",
-            lineHeight:"25.92px",
-        }
+        color:"#000000"
     },
     agentdocuments_text:{
         fontFamily:"Nunito Sans",
         fontWeight:"600",
         fontSize:"20px",
         lineHeight:"27.28px",
-        color:"#000000",
-        '@media (max-width:600px)':{
-            fontSize:"17px",
-            lineHeight:"23.19px",
-        }
+        color:"#000000"
     },
     tableContainer:{
         marginTop:"31px",
@@ -61,13 +47,6 @@ const useStyles = makeStyles() (() => ({
             display:"none",
     }
         // backgroundColor:"yellow"
-    },
-    agentTableMobile:{
-        display:"none",
-        '@media(max-width: 600px)':{
-            display:"block",
-        }
-
     }
 }))
 

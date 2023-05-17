@@ -2,12 +2,10 @@ import { makeStyles } from '../../../../../utils/makeStyles';
 
 interface agentData {
     agentCalculationData:any
-    table:number,
-    setTable:any
 }
 
 function CalculationPageFirstTable (props:agentData) : JSX.Element{
-    const {agentCalculationData,setTable} = props
+    const {agentCalculationData} = props
     const {classes} = useStyles()
     return(
         <>
@@ -23,8 +21,8 @@ function CalculationPageFirstTable (props:agentData) : JSX.Element{
             <th className={classes.table_headingText_first}>Agent</th>
             <th className={classes.table_headingText}>Customer Info</th>
             <th className={classes.table_headingText}>Company Name</th>
-            <th className={classes.table_headingText}>Contract Start Date</th>
-            <th className={classes.table_headingText}>Contract End Date</th>
+            <th className={classes.table_headingText}>Contract<br /> Start Date</th>
+            <th className={classes.table_headingText}>Contract<br />  End Date</th>
           </tr>
         </thead>
         <tbody>
@@ -32,7 +30,7 @@ function CalculationPageFirstTable (props:agentData) : JSX.Element{
                 <tr className={classes.table_row}>
                 <td className={classes.table_data_first}>{dt.agentName}</td>
                 <td className={classes.table_data}>{dt.customerInfo}</td>
-                <td className={classes.table_data}><span onClick={()=>{setTable(2)}}><a href='#' className={classes.companyName_a}>{dt.companyName}</a></span></td>
+                <td className={classes.table_data}>{dt.companyName}</td>
                 <td className={classes.table_data}>{dt.contractStartDate}</td>
                 <td className={classes.table_data}>{dt.contractEndDate}</td>
               </tr>
@@ -85,15 +83,13 @@ const useStyles = makeStyles() (() =>({
         border:"1px solid #D6D9DB",
        // borderBottom:"0",
         //borderTop:"0",
-        borderRight:"0px",
         borderRadius:"10px",
-        overflow:"auto"
     },
     calculationPage_table:{
        border:"1px solid #D6D9DB",
        width:"100%",
        borderRadius:"10px",
-       overflow:"auto"
+       overflow:"hidden"
        //borderCollapse:"separate"
     },
     table_header:{
@@ -110,8 +106,7 @@ const useStyles = makeStyles() (() =>({
         fontSize:"20px",
         lineHeight:"27.28px",
         color:"#000000",
-        padding:"23px 0 20px 0",
-        minWidth:"200px"
+        padding:"23px 0 20px 0"
     },
     table_headingText_first:{
         fontFamily:"Nunito Sans",
@@ -119,8 +114,7 @@ const useStyles = makeStyles() (() =>({
         fontSize:"20px",
         lineHeight:"27.28px",
         color:"#000000",
-        padding:"23px 0 20px 20px",
-        minWidth:"200px"
+        padding:"23px 0 20px 20px"
     },
     table_row:{
         border:"1px solid #D6D9DB",
@@ -134,9 +128,8 @@ const useStyles = makeStyles() (() =>({
         fontSize:"18px",
         lineHeight:"24.55px",
         color:"#667B8B",
-        padding:"23px 20px 20px 0",
-        //width:"25%"
-        minWidth:"200px"
+        padding:"23px 0 20px 0",
+        width:"25%"
     },
     table_data_first:{
         fontFamily:"Nunito Sans",
@@ -144,12 +137,8 @@ const useStyles = makeStyles() (() =>({
         fontSize:"18px",
         lineHeight:"24.55px",
         color:"#667B8B",
-        padding:"23px 20px 20px 20px",
-        //width:"15%"
-        minWidth:"200px"
-    },
-    companyName_a:{
-        textDecoration:"none"
+        padding:"23px 0 20px 20px",
+        width:"15%"
     }
 }))
 
