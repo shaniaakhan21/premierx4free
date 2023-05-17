@@ -100,12 +100,6 @@ function AgentTabs(): JSX.Element {
                                     </Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
-                                    <Nav.Link eventKey="third">
-                                        <img src={"/assets/svg/Dashboard/report-icon.svg"} alt="report" />
-                                        <span>Report</span>
-                                    </Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item>
                                     <Nav.Link eventKey="fourth">
                                         <img src={"/assets/svg/Dashboard/marketing-icon.svg"} alt="Marketing Materials" />
                                         <span>Marketing Materials</span>
