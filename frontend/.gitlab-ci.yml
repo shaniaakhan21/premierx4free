@@ -1,11 +1,27 @@
-master:
+stages:
+  - build
+  - deploy
+
+frontend:
+  stage: build
+  only:
+    changes:
+      - /home/gitlab-runner/publicwebsite/frontend
+  script:
+    - cd /home/gitlab-runner/publicwebsite
+    - git reset --hard HEAD
+    - git pull
+    - npm i --force
+    - npm run build
+
+deploy:
   stage: deploy
   only:
     - master
   tags:
     - nsur-runner-1
   script:
-    - cd /home/gitlab-runner/publicwebsite/frontend
+    - cd /home/gitlab-runner/publicwebsite
     - git reset --hard HEAD
     - git pull
     - npm i --force
