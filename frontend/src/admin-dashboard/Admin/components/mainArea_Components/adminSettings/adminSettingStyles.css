@@ -1,0 +1,194 @@
+.settings-container{
+    margin:30px 0 68px 61px;
+}
+
+.profile-position{
+    position: relative;
+    top: 27px;
+    left: 27px;
+    margin-right: 4%;
+}
+.card-container
+{
+    /* position: relative;
+    top:27px;
+    left:175px; */
+    padding: 45px 100px 32px 100px;
+}
+
+.mainBox .row{
+    margin-bottom: 2%;
+}
+
+.mainBox{
+    width: 50%;
+    padding: 0;
+    border :1px solid #D6D9DB;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 24px rgba(0,0,0,0.15);
+    border-radius: 10px;
+    
+}
+
+/* .after-it{
+    width: 50%;
+    padding: 0;
+} */
+
+.form-box{
+    padding: 3%;
+}
+.form-box-firstPart
+{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.form-box-inputArea{
+    width: 100%;
+}
+
+.mainBox .img-in-circle{
+    width: 145PX;
+    height: 145PX;
+    filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.25));
+}
+
+.row-design{
+    background: linear-gradient(269.96deg, #64B5F6 0.03%, #0556A7 99.17%);
+    margin: 0px;
+    border: 1px solid #D6D9DB;
+    border-radius: 10px 10px 0px 0px;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.row-design .card-title{
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 41px;
+    padding-top: 2%;
+    color: #FFFFFF;
+}
+
+.row-design .card-text{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 26px;
+    color: #FFFFFF;
+}
+
+.mainBox .edit-icon{
+    position: absolute;
+    top: 0;
+    left: 80px;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 10px;
+}
+
+.mainBox .edit-icon button{
+    background: #FFFFFF;
+    width: 35px;
+    height: 35px;
+    border: 2px solid #2391C3;
+    border-radius: 50%;
+}
+
+.form-box-buttonContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin:51px 31px 36px 31px;
+}
+
+.mainBox{
+    padding:0;
+}
+
+.form-box-field
+{
+    margin:43px 31px 0 31px ;
+}
+.form-box-field-top
+{
+    margin:10px 31px 0 31px;
+}
+
+.horizontalLine{
+    margin : 43px 31px 0 31px;
+    /* border:1px solid #D9D9D9; */
+    color:#D9D9D9;
+}
+.form-box-inputArea{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 8px 12px;
+    gap: 4px;
+    border: 1px solid #D9D9D9;
+    border-radius: 6px;
+}
+
+.form-box-lable1{
+font-family: 'Nunito Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height, or 138% */
+
+
+/* Character / mark */
+
+color: #000000;
+
+
+/* Inside auto layout */
+
+flex: none;
+order: 0;
+flex-grow: 1;
+margin-left: 2px;
+}
+
+.form-box-lable2{
+font-family: 'Nunito Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 24px;
+/* identical to box height, or 150% */
+
+
+color: #758B93;
+
+
+/* Inside auto layout */
+
+flex: none;
+order: 0;
+flex-grow: 1;
+margin-left: 2px;
+}
+
+.form-box-cancelButton{
+background: #FFFFFF;
+border: 1px solid #86A9B8;
+border-radius: 10px;
+padding: 15px 61px;
+}
+
+.form-box-saveButton{
+background: #64B5F6;
+border-radius: 10px;
+padding: 15px 61px;
+margin-left: 18px;
+}

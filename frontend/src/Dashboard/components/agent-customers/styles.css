@@ -1,0 +1,119 @@
+.box-main-customer{
+  padding: 2% 3% 0;
+
+  @media (max-width: 768px) {
+    padding: 4% 3%!important;
+  }
+
+  @media (max-width: 400px) {
+    padding: 6%!important;
+  }
+}
+
+.box-main-customer .textCustom {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 33px;
+  font-family: "Nunito Sans";
+  @media (max-width: 768px) {
+    font-size: 20px!important;
+  }
+}
+
+.table-responsive {
+  border-radius: 10px !important;
+  margin-top: 1%;
+  border: 1px solid #D6D9DB;
+}
+
+.box-main-customer .table {
+  border-color: #F4F6F8;
+  margin: 0 !important;
+
+  @media (max-width: 768px) {
+    width: 210%;
+  }
+
+  @media (max-width: 400px) {
+    width: 300%;
+  }
+}
+
+.table-bordered {
+  border-width: 1px;
+}
+
+.table-bordered>:not(caption)>*>* {
+  border-width: 0;
+}
+
+.table-hover>tbody>tr:hover>* {
+  --bs-table-accent-bg: rgb(244, 246, 248);
+  color: var(--bs-table-hover-color);
+}
+
+.box-main-customer td {
+  color: #667B8B;
+  font-size: 15px;
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
+}
+
+.box-main-customer th {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 27px;
+  padding: 1% 1% 1% 8px !important;
+
+  @media (max-width: 768px) {
+    font-size: 16px!important;
+    font-weight: 500!important;
+    line-height: 18px!important;    
+  }
+}
+
+.box-main-customer .Approved-icon {
+  margin-right: 8% !important;
+  width: 23px !important;
+  height: 23px !important;
+  background: #80CA46 !important;
+  padding: 3% !important;
+  border-radius: 50% !important;
+
+  @media (max-width: 768px) {
+    width: 20px!important;
+    height: 20px!important;
+  }
+}
+
+.box-main-customer .Rejected-icon {
+  margin-right: 8% !important;
+  width: 23px !important;
+  height: 23px !important;
+  background: #D44141 !important;
+  padding: 3% !important;
+  border-radius: 50% !important;
+  
+  @media (max-width: 768px) {
+    width: 20px!important;
+    height: 20px!important;
+  }
+}
+
+.box-main-customer .Pending-icon {
+  margin-right: 8% !important;
+  width: 23px !important;
+  height: 23px !important;
+
+  
+  @media (max-width: 768px) {
+    width: 20px!important;
+    height: 20px!important;
+  }
+}
+
+.status-col {
+  display: flex !important;
+  justify-content: flex-start !important;
+}

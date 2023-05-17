@@ -1,0 +1,13 @@
+.marketing_materials_mobileView{
+    display: none;
+}
+
+@media only screen and (max-width:600px)
+{
+    .marketing_materials_mobileView{
+        display: block;
+    }
+    .marketing_materials_desktopView{
+        display: none;
+    }
+}

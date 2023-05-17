@@ -1,0 +1,92 @@
+.modal-footer
+{
+    background-color: teal;
+}
+.removeModal{
+   
+}
+
+.modal{
+    --bs-modal-width:596px;
+    --bs-modal-height:347px;
+    --bs-modal-border-radius:30px;
+}
+
+.currentDocumentIcon
+{
+    width: 191.84px;
+    height:99.06px;
+}
+
+.replaceModal_content{
+    display: flex;
+    flex-direction: row;
+    margin-top: 18px;
+    color: #667B8B;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21.82px;
+    /* justify-content: center; */
+}
+
+.uploadFile_form_container{
+    display: flex;
+    flex-direction: row;
+    background: #FFFFFF;
+    border: 1px solid #D6D9DB;
+    border-radius: 6px;
+    width:100%
+}
+.uploadFile_form_input
+{
+    border:none;
+    width: 60%;
+}
+.uploadFile_form_button{
+    background-color: #64B5F6;
+    border-radius: 0 6px 6px 0px;
+    text-align: center;
+    color: #FFFFFF;
+    padding: 9px 12px 8px 12px;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24.55px;
+    width:40%
+}
+.Replacemodal_button_container
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap:18px;
+    margin-top: 21px;
+    margin-bottom: 38px;
+}
+.replace_cancel_button
+{
+    background-color: #FFFFFF;
+    border : 1px solid #86A9B8;
+    border-radius: 10px;
+    padding: 15px 63px 15px 63px;
+    color: #48748D;
+}
+
+.replace_save_button
+{
+    border-radius: 10px;
+    padding: 15px 72px 15px 73px;
+    background-color: #64B5F6;
+    color: #FFFFFF;
+    border:none;
+}
+.modal-heading{
+    font-weight: 768px;
+    font-size: 22px;
+    line-height: 30px;
+    color: #000000;
+    /* font-family: 'Nunito Sans'; */
+}
+.upload_newDocument_container
+{
+    width: 100%;
+}
