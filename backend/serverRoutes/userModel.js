@@ -8,19 +8,30 @@ router.post("/signin", async(req,res) => {
     const{email,password}  = req.body
 
         try{
-            // const check = await userDB.findOne({email:email, password:password})
-
-            // if(check){
-            //     res.json("exists")
-            // }
-            // else{
-            //     res.json("notexists")
-            // }
-            res.send({
-                msg:"sign in route hit"
+            const check = await userDB.findOne({email:email, password:password})
+            .then((result) => {
+                console.log("result",result)
+                if(result)
+                {
+                    res.send({
+                        status:true,
+                        result
+                    })
+                }
+                else{
+                    res.send({
+                        status:false,
+                        msg:"Invalid email ID or password"
+                    })
+                }
             })
+            
+            // res.send({
+            //     msg:"sign in route hit"
+            // })
         }
         catch(e){
+            console.log(e)
             res.json("notexists")
         }
 })
@@ -50,8 +61,19 @@ router.post("/signup", async(req,res) => {
                 })
             }
             else{
-                res.json("notexists")
-                await insertMany([data])
+                await userDB.create(data)
+                .then((result) => {
+                    res.send({
+                        status:true,
+                        result
+                    })
+                })
+                .catch((e) => {
+                    res.send({
+                        status:false,
+                        msg:`error occoured ${e}`
+                    })
+                })
             }
 
             // res.send({
