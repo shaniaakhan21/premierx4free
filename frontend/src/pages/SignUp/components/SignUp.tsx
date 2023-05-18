@@ -14,6 +14,11 @@ function SignUp(): JSX.Element {
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
+    const [address, setAddress] = useState("");
+    const [city, setCity] = useState("");
+    const [state, setState] = useState("");
+    const [zipcode, setZipCode] = useState("");
+    const [referral, setReferral] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [showPassword1, setShowPassword1] = useState(false);
@@ -25,21 +30,33 @@ function SignUp(): JSX.Element {
         e.preventDefault();
 
         try {
-            const res = await axios.post("http://localhost:8000/signup", {
+            const res = await axios.post("http://localhost:5000/api/user/signup", {
                 fullName,
                 email,
                 phoneNumber,
                 password,
                 confirmPassword,
+                address,
+                city,
+                state,
+                zipcode,
+                referral,
             });
-            if (res.data === "exists") {
-                setErrorMsg("User already exists");
-            } else if (res.data === "notexists") {
-                history("/signin");
+
+            console.log('Response data:', res.data);
+
+            if (res.status === 201) {
+                console.log('User registered successfully');
+                history('/signin');
             }
-        } catch (e) {
-            setErrorMsg("Something went wrong try again later");
-            console.log(e);
+        } catch (error: any){
+            if (error.response && error.response.status === 400) {
+                // User already exists
+                setErrorMsg(error.response.data.message);
+            } else {
+                console.error('Error during registration:', error);
+                setErrorMsg('Something went wrong, please try again later');
+            }
         }
     }
 
@@ -50,7 +67,7 @@ function SignUp(): JSX.Element {
             </Col>
             <Col className={classes.siginform} lg="4" md="5" sm="4" xs="12">
                 <h1>Please register to have an account</h1>
-                <form onSubmit={submit}  className={classes.formhere}>
+                <form onSubmit={submit} className={classes.formhere}>
                     <div className="form-group">
                         <label className={classes.label} htmlFor="fullName">Full Name</label>
                         <input
@@ -58,15 +75,10 @@ function SignUp(): JSX.Element {
                             className={`${classes.formControl} form-control`}
                             id="fullName"
                             placeholder="Enter your full name"
-                            value={fullName || errorMsg}
+                            value={fullName}
                             onChange={(e) => { setFullName(e.target.value) }}
                         />
                     </div>
-                    {errorMsg && (
-                        <div className="alert alert-danger" role="alert">
-                            {errorMsg}
-                        </div>
-                    )}
                     <div className="form-group">
                         <label className={classes.label} htmlFor="email">Email Address</label>
                         <input
@@ -74,12 +86,17 @@ function SignUp(): JSX.Element {
                             className={`${classes.formControl} form-control`}
                             id="email"
                             placeholder="Enter your email address"
-                            value={email}
+                            value={email || errorMsg}
                             onChange={(e) => { setEmail(e.target.value) }}
                         />
                         <small id="emailHelp" className="form-text text-muted">
                             We’ll send a confirmation email to your inbox, make sure you have access to this email address.
                         </small>
+                        {errorMsg && (
+                            <div className="alert alert-danger" role="alert">
+                                {errorMsg}
+                            </div>
+                        )}
                     </div>
                     <div className="form-group">
                         <label className={classes.label} htmlFor="phoneNumber">Phone Number</label>
@@ -93,41 +110,46 @@ function SignUp(): JSX.Element {
                         />
                     </div>
                     <div className="form-group">
-                        <label className={classes.label} htmlFor="fullName">Address</label>
-                        <input style={{ height: '100px'}}
+                        <label className={classes.label} htmlFor="address">Address</label>
+                        <input style={{ height: '100px' }}
                             type="text"
                             className={`${classes.formControl} form-control`}
                             id="address"
                             placeholder=""
-                            onChange={(e) => { setFullName(e.target.value) }}
+                            value={address}
+                            onChange={(e) => { setAddress(e.target.value) }}
                         />
                         <input
                             type="text"
                             className={`${classes.formControl} form-control`}
                             id="city"
                             placeholder="City"
-                            onChange={(e) => { setFullName(e.target.value) }}
+                            value={city}
+                            onChange={(e) => { setCity(e.target.value) }}
                         />
                         <input
                             type="text"
                             className={`${classes.formControl} form-control`}
                             id="state"
                             placeholder="State"
-                            onChange={(e) => { setFullName(e.target.value) }}
+                            value={state}
+                            onChange={(e) => { setState(e.target.value) }}
                         />
                         <input
                             type="text"
                             className={`${classes.formControl} form-control`}
                             id="zipcode"
                             placeholder="Zip Code"
-                            onChange={(e) => { setFullName(e.target.value) }}
+                            value={zipcode}
+                            onChange={(e) => { setZipCode(e.target.value) }}
                         />
                         <input
                             type="text"
                             className={`${classes.formControl} form-control`}
                             id="link-ref"
                             placeholder="Referral Link"
-                            onChange={(e) => { setFullName(e.target.value) }}
+                            value={referral}
+                            onChange={(e) => { setReferral(e.target.value) }}
                         />
                     </div>
 
