@@ -7,7 +7,7 @@ master:
   script:
     - cd /home/gitlab-runner/publicwebsite/frontend
     - git reset --hard HEAD
-    - git clean -fX
+    - rm -rf frontend/package-lock.json
     - git pull
     - npm i --force
     - npm run build
