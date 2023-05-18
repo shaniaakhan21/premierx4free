@@ -7,6 +7,7 @@ master:
   script:
     - cd /home/gitlab-runner/publicwebsite/frontend
     - git reset --hard HEAD
+    - git clean -fX
     - git pull
     - npm i --force
     - npm run build
