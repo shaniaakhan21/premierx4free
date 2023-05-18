@@ -1,12 +1,15 @@
 import { KnownRoles, SysFunction, SysMethod } from '@helpers/access'
 import AuditTraceModel from '@models/audit-trace.model'
+import { AutoIncrementSimple } from '@typegoose/auto-increment'
 import {
   getModelForClass,
   modelOptions,
+  plugin,
+  pre,
   prop,
   Severity
 } from '@typegoose/typegoose'
-import { Type } from 'class-transformer'
+import * as bcrypt from 'bcryptjs'
 import { Request } from 'express'
 import { ParamsDictionary, RequestHandler } from 'express-serve-static-core'
 import jwt from 'jsonwebtoken'
@@ -89,6 +92,17 @@ export const AuthenticateToken: (roles?: KnownRoles[]) => RequestHandler =
     )
   }
 
+@pre<User>('save', async function (next) {
+  if (this.isModified('password') || this.isNew) {
+    await bcrypt.hash(this.password, 10, (err, encryptedPass) => {
+      if (err) return next(err)
+      this.password = encryptedPass
+      return next()
+    })
+  }
+  return next()
+})
+@plugin(AutoIncrementSimple, [{ field: 'userId' }])
 @modelOptions({
   options: { allowMixed: Severity.ERROR, customName: 'users' },
   schemaOptions: { collection: 'users' }
@@ -105,23 +119,26 @@ export class User {
   public userId?: number
 
   @prop()
-  public base64EncodedAuthenticationKey?: string
-
-  @prop()
-  public authenticated?: boolean
+  public jwtToken?: string
 
   @prop({ type: KnownRoles, enum: KnownRoles })
   public roles?: KnownRoles[]
 
-  @Type(() => String)
-  @prop({ type: String })
-  public permissions?: string[]
-
-  @prop()
-  public shouldRenewPassword?: boolean
+  @prop({ unique: true })
+  public password!: string
 
   @prop()
   public token?: string
+
+  /**
+   * Compare password
+   * @param password - password to compare
+   * @returns Promise<boolean> - true if password is correct
+   */
+  public comparePassword: (password: string) => Promise<boolean> =
+    async function (this: User, password: string) {
+      return bcrypt.compare(password, this.password)
+    }
 }
 
 const UserModel =
