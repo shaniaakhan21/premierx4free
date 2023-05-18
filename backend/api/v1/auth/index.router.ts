@@ -2,7 +2,7 @@ import ErrorHandler from '@helpers/errorHandler'
 import express from 'express'
 
 import login from './login'
-import register from "./register";
+import register from './register'
 
 const authRouter = express.Router()
 

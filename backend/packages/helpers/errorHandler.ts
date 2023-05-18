@@ -1,36 +1,43 @@
 import { CustomReq } from '@models/user.model'
 import { Response, NextFunction } from 'express'
 import { ParamsDictionary, RequestHandler } from 'express-serve-static-core'
-import { ParsedQs } from 'qs'
+// eslint-disable-next-line import/no-extraneous-dependencies
 import * as HttpStatus from 'http-status'
+import { ParsedQs } from 'qs'
 
 export class RecordAlreadyExistsError extends Error {
   status = HttpStatus.CONFLICT
+
   message = 'Record already exists'
 }
 
 export class RecordNotFoundError extends Error {
   status = HttpStatus.NOT_FOUND
+
   message = 'Resource not found'
 }
 
 export class UnauthorizedError extends Error {
   status = HttpStatus.UNAUTHORIZED
+
   message = 'Unauthorized'
 }
 
 export class APINotImplementedError extends Error {
   status = HttpStatus.NOT_IMPLEMENTED
+
   message = 'API not implemented'
 }
 
 export class InvalidRequestError extends Error {
   status = HttpStatus.BAD_REQUEST
+
   message = 'Invalid request'
 }
 
 export class UnhandledError extends Error {
   status = HttpStatus.INTERNAL_SERVER_ERROR
+
   message = 'Unhandled error'
 }
 
