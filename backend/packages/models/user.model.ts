@@ -1,4 +1,4 @@
-import { KnownRoles, SysFunction, SysMethod } from '@helpers/access'
+import { Roles, SysFunction, SysMethod } from '@helpers/access'
 import AuditTraceModel from '@models/audit-trace.model'
 import { AutoIncrementSimple } from '@typegoose/auto-increment'
 import {
@@ -6,7 +6,7 @@ import {
   modelOptions,
   plugin,
   pre,
-  prop,
+  prop, Ref,
   Severity
 } from '@typegoose/typegoose'
 import * as bcrypt from 'bcryptjs'
@@ -15,11 +15,12 @@ import { ParamsDictionary, RequestHandler } from 'express-serve-static-core'
 import jwt from 'jsonwebtoken'
 import mongoose, { Model } from 'mongoose'
 import { ParsedQs } from 'qs'
+import {AgentProfile} from "@models/agent-profile.model";
 
 export type JWTPayload = {
   subject: number
   username: string
-  roles: KnownRoles[]
+  roles: Roles[]
 }
 
 export type CustomReq<
@@ -40,7 +41,7 @@ export function generateAccessToken(payload: any) {
 
 export const checkPermissions = (
   user: JWTPayload | undefined,
-  roles: KnownRoles[],
+  roles: Roles[],
   autoThrow: boolean = true
 ) => {
   if (!user?.roles?.find((r) => roles.indexOf(r ?? -1) > -1))
@@ -67,7 +68,7 @@ export const AuditTrace: (
     next()
   }
 
-export const AuthenticateToken: (roles?: KnownRoles[]) => RequestHandler =
+export const AuthenticateToken: (roles?: Roles[]) => RequestHandler =
   (roles) => (req: CustomReq, res, next) => {
     const authHeader = req.headers.authorization
     const token = authHeader && authHeader.split(' ')[1]
@@ -113,19 +114,22 @@ export class User {
   }
 
   @prop({ unique: true })
-  public username?: string
+  public email!: string
 
   @prop({ unique: true })
-  public userId?: number
+  public userId!: number
 
   @prop()
   public jwtToken?: string
 
-  @prop({ type: KnownRoles, enum: KnownRoles })
-  public roles?: KnownRoles[]
+  @prop({ type: () => [String] })
+  public roles?: Roles[]
 
   @prop({ unique: true })
   public password!: string
+
+  @prop({ ref: () => AgentProfile })
+  public agentProfile?: Ref<AgentProfile>
 
   @prop()
   public token?: string
@@ -138,6 +142,10 @@ export class User {
   public comparePassword: (password: string) => Promise<boolean> =
     async function (this: User, password: string) {
       return bcrypt.compare(password, this.password)
+    }
+
+    public static findByEmail = async (email: string) => {
+      return UserModel.find().where('email').equals(email).exec()
     }
 }
 

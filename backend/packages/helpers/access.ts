@@ -7,18 +7,19 @@ export enum SysMethod {
   Update
 }
 
-export enum KnownRoles {
-  Admin
+export enum Roles {
+  Admin,
+  Agent
 }
 
 export const roleMap: { [key: string]: { [key: string]: SysMethod[] } } = {
-  [KnownRoles.Admin]: {
+  [Roles.Admin]: {
     [SysFunction.User]: [SysMethod.Create]
   }
 }
 
 export const reverseRoleMap = Object.keys(roleMap).reduce<{
-  [key: number]: { [key: number]: KnownRoles[] }
+  [key: number]: { [key: number]: Roles[] }
 }>((obj, role) => {
   Object.keys(roleMap[role] ?? {}).map((f) => {
     roleMap[role]?.[f]?.map((m) => {
@@ -29,7 +30,7 @@ export const reverseRoleMap = Object.keys(roleMap).reduce<{
       // eslint-disable-next-line no-param-reassign
       if (!obj[f][m]) obj[f][m] = []
       // @ts-ignore
-      obj[f][m].push(role as unknown as KnownRoles)
+      obj[f][m].push(role as unknown as Roles)
       return null
     })
     return null
@@ -40,7 +41,7 @@ export const reverseRoleMap = Object.keys(roleMap).reduce<{
 export const getRoles: (
   functions: SysFunction[],
   methods: SysMethod[]
-) => KnownRoles[] = (functions, methods) =>
+) => Roles[] = (functions, methods) =>
   functions.map((f) => methods.map((m) => reverseRoleMap[f]?.[m] ?? [])).flat(2)
 
 export const normalizePermissions: (
