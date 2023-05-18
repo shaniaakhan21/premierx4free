@@ -20,8 +20,8 @@ const comission2data = [
 
 const comission3data = [
     { col1: 'Clients', col2: 6000 },
-    { col1: 'Direct', col2: 2052},
-    { col1: 'Referrals ', col2: 303650},
+    { col1: 'Direct', col2: 2052 },
+    { col1: 'Referrals ', col2: 303650 },
 ]
 
 const Comission = ({ spanText }: Props) => {
@@ -37,22 +37,7 @@ const Comission = ({ spanText }: Props) => {
         <div className="box-main-commission">
             <div className="box-it">
                 <span className='textCustom'>{spanText}</span>
-                {/* <div className="tab-options">
-                    <div>
-                        <img src='assets/svg/Dashboard/filter.svg' />
-                        <span>Filter</span>
-                    </div>
-                    <div className='line'></div>
-                    <div>
-                        <span>Sort By</span>
-                        <div className="sort-arrows">
-                            <img src='assets/svg/Dashboard/up-sort.svg' />
-                            <img src='assets/svg/Dashboard/down-sort.svg' />
-                        </div>
-                    </div>
-                </div> */}
             </div>
-
             <Tabs
                 defaultActiveKey="customers"
                 id="uncontrolled-tab-example"
@@ -60,18 +45,36 @@ const Comission = ({ spanText }: Props) => {
                 onSelect={handleTabSelect}
             >
                 <Tab eventKey="customers" title="Customers">
+                    <div className="tab-options-box">
+                        <div className="tab-options">
+                            <img src='assets/svg/Dashboard/calender.svg' />
+                            <span>Monthly Calendar</span>
+                        </div>
+                    </div>
                     <div id="customers-tab-content">
-                        <TablesComp data={comissiondata}  col1head= 'Company Name' col2head= 'Contact Start Date' col3head= 'Contact End Date' col4head= 'Monthly Membership paid Number (No. People)' col5head= 'Commission Due'/>
+                        <TablesComp data={comissiondata} col1head='Company Name' col2head='Contact Start Date' col3head='Contact End Date' col4head='Monthly Membership paid Number (No. People)' col5head='Commission Due' />
                     </div>
                 </Tab>
                 <Tab eventKey="refferalscustomers" title="Referral Customers">
+                    <div className="tab-options-box">
+                        <div className="tab-options">
+                            <img src='assets/svg/Dashboard/calender.svg' />
+                            <span>Monthly Calendar</span>
+                        </div>
+                    </div>
                     <div id="customers-tab-content">
-                        <TablesComp data={comission2data}  col1head= 'Customer Name' col2head= 'Referral Agent' col3head= 'Contact Start Date' col4head= 'Contact End Date' col5head= 'Monthly Membership paid Number' col6head='Commission Due'/>
+                        <TablesComp data={comission2data} col1head='Customer Name' col2head='Referral Agent' col3head='Contact Start Date' col4head='Contact End Date' col5head='Monthly Membership paid Number' col6head='Commission Due' />
                     </div>
                 </Tab>
                 <Tab eventKey="summary" title="Summary">
+                    <div className="tab-options-box">
+                        <div className="tab-options">
+                            <img src='assets/svg/Dashboard/calender.svg' />
+                            <span>Monthly Calendar</span>
+                        </div>
+                    </div>
                     <div id="customers-tab-content">
-                        <TablesComp data={comission3data} col1head=' ' col2head= 'Commission Due' />
+                        <TablesComp data={comission3data} col1head=' ' col2head='Commission Due' />
                     </div>
                 </Tab>
             </Tabs>
