@@ -1,0 +1,18 @@
+{
+  "restartable": "rs",
+  "ignore": [
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    ".git",
+    "node_modules"
+  ],
+  "watch": [
+    "./app/",
+    "./packages/"
+  ],
+  "exec": "cross-env NODE_ENV=development ts-node -r tsconfig-paths/register --project tsconfig.json ./server.ts",
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "ext": "js,ts,json"
+}

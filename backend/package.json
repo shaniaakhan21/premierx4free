@@ -2,18 +2,50 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "db.js",
+  "main": "server.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "lint": "eslint --ext .js,.ts .",
+    "lint-fix": "eslint --ext .js,.ts . --fix",
+    "lint-staged": "lint-staged",
+    "build-types": "tsc --noEmit --pretty",
+    "start": "nodemon --watch"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@typegoose/auto-increment": "^3.1.0",
+    "@typegoose/typegoose": "^11.1.0",
+    "body-parser": "^1.20.2",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "helmet": "^7.0.0",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.1.1",
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "qs": "^6.11.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "@types/jsonwebtoken": "^9.0.2",
+    "@typescript-eslint/eslint-plugin": "^5.10.1",
+    "@typescript-eslint/parser": "^5.10.1",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.7.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "lint-staged": "^13.2.2",
+    "prettier": "^2.6.1",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.0.4"
   }
 }

@@ -1,0 +1,44 @@
+{
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "lib": ["es2017", "dom", "dom.iterable"],
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "strict": true,
+        "alwaysStrict": true,
+        "strictNullChecks": true,
+        "noUncheckedIndexedAccess": true,
+
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "allowUnreachableCode": false,
+        "noFallthroughCasesInSwitch": true,
+
+        "target": "es2017",
+        "outDir": "dist",
+        "declaration": true,
+        "sourceMap": true,
+
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "allowJs": false,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+
+        "baseUrl": ".",
+
+        "paths": {
+            "@config/*": ["./packages/config/*"],
+            "@helpers/*": ["./packages/helpers/*"],
+            "@models/*": ["./packages/models/*"],
+        }
+    },
+    "exclude": ["./dist/**/*", "./node_modules/**/*"]
+}
