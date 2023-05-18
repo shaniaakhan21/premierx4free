@@ -8,8 +8,8 @@ export enum SysMethod {
 }
 
 export enum Roles {
-  Admin,
-  Agent
+  Admin = 'Admin',
+  Agent = 'Agent'
 }
 
 export const roleMap: { [key: string]: { [key: string]: SysMethod[] } } = {

@@ -1,6 +1,6 @@
 import { Roles, SysFunction, SysMethod } from '@helpers/access'
 import AuditTraceModel from '@models/audit-trace.model'
-import { AutoIncrementSimple } from '@typegoose/auto-increment'
+import {AutoIncrementID} from '@typegoose/auto-increment'
 import {
   getModelForClass,
   modelOptions,
@@ -103,11 +103,11 @@ export const AuthenticateToken: (roles?: Roles[]) => RequestHandler =
   }
   return next()
 })
-@plugin(AutoIncrementSimple, [{ field: 'userId' }])
 @modelOptions({
   options: { allowMixed: Severity.ERROR, customName: 'users' },
   schemaOptions: { collection: 'users' }
 })
+@plugin(AutoIncrementID, { field: 'userId' })
 export class User {
   constructor(d: Partial<User>) {
     Object.assign(this, d)

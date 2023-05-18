@@ -1,4 +1,4 @@
-import { AutoIncrementSimple } from '@typegoose/auto-increment'
+import {AutoIncrementID} from '@typegoose/auto-increment'
 import {getModelForClass, modelOptions, plugin, prop, Severity} from '@typegoose/typegoose'
 import mongoose, { Model } from 'mongoose'
 
@@ -16,11 +16,11 @@ export class AgentProfileLocation {
   public zip?: string
 }
 
-@plugin(AutoIncrementSimple, [{ field: 'agentId' }])
 @modelOptions({
   options: { allowMixed: Severity.ERROR, customName: 'agentProfiles' },
   schemaOptions: { collection: 'agentProfiles' }
 })
+@plugin(AutoIncrementID, { field: 'agentId' })
 export class AgentProfile {
   constructor(d: Partial<AgentProfile>) {
     Object.assign(this, d)
