@@ -6,8 +6,9 @@ master:
     - nsur-runner-1
   script:
     - cd /home/gitlab-runner/publicwebsite/frontend
-    - git reset --hard HEAD
-    - rm -rf frontend/package-lock.json
+    - git fetch origin master
+    - git reset --hard origin/master
+    - git clean -n -f -d
     - git pull
     - npm i --force
     - npm run build
