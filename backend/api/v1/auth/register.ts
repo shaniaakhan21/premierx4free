@@ -1,26 +1,23 @@
+import { Roles } from '@helpers/access'
 import { CustomRequestHandler, RecordAlreadyExistsError } from '@helpers/errorHandler'
-import { Request } from 'express'
+import { transactional } from '@helpers/global'
 import { successResponse } from '@helpers/response'
 import AgentProfileModel, { AgentProfile } from '@models/agent-profile.model'
 import UserModel, { User } from '@models/user.model'
-import { transactional } from '@helpers/global'
-import { Roles } from '@helpers/access'
+import { Request } from 'express'
 
 type RegisterRequest = Omit<AgentProfile, 'agentId'> & Pick<User, 'email' | 'password'>
 
-const register: CustomRequestHandler = async (
-  req: Request<{}, {}, RegisterRequest>,
-  res
-) => {
-  const exist = await User.findByEmail(req.body.email)
+const register: CustomRequestHandler = async (req: Request<{}, {}, RegisterRequest>, res) => {
+  const exist = await UserModel.findByEmail(req.body.email)
 
-  if (exist.length > 0) throw new RecordAlreadyExistsError('Agent with this email already exists')
+  if (exist) throw new RecordAlreadyExistsError('Agent with this email already exists')
 
   const user = await UserModel.create({
     email: req.body.email,
     password: req.body.password,
     roles: [Roles.Agent]
-  });
+  })
 
   const agent = await AgentProfileModel.create({
     name: req.body.name,
@@ -32,7 +29,7 @@ const register: CustomRequestHandler = async (
       zip: req.body.location?.zip
     },
     referralCode: req.body.referralCode
-  });
+  })
 
   user.agentProfile = agent._id
   await user.save()

@@ -12,6 +12,12 @@ export enum Roles {
   Agent = 'Agent'
 }
 
+export enum ClassTransformerRoles {
+  Self = 'Self',
+  Referrer = 'Referrer',
+  Referee = 'Referee'
+}
+
 export const roleMap: { [key: string]: { [key: string]: SysMethod[] } } = {
   [Roles.Admin]: {
     [SysFunction.User]: [SysMethod.Create]
@@ -38,15 +44,12 @@ export const reverseRoleMap = Object.keys(roleMap).reduce<{
   return obj
 }, {})
 
-export const getRoles: (
-  functions: SysFunction[],
-  methods: SysMethod[]
-) => Roles[] = (functions, methods) =>
+export const getRoles: (functions: SysFunction[], methods: SysMethod[]) => Roles[] = (functions, methods) =>
   functions.map((f) => methods.map((m) => reverseRoleMap[f]?.[m] ?? [])).flat(2)
 
-export const normalizePermissions: (
-  permSets: { [key: string]: SysMethod[] }[]
-) => { [key: string]: string[] } = (permSets) => {
+export const normalizePermissions: (permSets: { [key: string]: SysMethod[] }[]) => { [key: string]: string[] } = (
+  permSets
+) => {
   const perms: { [key: string]: string[] } = {}
   permSets.map((permSet) => {
     Object.keys(permSet).map((f) => {

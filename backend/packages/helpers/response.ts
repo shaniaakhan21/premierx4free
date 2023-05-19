@@ -12,10 +12,7 @@ export type SuccessResponse<T> = GenericResponse & {
   data?: T
 }
 
-export const successResponse = <T>(
-  data?: T,
-  message = 'Success'
-): SuccessResponse<T> => ({
+export const successResponse = <T>(data?: T, message = 'Success'): SuccessResponse<T> => ({
   success: true,
   message,
   data
