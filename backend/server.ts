@@ -19,7 +19,7 @@ dotenv.config({ path: path.resolve(__dirname, `.env.${process.env.NODE_ENV}`) })
 
 console.info('Starting Premierx4free Backend')
 
-const staticRoot = path.join(__dirname, '/../frontend/build')
+const staticRoot = path.join(__dirname, '/../frontend/dist')
 const app = express()
 
 // Express plugins

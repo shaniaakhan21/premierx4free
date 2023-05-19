@@ -1,3 +1,5 @@
+import { ClassTransformerRoles, Roles } from '@helpers/access'
+import ModelInterface from '@models/model.interface'
 import UserModel from '@models/user.model'
 import { AutoIncrementID } from '@typegoose/auto-increment'
 import {
@@ -10,9 +12,17 @@ import {
   ReturnModelType,
   Severity
 } from '@typegoose/typegoose'
-import { Expose, Type } from 'class-transformer'
+import { Exclude, Expose, Type } from 'class-transformer'
 import { ValidateNested } from 'class-validator'
 import mongoose from 'mongoose'
+
+export enum AgentStatus {
+  Registered = 'Registered',
+  PendingSign = 'PendingSign',
+  Active = 'Active',
+  Suspended = 'Suspended',
+  Terminated = 'Terminated'
+}
 
 export class AgentProfileLocation {
   @prop()
@@ -28,34 +38,46 @@ export class AgentProfileLocation {
   public zip?: string
 }
 
+@Exclude()
 @modelOptions({
   options: { allowMixed: Severity.ERROR, customName: 'agentProfiles' },
   schemaOptions: { collection: 'agentProfiles' }
 })
 @plugin(AutoIncrementID, { field: 'agentId' })
-export class AgentProfile {
+export class AgentProfile extends ModelInterface {
   constructor(d: Partial<AgentProfile>) {
+    super()
     Object.assign(this, d)
   }
 
   @prop()
+  @Expose()
   public agentId!: number
 
   @prop()
+  @Expose()
   public name!: string
 
   @ValidateNested()
   @Type(() => AgentProfileLocation)
   @prop({ type: AgentProfileLocation })
+  @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
   public location?: AgentProfileLocation
 
   @prop()
+  @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
   public contactNo?: string
 
-  @Expose()
+  @prop({ enum: AgentStatus })
+  public status?: AgentStatus
+
   @Type(() => String)
   @prop({ ref: () => AgentProfile })
+  @Expose({ groups: [ClassTransformerRoles.Self, ClassTransformerRoles.Referrer, Roles.Admin] })
   public referrer?: Ref<AgentProfile>
+
+  @Expose({ groups: [ClassTransformerRoles.Self, ClassTransformerRoles.Referrer, Roles.Admin] })
+  public subordinates?: AgentProfile[]
 
   /**
    * Find agent subordinates
