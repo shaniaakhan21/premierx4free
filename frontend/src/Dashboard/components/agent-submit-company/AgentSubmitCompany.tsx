@@ -110,6 +110,15 @@ function AgentSubmitCompany(): JSX.Element {
                                 </Form.Control.Feedback>
                             </Form.Group>
                         </Col>
+                        <Col lg={6}>
+                            <Form.Group controlId="insuranceInfo">
+                                <Form.Label>Commission Rate</Form.Label>
+                                <Form.Control required type="text" />
+                                <Form.Control.Feedback type="invalid">
+                                    Please enter Commission Rate.
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                        </Col>
                     </Row>
                     <Row className="flex-box-it first-phone-row">
                         <Col >
