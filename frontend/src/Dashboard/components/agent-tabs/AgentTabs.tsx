@@ -70,7 +70,7 @@ function AgentTabs(): JSX.Element {
         <>
             <Row className='phone-row'>
                 <Col sm="2" lg="12" className='phone-logo'>
-                   <a  href='/'><img className="card-img-top" src={"/assets/svg/Dashboard/logo-dash.svg"} alt="Card image cap" /></a> 
+                    <a href='/'><img className="card-img-top" src={"/assets/svg/Dashboard/logo-dash.svg"} alt="Card image cap" /></a>
                 </Col>
                 <Col sm="1" lg="12" className='phone-hamburger'>
                     <div>
@@ -167,20 +167,18 @@ function AgentTabs(): JSX.Element {
                                 <MarketingMaterials />
                             </Tab.Pane>
                             <Tab.Pane eventKey="fifth" className='tab-pane-fifth'>
-                                <div className="container mt-4">
-                                    <AgentSettings
-                                        imageUrl={profile.imageUrl}
-                                        fullName={profile.fullName}
-                                        email={profile.email}
-                                        phone={profile.phone}
-                                        zip={profile.zip}
-                                        currentPassword={profile.currentPassword}
-                                        newPassword={profile.newPassword}
-                                        confirmNewPassword={profile.confirmNewPassword}
-                                        onCancel={handleCancel}
-                                        onSave={handleSave}
-                                    />
-                                </div>
+                                <AgentSettings
+                                    imageUrl={profile.imageUrl}
+                                    fullName={profile.fullName}
+                                    email={profile.email}
+                                    phone={profile.phone}
+                                    zip={profile.zip}
+                                    currentPassword={profile.currentPassword}
+                                    newPassword={profile.newPassword}
+                                    confirmNewPassword={profile.confirmNewPassword}
+                                    onCancel={handleCancel}
+                                    onSave={handleSave}
+                                />
                             </Tab.Pane>
                             <Tab.Pane eventKey="sixth" className='tab-pane-sixth'>
                                 Logout
