@@ -119,15 +119,6 @@ function TableRow(props:data):JSX.Element{
                             Approve
                         </div>
                         </div>
-                        
-                        <div className={classes.reject_button_container}>
-                        <div>
-                            <img src='/assets/svg/icons/icon_reject.svg' className={classes.buttonIcon} />
-                        </div>
-                        <div className={classes.reject_button}>
-                            Reject
-                        </div>
-                        </div>
 
                     </div>
                 </div>
