@@ -24,7 +24,7 @@ import { ParsedQs } from 'qs'
 
 export type JWTPayload = {
   subject: number
-  username: string
+  email: string
   roles: Roles[]
 }
 
@@ -56,7 +56,7 @@ export const AuditTrace: (action: SysFunction, method: SysMethod) => RequestHand
     await AuditTraceModel.create({
       action,
       method,
-      by: req.user?.username,
+      by: req.user?.email,
       remarks: `URL - ${req.url} | Body - ${JSON.stringify(req.body)} | Params - ${JSON.stringify(
         req.params
       )} | Query - ${JSON.stringify(req.query)}`
@@ -144,7 +144,7 @@ export class User {
   public async generateJWT(this: DocumentType<User>) {
     const payload: JWTPayload = {
       subject: this.userId,
-      username: this.email,
+      email: this.email,
       roles: this.roles ?? []
     }
     this.jwtToken = generateAccessToken(payload)
@@ -152,8 +152,22 @@ export class User {
     return this.jwtToken
   }
 
+  /**
+   * Find user by email
+   * @param email
+   * @returns Promise<User | null>
+   */
   public static async findByEmail(this: ReturnModelType<typeof User>, email: string) {
     return this.findOne().where('email').equals(email).exec()
+  }
+
+  /**
+   * Find user by userId
+   * @param userId
+   * @returns Promise<User | null>
+   */
+  public static async findByUserId(this: ReturnModelType<typeof User>, userId: number) {
+    return this.findOne().where('userId').equals(userId).exec()
   }
 }
 

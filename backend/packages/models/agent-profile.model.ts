@@ -1,8 +1,18 @@
+import UserModel from '@models/user.model'
 import { AutoIncrementID } from '@typegoose/auto-increment'
-import { getModelForClass, modelOptions, plugin, prop, Severity } from '@typegoose/typegoose'
-import { Type } from 'class-transformer'
+import {
+  DocumentType,
+  getModelForClass,
+  modelOptions,
+  plugin,
+  prop,
+  Ref,
+  ReturnModelType,
+  Severity
+} from '@typegoose/typegoose'
+import { Expose, Type } from 'class-transformer'
 import { ValidateNested } from 'class-validator'
-import mongoose, { Model } from 'mongoose'
+import mongoose from 'mongoose'
 
 export class AgentProfileLocation {
   @prop()
@@ -42,10 +52,48 @@ export class AgentProfile {
   @prop()
   public contactNo?: string
 
-  @prop()
-  public referralCode?: string
+  @Expose()
+  @Type(() => String)
+  @prop({ ref: () => AgentProfile })
+  public referrer?: Ref<AgentProfile>
+
+  /**
+   * Find agent subordinates
+   * @returns Promise<AgentProfile[]>
+   */
+  public async getSubordinates(this: DocumentType<AgentProfile>) {
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
+    return AgentProfileModel.getSubordinates(this._id)
+  }
+
+  /**
+   * Find agent profile by agentId
+   * @param agentId
+   * @returns Promise<AgentProfile | null>
+   */
+  public static async findByAgentId(this: ReturnModelType<typeof AgentProfile>, agentId: number) {
+    return this.findOne().where('agentId').equals(agentId).exec()
+  }
+
+  public static async findByUserId(this: ReturnModelType<typeof AgentProfile>, userId: number) {
+    const agentProfileObjectId = (await UserModel.findByUserId(userId))?.agentProfile
+    return this.findById(agentProfileObjectId).exec()
+  }
+
+  /**
+   * Find agent subordinates by agentObjectId
+   * @param agentObjectId
+   * @returns Promise<AgentProfile[]>
+   */
+  public static async getSubordinates(
+    this: ReturnModelType<typeof AgentProfile>,
+    agentObjectId: mongoose.Types.ObjectId | string
+  ) {
+    return this.find().where('referrer').equals(new mongoose.Types.ObjectId(agentObjectId.toString())).exec()
+  }
 }
 
-const AgentProfileModel = (mongoose.models?.agentProfiles as Model<AgentProfile>) ?? getModelForClass(AgentProfile)
+const AgentProfileModel =
+  (mongoose.models?.agentProfiles as ReturnModelType<typeof AgentProfile>) ?? getModelForClass(AgentProfile)
 
 export default AgentProfileModel

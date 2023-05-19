@@ -6,7 +6,7 @@ import AgentProfileModel, { AgentProfile } from '@models/agent-profile.model'
 import UserModel, { User } from '@models/user.model'
 import { Request } from 'express'
 
-type RegisterRequest = Omit<AgentProfile, 'agentId'> & Pick<User, 'email' | 'password'>
+type RegisterRequest = Omit<AgentProfile, 'agentId'> & Pick<User, 'email' | 'password'> & { referrer?: number }
 
 const register: CustomRequestHandler = async (req: Request<{}, {}, RegisterRequest>, res) => {
   const exist = await UserModel.findByEmail(req.body.email)
@@ -19,7 +19,7 @@ const register: CustomRequestHandler = async (req: Request<{}, {}, RegisterReque
     roles: [Roles.Agent]
   })
 
-  const agent = await AgentProfileModel.create({
+  const agentData: Partial<AgentProfile> = {
     name: req.body.name,
     contactNo: req.body.contactNo,
     location: {
@@ -27,9 +27,15 @@ const register: CustomRequestHandler = async (req: Request<{}, {}, RegisterReque
       city: req.body.location?.city,
       state: req.body.location?.state,
       zip: req.body.location?.zip
-    },
-    referralCode: req.body.referralCode
-  })
+    }
+  }
+
+  if (req.body.referrer && req.body.referrer?.toString() !== '') {
+    const referrer = await AgentProfileModel.findByAgentId(req.body.referrer)
+    if (referrer) agentData.referrer = referrer._id
+  }
+
+  const agent = await AgentProfileModel.create(agentData)
 
   user.agentProfile = agent._id
   await user.save()

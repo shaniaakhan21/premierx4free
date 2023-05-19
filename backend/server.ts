@@ -2,6 +2,7 @@ import * as path from 'path'
 import * as process from 'process'
 
 import { PORT } from '@config/global'
+import { APINotImplementedError } from '@helpers/errorHandler'
 import { connectDB } from '@helpers/global'
 import * as bodyParser from 'body-parser'
 import cors from 'cors'
@@ -18,6 +19,7 @@ dotenv.config({ path: path.resolve(__dirname, `.env.${process.env.NODE_ENV}`) })
 
 console.info('Starting Premierx4free Backend')
 
+const staticRoot = path.join(__dirname, '/../frontend/build')
 const app = express()
 
 // Express plugins
@@ -26,18 +28,25 @@ app.use(cors())
 app.use(bodyParser.json({ limit: '50mb' }))
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }))
 
+app.use(express.static(staticRoot))
+
 connectDB()
   .then(() => console.info('Connected to MongoDB'))
   .catch((e) => console.error('Error connecting to MongoDB', e))
 
 app.use('/api', apiRouter)
 
-app.get('/*', (_, res) => {
+app.get('*', (req, res) => {
+  if (req.get('Content-Type') === 'application/json') throw new APINotImplementedError('API not implemented')
   try {
-    res.sendFile(path.join(__dirname, '/../frontend/build', 'index.html'))
+    res.sendFile(path.resolve(staticRoot, 'index.html'))
   } catch (e) {
     res.send('Oops! unexpected error')
   }
+})
+
+app.use((_req, _res, _next) => {
+  throw new APINotImplementedError('API not implemented')
 })
 
 app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
@@ -46,10 +55,6 @@ app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     message: err.message,
     stack: err.stack
   })
-})
-
-app.use((_req, res, _next) => {
-  res.status(404).json({ error: 'NOT FOUND' })
 })
 
 app.listen(PORT, () => {
