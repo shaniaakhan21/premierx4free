@@ -15,7 +15,7 @@ import {
   Severity
 } from '@typegoose/typegoose'
 import * as bcrypt from 'bcryptjs'
-import { Exclude, Expose } from 'class-transformer'
+import { Exclude, Expose, instanceToPlain, plainToInstance } from 'class-transformer'
 import { Request } from 'express'
 import { ParamsDictionary, RequestHandler } from 'express-serve-static-core'
 import * as HttpStatus from 'http-status'
@@ -154,6 +154,11 @@ export class User extends ModelInterface {
     return this.jwtToken
   }
 
+  public format(this: DocumentType<User>, roles: (Roles | ClassTransformerRoles)[] = []) {
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
+    return UserModel.formatDocument(this, roles)
+  }
+
   /**
    * Find user by email
    * @param email
@@ -170,6 +175,24 @@ export class User extends ModelInterface {
    */
   public static async findByUserId(this: ReturnModelType<typeof User>, userId: number) {
     return this.findOne().where('userId').equals(userId).exec()
+  }
+
+  /**
+   * Format user document
+   * @param user
+   * @param roles
+   * @returns User
+   */
+  public static formatDocument(
+    this: ReturnModelType<typeof User>,
+    user: DocumentType<User>,
+    roles: (Roles | ClassTransformerRoles)[] = []
+  ) {
+    const options = {
+      groups: roles,
+      enableCircularCheck: true
+    }
+    return instanceToPlain(plainToInstance(User, user.toJSON(), options), options)
   }
 }
 

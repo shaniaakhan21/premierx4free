@@ -4,11 +4,10 @@ import { transactional } from '@helpers/global'
 import { successResponse } from '@helpers/response'
 import AgentProfileModel, { AgentProfile } from '@models/agent-profile.model'
 import UserModel, { User } from '@models/user.model'
-import { Request } from 'express'
 
 type RegisterRequest = Omit<AgentProfile, 'agentId'> & Pick<User, 'email' | 'password'> & { referrer?: number }
 
-const register: CustomRequestHandler = async (req: Request<{}, {}, RegisterRequest>, res) => {
+const register: CustomRequestHandler<{}, any, RegisterRequest> = async (req, res) => {
   const exist = await UserModel.findByEmail(req.body.email)
 
   if (exist) throw new RecordAlreadyExistsError('Agent with this email already exists')

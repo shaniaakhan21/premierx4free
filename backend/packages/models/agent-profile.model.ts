@@ -98,7 +98,7 @@ export class AgentProfile extends ModelInterface {
 
   public format(this: DocumentType<AgentProfile>, roles: (Roles | ClassTransformerRoles)[] = []) {
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
-    return AgentProfileModel.formatAgentDocument(this, roles)
+    return AgentProfileModel.formatDocument(this, roles)
   }
 
   /**
@@ -138,13 +138,13 @@ export class AgentProfile extends ModelInterface {
    * @param roles
    * @returns Promise<AgentProfile>
    */
-  public static formatAgentDocument(
+  public static formatDocument(
     this: ReturnModelType<typeof AgentProfile>,
     agent: DocumentType<AgentProfile>,
     roles: (Roles | ClassTransformerRoles)[] = []
   ) {
     const options = {
-      groups: [ClassTransformerRoles.Referrer, ...roles],
+      groups: roles,
       enableCircularCheck: true
     }
     return instanceToPlain(plainToInstance(AgentProfile, agent.toJSON(), options), options)
