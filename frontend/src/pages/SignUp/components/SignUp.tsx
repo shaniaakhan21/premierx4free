@@ -30,12 +30,16 @@ function SignUp(): JSX.Element {
         e.preventDefault();
 
         try {
+            if(password!==confirmPassword)
+            {
+                setErrorMsg("passwords did not match")
+                return
+            }
             const res = await axios.post("http://localhost:5000/api/user/signup", {
                 fullName,
                 email,
                 phoneNumber,
                 password,
-                confirmPassword,
                 address,
                 city,
                 state,

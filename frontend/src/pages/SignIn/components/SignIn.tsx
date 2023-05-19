@@ -27,10 +27,13 @@ function SignIn(): JSX.Element {
             }
              await axios.post('/api/v1/auth/login',body)
              .then((response) => {
-                if (response) {
+                console.log("response",response.data.success)
+                if (response.data.success) {
+                    console.log("login successful")
                     // login successful, redirect to home page
                     history("/");
                 } else {
+                    console.log("login failed")
                     // login failed, show error message
                     setErrorMsg("Invalid email or password");
                 }

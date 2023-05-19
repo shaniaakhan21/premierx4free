@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { CustomRequestHandler } from '@helpers/errorHandler'
 import { successResponse } from '@helpers/response'
 import { Request } from 'express'
