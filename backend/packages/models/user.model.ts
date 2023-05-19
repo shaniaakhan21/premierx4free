@@ -1,6 +1,7 @@
 import { ClassTransformerRoles, Roles, SysFunction, SysMethod } from '@helpers/access'
 import { AgentProfile } from '@models/agent-profile.model'
 import AuditTraceModel from '@models/audit-trace.model'
+import ModelInterface from '@models/model.interface'
 import { AutoIncrementID } from '@typegoose/auto-increment'
 import {
   DocumentType,
@@ -100,8 +101,9 @@ export const AuthenticateToken: (roles?: Roles[]) => RequestHandler = (roles) =>
   schemaOptions: { collection: 'users' }
 })
 @plugin(AutoIncrementID, { field: 'userId' })
-export class User {
+export class User extends ModelInterface {
   constructor(d: Partial<User>) {
+    super()
     Object.assign(this, d)
   }
 
