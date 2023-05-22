@@ -13,7 +13,7 @@ import {
   Severity
 } from '@typegoose/typegoose'
 import { Exclude, Expose, instanceToPlain, plainToInstance, Type } from 'class-transformer'
-import { ValidateNested } from 'class-validator'
+import { Equals, IsNumber, IsOptional, IsPositive, IsString, ValidateNested } from 'class-validator'
 import mongoose from 'mongoose'
 
 export enum AgentStatus {
@@ -24,17 +24,37 @@ export enum AgentStatus {
   Terminated = 'Terminated'
 }
 
+@Exclude()
 export class AgentProfileLocation {
+  constructor(d: Partial<AgentProfileLocation>) {
+    Object.assign(this, d)
+  }
+
+  @Equals(undefined)
+  public _id?: mongoose.Types.ObjectId | string
+
+  @IsString()
+  @IsOptional()
   @prop()
+  @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
   public address?: string
 
+  @IsString()
+  @IsOptional()
   @prop()
+  @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
   public city?: string
 
+  @IsString()
+  @IsOptional()
   @prop()
+  @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
   public state?: string
 
+  @IsString()
+  @IsOptional()
   @prop()
+  @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
   public zip?: string
 }
 
@@ -50,10 +70,11 @@ export class AgentProfile extends ModelInterface {
     Object.assign(this, d)
   }
 
-  @prop()
+  @prop({ index: true, unique: true })
   @Expose()
   public agentId!: number
 
+  @IsString()
   @prop()
   @Expose()
   public name!: string
@@ -64,6 +85,7 @@ export class AgentProfile extends ModelInterface {
   @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
   public location?: AgentProfileLocation
 
+  @IsOptional()
   @prop()
   @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
   public contactNo?: string
@@ -76,9 +98,11 @@ export class AgentProfile extends ModelInterface {
   @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
   public contract?: string
 
-  @prop({ enum: AgentStatus, default: AgentStatus.Registered })
+  @prop({ enum: AgentStatus, default: AgentStatus.Registered, index: true })
   public status?: AgentStatus
 
+  @IsNumber()
+  @IsPositive()
   @Type(() => String)
   @prop({ ref: () => AgentProfile })
   @Expose({ groups: [ClassTransformerRoles.Self, ClassTransformerRoles.Referrer, Roles.Admin] })

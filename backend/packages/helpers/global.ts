@@ -34,10 +34,18 @@ export default async function validateClass(data: object) {
   try {
     await validateOrReject(data)
   } catch (e: any) {
-    const message = e
-      .map((e2: any) => Object.values(e2.constraints))
-      .flat()
-      .join('. ')
+    console.log(e)
+    const getConstraints: (e2: any, parentProperty?: string) => string[] = (e2, parentProperty) => {
+      if (e2.constraints) {
+        return (Object.values(e2.constraints) as string[]).map(
+          (s) => `${parentProperty ? `${parentProperty}.` : ''}${s}`
+        )
+      }
+      return Object.values(e2.children)
+        .map((e3: any) => getConstraints(e3, e2.property))
+        .flat()
+    }
+    const message = e.map(getConstraints).flat().join('. ')
     const error = new InvalidRequestError(message)
     error.publicMessage = message
     throw error

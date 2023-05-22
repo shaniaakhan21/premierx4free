@@ -16,6 +16,7 @@ import {
 } from '@typegoose/typegoose'
 import * as bcrypt from 'bcryptjs'
 import { Exclude, Expose, instanceToPlain, plainToInstance } from 'class-transformer'
+import { IsEmail, IsString, MinLength } from 'class-validator'
 import { Request } from 'express'
 import { ParamsDictionary, RequestHandler } from 'express-serve-static-core'
 import * as HttpStatus from 'http-status'
@@ -107,12 +108,14 @@ export class User extends ModelInterface {
     Object.assign(this, d)
   }
 
+  @IsString()
+  @IsEmail()
   @Expose()
-  @prop({ unique: true })
+  @prop({ unique: true, index: true })
   public email!: string
 
   @Expose()
-  @prop({ unique: true })
+  @prop({ unique: true, index: true })
   public userId!: number
 
   @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
@@ -123,6 +126,8 @@ export class User extends ModelInterface {
   @prop({ type: () => [String] })
   public roles?: Roles[]
 
+  @IsString()
+  @MinLength(8)
   @prop({ unique: true })
   public password!: string
 

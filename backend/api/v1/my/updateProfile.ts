@@ -1,28 +1,58 @@
 import { ClassTransformerRoles } from '@helpers/access'
 import { CustomRequestHandler, RecordNotFoundError } from '@helpers/errorHandler'
-import { transactional } from '@helpers/global'
+import validateClass, { transactional } from '@helpers/global'
 import { successResponse } from '@helpers/response'
-import AgentProfileModel, { AgentProfile } from '@models/agent-profile.model'
+import AgentProfileModel, { AgentProfile, AgentProfileLocation } from '@models/agent-profile.model'
 import UserModel, { User } from '@models/user.model'
+import { Exclude, Expose, plainToClass, Type } from 'class-transformer'
+import { IsEmail, IsOptional, IsString, MinLength, ValidateNested } from 'class-validator'
 
-export type UpdateProfileRequest = Pick<AgentProfile, 'name' | 'contactNo' | 'location'> &
-  Pick<User, 'email' | 'password'>
+@Exclude()
+export class UpdateProfileRequest {
+  constructor(body: any) {
+    Object.assign(this, body)
+  }
+
+  @IsString()
+  @Expose()
+  public name!: AgentProfile['name']
+
+  @IsString()
+  @Expose()
+  public contactNo: AgentProfile['contactNo']
+
+  @ValidateNested()
+  @Type(() => AgentProfileLocation)
+  @Expose()
+  public location!: AgentProfileLocation
+
+  @IsString()
+  @IsEmail()
+  @Expose()
+  public email!: User['email']
+
+  @IsString()
+  @MinLength(8)
+  @IsOptional()
+  @Expose()
+  public password?: User['password']
+}
 
 const updateProfile: CustomRequestHandler<{}, any, UpdateProfileRequest> = async (req, res) => {
+  const request = plainToClass(UpdateProfileRequest, req.body, {
+    strategy: 'excludeAll',
+    exposeUnsetFields: false,
+    groups: [ClassTransformerRoles.Self, ...(req.user?.roles ?? [])]
+  })
+  await validateClass(request)
   const user = await UserModel.findByUserId(req.user!.subject)
   if (!user) throw new RecordNotFoundError('Agent not found')
   const agent = await AgentProfileModel.findById(user.agentProfile)
   if (!agent) throw new RecordNotFoundError('Agent not found')
-  agent.name = req.body.name
-  agent.contactNo = req.body.contactNo
-  agent.location = {
-    address: req.body.location?.address,
-    city: req.body.location?.city,
-    state: req.body.location?.state,
-    zip: req.body.location?.zip
-  }
-  user.email = req.body.email
-  if (req.body.password) user.password = req.body.password
+  const { email, password, ...agentData } = request
+  agent.set(agentData)
+  user.email = email
+  if (password) user.password = password
 
   // Do not use `updateOne` method of mongoose, it will not trigger `pre` and `post` hooks
   await user.save()
