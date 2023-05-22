@@ -39,7 +39,7 @@ function AgentTabs(props:data): JSX.Element {
 
     const data = [
         { col1: 'Acme Corporation', col2: '50', col3: '$ 500', col4: 'Approved', col5: 'Lorem Ipsum is simply dummy text of the printing ...' },
-        { col1: 'Vehement Capital.Inc', col2: '50', col3: '$ 500', col4: 'Rejected', col5: 'Lorem Ipsum is simply dummy text of the printing ...' },
+        { col1: 'Vehement Capital.Inc', col2: '50', col3: '$ 500', col4: 'Pending', col5: 'Lorem Ipsum is simply dummy text of the printing ...' },
         { col1: 'Massive Dynamic.LLC', col2: '50', col3: '$ 400', col4: 'Pending', col5: 'Lorem Ipsum is simply dummy text of the printing ...' },
     ]
 
@@ -73,7 +73,7 @@ function AgentTabs(props:data): JSX.Element {
         <>
             <Row className='phone-row'>
                 <Col sm="2" lg="12" className='phone-logo'>
-                    <a href='/'><img className="card-img-top" src={"/assets/svg/Dashboard/logo-dash.svg"} alt="Card image cap" /></a>
+                   <a  href='/'><img className="card-img-top" src={"/assets/svg/Dashboard/logo-dash.svg"} alt="Card image cap" /></a> 
                 </Col>
                 <Col sm="1" lg="12" className='phone-hamburger'>
                     <div>
@@ -170,18 +170,20 @@ function AgentTabs(props:data): JSX.Element {
                                 <MarketingMaterials />
                             </Tab.Pane>
                             <Tab.Pane eventKey="fifth" className='tab-pane-fifth'>
-                                <AgentSettings
-                                    imageUrl={profile.imageUrl}
-                                    fullName={profile.fullName}
-                                    email={profile.email}
-                                    phone={profile.phone}
-                                    zip={profile.zip}
-                                    currentPassword={profile.currentPassword}
-                                    newPassword={profile.newPassword}
-                                    confirmNewPassword={profile.confirmNewPassword}
-                                    onCancel={handleCancel}
-                                    onSave={handleSave}
-                                />
+                                <div className="container mt-4">
+                                    <AgentSettings
+                                        imageUrl={profile.imageUrl}
+                                        fullName={profile.fullName}
+                                        email={profile.email}
+                                        phone={profile.phone}
+                                        zip={profile.zip}
+                                        currentPassword={profile.currentPassword}
+                                        newPassword={profile.newPassword}
+                                        confirmNewPassword={profile.confirmNewPassword}
+                                        onCancel={handleCancel}
+                                        onSave={handleSave}
+                                    />
+                                </div>
                             </Tab.Pane>
                             <Tab.Pane eventKey="sixth" className='tab-pane-sixth'>
                                 Logout

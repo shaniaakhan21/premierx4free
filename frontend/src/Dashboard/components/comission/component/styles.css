@@ -20,10 +20,37 @@
 }
 
 .grid-for-number{
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: bold;
     margin: 5% 9%;
 }
+
+
+@media only screen and (max-width:1700px)
+{
+    .grid-for-number{
+        font-size: 1rem;
+    }
+
+    .box-for-total{
+        width: 20%;
+    }
+
+}
+
+
+@media only screen and (max-width:1200px)
+{
+    .grid-for-number{
+        font-size: 0.9rem;
+    }
+
+    .box-for-total{
+
+    }
+
+}
+
 
 @media only screen and (max-width:600px)
 {
@@ -32,8 +59,17 @@
     }
 
     .box-for-total{
-        width: 40%;
+        width: 45%;
     }
 
 }
 
+
+@media only screen and (max-width:400px)
+{
+
+    .box-for-total{
+        width: 60%;
+    }
+
+}

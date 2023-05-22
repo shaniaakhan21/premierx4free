@@ -11,9 +11,9 @@
     font-size: 24px;
     line-height: 33px;
     font-family: "Nunito Sans";
-  
+
     @media (max-width: 768px) {
-      font-size: 20px!important;
+      font-size: 20px !important;
     }
   }
 
@@ -26,7 +26,7 @@
   .box-main-commission .table {
     border-color: #F4F6F8;
     margin: 0 !important;
-    
+
     @media (max-width: 768px) {
       width: 200%;
     }
@@ -52,7 +52,7 @@
   .box-main-commission td {
     color: #667B8B;
     font-size: 15px;
-    
+
     @media (max-width: 768px) {
       font-size: 13px;
     }
@@ -64,7 +64,7 @@
     line-height: 27px;
     padding: 1% 1% 1% 8px;
 
-    
+
     @media (max-width: 768px) {
       font-size: 16px !important;
       font-weight: 500 !important;
@@ -88,8 +88,8 @@
     border: none;
   }
 
- .tab-options {
-    width: 13%;
+  .tab-options {
+    width: 14%;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -98,41 +98,67 @@
     border-radius: 50px;
     padding: 6px;
 
-    @media (max-width: 1000px) {
-      left: 0rem;
-      width:61%;
-      padding: 1.5%;
-    }
-
   }
 
-  .tab-options-box{
+
+  @media (max-width: 1500px) {
+    .tab-options {
+      width: 18%;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .tab-options {
+      width: 20%;
+    }
+  }
+
+  @media (max-width:700px) {
+    .tab-options {
+      left: 0rem;
+      width: 40%;
+      padding: 1.5%;
+    }
+  }
+
+  @media (max-width:400px) {
+    .tab-options {
+      left: 0rem;
+      width: 61%;
+      padding: 1.5%;
+    }
+  }
+
+
+  .tab-options-box {
     display: flex;
     justify-content: flex-end;
   }
 
-   .tab-options img {
+  .tab-options img {
     @media (max-width: 768px) {
       width: 8%;
     }
   }
 
-   .tab-options div {
+  .tab-options div {
     display: flex;
     align-items: center;
     cursor: pointer;
   }
 
-   .tab-options span {
+  .tab-options span {
     margin-left: 5px;
+
     @media (max-width: 768px) {
-      font-size:13px!important;
+      font-size: 13px !important;
     }
   }
 
   .box-main-commission .box-it {
     display: flex;
     flex-direction: row;
+
     @media (max-width: 768px) {
       justify-content: space-between;
     }

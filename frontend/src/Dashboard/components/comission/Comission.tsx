@@ -19,7 +19,6 @@ const comission2data = [
 ]
 
 const comission3data = [
-    { col1: 'Clients', col2: 6000 },
     { col1: 'Direct', col2: 2052 },
     { col1: 'Referrals ', col2: 303650 },
 ]
@@ -44,7 +43,7 @@ const Comission = ({ spanText }: Props) => {
                 className="mb-3"
                 onSelect={handleTabSelect}
             >
-                <Tab eventKey="customers" title="Customers">
+                <Tab eventKey="customers" title="Direct Customers">
                     <div className="tab-options-box">
                         <div className="tab-options">
                             <img src='assets/svg/Dashboard/calender.svg' />
@@ -74,7 +73,7 @@ const Comission = ({ spanText }: Props) => {
                         </div>
                     </div>
                     <div id="customers-tab-content">
-                        <TablesComp data={comission3data} col1head=' ' col2head='Commission Due' />
+                        <TablesComp data={comission3data} col1head='Clients' col2head='Commission Due' />
                     </div>
                 </Tab>
             </Tabs>
