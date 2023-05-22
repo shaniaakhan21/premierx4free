@@ -55,7 +55,7 @@ export interface CustomRequestHandler<
   ): Promise<any>
 }
 
-export default function ErrorHandler(fn: CustomRequestHandler): RequestHandler {
+export default function ErrorHandler(fn: CustomRequestHandler<any, any, any, any>): RequestHandler {
   const handler: RequestHandler = async (req, res, next) => {
     try {
       await fn(req, res, next)
