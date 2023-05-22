@@ -162,6 +162,11 @@ export class User extends ModelInterface {
     return this.jwtToken
   }
 
+  /**
+   * Format user document
+   * @param roles
+   * @returns User
+   */
   public format(this: DocumentType<User>, roles: (Roles | ClassTransformerRoles)[] = []) {
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
     return UserModel.formatDocument(this, roles)
