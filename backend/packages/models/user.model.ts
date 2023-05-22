@@ -1,25 +1,30 @@
-import { Roles, SysFunction, SysMethod } from '@helpers/access'
+import { ClassTransformerRoles, Roles, SysFunction, SysMethod } from '@helpers/access'
+import { AgentProfile } from '@models/agent-profile.model'
 import AuditTraceModel from '@models/audit-trace.model'
-import { AutoIncrementSimple } from '@typegoose/auto-increment'
+import { AutoIncrementID } from '@typegoose/auto-increment'
 import {
+  DocumentType,
   getModelForClass,
   modelOptions,
   plugin,
   pre,
-  prop, Ref,
+  prop,
+  Ref,
+  ReturnModelType,
   Severity
 } from '@typegoose/typegoose'
 import * as bcrypt from 'bcryptjs'
+import { Exclude, Expose } from 'class-transformer'
 import { Request } from 'express'
 import { ParamsDictionary, RequestHandler } from 'express-serve-static-core'
+import * as HttpStatus from 'http-status'
 import jwt from 'jsonwebtoken'
-import mongoose, { Model } from 'mongoose'
+import mongoose from 'mongoose'
 import { ParsedQs } from 'qs'
-import {AgentProfile} from "@models/agent-profile.model";
 
 export type JWTPayload = {
   subject: number
-  username: string
+  email: string
   roles: Roles[]
 }
 
@@ -39,60 +44,47 @@ export function generateAccessToken(payload: any) {
   })
 }
 
-export const checkPermissions = (
-  user: JWTPayload | undefined,
-  roles: Roles[],
-  autoThrow: boolean = true
-) => {
+export const checkPermissions = (user: JWTPayload | undefined, roles: Roles[], autoThrow: boolean = true) => {
   if (!user?.roles?.find((r) => roles.indexOf(r ?? -1) > -1))
     if (autoThrow) throw new Error("Don't have permission to access")
     else return false
   return true
 }
 
-export const AuditTrace: (
-  action: SysFunction,
-  method: SysMethod
-) => RequestHandler =
+export const AuditTrace: (action: SysFunction, method: SysMethod) => RequestHandler =
   (action, method) => async (req: CustomReq, _res, next) => {
     await AuditTraceModel.create({
       action,
       method,
-      by: req.user?.username,
-      remarks: `URL - ${req.url} | Body - ${JSON.stringify(
-        req.body
-      )} | Params - ${JSON.stringify(req.params)} | Query - ${JSON.stringify(
-        req.query
-      )}`
+      by: req.user?.email,
+      remarks: `URL - ${req.url} | Body - ${JSON.stringify(req.body)} | Params - ${JSON.stringify(
+        req.params
+      )} | Query - ${JSON.stringify(req.query)}`
     })
     next()
   }
 
-export const AuthenticateToken: (roles?: Roles[]) => RequestHandler =
-  (roles) => (req: CustomReq, res, next) => {
-    const authHeader = req.headers.authorization
-    const token = authHeader && authHeader.split(' ')[1]
+export const AuthenticateToken: (roles?: Roles[]) => RequestHandler = (roles) => (req: CustomReq, res, next) => {
+  const authHeader = req.headers.authorization
+  const token = authHeader && authHeader.split(' ')[1]
 
-    if (token == null) {
-      res.sendStatus(401)
-      return
-    }
-
-    jwt.verify(
-      token,
-      process.env.TOKEN_SECRET as string,
-      (err: any, user: any) => {
-        if (err) {
-          res.sendStatus(403)
-          return
-        }
-        req.user = user as JWTPayload
-        if (roles && roles.length > 0) checkPermissions(req.user, roles)
-        next()
-      }
-    )
+  if (token == null) {
+    res.sendStatus(HttpStatus.UNAUTHORIZED)
+    return
   }
 
+  jwt.verify(token, process.env.TOKEN_SECRET as string, (err: any, user: any) => {
+    if (err) {
+      res.sendStatus(HttpStatus.FORBIDDEN)
+      return
+    }
+    req.user = user as JWTPayload
+    if (roles && roles.length > 0) checkPermissions(req.user, roles)
+    next()
+  })
+}
+
+@Exclude()
 @pre<User>('save', async function (next) {
   if (this.isModified('password') || this.isNew) {
     await bcrypt.hash(this.password, 10, (err, encryptedPass) => {
@@ -103,53 +95,82 @@ export const AuthenticateToken: (roles?: Roles[]) => RequestHandler =
   }
   return next()
 })
-@plugin(AutoIncrementSimple, [{ field: 'userId' }])
 @modelOptions({
   options: { allowMixed: Severity.ERROR, customName: 'users' },
   schemaOptions: { collection: 'users' }
 })
+@plugin(AutoIncrementID, { field: 'userId' })
 export class User {
   constructor(d: Partial<User>) {
     Object.assign(this, d)
   }
 
+  @Expose()
   @prop({ unique: true })
   public email!: string
 
+  @Expose()
   @prop({ unique: true })
   public userId!: number
 
+  @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
   @prop()
   public jwtToken?: string
 
+  @Expose()
   @prop({ type: () => [String] })
   public roles?: Roles[]
 
   @prop({ unique: true })
   public password!: string
 
+  @Expose()
   @prop({ ref: () => AgentProfile })
   public agentProfile?: Ref<AgentProfile>
-
-  @prop()
-  public token?: string
 
   /**
    * Compare password
    * @param password - password to compare
    * @returns Promise<boolean> - true if password is correct
    */
-  public comparePassword: (password: string) => Promise<boolean> =
-    async function (this: User, password: string) {
-      return bcrypt.compare(password, this.password)
-    }
+  public async comparePassword(this: DocumentType<User>, password: string) {
+    return bcrypt.compare(password, this.password)
+  }
 
-    public static findByEmail = async (email: string) => {
-      return UserModel.find().where('email').equals(email).exec()
+  /**
+   * Generate JWT token and save to database
+   * @returns Promise<string> - JWT token
+   */
+  public async generateJWT(this: DocumentType<User>) {
+    const payload: JWTPayload = {
+      subject: this.userId,
+      email: this.email,
+      roles: this.roles ?? []
     }
+    this.jwtToken = generateAccessToken(payload)
+    await this.save()
+    return this.jwtToken
+  }
+
+  /**
+   * Find user by email
+   * @param email
+   * @returns Promise<User | null>
+   */
+  public static async findByEmail(this: ReturnModelType<typeof User>, email: string) {
+    return this.findOne().where('email').equals(email).exec()
+  }
+
+  /**
+   * Find user by userId
+   * @param userId
+   * @returns Promise<User | null>
+   */
+  public static async findByUserId(this: ReturnModelType<typeof User>, userId: number) {
+    return this.findOne().where('userId').equals(userId).exec()
+  }
 }
 
-const UserModel =
-  (mongoose.models?.users as Model<User>) ?? getModelForClass(User)
+const UserModel = (mongoose.models?.users as ReturnModelType<typeof User>) ?? getModelForClass(User)
 
 export default UserModel

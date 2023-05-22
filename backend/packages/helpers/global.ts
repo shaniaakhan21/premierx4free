@@ -1,4 +1,5 @@
-import { CustomRequestHandler } from '@helpers/errorHandler'
+import { CustomRequestHandler, InvalidRequestError } from '@helpers/errorHandler'
+import { validateOrReject } from 'class-validator'
 import mongoose, { Mongoose } from 'mongoose'
 
 let connection: Mongoose
@@ -25,3 +26,17 @@ export const transactional: (fn: CustomRequestHandler) => CustomRequestHandler =
       await session.endSession()
     }
   }
+
+export default async function validateClass(data: object) {
+  try {
+    await validateOrReject(data)
+  } catch (e: any) {
+    const message = e
+      .map((e2: any) => Object.values(e2.constraints))
+      .flat()
+      .join('. ')
+    const error = new InvalidRequestError(message)
+    error.publicMessage = message
+    throw error
+  }
+}

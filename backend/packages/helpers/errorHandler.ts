@@ -1,44 +1,43 @@
 import { CustomReq } from '@models/user.model'
 import { Response, NextFunction } from 'express'
 import { ParamsDictionary, RequestHandler } from 'express-serve-static-core'
-// eslint-disable-next-line import/no-extraneous-dependencies
 import * as HttpStatus from 'http-status'
 import { ParsedQs } from 'qs'
 
 export class RecordAlreadyExistsError extends Error {
   status = HttpStatus.CONFLICT
 
-  message = 'Record already exists'
+  publicMessage = 'Record already exists'
 }
 
 export class RecordNotFoundError extends Error {
   status = HttpStatus.NOT_FOUND
 
-  message = 'Resource not found'
+  publicMessage = 'Resource not found'
 }
 
 export class UnauthorizedError extends Error {
   status = HttpStatus.UNAUTHORIZED
 
-  message = 'Unauthorized'
+  publicMessage = 'Unauthorized'
 }
 
 export class APINotImplementedError extends Error {
   status = HttpStatus.NOT_IMPLEMENTED
 
-  message = 'API not implemented'
+  publicMessage = 'API not implemented'
 }
 
 export class InvalidRequestError extends Error {
   status = HttpStatus.BAD_REQUEST
 
-  message = 'Invalid request'
+  publicMessage = 'Invalid request'
 }
 
 export class UnhandledError extends Error {
   status = HttpStatus.INTERNAL_SERVER_ERROR
 
-  message = 'Unhandled error'
+  publicMessage = 'Unhandled error'
 }
 
 export interface CustomRequestHandler<
@@ -56,7 +55,7 @@ export interface CustomRequestHandler<
   ): Promise<any>
 }
 
-export default function ErrorHandler(fn: CustomRequestHandler): RequestHandler {
+export default function ErrorHandler(fn: CustomRequestHandler<any, any, any, any>): RequestHandler {
   const handler: RequestHandler = async (req, res, next) => {
     try {
       await fn(req, res, next)
@@ -64,8 +63,10 @@ export default function ErrorHandler(fn: CustomRequestHandler): RequestHandler {
       res.json({
         success: false,
         status: e.status || HttpStatus.INTERNAL_SERVER_ERROR,
-        message: e.message || 'Unhandled error'
+        message: e.publicMessage || 'Unhandled error',
+        ...(process.env.NODE_ENV === 'development' ? { error: e.message } : {})
       })
+      console.error(e)
     }
   }
   return (req, res, next) => handler(req, res, next)

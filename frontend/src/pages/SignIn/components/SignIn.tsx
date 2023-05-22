@@ -30,8 +30,9 @@ function SignIn(): JSX.Element {
                 console.log("response",response.data.success)
                 if (response.data.success) {
                     console.log("login successful")
+                    localStorage.setItem("data",JSON.stringify(response.data))
                     // login successful, redirect to home page
-                    history("/");
+                    history("/agent-dashboard");
                 } else {
                     console.log("login failed")
                     // login failed, show error message
