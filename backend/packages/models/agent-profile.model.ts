@@ -12,7 +12,7 @@ import {
   ReturnModelType,
   Severity
 } from '@typegoose/typegoose'
-import { Exclude, Expose, Type } from 'class-transformer'
+import { Exclude, Expose, instanceToPlain, plainToInstance, Type } from 'class-transformer'
 import { ValidateNested } from 'class-validator'
 import mongoose from 'mongoose'
 
@@ -68,7 +68,15 @@ export class AgentProfile extends ModelInterface {
   @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
   public contactNo?: string
 
-  @prop({ enum: AgentStatus })
+  @prop()
+  @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
+  public nda?: string
+
+  @prop()
+  @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
+  public contract?: string
+
+  @prop({ enum: AgentStatus, default: AgentStatus.Registered })
   public status?: AgentStatus
 
   @Type(() => String)
@@ -88,6 +96,11 @@ export class AgentProfile extends ModelInterface {
     return AgentProfileModel.getSubordinates(this._id)
   }
 
+  public format(this: DocumentType<AgentProfile>, roles: (Roles | ClassTransformerRoles)[] = []) {
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
+    return AgentProfileModel.formatAgentDocument(this, roles)
+  }
+
   /**
    * Find agent profile by agentId
    * @param agentId
@@ -97,6 +110,11 @@ export class AgentProfile extends ModelInterface {
     return this.findOne().where('agentId').equals(agentId).exec()
   }
 
+  /**
+   * Find agent profile by userId
+   * @param userId
+   * @returns Promise<AgentProfile | null>
+   */
   public static async findByUserId(this: ReturnModelType<typeof AgentProfile>, userId: number) {
     const agentProfileObjectId = (await UserModel.findByUserId(userId))?.agentProfile
     return this.findById(agentProfileObjectId).exec()
@@ -112,6 +130,24 @@ export class AgentProfile extends ModelInterface {
     agentObjectId: mongoose.Types.ObjectId | string
   ) {
     return this.find().where('referrer').equals(new mongoose.Types.ObjectId(agentObjectId.toString())).exec()
+  }
+
+  /**
+   * Format agent document
+   * @param agent
+   * @param roles
+   * @returns Promise<AgentProfile>
+   */
+  public static formatAgentDocument(
+    this: ReturnModelType<typeof AgentProfile>,
+    agent: DocumentType<AgentProfile>,
+    roles: (Roles | ClassTransformerRoles)[] = []
+  ) {
+    const options = {
+      groups: [ClassTransformerRoles.Referrer, ...roles],
+      enableCircularCheck: true
+    }
+    return instanceToPlain(plainToInstance(AgentProfile, agent.toJSON(), options), options)
   }
 }
 
