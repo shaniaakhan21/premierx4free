@@ -10,8 +10,10 @@ import SignUpPage from "../pages/SignUp";
 import SignInPage from "../pages/SignIn";
 import ForgotPassword from "../pages/ForgotPassword";
 import AgentDashboard from "../Dashboard";
+import { ProtectedAgentDashboard } from "./ProtectedRoutes";
 
 function AppRouter(): JSX.Element {
+	const userAgent = localStorage.getItem('data')
 	return (
 		<Routes>
 			<Route path='/' element={<AboutPage />} />
@@ -24,7 +26,13 @@ function AppRouter(): JSX.Element {
 			<Route path='/signup' element={<SignUpPage />} />
 			<Route path='/signin' element={<SignInPage />} />
 			<Route path='/resetpassword' element={<ForgotPassword />} />
-			<Route path='/agent-dashboard' element={<AgentDashboard />} />
+			<Route path='/agent-dashboard' element={
+				<ProtectedAgentDashboard>
+				<AgentDashboard />
+			</ProtectedAgentDashboard>
+			} />
+			
+			
 		</Routes>
 	)
 }

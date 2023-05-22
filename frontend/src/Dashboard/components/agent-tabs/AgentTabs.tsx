@@ -25,9 +25,12 @@ const initialProfile = {
     confirmNewPassword: '',
 };
 
+interface data{
+    agentData:any
+}
 
-function AgentTabs(): JSX.Element {
-
+function AgentTabs(props:data): JSX.Element {
+    let {agentData} = props
     const [showTabs, setShowTabs] = useState(false);
 
     const handleToggleTabs = () => {
@@ -85,7 +88,7 @@ function AgentTabs(): JSX.Element {
                 <Row>
                     {showTabs && (
                         <Col sm={2} className='tab-contains'>
-                            <AgentProfile />
+                            <AgentProfile agentData={agentData} />
                             <Nav variant="pills" className="flex-column" >
                                 <Nav.Item>
                                     <Nav.Link eventKey="first">
@@ -121,7 +124,7 @@ function AgentTabs(): JSX.Element {
                         </Col>
                     )}
                     <Col sm={2} className='tab-contains mobile-hide'>
-                        <AgentProfile />
+                        <AgentProfile agentData={agentData} />
                         <Nav variant="pills" className="flex-column" >
                             <Nav.Item>
                                 <Nav.Link eventKey="first">

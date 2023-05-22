@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
 const imgSignin = '/assets/svg/SignIn/sigin-img.svg';
 import { Row, Col } from 'react-bootstrap';
+import axios from 'axios';
 
 function SignIn(): JSX.Element {
     const { classes } = useStyles();
@@ -20,16 +21,28 @@ function SignIn(): JSX.Element {
         e.preventDefault();
 
         try {
-            const response = await fetch("http://localhost:5000/api/user/signin", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email, password }) });
-            const result = await response.json();
-
-            if (result === "exists") {
-                // login successful, redirect to home page
-                history("/");
-            } else {
-                // login failed, show error message
-                setErrorMsg("Invalid email or password");
+            const body:object = {
+                email,
+                password
             }
+             await axios.post('/api/v1/auth/login',body)
+             .then((response) => {
+                console.log("response",response.data.success)
+                if (response.data.success) {
+                    console.log("login successful")
+                    localStorage.setItem("data",JSON.stringify(response.data))
+                    // login successful, redirect to home page
+                    history("/agent-dashboard");
+                } else {
+                    console.log("login failed")
+                    // login failed, show error message
+                    setErrorMsg("Invalid email or password");
+                }
+             })
+           // const response = await fetch("http://localhost:5000/api/user/signin", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email, password }) });
+            //const result = await response.json();
+
+            
         } catch (error) {
             console.error("Error:", error);
             setErrorMsg("An error occurred, please try again later.");
