@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom"
 import { useAuth } from "../contexts/auth.context";
 
 interface Props {
-    children: ReactNode
+    children: JSX.Element
 }
 
 export const ProtectedAgentDashboard = ({ children }: Props) => {
