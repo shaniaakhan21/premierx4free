@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { CustomReq } from '@models/user.model'
 import { Response, NextFunction } from 'express'
 import { ParamsDictionary, RequestHandler } from 'express-serve-static-core'
