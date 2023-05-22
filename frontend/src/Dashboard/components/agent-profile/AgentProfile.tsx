@@ -1,23 +1,24 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap';
 import useStyles from "../agent-profile/styles"
+import User from "../../../models/user.model";
 
-interface data {
-    agentData : any
+interface Props {
+    agentData : User
 }
 
-function AgentProfile(props:data): JSX.Element {
+function AgentProfile(props: Props): JSX.Element {
 
-    let {agentData} = props
-    // console.log("data from agent profile",agentData.data.agentProfile.name)
+    let { agentData } = props
+
     const classes = useStyles();
 	return (
 		<div>
 			<div className={`${classes.classes.profileBody} "card" `}>
-                <div className={` ${classes.classes.cardCustBody} "card-body" `}>
-                    <img className="rounded-circle img-fluid" src={"/assets/svg/Dashboard/dummy.svg"} alt="Card image cap"/>
-                    <h3 className="card-title">{agentData?.data?.agentProfile?.name}</h3>
-                    <span style={{ color:'white!important'}} className="card-text">{agentData?.data?.email}</span>
+                <div className={`${classes.classes.cardCustBody} "card-body"`}>
+                    <img className="rounded-circle img-fluid" src="/assets/svg/Dashboard/dummy.svg" />
+                    <h3 className="card-title">{agentData?.agentProfile?.name}</h3>
+                    <span style={{ color:'white!important' }} className="card-text">{agentData?.email}</span>
                 </div>
             </div>
 		</div>

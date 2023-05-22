@@ -9,6 +9,8 @@ import TaggingService from './utils/TaggingService';
 import './components/FontawesomeIcons';
 import '@fontsource/nunito-sans';
 import CookieBanner from './components/cookie';
+import axios from "axios";
+import {AuthProvider} from "./contexts/auth.context";
 
 export const muiCache = createCache({
   key: 'premierx-theme',
@@ -20,6 +22,7 @@ function App() {
 
   useEffect(() => {
     TaggingService.init()
+    axios.defaults.baseURL = '/api/v1/'
   }, [])
 
   return (
@@ -27,8 +30,10 @@ function App() {
       <CacheProvider value={muiCache}>
         <ThemeProvider theme={theme}>
           <BrowserRouter>
-            <CookieBanner />
-            <AppRouter />
+            <AuthProvider>
+              <CookieBanner />
+              <AppRouter />
+            </AuthProvider>
           </BrowserRouter>
         </ThemeProvider>
       </CacheProvider>

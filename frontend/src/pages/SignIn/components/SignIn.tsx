@@ -1,13 +1,15 @@
 import useStyles from './styles';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap';
-import { useState } from "react";
+import {FormEventHandler, useState} from "react";
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
 const imgSignin = '/assets/svg/SignIn/sigin-img.svg';
 import { Row, Col } from 'react-bootstrap';
 import axios from 'axios';
+import {login} from "../../../services/auth";
+import {useAuth} from "../../../contexts/auth.context";
 
 function SignIn(): JSX.Element {
     const { classes } = useStyles();
@@ -16,38 +18,25 @@ function SignIn(): JSX.Element {
     const [showPassword1, setShowPassword1] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
     const history = useNavigate();
+    const { setUser } = useAuth()
 
-    async function submit(e: { preventDefault: () => void; }) {
-        e.preventDefault();
-
+    const onSubmit: FormEventHandler<any> = async (e) => {
+        e.preventDefault()
         try {
-            const body:object = {
-                email,
-                password
-            }
-             await axios.post('/api/v1/auth/login',body)
-             .then((response) => {
-                console.log("response",response.data.success)
-                if (response.data.success) {
-                    console.log("login successful")
-                    localStorage.setItem("data",JSON.stringify(response.data))
-                    // login successful, redirect to home page
-                    history("/agent-dashboard");
-                } else {
-                    console.log("login failed")
-                    // login failed, show error message
-                    setErrorMsg("Invalid email or password");
-                }
+             const response = await login({
+                 email,
+                 password
              })
-           // const response = await fetch("http://localhost:5000/api/user/signin", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email, password }) });
-            //const result = await response.json();
-
-            
+            if (response.data.success) {
+                setUser(response.data.data)
+                history("/agent-dashboard")
+            } else {
+                setErrorMsg("Invalid email or password");
+            }
         } catch (error) {
-            console.error("Error:", error);
             setErrorMsg("An error occurred, please try again later.");
         }
-    };
+    }
 
     return (
         <Row className={classes.container}>
@@ -56,7 +45,7 @@ function SignIn(): JSX.Element {
             </Col>
             <Col className={classes.siginform} lg="4" md="6">
                 <h1>Welcome back! <br></br>Please, log in to continue</h1>
-                <form action='POST' className={classes.formhere}>
+                <form action='POST' className={classes.formhere} onSubmit={onSubmit}>
                     {errorMsg && (
                         <div className="alert alert-danger" role="alert">
                             {errorMsg}
@@ -96,7 +85,7 @@ function SignIn(): JSX.Element {
                         </div>
                     </div>
 
-                    <button type="submit" onClick={submit} className={`${classes.buttonstyle} btn btn-primary`}>
+                    <button type="submit" className={`${classes.buttonstyle} btn btn-primary`}>
                         Log In
                     </button>
                     <div className={classes.linktosignindiv}>

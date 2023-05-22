@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { ClassTransformerRoles } from '@helpers/access'
 import { CustomRequestHandler, InvalidRequestError } from '@helpers/errorHandler'
 import validateClass from '@helpers/global'

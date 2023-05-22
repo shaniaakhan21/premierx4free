@@ -2,17 +2,10 @@ import AgentHeader from '../Dashboard/components/agent-header/AgentHeader';
 import {Row, Col } from 'react-bootstrap';
 import './styles.css';
 import AgentTabs from './components/agent-tabs/AgentTabs';
-import { useState,useEffect } from 'react';
-import { getLocalStorage } from './helperFunctions';
+import {useAuth} from "../contexts/auth.context";
 
 function AgentDashboard(): JSX.Element {
-  const [data,setData] = useState<object | null>()
-
-console.log("data from lcstrage is",data)
-  useEffect(()=> {
-    // let jsonObj:object|null =  JSON.parse(getLocalStorage('data') ?? '{}')
-     setData(getLocalStorage('data'))
-  },[])
+  const { user } = useAuth()
 
   return (
     <div className='main-div'>
@@ -27,7 +20,7 @@ console.log("data from lcstrage is",data)
           <AgentHeader  />
         </Col>
       </Row>
-      <AgentTabs agentData={data} />
+      <AgentTabs agentData={user!} />
     </div>
   );
 }
