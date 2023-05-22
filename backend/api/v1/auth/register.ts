@@ -9,9 +9,9 @@ import { Request } from 'express'
 type RegisterRequest = Omit<AgentProfile, 'agentId'> & Pick<User, 'email' | 'password'>
 
 const register: CustomRequestHandler = async (req: Request<{}, {}, RegisterRequest>, res) => {
-  const exist = await User.findByEmail(req.body.email)
+  const exist = await UserModel.findByEmail(req.body.email)
 
-  if (exist.length > 0) throw new RecordAlreadyExistsError('Agent with this email already exists')
+  if (exist) throw new RecordAlreadyExistsError('Agent with this email already exists')
 
   const user = await UserModel.create({
     email: req.body.email,

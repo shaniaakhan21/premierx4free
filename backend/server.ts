@@ -9,6 +9,8 @@ import * as dotenv from 'dotenv'
 import express from 'express'
 import { NextFunction, Request, Response } from 'express-serve-static-core'
 import helmet from 'helmet'
+// eslint-disable-next-line import/no-extraneous-dependencies
+import 'reflect-metadata'
 
 import apiRouter from './api/index.router'
 

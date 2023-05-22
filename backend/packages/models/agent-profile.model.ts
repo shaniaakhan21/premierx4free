@@ -1,5 +1,7 @@
-import { AutoIncrementSimple } from '@typegoose/auto-increment'
-import {getModelForClass, modelOptions, plugin, prop, Severity} from '@typegoose/typegoose'
+import { AutoIncrementID } from '@typegoose/auto-increment'
+import { getModelForClass, modelOptions, plugin, prop, Severity } from '@typegoose/typegoose'
+import { Type } from 'class-transformer'
+import { ValidateNested } from 'class-validator'
 import mongoose, { Model } from 'mongoose'
 
 export class AgentProfileLocation {
@@ -16,11 +18,11 @@ export class AgentProfileLocation {
   public zip?: string
 }
 
-@plugin(AutoIncrementSimple, [{ field: 'agentId' }])
 @modelOptions({
   options: { allowMixed: Severity.ERROR, customName: 'agentProfiles' },
   schemaOptions: { collection: 'agentProfiles' }
 })
+@plugin(AutoIncrementID, { field: 'agentId' })
 export class AgentProfile {
   constructor(d: Partial<AgentProfile>) {
     Object.assign(this, d)
@@ -32,6 +34,8 @@ export class AgentProfile {
   @prop()
   public name!: string
 
+  @ValidateNested()
+  @Type(() => AgentProfileLocation)
   @prop({ type: AgentProfileLocation })
   public location?: AgentProfileLocation
 
