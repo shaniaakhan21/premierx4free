@@ -15,7 +15,8 @@ import {
   Severity
 } from '@typegoose/typegoose'
 import * as bcrypt from 'bcryptjs'
-import { Exclude, Expose, instanceToPlain, plainToInstance } from 'class-transformer'
+import { Exclude, Expose, instanceToPlain, plainToInstance, Type } from 'class-transformer'
+import { ClassTransformOptions } from 'class-transformer/types/interfaces'
 import { IsEmail, IsString, MinLength } from 'class-validator'
 import { Request } from 'express'
 import { ParamsDictionary, RequestHandler } from 'express-serve-static-core'
@@ -126,12 +127,14 @@ export class User extends ModelInterface {
   @prop({ type: () => [String] })
   public roles?: Roles[]
 
+  @Exclude()
   @IsString()
   @MinLength(8)
   @prop({ unique: true })
   public password!: string
 
   @Expose()
+  @Type(() => AgentProfile)
   @prop({ ref: () => AgentProfile })
   public agentProfile?: Ref<AgentProfile>
 
@@ -193,9 +196,10 @@ export class User extends ModelInterface {
     user: DocumentType<User>,
     roles: (Roles | ClassTransformerRoles)[] = []
   ) {
-    const options = {
+    const options: ClassTransformOptions = {
       groups: roles,
-      enableCircularCheck: true
+      enableCircularCheck: true,
+      strategy: 'excludeAll'
     }
     return instanceToPlain(plainToInstance(User, user.toJSON(), options), options)
   }

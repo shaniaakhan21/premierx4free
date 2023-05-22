@@ -12,8 +12,8 @@ import {
   ReturnModelType,
   Severity
 } from '@typegoose/typegoose'
-import { Exclude, Expose, instanceToPlain, plainToInstance, Type } from 'class-transformer'
-import { Equals, IsNumber, IsOptional, IsPositive, IsString, ValidateNested } from 'class-validator'
+import { Exclude, Expose, instanceToPlain, plainToInstance, Transform, Type } from 'class-transformer'
+import { Equals, IsBoolean, IsNumber, IsOptional, IsPositive, IsString, Min, ValidateNested } from 'class-validator'
 import mongoose from 'mongoose'
 
 export enum AgentStatus {
@@ -31,6 +31,7 @@ export class AgentProfileLocation {
   }
 
   @Equals(undefined)
+  @Exclude()
   public _id?: mongoose.Types.ObjectId | string
 
   @IsString()
@@ -59,6 +60,109 @@ export class AgentProfileLocation {
 }
 
 @Exclude()
+export class AgentProfileCompany {
+  constructor(d: Partial<AgentProfileLocation>) {
+    Object.assign(this, d)
+  }
+
+  @Transform((value) => {
+    if ('value' in value) {
+      return value.obj[value.key]?.toString()
+    }
+
+    return 'unknown value'
+  })
+  @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
+  public _id?: mongoose.Types.ObjectId | string
+
+  @IsString()
+  @IsOptional()
+  @prop()
+  @Expose({ groups: [ClassTransformerRoles.Self, ClassTransformerRoles.Referrer, Roles.Admin] })
+  public name?: string
+
+  @IsString()
+  @IsOptional()
+  @prop()
+  @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
+  public phone?: string
+
+  @IsString()
+  @IsOptional()
+  @prop()
+  @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
+  public address?: string
+
+  @IsString()
+  @IsOptional()
+  @prop()
+  @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
+  public contactPersonName?: string
+
+  @IsString()
+  @IsOptional()
+  @prop()
+  @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
+  public contactPersonPhone?: string
+
+  @IsNumber()
+  @Min(0)
+  @IsOptional()
+  @prop()
+  @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
+  public employeeCount?: number
+
+  @IsString()
+  @IsOptional()
+  @prop()
+  @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
+  public fullTime?: string
+
+  @IsString()
+  @IsOptional()
+  @prop()
+  @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
+  public partTime?: string
+
+  @IsString()
+  @IsOptional()
+  @prop()
+  @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
+  public insuranceInfo?: string
+
+  @IsNumber()
+  @Min(0)
+  @IsOptional()
+  @prop()
+  @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
+  public commissionRate?: number
+
+  @IsBoolean()
+  @IsOptional()
+  @prop()
+  @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
+  public fullInsured?: boolean
+
+  @IsBoolean()
+  @IsOptional()
+  @prop()
+  @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
+  public selfInsured?: boolean
+
+  @IsBoolean()
+  @IsOptional()
+  @prop()
+  @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
+  public notInsured?: boolean
+
+  @IsString()
+  @IsOptional()
+  @prop()
+  @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
+  public typeOfBusiness?: string
+}
+
+@Exclude()
 @modelOptions({
   options: { allowMixed: Severity.ERROR, customName: 'agentProfiles' },
   schemaOptions: { collection: 'agentProfiles' }
@@ -84,6 +188,12 @@ export class AgentProfile extends ModelInterface {
   @prop({ type: AgentProfileLocation })
   @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
   public location?: AgentProfileLocation
+
+  @ValidateNested()
+  @Type(() => AgentProfileCompany)
+  @prop({ type: AgentProfileCompany })
+  @Expose({ groups: [ClassTransformerRoles.Self, ClassTransformerRoles.Referrer, Roles.Admin] })
+  public companies?: AgentProfileCompany[]
 
   @IsOptional()
   @prop()
