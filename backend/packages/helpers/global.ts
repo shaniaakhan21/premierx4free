@@ -1,6 +1,7 @@
 import { CustomRequestHandler, InvalidRequestError } from '@helpers/errorHandler'
 import { validateOrReject } from 'class-validator'
 import mongoose, { Mongoose } from 'mongoose'
+import { v4 as uuidv4 } from 'uuid'
 
 let connection: Mongoose
 
@@ -26,6 +27,8 @@ export const transactional: (fn: CustomRequestHandler) => CustomRequestHandler =
       await session.endSession()
     }
   }
+
+export const generateFileName = (originalName: string) => `${uuidv4()}.${originalName.split('.').pop()}`
 
 export default async function validateClass(data: object) {
   try {
