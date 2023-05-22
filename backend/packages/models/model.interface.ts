@@ -1,8 +1,7 @@
-import { Expose, Transform } from 'class-transformer'
+import { Transform } from 'class-transformer'
 import mongoose from 'mongoose'
 
 export default class ModelInterface {
-  @Expose()
   @Transform((value) => {
     if ('value' in value) {
       return value.obj[value.key].toString()

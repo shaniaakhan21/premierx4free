@@ -22,8 +22,8 @@ type Props = {
 const AgentCustomers = ({ data, spanText, col1head, col2head, col3head, col4head, col5head }: Props)   =>  {
     const getStatusIcon = (status: string) => {
         switch (status) {
-            case "Approved":
-                return <img src="assets/svg/Dashboard/approve.svg" className="Approved-icon" alt="Approved" />;
+            case "Active":
+                return <img src="assets/svg/Dashboard/approve.svg" className="Approved-icon" alt="Active" />;
             case "Rejected":
                 return <img src="assets/svg/Dashboard/rejected.svg" className="Rejected-icon" alt="Rejected" />;
             case "Pending":
