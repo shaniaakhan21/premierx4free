@@ -22,8 +22,8 @@ function Sidebar(props:event):JSX.Element{
                     <img src='/assets/svg/Dashboard/dummy.svg' className={classes.displayImage} />
                 </div>
                 <div className={classes.topRectangle_text}>
-                    <p className={classes.nameText}>Edwin Zam</p>
-                    <span className={classes.emailText}>edwinzam@gmail.com</span>
+                    <p className={classes.nameText}>Heather Stephens</p>
+                    <span className={classes.emailText}>heatherstephens@gmail.com</span>
                 </div>  
             </div>
             
