@@ -1,44 +1,49 @@
 import { makeStyles } from '../../../../../utils/makeStyles';
 interface agentData {
-    agentCalculationData:any
+    agentCalculationData: any
 }
-function CalculationPageSecondTable (props:agentData) : JSX.Element{
-    const {classes} = useStyles()
-    const {agentCalculationData} = props
-    console.log("integralTable",agentCalculationData[0]?.integralTable)
-    return(
+function CalculationPageSecondTable(props: agentData): JSX.Element {
+    const { classes } = useStyles()
+    const { agentCalculationData } = props
+    console.log("integralTable", agentCalculationData[0]?.integralTable)
+    return (
         <>
-        <div className={classes.calculationPage_heading}>
-            <p className={classes.calculationPage_headingText}>Calculation</p>
-            <button className={classes.calculationPage_headingButton}>Back</button>
+            <div className={classes.calculationPage_heading}>
+                <p className={classes.calculationPage_headingText}>Calculation</p>
             </div>
             <div className={classes.calculationPage_tableContainer}>
 
-            <table className={classes.calculationPage_table}>
-        <thead >
-          <tr className={classes.table_header}>
-            <th className={classes.table_headingText_first}>Referral Agent Name</th>
-            <th className={classes.table_headingText}>Contract<br /> Start Date</th>
-            <th className={classes.table_headingText}>Contract<br />  End Date</th>
-            <th className={classes.table_headingText}>Monthly Membership<br />  Paid (No. of People)</th>
-            <th className={classes.table_headingText}>Membership<br />  Number</th>
-            <th className={classes.table_headingText}>Total Pay</th>
-          </tr>
-        </thead>
-        <tbody>
-            { agentCalculationData[0]?.integralTable?.map((dt:any) => (
-             <tr className={classes.table_row}>
-                <td className={classes.table_data_first}>{dt.ReferralAgentName}</td>
-                <td className={classes.table_data}>2023-04-30</td>
-                <td className={classes.table_data}>2023-04-30</td>
-                <td className={classes.table_data}>{dt.membershipPaid}</td>
-                <td className={classes.table_data}>{dt.membershipNo}</td>
-                <td className={classes.table_data}>{dt.totalPay}</td>
-              </tr>
-            ))
-          
-            }
-          {/* <tr className={classes.table_row}>
+                <table className={classes.calculationPage_table}>
+                    <thead >
+                        <tr className={classes.table_header}>
+                            <th className={classes.table_headingText_first}>Agent Name</th>
+                            <th className={classes.table_headingText}>Company Name</th>
+                            <th className={classes.table_headingText}>Company Information</th>
+                            <th className={classes.table_headingText}>Commission Rate</th>
+                            <th className={classes.table_headingText}>Contract<br /> Start Date</th>
+                            <th className={classes.table_headingText}>Contract<br />  End Date</th>
+                            <th className={classes.table_headingText}>Monthly Membership<br />  Paid (No. of People)</th>
+                            <th className={classes.table_headingText}>Amount Paid<br />  Per Person</th>
+                            <th className={classes.table_headingText}>Total Pay</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {agentCalculationData?.map((dt: any) => (
+                            <tr className={classes.table_row}>
+                                <td className={classes.table_data_first}>{dt.AgentName}</td>
+                                <td className={classes.table_data}>{dt.CompanyName}</td>
+                                <td className={classes.table_data}>{dt.CompanyInfo}</td>
+                                <td className={classes.table_data}>{dt.CommissionRate}</td>
+                                <td className={classes.table_data}>2023-04-30</td>
+                                <td className={classes.table_data}>2023-04-30</td>
+                                <td className={classes.table_data}>{dt.noOfPeople}</td>
+                                <td className={classes.table_data}>{dt.perPerson}</td>
+                                <td className={classes.table_data}>{dt.totalPay}</td>
+                            </tr>
+                        ))
+
+                        }
+                        {/* <tr className={classes.table_row}>
             <td className={classes.table_data_first}>Table cell</td>
             <td className={classes.table_data}>Table cell</td>
             <td className={classes.table_data}>Table cell</td>
@@ -46,99 +51,99 @@ function CalculationPageSecondTable (props:agentData) : JSX.Element{
             <td className={classes.table_data}>Table cell</td>
             <td className={classes.table_data}>Table cell</td>
           </tr> */}
-        </tbody>
-      </table>
+                    </tbody>
+                </table>
 
             </div>
-            </>
+        </>
     )
 }
 
-const useStyles = makeStyles() (() =>({
-    calculationPage_heading:{
+const useStyles = makeStyles()(() => ({
+    calculationPage_heading: {
         display: "flex",
-        flexDirection:"row",
-        justifyContent:"space-between",
+        flexDirection: "row",
+        justifyContent: "space-between",
         //alignItems:"center"
     },
-    calculationPage_headingText:{
-        marginTop:"10px",
-        fontFamily:"Nunito Sans",
-        fontWeight:"400",
-        fontSize:"24px",
-        lineHeight:"32.74px",
-        color:"#000000"
+    calculationPage_headingText: {
+        marginTop: "10px",
+        fontFamily: "Nunito Sans",
+        fontWeight: "400",
+        fontSize: "24px",
+        lineHeight: "32.74px",
+        color: "#000000"
     },
-    calculationPage_headingButton:{
-        marginBottom:"10px",
-        padding:"4px 33px 5px 34px",
-        border:"1px solid #86A9B8",
-        backgroundColor:"#FFFFFF",
-        color:"#48748D",
-        borderRadius:"10px"
+    calculationPage_headingButton: {
+        marginBottom: "10px",
+        padding: "4px 33px 5px 34px",
+        border: "1px solid #86A9B8",
+        backgroundColor: "#FFFFFF",
+        color: "#48748D",
+        borderRadius: "10px"
     },
-    calculationPage_mainContainer:{
+    calculationPage_mainContainer: {
         // backgroundColor:"lightblue"
     },
-    calculationPage_tableContainer:{
-        marginTop:"10px",
-        border:"1px solid #D6D9DB",
-       // borderBottom:"0",
+    calculationPage_tableContainer: {
+        marginTop: "10px",
+        border: "1px solid #D6D9DB",
+        // borderBottom:"0",
         //borderTop:"0",
-        borderRadius:"10px",
+        borderRadius: "10px",
     },
-    calculationPage_table:{
-       border:"1px solid #D6D9DB",
-       width:"100%",
-       borderRadius:"10px",
-       overflow:"hidden"
-       //borderCollapse:"separate"
+    calculationPage_table: {
+        border: "1px solid #D6D9DB",
+        width: "100%",
+        borderRadius: "10px",
+        overflow: "hidden"
+        //borderCollapse:"separate"
     },
-    table_header:{
-        border:"1px solid #D6D9DB",
-        backgroundColor:"#D6D9DB",
-        padding:"8px 44px 6px 21px",
-        borderRadius:"10px"
-       
-        
+    table_header: {
+        border: "1px solid #D6D9DB",
+        backgroundColor: "#D6D9DB",
+        padding: "8px 44px 6px 21px",
+        borderRadius: "10px"
+
+
     },
-    table_headingText:{
-        fontFamily:"Nunito Sans",
-        fontWeight:"400",
-        fontSize:"20px",
-        lineHeight:"27.28px",
-        color:"#000000",
-        padding:"23px 0 20px 0"
+    table_headingText: {
+        fontFamily: "Nunito Sans",
+        fontWeight: "400",
+        fontSize: "20px",
+        lineHeight: "27.28px",
+        color: "#000000",
+        padding: "23px 0 20px 0"
     },
-    table_headingText_first:{
-        fontFamily:"Nunito Sans",
-        fontWeight:"400",
-        fontSize:"20px",
-        lineHeight:"27.28px",
-        color:"#000000",
-        padding:"23px 0 20px 20px"
+    table_headingText_first: {
+        fontFamily: "Nunito Sans",
+        fontWeight: "400",
+        fontSize: "20px",
+        lineHeight: "27.28px",
+        color: "#000000",
+        padding: "23px 0 20px 20px"
     },
-    table_row:{
-        border:"1px solid #D6D9DB",
+    table_row: {
+        border: "1px solid #D6D9DB",
         // display:"flex",
         // flexDirection:"row",
-        width:"100%"
+        width: "100%"
     },
-    table_data:{
-        fontFamily:"Nunito Sans",
-        fontWeight:"400",
-        fontSize:"18px",
-        lineHeight:"24.55px",
-        color:"#667B8B",
-        padding:"23px 0 20px 0"
+    table_data: {
+        fontFamily: "Nunito Sans",
+        fontWeight: "400",
+        fontSize: "18px",
+        lineHeight: "24.55px",
+        color: "#667B8B",
+        padding: "23px 0 20px 0"
     },
-    table_data_first:{
-        fontFamily:"Nunito Sans",
-        fontWeight:"400",
-        fontSize:"18px",
-        lineHeight:"24.55px",
-        color:"#667B8B",
-        padding:"23px 0 20px 20px"
+    table_data_first: {
+        fontFamily: "Nunito Sans",
+        fontWeight: "400",
+        fontSize: "18px",
+        lineHeight: "24.55px",
+        color: "#667B8B",
+        padding: "23px 0 20px 20px"
     }
 }))
 
