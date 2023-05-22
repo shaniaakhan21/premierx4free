@@ -1,4 +1,3 @@
-/* eslint-disable import/no-named-as-default */
 import ErrorHandler from '@helpers/errorHandler'
 import express from 'express'
 

@@ -3,8 +3,7 @@ import { useState } from 'react';
 import './styles.css';
 import AgentCustomers from '../agent-customers/AgentCustomers';
 import AgentTeam from '../agent-team/AgentTeam';
-import AgentNetwork from '../agent-network/AgentNetwork';
-import Comission from '../comission/Comission';
+import Commission from '../comission/Comission';
 import AgentFooter from '../agent-footer/AgentFooter';
 import AgentReport from '../agent-report/AgentReport';
 import AgentSubHeader from '../agent-header/component/AgentSubHeader';
@@ -12,6 +11,7 @@ import AgentSubmitCompany from '../agent-submit-company/AgentSubmitCompany';
 import AgentSettings from '../agent-settings/AgentSettings';
 import MarketingMaterials from '../agent-marketing-materials/MarketingMaterials';
 import AgentProfile from '../agent-profile/AgentProfile';
+import User from "../../../models/user.model";
 
 
 const initialProfile = {
@@ -25,12 +25,12 @@ const initialProfile = {
     confirmNewPassword: '',
 };
 
-interface data{
-    agentData:any
+interface Props {
+    agentData: User
 }
 
-function AgentTabs(props:data): JSX.Element {
-    let {agentData} = props
+function AgentTabs(props: Props): JSX.Element {
+    let { agentData } = props
     const [showTabs, setShowTabs] = useState(false);
 
     const handleToggleTabs = () => {
@@ -73,7 +73,7 @@ function AgentTabs(props:data): JSX.Element {
         <>
             <Row className='phone-row'>
                 <Col sm="2" lg="12" className='phone-logo'>
-                   <a  href='/'><img className="card-img-top" src={"/assets/svg/Dashboard/logo-dash.svg"} alt="Card image cap" /></a> 
+                   <a  href='/'><img className="card-img-top" src={"/assets/svg/Dashboard/logo-dash.svg"} alt="Card image cap" /></a>
                 </Col>
                 <Col sm="1" lg="12" className='phone-hamburger'>
                     <div>
@@ -158,7 +158,7 @@ function AgentTabs(props:data): JSX.Element {
                                 <AgentSubHeader />
                                 <AgentCustomers data={data} col1head='Company Name' col2head='Number of Employees /Members' col3head='Commission Rate' col4head='Status (Active/Pending)' col5head='Comments' spanText="Direct Clients" />
                                 <AgentTeam data={teamdata} col1head='Representative Name' col2head='Commission Rate' col3head='View Client List ' spanText="Referral Clients" />
-                                <Comission spanText="Commission Summary" />
+                                <Commission spanText="Commission Summary" />
                             </Tab.Pane>
                             <Tab.Pane eventKey="second" className="tab-pane-second">
                                 <AgentSubmitCompany />

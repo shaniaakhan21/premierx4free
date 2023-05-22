@@ -1,16 +1,16 @@
-import { MouseEventHandler } from "react";
 import useStyles from "../agent-header/styles";
-import AgentSubHeader from "./component/AgentSubHeader";
 import { useNavigate } from 'react-router-dom';
+import {useAuth} from "../../../contexts/auth.context";
 
 function AgentHeader(): JSX.Element {
+	const { setUser } = useAuth()
 	const classes = useStyles();
 	const navigate = useNavigate()
 	const handleLogout = () => {
-		localStorage.removeItem("data")
+		setUser(undefined)
 		navigate('/')
-
 	}
+
 	return (
 		<div>
 			<div className={classes.classes.container} onClick={() => {
