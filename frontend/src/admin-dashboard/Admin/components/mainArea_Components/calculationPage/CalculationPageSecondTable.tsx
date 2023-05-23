@@ -55,6 +55,12 @@ function CalculationPageSecondTable(props: agentData): JSX.Element {
                 </table>
 
             </div>
+            <div className={classes.calculationPage_contain}>
+                <div className={classes.calculationPage_contains_contain}>
+                    <button className={classes.calculationPage_headingButton}>View Calculation History</button>
+                    <button className={classes.calculationPage_headingButton}>Update data</button>
+                </div>
+            </div>
         </>
     )
 }
@@ -64,7 +70,6 @@ const useStyles = makeStyles()(() => ({
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
-        //alignItems:"center"
     },
     calculationPage_headingText: {
         marginTop: "10px",
@@ -77,19 +82,14 @@ const useStyles = makeStyles()(() => ({
     calculationPage_headingButton: {
         marginBottom: "10px",
         padding: "4px 33px 5px 34px",
-        border: "1px solid #86A9B8",
+        border: "1px solid #8989897a",
         backgroundColor: "#FFFFFF",
-        color: "#48748D",
+        color: "#898989",
         borderRadius: "10px"
-    },
-    calculationPage_mainContainer: {
-        // backgroundColor:"lightblue"
     },
     calculationPage_tableContainer: {
         marginTop: "10px",
         border: "1px solid #D6D9DB",
-        // borderBottom:"0",
-        //borderTop:"0",
         borderRadius: "10px",
     },
     calculationPage_table: {
@@ -97,15 +97,12 @@ const useStyles = makeStyles()(() => ({
         width: "100%",
         borderRadius: "10px",
         overflow: "hidden"
-        //borderCollapse:"separate"
     },
     table_header: {
         border: "1px solid #D6D9DB",
         backgroundColor: "#D6D9DB",
         padding: "8px 44px 6px 21px",
         borderRadius: "10px"
-
-
     },
     table_headingText: {
         fontFamily: "Nunito Sans",
@@ -125,8 +122,6 @@ const useStyles = makeStyles()(() => ({
     },
     table_row: {
         border: "1px solid #D6D9DB",
-        // display:"flex",
-        // flexDirection:"row",
         width: "100%"
     },
     table_data: {
@@ -144,6 +139,17 @@ const useStyles = makeStyles()(() => ({
         lineHeight: "24.55px",
         color: "#667B8B",
         padding: "23px 0 20px 20px"
+    },
+    calculationPage_contain: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        paddingTop: '1%',
+    },
+    calculationPage_contains_contain: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        width: '27%'
     }
 }))
 

@@ -35,8 +35,8 @@ function AdminSettings(): JSX.Element {
                     </Col>
 
                     <Col lg={10} className='card-container'>
-                        <h3 className="card-title">John Smith</h3>
-                        <p className="card-text">johnsmith@gmail.com</p>
+                        <h3 className="card-title">Heather Stephens</h3>
+                        <p className="card-text">heatherstephens@gmail.com</p>
                     </Col>
 
                 </Row>
@@ -45,13 +45,13 @@ function AdminSettings(): JSX.Element {
                         <div className='form-box-field'>
                             <Form.Group controlId="fullName">
                                 <Form.Label className='form-box-lable1'>Full Name</Form.Label>
-                                <Form.Control type="text" defaultValue='Edwin Zam' className='form-box-inputArea' />
+                                <Form.Control type="text" defaultValue='Heather Stephens' className='form-box-inputArea' />
                             </Form.Group>
                         </div>
                         <div className='form-box-field'>
                             <Form.Group controlId="email">
                                 <Form.Label className='form-box-lable1'>Email Address</Form.Label>
-                                <Form.Control type="email" defaultValue='JhonSmith@gmail.com ' className='form-box-inputArea' />
+                                <Form.Control type="email" defaultValue='heatherstephens@gmail.com' className='form-box-inputArea' />
                             </Form.Group>
                         </div>
                     

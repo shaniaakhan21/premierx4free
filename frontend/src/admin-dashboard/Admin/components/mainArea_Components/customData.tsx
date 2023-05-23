@@ -43,9 +43,9 @@ export const agentCalculationData = [
         contractStartDate: "2023-04-30",
         contractEndDate: "2023-04-30",
         ReferralAgentName: "John Smith",
-        noOfPeople: "2000",
-        perPerson: "$230",
-        totalPay: "$300",
+        noOfPeople: "500",
+        perPerson: "$23",
+        totalPay: "$11500",
     },
 
     {
@@ -57,8 +57,8 @@ export const agentCalculationData = [
         contractEndDate: "2023-04-30",
         ReferralAgentName: "John Smith",
         noOfPeople: "2000",
-        perPerson: "$119",
-        totalPay: "$300",
+        perPerson: "$20",
+        totalPay: "$40000",
     },
 
     {
@@ -69,8 +69,8 @@ export const agentCalculationData = [
         contractStartDate: "2023-04-30",
         contractEndDate: "2023-04-30",
         ReferralAgentName: "John Smith",
-        noOfPeople: "2000",
+        noOfPeople: "600",
         perPerson: "$225",
-        totalPay: "$300",
+        totalPay: "$135000",
     },
 ]

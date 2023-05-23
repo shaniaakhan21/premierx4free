@@ -61,3 +61,8 @@
         display:none;
     }
 }
+
+.no-m-y-p{
+    margin: 0!important;
+    padding: 3%;
+}

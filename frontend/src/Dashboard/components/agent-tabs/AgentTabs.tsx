@@ -169,7 +169,7 @@ function AgentTabs(props: Props): JSX.Element {
                                 <MarketingMaterials />
                             </Tab.Pane>
                             <Tab.Pane eventKey="fifth" className='tab-pane-fifth'>
-                                <div className="container mt-4">
+                                <div className="container no-m-y-p">
                                     <AgentSettings
                                         imageUrl={profile.imageUrl}
                                         fullName={profile.fullName}

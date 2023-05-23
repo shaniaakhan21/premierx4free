@@ -20,7 +20,7 @@ type Props = {
 const AgentTeam = ({ data, spanText, col1head, col2head, col3head }: Props) => {
     const hydata = [
         { col1: 'Acme Corporation', col2: '50', col3: '$ 500', col4: 'Active', col5: 'Lorem Ipsum is simply dummy text of the printing ...' },
-        { col1: 'Vehement Capital.Inc', col2: '50', col3: '$ 500', col4: 'Rejected', col5: 'Lorem Ipsum is simply dummy text of the printing ...' },
+        { col1: 'Vehement Capital.Inc', col2: '50', col3: '$ 500', col4: 'Pending', col5: 'Lorem Ipsum is simply dummy text of the printing ...' },
         { col1: 'Massive Dynamic.LLC', col2: '50', col3: '$ 400', col4: 'Pending', col5: 'Lorem Ipsum is simply dummy text of the printing ...' },
     ]
     const [showPopup, setShowPopup] = useState(false);
