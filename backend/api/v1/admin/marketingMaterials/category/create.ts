@@ -1,7 +1,7 @@
 import { CustomRequestHandler } from '@helpers/errorHandler'
 import validateClass from '@helpers/global'
 import { successResponse } from '@helpers/response'
-import MarketingMaterialsCategoryModel, { MarketingMaterialsCategory } from '@models/MarketingMaterialsCategory'
+import MarketingMaterialsCategoryModel, { MarketingMaterialsCategory } from '@models/marketingMaterialsCategory.model'
 import UserModel from '@models/user.model'
 import { plainToInstance } from 'class-transformer'
 

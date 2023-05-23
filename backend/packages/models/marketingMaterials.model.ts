@@ -1,5 +1,5 @@
 import { ClassTransformerRoles, Roles } from '@helpers/access'
-import { MarketingMaterialsCategory } from '@models/MarketingMaterialsCategory'
+import { MarketingMaterialsCategory } from '@models/marketingMaterialsCategory.model'
 import ModelInterface from '@models/model.interface'
 import { User } from '@models/user.model'
 import {

@@ -1,6 +1,6 @@
 import { CustomRequestHandler } from '@helpers/errorHandler'
 import { successResponse } from '@helpers/response'
-import MarketingMaterialsModel from '@models/marketingMaterials'
+import MarketingMaterialsModel from '@models/marketingMaterials.model'
 
 const getMarketingMaterials: CustomRequestHandler<{}> = async (req, res) => {
   res.json(
