@@ -1,8 +1,4 @@
 import { makeStyles } from '../../../../utils/makeStyles';
-import Logo from '../../../../components/Logo';
-import { Height } from '@material-ui/icons';
-import { BorderRight } from '@mui/icons-material';
-import { color, fontFamily } from '@mui/system';
 import * as React from 'react';
 
 interface event {
@@ -24,9 +20,9 @@ function Sidebar(props:event):JSX.Element{
                 <div className={classes.topRectangle_text}>
                     <p className={classes.nameText}>Heather Stephens</p>
                     <span className={classes.emailText}>heatherstephens@gmail.com</span>
-                </div>  
+                </div>
             </div>
-            
+
             <div className={classes.sidebar_navigation}>
                         <div className={eventNumber ==1 ?classes.navigation_li_selected:classes.navigation_li} onClick={() => {setEventNumber(1)}}>
                             <img src='/assets/svg/documents.svg' className={classes.navigation_img} />
@@ -52,7 +48,7 @@ function Sidebar(props:event):JSX.Element{
 const useStyles = makeStyles() (() => ({
     sidebar_mainContainer:{
         width:"275px",
-        
+
     },
     sidebar_topRectangle:{
         width:"100%",

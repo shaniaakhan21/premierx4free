@@ -1,12 +1,12 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import * as fs from 'fs'
-import * as path from 'path'
+import fs from 'fs'
+import path from 'path'
 
 import { CustomRequestHandler } from '@helpers/errorHandler'
 import validateClass, { generateFileName } from '@helpers/global'
 import { successResponse } from '@helpers/response'
-import MarketingMaterialsModel, { MarketingMaterials } from '@models/marketingMaterials'
-import MarketingMaterialsCategoryModel from '@models/marketingMaterialsCategory'
+import MarketingMaterialsModel, { MarketingMaterials } from '@models/marketingMaterials.model'
+import MarketingMaterialsCategoryModel from '@models/marketingMaterialsCategory.model'
 import UserModel from '@models/user.model'
 import { plainToInstance } from 'class-transformer'
 import { UploadedFile } from 'express-fileupload'
@@ -32,7 +32,7 @@ const createMarketingMaterial: CustomRequestHandler<{}, any, MarketingMaterials>
     if (req.files?.document && !(req.files?.document as UploadedFile[])?.[0]) {
       const file = req.files?.document as UploadedFile
       const fileName = generateFileName(file.name)
-      await file.mv(path.resolve(__dirname, '../../../../uploads/marketingMaterials'))
+      await file.mv(path.resolve(__dirname, '../../../../uploads/marketingMaterials', fileName))
       if (existing.document) {
         const existingFile = path.resolve(__dirname, '../../../../uploads/marketingMaterials', existing.document)
         if (fs.existsSync(existingFile)) {

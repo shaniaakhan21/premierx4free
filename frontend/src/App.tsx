@@ -12,6 +12,8 @@ import CookieBanner from './components/cookie';
 import axios from "axios";
 import {AuthProvider} from "./contexts/auth.context";
 
+import { Theme } from '@mui/material/styles';
+
 export const muiCache = createCache({
   key: 'premierx-theme',
   prepend: true,
@@ -27,16 +29,16 @@ function App() {
 
   return (
     <div className='App'>
-      <CacheProvider value={muiCache}>
-        <ThemeProvider theme={theme}>
-          <BrowserRouter>
-            <AuthProvider>
+      <AuthProvider>
+        <CacheProvider value={muiCache}>
+          <ThemeProvider theme={theme}>
+            <BrowserRouter>
               <CookieBanner />
               <AppRouter />
-            </AuthProvider>
-          </BrowserRouter>
-        </ThemeProvider>
-      </CacheProvider>
+            </BrowserRouter>
+          </ThemeProvider>
+        </CacheProvider>
+      </AuthProvider>
     </div>
   )
 }

@@ -1,25 +1,21 @@
 import "./styles.css";
 import { Table } from 'react-bootstrap';
+import {useAgentInfo} from "../../../services/agent";
+import {useAuth} from "../../../contexts/auth.context";
+import AgentProfile from "../../../models/agentProfile.model";
+import {useEffect} from "react";
 
-type TableData = {
-    col1: string;
-    col2: string;
-    col3: string;
-    col4: string;
-    col5: string;
-}
-  
 type Props = {
-    data: TableData[];
-    spanText: string;
-    col1head: string;
-    col2head: string;
-    col3head: string;
-    col4head: string;
-    col5head: string;
+    title: string;
+    agentUserId?: number
+    agent?: AgentProfile
 }
 
-const AgentCustomers = ({ data, spanText, col1head, col2head, col3head, col4head, col5head }: Props)   =>  {
+const AgentCustomers = ({ title, agentUserId, agent }: Props)   =>  {
+    const { user } = useAuth()
+
+    const { data: agentInfo } = useAgentInfo(user!, !agent ? (agentUserId ?? user?.userId?.toString()!) : undefined)
+
     const getStatusIcon = (status: string) => {
         switch (status) {
             case "Active":
@@ -34,25 +30,25 @@ const AgentCustomers = ({ data, spanText, col1head, col2head, col3head, col4head
     };
 	return (
 		<div className="box-main box-main-customer">
-            <span className='textCustom'>{spanText}</span>
+            {title ? <span className='textCustom'>{title}</span> : null}
             <Table bordered hover responsive style={{ borderRadius: '5%' }} className='tableDesign'>
                 <thead>
                     <tr style={{ backgroundColor: '#F4F6F8' }}>
-                        <th>{col1head}</th>
-                        <th>{col2head}</th>
-                        <th>{col3head}</th>
-                        <th>{col4head}</th>
-                        <th>{col5head}</th>
+                        <th>Company Name</th>
+                        <th>Number of Employees / Members</th>
+                        <th>Commission Rate</th>
+                        <th>Status (Active / Pending)</th>
+                        <th>Comments</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map((row, index) => (
+                    {(agent ?? agentInfo?.data.agentProfile)?.companies?.map((company, index) => (
                     <tr key={index} style={{ backgroundColor: 'white' }}>
-                        <td>{row.col1}</td>
-                        <td>{row.col2}</td>
-                        <td>{row.col3}</td>
-                        <td className="status-col">{getStatusIcon(row.col4)} {row.col4}</td>
-                        <td>{row.col5}</td>
+                        <td>{company.name}</td>
+                        <td>{company.employeeCount}</td>
+                        <td>{company.commissionRate}</td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     ))}
                 </tbody>

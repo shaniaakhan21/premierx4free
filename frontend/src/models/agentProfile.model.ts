@@ -6,6 +6,24 @@ export enum AgentStatus {
   Terminated = 'Terminated'
 }
 
+export type AgentProfileCompany = {
+  _id?: string
+  name?: string
+  phone?: string
+  address?: string
+  contactPersonName?: string
+  contactPersonPhone?: string
+  employeeCount?: number
+  fullTime?: string
+  partTime?: string
+  insuranceInfo?: string
+  commissionRate?: number
+  fullInsured?: boolean
+  selfInsured?: boolean
+  notInsured?: boolean
+  typeOfBusiness?: string
+}
+
 export default class AgentProfile {
   public _id!: string
 
@@ -17,6 +35,8 @@ export default class AgentProfile {
     state: string
     zip: string
   }
+
+  public companies?: AgentProfileCompany[]
 
   public contactNo!: string
 

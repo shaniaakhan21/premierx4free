@@ -26,11 +26,10 @@ const initialProfile = {
 };
 
 interface Props {
-    agentData: User
+
 }
 
 function AgentTabs(props: Props): JSX.Element {
-    let { agentData } = props
     const [showTabs, setShowTabs] = useState(false);
 
     const handleToggleTabs = () => {
@@ -88,7 +87,7 @@ function AgentTabs(props: Props): JSX.Element {
                 <Row>
                     {showTabs && (
                         <Col sm={2} className='tab-contains'>
-                            <AgentProfile agentData={agentData} />
+                            <AgentProfile />
                             <Nav variant="pills" className="flex-column" >
                                 <Nav.Item>
                                     <Nav.Link eventKey="first">
@@ -124,7 +123,7 @@ function AgentTabs(props: Props): JSX.Element {
                         </Col>
                     )}
                     <Col sm={2} className='tab-contains mobile-hide'>
-                        <AgentProfile agentData={agentData} />
+                        <AgentProfile />
                         <Nav variant="pills" className="flex-column" >
                             <Nav.Item>
                                 <Nav.Link eventKey="first">
@@ -156,8 +155,8 @@ function AgentTabs(props: Props): JSX.Element {
                         <Tab.Content>
                             <Tab.Pane eventKey="first" className="tab-pane-first">
                                 <AgentSubHeader />
-                                <AgentCustomers data={data} col1head='Company Name' col2head='Number of Employees /Members' col3head='Commission Rate' col4head='Status (Active/Pending)' col5head='Comments' spanText="Direct Clients" />
-                                <AgentTeam data={teamdata} col1head='Representative Name' col2head='Commission Rate' col3head='View Client List ' spanText="Referral Clients" />
+                                <AgentCustomers title="Direct Clients" />
+                                <AgentTeam title="Referral Clients" />
                                 <Commission spanText="Commission Summary" />
                             </Tab.Pane>
                             <Tab.Pane eventKey="second" className="tab-pane-second">
@@ -170,7 +169,7 @@ function AgentTabs(props: Props): JSX.Element {
                                 <MarketingMaterials />
                             </Tab.Pane>
                             <Tab.Pane eventKey="fifth" className='tab-pane-fifth'>
-                                <div className="container mt-4">
+                                <div className="container no-m-y-p">
                                     <AgentSettings
                                         imageUrl={profile.imageUrl}
                                         fullName={profile.fullName}
