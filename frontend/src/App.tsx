@@ -29,16 +29,16 @@ function App() {
 
   return (
     <div className='App'>
-      <CacheProvider value={muiCache}>
-        <ThemeProvider theme={theme}>
-          <BrowserRouter>
-            <AuthProvider>
+      <AuthProvider>
+        <CacheProvider value={muiCache}>
+          <ThemeProvider theme={theme}>
+            <BrowserRouter>
               <CookieBanner />
               <AppRouter />
-            </AuthProvider>
-          </BrowserRouter>
-        </ThemeProvider>
-      </CacheProvider>
+            </BrowserRouter>
+          </ThemeProvider>
+        </CacheProvider>
+      </AuthProvider>
     </div>
   )
 }
