@@ -1,6 +1,9 @@
 import "./styles.css";
 import { Table, Modal, Button } from 'react-bootstrap';
 import { useState } from "react";
+import {useMyDashboard} from "../../../services/my";
+import {useAuth} from "../../../contexts/auth.context";
+import AgentProfile from "../../../models/agentProfile.model";
 import AgentCustomers from "../agent-customers/AgentCustomers";
 
 type TableData = {
@@ -33,6 +36,7 @@ const AgentTeam = ({ data, spanText, col1head, col2head, col3head }: Props) => {
         setShowPopup(false);
     };
 
+    const [viewMore, setViewMore] = useState<AgentProfile | undefined>();
 
     return (
         <div className="box-main team-box">
@@ -46,21 +50,21 @@ const AgentTeam = ({ data, spanText, col1head, col2head, col3head }: Props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map((row, index) => (
-                        <tr key={index} style={{ backgroundColor: 'white' }}>
-                            <td>{row.col1}</td>
-                            <td>{row.col2}</td>
-                            <td ><a onClick={handleClick} className="color-link">{row.col3}</a></td>
+                    {data?.data.map((agent, idx) => (
+                        <tr key={idx} style={{ backgroundColor: 'white' }}>
+                            <td>{agent.agent.name}</td>
+                            <td>{agent.commission}$</td>
+                            <td >{(agent.agent.companies?.length ?? 0) > 0 ? <a onClick={() => setViewMore(agent.agent)} className="color-link">View More</a> : null}</td>
                         </tr>
                     ))}
                 </tbody>
             </Table>
-            <Modal show={showPopup} onHide={handleCancel} className='boxModal'>
+            <Modal show={!!viewMore} onHide={() => setViewMore(undefined)} className='boxModal'>
                 <Modal.Body>
-                <AgentCustomers data={hydata} col1head='Company Name' col2head='Number of Employees /Members' col3head='Commission Rate' col4head='Status (Active/Pending)' col5head='Comments' spanText="View Direct Clients " />
+                <AgentCustomers agent={viewMore} title="View Direct Clients " />
                 </Modal.Body>
                 <Modal.Footer className='modalFooter'>
-                    <Button variant="secondary" onClick={handleCancel} className='buttonBlue'>
+                    <Button variant="secondary" onClick={() => setViewMore(undefined)} className='buttonBlue'>
                         Close
                     </Button>
                 </Modal.Footer>
