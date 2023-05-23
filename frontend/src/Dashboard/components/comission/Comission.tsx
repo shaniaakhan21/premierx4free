@@ -51,7 +51,7 @@ const Comission = ({ spanText }: Props) => {
                         </div>
                     </div>
                     <div id="customers-tab-content">
-                        <TablesComp data={comissiondata} col1head='Company Name' col2head='Contract Start Date' col3head='Contact End Date' col4head='Monthly Membership paid (No. of People)' col5head='Amount Paid Per Person' col6head='Total Pay' />
+                        <TablesComp data={comissiondata} col1head='Company Name' col2head='Contract Start Date' col3head='Contract End Date' col4head='Monthly Membership paid (No. of People)' col5head='Amount Paid Per Person' col6head='Total Pay' />
                     </div>
                 </Tab>
                 <Tab eventKey="refferalscustomers" title="Referral Clients">
@@ -62,7 +62,7 @@ const Comission = ({ spanText }: Props) => {
                         </div>
                     </div>
                     <div id="customers-tab-content">
-                        <TablesComp data={comission2data} col1head='Company Name' col2head='Referral Agent' col3head='Contract Start Date' col4head='Contact End Date' col5head='Monthly Membership paid (No. of People)' col6head='Amount Paid Per Person' col7head='Total Pay' />
+                        <TablesComp data={comission2data} col1head='Company Name' col2head='Referral Agent' col3head='Contract Start Date' col4head='Contract End Date' col5head='Monthly Membership paid (No. of People)' col6head='Amount Paid Per Person' col7head='Total Pay' />
                     </div>
                 </Tab>
                 <Tab eventKey="summary" title="Summary">

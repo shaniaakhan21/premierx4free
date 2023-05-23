@@ -20,9 +20,21 @@ type Props = {
     col3head: string;
 }
 
-const AgentTeam = ({ spanText, col1head, col2head, col3head }: Props) => {
-    const { user } = useAuth()
-    const { data } = useMyDashboard(user!)
+const AgentTeam = ({ data, spanText, col1head, col2head, col3head }: Props) => {
+    const hydata = [
+        { col1: 'Acme Corporation', col2: '50', col3: '$ 500', col4: 'Active', col5: 'Lorem Ipsum is simply dummy text of the printing ...' },
+        { col1: 'Vehement Capital.Inc', col2: '50', col3: '$ 500', col4: 'Pending', col5: 'Lorem Ipsum is simply dummy text of the printing ...' },
+        { col1: 'Massive Dynamic.LLC', col2: '50', col3: '$ 400', col4: 'Pending', col5: 'Lorem Ipsum is simply dummy text of the printing ...' },
+    ]
+    const [showPopup, setShowPopup] = useState(false);
+
+    const handleClick = () => {
+        setShowPopup(true);
+    };
+
+    const handleCancel = () => {
+        setShowPopup(false);
+    };
 
     const [viewMore, setViewMore] = useState<AgentProfile | undefined>();
 
