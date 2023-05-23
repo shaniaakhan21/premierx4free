@@ -8,7 +8,7 @@ type TableData = {
     col4: string;
     col5: string;
 }
-  
+
 type Props = {
     data: TableData[];
     spanText: string;
@@ -20,6 +20,8 @@ type Props = {
 }
 
 const AgentCustomers = ({ data, spanText, col1head, col2head, col3head, col4head, col5head }: Props)   =>  {
+
+
     const getStatusIcon = (status: string) => {
         switch (status) {
             case "Active":

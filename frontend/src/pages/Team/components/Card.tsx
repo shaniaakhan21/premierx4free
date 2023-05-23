@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import { Button } from '@mui/material';
+import {makeStyles} from "../../../utils/makeStyles";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles<{ marginTop: number }>()((theme, { marginTop }) => ({
   container: {
     display: 'flex',
     flexDirection: 'column',
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   buttonMargin: {
-    marginTop: (props: any) => props.marginTop,
+    marginTop: marginTop,
   },
 }));
 
@@ -63,7 +63,7 @@ interface Props {
 }
 
 const Card: React.FC<Props> = ({ imageSrc, name, description, onClick, marginTop }) => {
-  const classes = useStyles({ marginTop });
+  const { classes } = useStyles({ marginTop });
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {

@@ -5,7 +5,6 @@ import AgentTabs from './components/agent-tabs/AgentTabs';
 import {useAuth} from "../contexts/auth.context";
 
 function AgentDashboard(): JSX.Element {
-  const { user } = useAuth()
 
   return (
     <div className='main-div'>
@@ -20,7 +19,7 @@ function AgentDashboard(): JSX.Element {
           <AgentHeader  />
         </Col>
       </Row>
-      <AgentTabs agentData={user!} />
+      <AgentTabs />
     </div>
   );
 }

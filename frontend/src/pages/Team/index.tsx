@@ -1,8 +1,8 @@
 import Footer from '../../components/Footer';
 import TeamInfo from './components/TeamInfo';
 import Card from './components/Card';
-import { makeStyles } from '@material-ui/core/styles';
 import Navbar from '../../components/Navbar';
+import { makeStyles } from '../../utils/makeStyles';
 
 const people = [
   {name: 'Randy Case - CEO', marginTop:47, imageSrc: '/assets/svg/Team/randy.svg', description:'Randy founded PremieRx4Free in 2023 to be a disruptor in the prescription drug industry. His background and knowledge in the subject area make him the perfect person to get prescription medications and tele-health programs to the masses. In 2020, Randy co-founded NSUR, Inc. a crypto based company that specializes in the health and wellness sectors and applying the blockchain technology to it. Randy played a major role in energy deregulation in the 2010-2020 time frame forming Strategic Energy Marketing. Previous to that, Randy founded Strategic Realty Group, Inc. and was responsible for the renovation and development of Palm Desert Country Club (PDCC) in Palm Desert, Ca. As a result of that renovation and development, PDCC was awarded the golf course renovation of the year in the US in 2007 by Golf, Inc. magazine. Randy also served as Director of Real Estate for The Metropolitan Water District of Southern California (MWD), the world’s largest water agency. Randy was responsible for all real estate activities related to approximately 10,000 properties owned by MWD throughout Southern California and a $4.1 billion capital expansion program— The largest ever undertaken by the MWD.' },
@@ -12,7 +12,7 @@ const people = [
   {name: 'Heather Stephens - Director of Financial Services', marginTop:8, imageSrc: '/assets/svg/Team/heather.png' , description:'Heather specializes in corporate finance and business structure. She spent 15 years in human resources and that grew into her passion for entrepreneurship and business operations. Heather earned her education at San Diego State University, where she honed her financial acumen and built a strong foundation for her professional career. Her expertise in corporate finance and business structure has helped numerous clients navigate complex financial challenges and achieve long-term success. Heather is a trusted partner to her clients, providing personalized financial guidance and support throughout their business ventures. Her passion for entrepreneurship and business operations makes her a valuable asset to any organization seeking to achieve financial success.'},
 ];
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles()(() => ({
   container: {
     display: 'flex',
     flexDirection: 'row',
@@ -33,7 +33,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 function TeamPage(): JSX.Element {
-  const classes = useStyles();
+  const { classes } = useStyles();
   return (
     <div>
       <Navbar />
