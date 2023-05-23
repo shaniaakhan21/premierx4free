@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import * as fs from 'fs'
 import * as path from 'path'
 
@@ -5,7 +6,7 @@ import { CustomRequestHandler } from '@helpers/errorHandler'
 import validateClass, { generateFileName } from '@helpers/global'
 import { successResponse } from '@helpers/response'
 import MarketingMaterialsModel, { MarketingMaterials } from '@models/marketingMaterials'
-import MarketingMaterialsCategoryModel from '@models/MarketingMaterialsCategory'
+import MarketingMaterialsCategoryModel from '@models/marketingMaterialsCategory'
 import UserModel from '@models/user.model'
 import { plainToInstance } from 'class-transformer'
 import { UploadedFile } from 'express-fileupload'
