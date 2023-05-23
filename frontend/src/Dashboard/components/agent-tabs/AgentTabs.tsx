@@ -26,11 +26,10 @@ const initialProfile = {
 };
 
 interface Props {
-    agentData: User
+
 }
 
 function AgentTabs(props: Props): JSX.Element {
-    let { agentData } = props
     const [showTabs, setShowTabs] = useState(false);
 
     const handleToggleTabs = () => {
@@ -88,7 +87,7 @@ function AgentTabs(props: Props): JSX.Element {
                 <Row>
                     {showTabs && (
                         <Col sm={2} className='tab-contains'>
-                            <AgentProfile agentData={agentData} />
+                            <AgentProfile />
                             <Nav variant="pills" className="flex-column" >
                                 <Nav.Item>
                                     <Nav.Link eventKey="first">
@@ -124,7 +123,7 @@ function AgentTabs(props: Props): JSX.Element {
                         </Col>
                     )}
                     <Col sm={2} className='tab-contains mobile-hide'>
-                        <AgentProfile agentData={agentData} />
+                        <AgentProfile />
                         <Nav variant="pills" className="flex-column" >
                             <Nav.Item>
                                 <Nav.Link eventKey="first">

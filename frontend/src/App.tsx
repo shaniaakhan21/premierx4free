@@ -12,6 +12,8 @@ import CookieBanner from './components/cookie';
 import axios from "axios";
 import {AuthProvider} from "./contexts/auth.context";
 
+import { Theme } from '@mui/material/styles';
+
 export const muiCache = createCache({
   key: 'premierx-theme',
   prepend: true,

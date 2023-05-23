@@ -1,8 +1,4 @@
 import { makeStyles } from '../../../../utils/makeStyles';
-import Logo from '../../../../components/Logo';
-import { Height } from '@material-ui/icons';
-import { BorderRight } from '@mui/icons-material';
-import { color, fontFamily } from '@mui/system';
 import * as React from 'react';
 
 interface event {
@@ -15,8 +11,8 @@ function SidebarMobile(props:event):JSX.Element{
     const {eventNumber,setEventNumber} = props
     const {classes} = useStyles()
     return(
-        
-            
+
+
         <div className={classes.sidebar_mainContainer}>
             <div className={classes.sidebar_topRectangle}>
                 {/* <div className={classes.topRectangle_logo}>
@@ -28,9 +24,9 @@ function SidebarMobile(props:event):JSX.Element{
                 <div className={classes.topRectangle_text}>
                     <p className={classes.nameText}>Edwin Zam</p>
                     <span className={classes.emailText}>edwinzam@gmail.com</span>
-                </div>  
+                </div>
             </div>
-            
+
             <div className={classes.sidebar_navigation}>
                         <div className={eventNumber ==1 ?classes.navigation_li_selected:classes.navigation_li} onClick={() => {setEventNumber(1)}}>
                             <img src='/assets/svg/documents.svg' className={classes.navigation_img} />
