@@ -17,11 +17,9 @@ import { Equals, IsBoolean, IsNumber, IsOptional, IsPositive, IsString, Min, Val
 import mongoose from 'mongoose'
 
 export enum AgentStatus {
-  Registered = 'Registered',
-  PendingSign = 'PendingSign',
+  Pending = 'Pending',
   Active = 'Active',
-  Suspended = 'Suspended',
-  Terminated = 'Terminated'
+  Registered = 'Registered'
 }
 
 @Exclude()
@@ -208,7 +206,8 @@ export class AgentProfile extends ModelInterface {
   @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
   public contract?: string
 
-  @prop({ enum: AgentStatus, default: AgentStatus.Registered, index: true })
+  @prop({ enum: AgentStatus, default: AgentStatus.Pending, index: true })
+  @Expose({ groups: [ClassTransformerRoles.Self, ClassTransformerRoles.Referrer, Roles.Admin] })
   public status?: AgentStatus
 
   @IsNumber()
