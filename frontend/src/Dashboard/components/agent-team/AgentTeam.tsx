@@ -1,6 +1,9 @@
 import "./styles.css";
 import { Table, Modal, Button } from 'react-bootstrap';
 import { useState } from "react";
+import {useMyDashboard} from "../../../services/my";
+import {useAuth} from "../../../contexts/auth.context";
+import AgentProfile from "../../../models/agentProfile.model";
 import AgentCustomers from "../agent-customers/AgentCustomers";
 
 type TableData = {
@@ -17,22 +20,11 @@ type Props = {
     col3head: string;
 }
 
-const AgentTeam = ({ data, spanText, col1head, col2head, col3head }: Props) => {
-    const hydata = [
-        { col1: 'Acme Corporation', col2: '50', col3: '$ 500', col4: 'Active', col5: 'Lorem Ipsum is simply dummy text of the printing ...' },
-        { col1: 'Vehement Capital.Inc', col2: '50', col3: '$ 500', col4: 'Rejected', col5: 'Lorem Ipsum is simply dummy text of the printing ...' },
-        { col1: 'Massive Dynamic.LLC', col2: '50', col3: '$ 400', col4: 'Pending', col5: 'Lorem Ipsum is simply dummy text of the printing ...' },
-    ]
-    const [showPopup, setShowPopup] = useState(false);
+const AgentTeam = ({ spanText, col1head, col2head, col3head }: Props) => {
+    const { user } = useAuth()
+    const { data } = useMyDashboard(user!)
 
-    const handleClick = () => {
-        setShowPopup(true);
-    };
-
-    const handleCancel = () => {
-        setShowPopup(false);
-    };
-
+    const [viewMore, setViewMore] = useState<AgentProfile | undefined>();
 
     return (
         <div className="box-main team-box">
@@ -46,21 +38,21 @@ const AgentTeam = ({ data, spanText, col1head, col2head, col3head }: Props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map((row, index) => (
-                        <tr key={index} style={{ backgroundColor: 'white' }}>
-                            <td>{row.col1}</td>
-                            <td>{row.col2}</td>
-                            <td ><a onClick={handleClick} className="color-link">{row.col3}</a></td>
+                    {data?.data.map((agent, idx) => (
+                        <tr key={idx} style={{ backgroundColor: 'white' }}>
+                            <td>{agent.agent.name}</td>
+                            <td>{agent.commission}$</td>
+                            <td >{(agent.agent.companies?.length ?? 0) > 0 ? <a onClick={() => setViewMore(agent.agent)} className="color-link">View More</a> : null}</td>
                         </tr>
                     ))}
                 </tbody>
             </Table>
-            <Modal show={showPopup} onHide={handleCancel} className='boxModal'>
+            <Modal show={!!viewMore} onHide={() => setViewMore(undefined)} className='boxModal'>
                 <Modal.Body>
-                <AgentCustomers data={hydata} col1head='Company Name' col2head='Number of Employees /Members' col3head='Commission Rate' col4head='Status (Active/Pending)' col5head='Comments' spanText="View Direct Clients " />
+                <AgentCustomers agent={viewMore} title="View Direct Clients " />
                 </Modal.Body>
                 <Modal.Footer className='modalFooter'>
-                    <Button variant="secondary" onClick={handleCancel} className='buttonBlue'>
+                    <Button variant="secondary" onClick={() => setViewMore(undefined)} className='buttonBlue'>
                         Close
                     </Button>
                 </Modal.Footer>

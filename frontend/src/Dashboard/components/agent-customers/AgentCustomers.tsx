@@ -2,29 +2,18 @@ import "./styles.css";
 import { Table } from 'react-bootstrap';
 import {useAgentInfo} from "../../../services/agent";
 import {useAuth} from "../../../contexts/auth.context";
-
-type TableData = {
-    col1: string;
-    col2: string;
-    col3: string;
-    col4: string;
-    col5: string;
-}
+import AgentProfile from "../../../models/agentProfile.model";
 
 type Props = {
-    data: TableData[];
-    spanText: string;
-    col1head: string;
-    col2head: string;
-    col3head: string;
-    col4head: string;
-    col5head: string;
+    title: string;
+    agentUserId?: number
+    agent?: AgentProfile
 }
 
-const AgentCustomers = ({ data, spanText, col1head, col2head, col3head, col4head, col5head }: Props)   =>  {
+const AgentCustomers = ({ title, agentUserId, agent }: Props)   =>  {
     const { user } = useAuth()
 
-    const { data: agentInfo } = useAgentInfo(user!, user?.userId!)
+    const { data: agentInfo } = useAgentInfo(user!, !agent ? (agentUserId ?? user?.userId!) : undefined)
 
     const getStatusIcon = (status: string) => {
         switch (status) {
@@ -40,7 +29,7 @@ const AgentCustomers = ({ data, spanText, col1head, col2head, col3head, col4head
     };
 	return (
 		<div className="box-main box-main-customer">
-            <span className='textCustom'>{spanText}</span>
+            {title ? <span className='textCustom'>{title}</span> : null}
             <Table bordered hover responsive style={{ borderRadius: '5%' }} className='tableDesign'>
                 <thead>
                     <tr style={{ backgroundColor: '#F4F6F8' }}>
@@ -52,7 +41,7 @@ const AgentCustomers = ({ data, spanText, col1head, col2head, col3head, col4head
                     </tr>
                 </thead>
                 <tbody>
-                    {agentInfo?.data.agentProfile?.companies?.map((company, index) => (
+                    {(agent ?? agentInfo?.data.agentProfile)?.companies?.map((company, index) => (
                     <tr key={index} style={{ backgroundColor: 'white' }}>
                         <td>{company.name}</td>
                         <td>{company.employeeCount}</td>
