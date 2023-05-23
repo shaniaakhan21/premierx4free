@@ -156,7 +156,7 @@ function AgentTabs(props: Props): JSX.Element {
                             <Tab.Pane eventKey="first" className="tab-pane-first">
                                 <AgentSubHeader />
                                 <AgentCustomers title="Direct Clients" />
-                                <AgentTeam data={teamdata} col1head='Representative Name' col2head='Commission Rate' col3head='View Client List ' spanText="Referral Clients" />
+                                <AgentTeam title="Referral Clients" />
                                 <Commission spanText="Commission Summary" />
                             </Tab.Pane>
                             <Tab.Pane eventKey="second" className="tab-pane-second">
