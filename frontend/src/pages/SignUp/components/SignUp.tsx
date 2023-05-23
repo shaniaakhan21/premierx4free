@@ -8,6 +8,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
 const imgSignin = '/assets/svg/SignIn/sigin-img.svg';
+import {register} from "../../../services/register";
 
 function SignUp(): JSX.Element {
     const { classes } = useStyles();
@@ -35,21 +36,23 @@ function SignUp(): JSX.Element {
                 setErrorMsg("passwords did not match")
                 return
             }
-            const res = await axios.post("http://localhost:5000/api/user/signup", {
-                fullName,
+            const res = await register( {
+                name:fullName,
                 email,
-                phoneNumber,
+                contactNo:phoneNumber,
                 password,
-                address,
-                city,
-                state,
-                zipcode,
-                referral,
+                location:{
+                    address,
+                    city,
+                    state,
+                    zip:zipcode,
+                },
+                referralCode:referral,
             });
 
-            console.log('Response data:', res.data);
+            console.log('Response data:', res);
 
-            if (res.status === 201) {
+            if (res.status === 200) {
                 console.log('User registered successfully');
                 history('/signin');
             }

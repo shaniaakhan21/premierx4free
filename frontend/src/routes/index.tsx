@@ -26,13 +26,12 @@ function AppRouter(): JSX.Element {
 			<Route path='/signup' element={<SignUpPage />} />
 			<Route path='/signin' element={<SignInPage />} />
 			<Route path='/resetpassword' element={<ForgotPassword />} />
-			<Route path='/agent-dashboard' element={
-			<ProtectedAgentDashboard>
-				<AgentDashboard />
-			</ProtectedAgentDashboard>
-			} />
-
-
+			{/* <Route path='/agent-dashboard' element={<AgentDashboard />} /> */}
+			<Route element={<ProtectedAgentDashboard />}>
+				<Route path='/agent-dashboard' element={<AgentDashboard />} />
+			</Route>
+			
+			
 		</Routes>
 	)
 }

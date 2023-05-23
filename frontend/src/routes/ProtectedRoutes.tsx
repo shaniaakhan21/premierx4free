@@ -1,16 +1,18 @@
 import { ReactNode } from "react"
-import { Navigate } from "react-router-dom"
+import { Navigate, Route, RouteProps, Outlet} from "react-router-dom"
 import { useAuth } from "../contexts/auth.context";
 
 interface Props {
-    children: JSX.Element
+    isAuth?:boolean
+    path?:string,
+    element?:any
 }
 
-export const ProtectedAgentDashboard = ({ children }: Props) => {
+export const ProtectedAgentDashboard = ({isAuth,...routeProps }: Props) => {
     const { user } = useAuth()
     if (!user)
         return(
             <Navigate to='/signin' replace />
         )
-    return children
+    return <Outlet />
 }
