@@ -1,5 +1,5 @@
-import * as fs from 'fs'
-import * as path from 'path'
+import fs from 'fs'
+import path from 'path'
 
 import { CustomRequestHandler } from '@helpers/errorHandler'
 import validateClass, { generateFileName } from '@helpers/global'
@@ -31,7 +31,7 @@ const createMarketingMaterial: CustomRequestHandler<{}, any, MarketingMaterials>
     if (req.files?.document && !(req.files?.document as UploadedFile[])?.[0]) {
       const file = req.files?.document as UploadedFile
       const fileName = generateFileName(file.name)
-      await file.mv(path.resolve(__dirname, '../../../../uploads/marketingMaterials'))
+      await file.mv(path.resolve(__dirname, '../../../../uploads/marketingMaterials', fileName))
       if (existing.document) {
         const existingFile = path.resolve(__dirname, '../../../../uploads/marketingMaterials', existing.document)
         if (fs.existsSync(existingFile)) {
