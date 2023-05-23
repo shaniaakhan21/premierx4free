@@ -3,6 +3,7 @@ import { Table } from 'react-bootstrap';
 import {useAgentInfo} from "../../../services/agent";
 import {useAuth} from "../../../contexts/auth.context";
 import AgentProfile from "../../../models/agentProfile.model";
+import {useEffect} from "react";
 
 type Props = {
     title: string;
@@ -13,7 +14,7 @@ type Props = {
 const AgentCustomers = ({ title, agentUserId, agent }: Props)   =>  {
     const { user } = useAuth()
 
-    const { data: agentInfo } = useAgentInfo(user!, !agent ? (agentUserId ?? user?.userId!) : undefined)
+    const { data: agentInfo } = useAgentInfo(user!, !agent ? (agentUserId ?? user?.userId?.toString()!) : undefined)
 
     const getStatusIcon = (status: string) => {
         switch (status) {
