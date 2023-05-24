@@ -24,6 +24,8 @@ export type MarketingMaterialsSummaryResponse = {
 
 export const useMarketingMaterialsSummary = (user: User) => useSWR(['/admin/marketingMaterials/summary', user], getFetcher<GenericResponse<MarketingMaterialsSummaryResponse>>)
 
+export const useMarketingMaterials = (user: User) => useSWR(['/admin/marketingMaterials', user], getFetcher<GenericResponse<MarketingMaterial[]>>)
+
 export const removeMarketingMaterial = async (user: User, id: MarketingMaterial['_id']) => {
   return deleteFetcher(['/admin/marketingMaterials', user, [id], undefined])
 }
