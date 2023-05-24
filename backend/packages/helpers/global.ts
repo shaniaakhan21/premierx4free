@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { CustomRequestHandler, InvalidRequestError } from '@helpers/errorHandler'
 import { validateOrReject } from 'class-validator'
 import mongoose, { Mongoose } from 'mongoose'
