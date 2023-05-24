@@ -29,6 +29,11 @@ function SignIn(): JSX.Element {
              })
             if (response.data.success) {
                 setUser(response.data.data)
+                if(response.data.data.roles[0]=='Admin')
+                {
+                    history("/admin")
+                    return
+                }
                 history("/agent-dashboard")
             } else {
                 setErrorMsg("Invalid email or password");

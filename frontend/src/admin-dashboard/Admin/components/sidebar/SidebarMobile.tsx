@@ -5,10 +5,11 @@ interface event {
     eventNumber:number,
     setEventNumber:any,
     sidebarToggle:boolean,
-    setSidebarToggle:any
+    setSidebarToggle:any,
+    user:any
 }
 function SidebarMobile(props:event):JSX.Element{
-    const {eventNumber,setEventNumber} = props
+    const {eventNumber,setEventNumber,user} = props
     const {classes} = useStyles()
     return(
 
@@ -22,8 +23,8 @@ function SidebarMobile(props:event):JSX.Element{
                     <img src='/assets/svg/Dashboard/dummy.svg' className={classes.displayImage} />
                 </div>
                 <div className={classes.topRectangle_text}>
-                    <p className={classes.nameText}>Edwin Zam</p>
-                    <span className={classes.emailText}>edwinzam@gmail.com</span>
+                    <p className={classes.nameText}>{user?.agentProfile?.name}</p>
+                    <span className={classes.emailText}>{user?.email}</span>
                 </div>
             </div>
 

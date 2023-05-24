@@ -4,9 +4,10 @@ import * as React from 'react';
 interface event {
     eventNumber:number
     setEventNumber:any
+    user:any
 }
 function Sidebar(props:event):JSX.Element{
-    const {eventNumber,setEventNumber} = props
+    const {eventNumber,setEventNumber,user} = props
     const {classes} = useStyles()
     return(
         <div className={classes.sidebar_mainContainer}>
@@ -18,8 +19,8 @@ function Sidebar(props:event):JSX.Element{
                     <img src='/assets/svg/Dashboard/dummy.svg' className={classes.displayImage} />
                 </div>
                 <div className={classes.topRectangle_text}>
-                    <p className={classes.nameText}>Heather Stephens</p>
-                    <span className={classes.emailText}>heatherstephens@gmail.com</span>
+                    <p className={classes.nameText}>{user?.agentProfile?.name}</p>
+                    <span className={classes.emailText}>{user?.email}</span>
                 </div>
             </div>
 

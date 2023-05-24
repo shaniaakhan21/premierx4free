@@ -1,7 +1,7 @@
 import { makeStyles } from '../../../../../utils/makeStyles';
 import {agentData} from '../customData'
 import TableRow from './TableRow';
-
+import TableRowMobile from './TableRowMobile'
 function AgentDocuments():JSX.Element{
     const {classes} = useStyles()
     console.log("agentData is",agentData)
@@ -13,6 +13,11 @@ function AgentDocuments():JSX.Element{
                 <div className={classes.agentTable}>
                     {agentData?.map((dt,i)=>(
                         <TableRow agentData={dt} index={i} dataLength={agentData.length} />
+                    ))}
+                </div>
+                <div className={classes.agentTableMobile}>
+                    {agentData?.map((dt,i)=>(
+                        <TableRowMobile agentData={dt} index={i} dataLength={agentData.length} />
                     ))}
                 </div>
             </div>
@@ -47,7 +52,15 @@ const useStyles = makeStyles() (() => ({
             display:"none",
     }
         // backgroundColor:"yellow"
+    },
+    agentTableMobile:{
+        display:"none",
+       // margin:"25px 59px 0 0",
+        '@media(max-width: 768px)':{
+            display:"block",
     }
+        // backgroundColor:"yellow"
+    },
 }))
 
 export default AgentDocuments
