@@ -1,5 +1,5 @@
 import axios, {AxiosRequestConfig, AxiosResponse} from "axios";
-import User from "../src/models/user.model";
+import User from "../models/user.model";
 
 export const buildFetcher = async <RequestType, ResponseType>(
   url: string,
@@ -17,7 +17,6 @@ export const buildFetcher = async <RequestType, ResponseType>(
       return Object.entries(params).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&')
     },
     headers: {
-      'Content-Type': 'application/json',
       'Accept': 'application/json',
     }
   }

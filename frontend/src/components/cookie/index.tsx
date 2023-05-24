@@ -1,15 +1,27 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import './styles.css';
+import {useAuth} from "../../contexts/auth.context";
 
 const CookieBanner: React.FC = () => {
+    const { user } = useAuth()
     const [show, setShow] = useState(true);
 
     const handleClose = () => setShow(false);
     const handleAccept = () => {
-        // Add your accept logic here
+        localStorage.setItem('cookieAccepted', 'true');
         setShow(false);
     };
+
+    if (localStorage.getItem('cookieAccepted') === 'true') {
+        return null;
+    }
+
+    useEffect(() => {
+        if (user) {
+            localStorage.setItem('cookieAccepted', 'true');
+        }
+    }, [user]);
 
     return (
         <>
