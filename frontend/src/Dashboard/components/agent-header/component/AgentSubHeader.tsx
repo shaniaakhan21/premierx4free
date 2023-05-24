@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import useStyles from "./styles"
+import {useAuth} from "../../../../contexts/auth.context";
 
 interface PopupProps {
   show: boolean;
@@ -33,44 +34,18 @@ const Popup = ({ show, onClose, onSave, title, content }: PopupProps) => {
 interface AgentSubHeaderProps {}
 
 const AgentSubHeader = (props: AgentSubHeaderProps): JSX.Element => {
+  const { user } = useAuth()
   const classes = useStyles();
-  const [showNdaPopup, setShowNdaPopup] = useState(false);
-  const [showCaPopup, setShowCaPopup] = useState(false);
-  
-
-  const handleNdaClick = () => {
-    setShowNdaPopup(true);
-  };
-
-  const handleCaClick = () => {
-    setShowCaPopup(true);
-  };
-
-  const handleNdaSave = () => {
-    setShowNdaPopup(false);
-  };
-
-  const handleNdaCancel = () => {
-    setShowNdaPopup(false);
-  };
-
-  const handleCaSave = () => {
-    setShowCaPopup(false);
-  };
-
-  const handleCaCancel = () => {
-    setShowCaPopup(false);
-  };
 
   return (
-    <div className={`{ ${classes.classes.mainConatiner} "row" `}>
+    <div className={`${classes.classes.mainConatiner} row`}>
       <div className="col-lg-6 col-sm-12">
         <div className={classes.classes.subcontainer}>
           <span>Documents</span>
           <div className={classes.classes.subsubcontainer}>
-            <a onClick={handleNdaClick}>NDA</a>
+            <a href={`/api/uploads/nda/${user?.agentProfile?.nda}`} download>NDA</a>
             <div className={classes.classes.line}></div>
-            <a onClick={handleCaClick}>Commission Agreement</a>
+            <a href={`/api/uploads/contract/${user?.agentProfile?.contract}`} download>Commission Agreement</a>
           </div>
         </div>
       </div>
@@ -91,20 +66,6 @@ const AgentSubHeader = (props: AgentSubHeaderProps): JSX.Element => {
           </div>
         </div>
       </div>
-      <Popup
-        show={showNdaPopup}
-        onClose={handleNdaCancel}
-        onSave={handleNdaSave}
-        title={"Upload NDA Documents"}
-        content={<textarea placeholder="Sign in here" className={classes.classes.areaCustom}></textarea>}
-      />
-        <Popup
-        show={showCaPopup}
-        onClose={handleCaCancel}
-        onSave={handleCaSave}
-        title={"Upload Commission Agreement Documents"}
-        content={<textarea placeholder="Sign in here" className={classes.classes.areaCustom}></textarea>}
-      />
     </div>
   );
 };
