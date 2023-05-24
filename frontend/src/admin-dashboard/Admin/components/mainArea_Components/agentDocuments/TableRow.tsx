@@ -3,6 +3,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {useState} from 'react'
+import { uploadFileRequest } from '../../../../../services/uploadFile';
+import { useAuth } from '../../../../../contexts/auth.context';
 
 interface data {
     agentData:any,
@@ -10,11 +12,38 @@ interface data {
     dataLength:number
 }
 
+
+
 function TableRow(props:data):JSX.Element{
+    interface agentFilesInterface{
+        ndaFile?:any,
+        contractFile?:any
+    }
     const {agentData,index,dataLength} = props
     const {classes} = useStyles()
     const [toggle,setToggle] = useState(false)
+    const [agentFiles,setAgentFiles] = useState<agentFilesInterface>()
+    const {user} = useAuth()
     console.log('agent data from table row',index,dataLength)
+    const uploadFile = async() => {
+        if(agentFiles?.ndaFile)
+        {
+            let formData = new FormData()
+            formData.append("file", agentFiles?.ndaFile[0]);
+            formData.append("fileName", agentFiles?.ndaFile[0].name);
+            console.log("user from agent data dash",)
+            const ndaResp = await uploadFileRequest(formData,user?.jwtToken ?? "",{agentID:10,fileType:"NDA"})
+        }
+        if(agentFiles?.contractFile)
+        {
+            let formData = new FormData()
+            formData.append("file", agentFiles?.contractFile[0]);
+            formData.append("fileName", agentFiles?.contractFile[0].name);
+            console.log("user from agent data dash",)
+            const ndaResp = await uploadFileRequest(formData,user?.jwtToken ?? "",{agentID:10,fileType:"contract"})
+        }
+    }
+    
     return(
         <>
         <div className={index==0?classes.firstTablerow:index==dataLength-1?classes.lastTablerow:classes.tablerow}>
@@ -69,15 +98,21 @@ function TableRow(props:data):JSX.Element{
                         <div>
                             <p>NDA Agreement</p>
                             <div className={classes.upload_file}>
-                                <input className={classes.upload_file_input} />
-                                <div className={classes.upload_file_button}>Upload File</div>
+                                <input className={classes.upload_file_input} value={agentFiles?.ndaFile[0]?agentFiles.ndaFile[0].name:""} />
+                                <label className={classes.upload_file_button}>
+                                    <input type='file' style={{display:"none"}} onChange={(e)=>{setAgentFiles({...agentFiles,ndaFile:e.target?.files})}} />
+                                    Upload File
+                                </label>
                             </div>
                         </div>
                         <div>
                             <p>Comission Agreement</p>
                             <div className={classes.upload_file}>
-                                <input className={classes.upload_file_input} />
-                                <div className={classes.upload_file_button}>Upload File</div>
+                                <input className={classes.upload_file_input} value={agentFiles?.contractFile?agentFiles.contractFile[0].name:""} />
+                                <label className={classes.upload_file_button}>
+                                    <input type='file' style={{ display: "none" }} onChange={(e)=>{setAgentFiles({...agentFiles,contractFile:e.target?.files})}} />
+                                    Upload File
+                                </label>
                             </div>
                         </div>
                         <div>
@@ -108,6 +143,7 @@ function TableRow(props:data):JSX.Element{
                             </div>
                             </div>
                         </div>
+                        <button onClick={() => {uploadFile()}}>save</button>
                     </div>
                 </div>
             </div>: <></>}

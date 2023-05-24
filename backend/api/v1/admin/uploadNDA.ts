@@ -1,21 +1,24 @@
+/* eslint-disable prettier/prettier */
 import path from 'path'
 
 import { CustomRequestHandler, RecordNotFoundError } from '@helpers/errorHandler'
 import { generateFileName } from '@helpers/global'
 import { successResponse } from '@helpers/response'
 import AgentProfileModel, { AgentStatus } from '@models/agent-profile.model'
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { UploadedFile } from 'express-fileupload'
 
 const uploadNDA: CustomRequestHandler<{ agentId: string }> = async (req, res) => {
   const agent = await AgentProfileModel.findByAgentId(parseInt(req.params.agentId, 10))
   if (!agent) throw new RecordNotFoundError('Agent not found')
+  console.log(`files from backend uploading function`,req.files?.file)
 
-  if (!req.files?.document || !!(req.files?.document as UploadedFile[])?.[0])
+  if (!req.files?.file || !!(req.files?.file as UploadedFile[])?.[0])
     throw new RecordNotFoundError('NDA file not found')
 
-  const fileName = generateFileName((req.files.document as UploadedFile).name)
+  const fileName = generateFileName((req.files.file as UploadedFile).name)
 
-  const file = req.files?.document as UploadedFile
+  const file = req.files?.file as UploadedFile
   await file.mv(path.resolve(__dirname, '../../../uploads/nda', fileName))
 
   agent.nda = fileName
