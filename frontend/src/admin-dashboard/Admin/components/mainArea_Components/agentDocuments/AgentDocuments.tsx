@@ -2,17 +2,32 @@ import { makeStyles } from '../../../../../utils/makeStyles';
 import {agentData} from '../customData'
 import TableRow from './TableRow';
 import TableRowMobile from './TableRowMobile'
+import { getAllAgents } from '../../../../../services/agent';
+import { useAuth } from '../../../../../contexts/auth.context';
+import { useEffect, useState } from 'react';
 function AgentDocuments():JSX.Element{
+    useEffect(() => {
+        getAllAgentsFunc()
+    },[])
     const {classes} = useStyles()
+    const [data,setData] = useState<any []>()
+    const {user} = useAuth()
     console.log("agentData is",agentData)
+
+    const getAllAgentsFunc = async() => {
+        const resp= await getAllAgents(user?.jwtToken ?? "")
+        console.log("response from agent docs",resp.data.data)
+        setData(resp.data.data)
+    }
+    console.log("response from agent docs as ddata",data)
     return(
         <div >
             <p className={classes.agentdocuments_Headingtext}>Agent Documents</p>
             <div className={classes.tableContainer}>
                 <p className={classes.agentdocuments_text}>Upload Documents</p>
                 <div className={classes.agentTable}>
-                    {agentData?.map((dt,i)=>(
-                        <TableRow agentData={dt} index={i} dataLength={agentData.length} />
+                    {data?.map((dt,i)=>(
+                        <TableRow data={dt} index={i} dataLength={data.length} />
                     ))}
                 </div>
                 <div className={classes.agentTableMobile}>

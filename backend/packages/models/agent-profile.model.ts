@@ -265,6 +265,10 @@ export class AgentProfile extends ModelInterface {
     return this.find().where('referrer').equals(new mongoose.Types.ObjectId(agentObjectId.toString())).exec()
   }
 
+  public static async getAllAgents(this: ReturnModelType<typeof AgentProfile>) {
+    return this.find().exec()
+  }
+
   /**
    * Format agent document
    * @param agent

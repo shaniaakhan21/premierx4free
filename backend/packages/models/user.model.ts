@@ -20,6 +20,7 @@ import { ClassTransformOptions } from 'class-transformer/types/interfaces'
 import { IsEmail, IsString, MinLength } from 'class-validator'
 import { Request } from 'express'
 import { ParamsDictionary, RequestHandler } from 'express-serve-static-core'
+// eslint-disable-next-line import/no-extraneous-dependencies
 import * as HttpStatus from 'http-status'
 import jwt from 'jsonwebtoken'
 import mongoose from 'mongoose'
@@ -78,6 +79,7 @@ export const AuthenticateToken: (roles?: Roles[]) => RequestHandler = (roles) =>
 
   jwt.verify(token, process.env.TOKEN_SECRET as string, (err: any, user: any) => {
     if (err) {
+      console.log('error while verifying', err)
       res.sendStatus(HttpStatus.FORBIDDEN)
       return
     }

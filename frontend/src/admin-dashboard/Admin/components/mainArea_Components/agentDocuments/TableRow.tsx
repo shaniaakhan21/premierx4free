@@ -2,29 +2,32 @@ import { makeStyles } from '../../../../../utils/makeStyles';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import { uploadFileRequest } from '../../../../../services/uploadFile';
 import { useAuth } from '../../../../../contexts/auth.context';
 
-interface data {
-    agentData:any,
+interface dataRow {
+    data:any,
     index:number,
     dataLength:number
 }
 
 
 
-function TableRow(props:data):JSX.Element{
+function TableRow(props:dataRow):JSX.Element{
     interface agentFilesInterface{
         ndaFile?:any,
         contractFile?:any
     }
-    const {agentData,index,dataLength} = props
+    const {data,index,dataLength} = props
     const {classes} = useStyles()
     const [toggle,setToggle] = useState(false)
     const [agentFiles,setAgentFiles] = useState<agentFilesInterface>()
     const {user} = useAuth()
-    console.log('agent data from table row',index,dataLength)
+    console.log('agent data from table row',data,index,dataLength)
+
+    
+
     const uploadFile = async() => {
         if(agentFiles?.ndaFile)
         {
@@ -32,7 +35,7 @@ function TableRow(props:data):JSX.Element{
             formData.append("file", agentFiles?.ndaFile[0]);
             formData.append("fileName", agentFiles?.ndaFile[0].name);
             console.log("user from agent data dash",)
-            const ndaResp = await uploadFileRequest(formData,user?.jwtToken ?? "",{agentID:10,fileType:"NDA"})
+            const ndaResp = await uploadFileRequest(formData,user?.jwtToken ?? "",{agentID:data?.agentId,fileType:"NDA"})
         }
         if(agentFiles?.contractFile)
         {
@@ -40,7 +43,7 @@ function TableRow(props:data):JSX.Element{
             formData.append("file", agentFiles?.contractFile[0]);
             formData.append("fileName", agentFiles?.contractFile[0].name);
             console.log("user from agent data dash",)
-            const ndaResp = await uploadFileRequest(formData,user?.jwtToken ?? "",{agentID:10,fileType:"contract"})
+            const ndaResp = await uploadFileRequest(formData,user?.jwtToken ?? "",{agentID:data?.agentId,fileType:"contract"})
         }
     }
     
@@ -49,15 +52,15 @@ function TableRow(props:data):JSX.Element{
         <div className={index==0?classes.firstTablerow:index==dataLength-1?classes.lastTablerow:classes.tablerow}>
             <div className={classes.headingDescription}>
                 <div><img src='/assets/svg/icons/icon_person.svg' className={classes.headingIcon} /></div>
-                <p className={classes.headingText}>{agentData.firstName} {agentData.lastName}</p>
+                <p className={classes.headingText}>{data?.name}</p>
             </div>
             <div className={classes.headingDescription}>
                 <div><img src='/assets/svg/icons/iconEnvelopeClosed.svg' className={classes.headingIcon} /></div>
-                <p className={classes.headingText}>{agentData.email}</p>
+                <p className={classes.headingText}>{data.name}</p>
             </div>
             <div className={classes.headingDescription}>
                 <div><img src='/assets/svg/icons/icon_phone.svg' className={classes.headingIcon} /></div>
-                <p className={classes.headingText}>{agentData.phoneNum}</p>
+                <p className={classes.headingText}>{data.contactNo}</p>
             </div>
             <div onClick={() => {setToggle(!toggle)}}>
                {toggle?<img src='/assets/svg/minus.svg' className={classes.headerSvg} />: <img src='/assets/svg/plus.svg' className={classes.headerSvg} />}
@@ -69,27 +72,27 @@ function TableRow(props:data):JSX.Element{
                     <div>
                     <Row>
                         <Col md={3}>
-                            <p className={classes.detailHeading}>First Name <br /> <span className={classes.detailText}>{agentData.firstName}</span></p>
+                            <p className={classes.detailHeading}>First Name <br /> <span className={classes.detailText}>{data.name}</span></p>
                         </Col>
                         <Col md={3}>
-                            <p className={classes.detailHeading}>Last Name <br /> <span className={classes.detailText}>{agentData.lastName}</span></p>
+                            <p className={classes.detailHeading}>Last Name <br /> <span className={classes.detailText}>{data.name}</span></p>
                         </Col>
                         <Col md={3}>
-                            <p className={classes.detailHeading}>Address <br /> <span className={classes.detailText}>{agentData.address}</span></p>
+                            <p className={classes.detailHeading}>Address <br /> <span className={classes.detailText}>{data.location.address}</span></p>
                         </Col>
                         <Col md={3}>
-                            <p className={classes.detailHeading}>City <br /> <span className={classes.detailText}>{agentData.city}</span></p>
+                            <p className={classes.detailHeading}>City <br /> <span className={classes.detailText}>{data.location.city}</span></p>
                         </Col>
                     </Row>
                     <Row>
                         <Col md={3}>
-                            <p className={classes.detailHeading}>State <br /> <span className={classes.detailText}>{agentData.state}</span></p>
+                            <p className={classes.detailHeading}>State <br /> <span className={classes.detailText}>{data.location.state}</span></p>
                         </Col>
                         <Col  md={3}>
-                            <p className={classes.detailHeading}>Zip Code <br /> <span className={classes.detailText}>{agentData.zip}</span></p>
+                            <p className={classes.detailHeading}>Zip Code <br /> <span className={classes.detailText}>{data.location.zip}</span></p>
                         </Col>
                         <Col md={3}>
-                            <p className={classes.detailHeading}>Referrel Link <br /> <span className={classes.detailText}>{agentData.referralLink}</span></p>
+                            <p className={classes.detailHeading}>Referrel Link <br /> <span className={classes.detailText}>{"coming soon"}</span></p>
                         </Col>
                     </Row>
                 </div>
