@@ -8,10 +8,11 @@ import {useEffect} from "react";
 type Props = {
     title: string;
     agentUserId?: number
-    agent?: AgentProfile
+    agent?: AgentProfile,
+    commission?: number
 }
 
-const AgentCustomers = ({ title, agentUserId, agent }: Props)   =>  {
+const AgentCustomers = ({ title, agentUserId, agent, commission }: Props)   =>  {
     const { user } = useAuth()
 
     const { data: agentInfo } = useAgentInfo(user!, !agent ? (agentUserId ?? user?.userId?.toString()!) : undefined)
@@ -46,7 +47,7 @@ const AgentCustomers = ({ title, agentUserId, agent }: Props)   =>  {
                     <tr key={index} style={{ backgroundColor: 'white' }}>
                         <td>{company.name}</td>
                         <td>{company.employeeCount}</td>
-                        <td>{company.commissionRate}</td>
+                        <td>{commission ?? company.commissionRate}$</td>
                         <td></td>
                         <td></td>
                     </tr>

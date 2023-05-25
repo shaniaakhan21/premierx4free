@@ -1,5 +1,5 @@
 import useSWR from "swr"
-import {getFetcher} from "../../helpers/axiosFetchers";
+import {getFetcher} from "../helpers/axiosFetchers";
 import {GenericResponse} from "./genericResponse.type";
 import User from "../models/user.model";
 import AgentProfile from "../models/agentProfile.model";

@@ -4,10 +4,15 @@ html, body, #root, .App {
     padding: 0 !important;
 }
 
+#root {
+	overflow-y: auto;
+}
+
 .App {
 	height: 100vh;
 }
 body {
+	overflow: hidden;
 	min-height: 100%;
 	font-family: "Nunito Sans";
 }

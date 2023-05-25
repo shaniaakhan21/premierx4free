@@ -6,437 +6,108 @@ import Col from 'react-bootstrap/Col';
 import { Repeat } from '@mui/icons-material';
 import { color, display, fontWeight } from '@mui/system';
 import RemoveModal from '../modal_popups/RemoveModal';
-import { useState } from 'react';
+import {useMemo, useState} from 'react';
 import ReplaceModal from '../modal_popups/ReplaceModal';
 import UploadMoreModal from '../modal_popups/UploadMore';
 import AddCategoryModal from '../modal_popups/AddCategory';
 import * as React from 'react';
 import './marketingMaterials.css'
 import axios from 'axios'
+import {useAuth} from "../../../../../contexts/auth.context";
+import {
+    MarketingMaterialsSummaryResponse,
+    useMarketingMaterialsCategories,
+    useMarketingMaterialsSummary
+} from "../../../../../services/admin";
+import MarketingMaterialsCategory from "../../../../../models/marketingMaterialsCategory.model";
+import MarketingMaterial from "../../../../../models/marketingMaterial.model";
+import MarketingDocumentPreview from "../modal_popups/MarketingDocumentPreview";
 
 
 function MarketingMaterials():JSX.Element{
+    const { user } = useAuth()
+    const { data: categories } = useMarketingMaterialsCategories(user!)
+    const { data: summaryData, mutate: refreshSummary } = useMarketingMaterialsSummary(user!)
     const {classes} = useStyles()
-    const [removeModalOpen,setRemoveModalOpen] = useState(false)
-    const [replaceModalOpen,setReplaceModalOpen] = useState(false)
-    const [uploadMoreModalOpen,setUploadMoreModalOpen] = useState(false)
-    const [addCategoryModalOpen,setAddCategoryModalOpen] = useState(false)
+    const [showRemoveMaterial, setShowRemoveMaterial] = useState<MarketingMaterial | undefined>()
+    const [showReplaceMaterial, setShowReplaceMaterial] = useState<MarketingMaterial | undefined>()
+    const [showUploadMore, setShowUploadMore] = useState<MarketingMaterialsCategory | undefined>()
+    const [showAddCategory, setShowAddCategory] = useState<boolean>(false)
     const containerWidth = 2
     const containerSm = 6
-    const addCategory = async() => {
-        await axios.post('/api/user/signin')
-        .then((res) => {
-            console.log("result from api is",res)
+
+    const summaryIndexed = useMemo(() => {
+        if (!summaryData) return {}
+        const cats: { [key: string]: Pick<MarketingMaterialsCategory, '_id' | 'name'> & { count: number, documents: MarketingMaterial[] } } = {};
+        summaryData?.data?.categories?.map(({ count, ...info }) => {
+            if (!cats[info._id]) cats[info._id] = { ...info, count: 0, documents: [] }
+            cats[info._id].count = count
         })
-    }
+        summaryData?.data?.data?.map(({ documents, ...info }) => {
+            if (!cats[info._id]) cats[info._id] = { ...info, count: 0, documents: [] }
+            cats[info._id].documents = documents
+        })
+        return cats
+    }, [summaryData])
+
     return(
         <div className={classes.marketing_mainContainer}>
             <p className={classes.mainContainer_heading}>Marketing Materials</p>
 
             <div className={classes.marketing_headerContainer}>
                 <p className={classes.headerContainer_heading}>Upload Documents</p>
-                <button className={classes.headerContainer_button} onClick={() => {
-                    setAddCategoryModalOpen(true)
-                    addCategory()
-                    }}>+ Add Category</button>
+                <button className={classes.headerContainer_button} onClick={() => setShowAddCategory(true)}>+ Add Category</button>
             </div>
 
-            <div className={classes.marketing_contentContainer}>
-
+            {categories?.data?.map(category => <div key={category._id} className={classes.marketing_contentContainer}>
                 <div className={classes.contentContainer_heading}>
-                    <p className={classes.heading_text}>Elevator Pitch for Prospect Clients</p>
+                    <p className={classes.heading_text}>{category.name}</p>
                     <p><a href='#' className={classes.heading_link}>View More</a></p>
                 </div>
 
                 <Row className={classes.contentContainer_row}>
-                <Col lg={containerWidth} className={classes.containerContent_contentUnit} style={{padding:0}}>
-                    <div className={classes.contentUnit_buttons}>
-                        <div className={classes.delete_button} onClick={() => {setRemoveModalOpen(true)}}>
-                            <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image} />
-                            <p>Remove</p>
-                        </div>
-                        <div className={classes.delete_button} onClick={() => {setReplaceModalOpen(true)}}>
-                            <img src='/assets/svg/Dashboard/Replace-icon.svg' className={classes.replaceButton_image}/>
-                            <p>Replace</p>
-                        </div>
-                    </div>
-                </Col>
-
-                <Col lg={containerWidth} className={classes.containerContent_contentUnitPyramid} style={{padding:0}}>
-                    <div className={classes.contentUnit_buttons}>
-                        <div className={classes.delete_button} onClick={() => {setRemoveModalOpen(true)}}>
-                            <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image}/>
-                            <p>Remove</p>
-                        </div>
-                        <div className={classes.delete_button} onClick={() => {setReplaceModalOpen(true)}}>
-                            <img src='/assets/svg/Dashboard/Replace-icon.svg' className={classes.replaceButton_image}/>
-                            <p>Replace</p>
-                        </div>
-                    </div>
-                </Col>
-
-                <Col lg={containerWidth} className={classes.containerContent_contentUnitPdfPpt} style={{padding:0}}>
-                    <img src='/assets/svg/Dashboard/pdf-icon.png' className={classes.containerContent_PdfPptIcon} />
-                    <div className={classes.contentUnit_buttons}>
-                        <div className={classes.delete_button} onClick={() => {setRemoveModalOpen(true)}}>
-                            <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image}/>
-                            <p>Remove</p>
-                        </div>
-                        <div className={classes.delete_button} onClick={() => {setReplaceModalOpen(true)}}>
-                            <img src='/assets/svg/Dashboard/Replace-icon.svg' className={classes.replaceButton_image}/>
-                            <p>Replace</p>
-                        </div>
-                    </div>
-                </Col>
-
-                <Col lg={containerWidth} className={classes.containerContent_contentUnitPdfPpt} style={{padding:0}}>
-                    <img src='/assets/svg/Dashboard/ppt-icon.png' className={classes.containerContent_PdfPptIcon} />
-                    <div className={classes.contentUnit_buttons}>
-                        <div className={classes.delete_button} onClick={() => {setRemoveModalOpen(true)}}>
-                            <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image}/>
-                            <p>Remove</p>
-                        </div>
-                        <div className={classes.delete_button} onClick={() => {setReplaceModalOpen(true)}}>
-                            <img src='/assets/svg/Dashboard/Replace-icon.svg' className={classes.replaceButton_image}/>
-                            <p>Replace</p>
-                        </div>
-                    </div>
-                </Col>
-
-                <Col lg={containerWidth} className={classes.containerContent_contentUnitUploadMore} onClick={() => {setUploadMoreModalOpen(true)}} >
-                <img src='/assets/svg/Dashboard/upload-more-documents.svg' className={classes.containerContent_uploadMoreIcon} />
-                    <div className={classes.uploadMore_buttonTitle}>
-                        <p>Upload More Documents</p>
-                    </div>
-                </Col>
-
-
-            </Row>
-            </div>
-
-
-
-
-            <div className={classes.marketing_contentContainer}>
-
-                <div className={classes.contentContainer_heading}>
-                    <p className={classes.heading_text}> Prospect Reps</p>
-                    <p><a href='#' className={classes.heading_link}>View More</a></p>
-                </div>
-
-                <Row className={classes.contentContainer_row}>
-                    <Col lg={containerWidth} className={classes.containerContent_contentUnit} style={{padding:0}}>
+                    {summaryIndexed[category._id]?.documents?.map((document, index) => <Col key={document._id} lg={containerWidth} className={classes.containerContent_contentUnit} style={{padding: 0}}>
+                        <MarketingDocumentPreview fileName={document?.document} alt={document?.head} className={classes.containerContent_PdfPptIcon} />
                         <div className={classes.contentUnit_buttons}>
-                            <div className={classes.delete_button} onClick={() => { setRemoveModalOpen(true) }}>
-                                <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image} />
+                            <div className={classes.delete_button} onClick={() => setShowRemoveMaterial(document)}>
+                                <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image} alt='Remove' />
                                 <p>Remove</p>
                             </div>
-                            <div className={classes.delete_button} onClick={() => { setReplaceModalOpen(true) }}>
-                                <img src='/assets/svg/Dashboard/Replace-icon.svg' className={classes.replaceButton_image} />
+                            <div className={classes.delete_button} onClick={() => setShowReplaceMaterial(document)}>
+                                <img src='/assets/svg/Dashboard/Replace-icon.svg' className={classes.replaceButton_image} alt='Replace'/>
                                 <p>Replace</p>
                             </div>
                         </div>
-                    </Col>
+                    </Col>)}
 
-                    <Col lg={containerWidth} className={classes.containerContent_contentUnitPyramid} style={{padding:0}}>
-                        <div className={classes.contentUnit_buttons}>
-                            <div className={classes.delete_button} onClick={() => { setRemoveModalOpen(true) }}>
-                                <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image} />
-                                <p>Remove</p>
-                            </div>
-                            <div className={classes.delete_button} onClick={() => { setReplaceModalOpen(true) }}>
-                                <img src='/assets/svg/Dashboard/Replace-icon.svg' className={classes.replaceButton_image} />
-                                <p>Replace</p>
-                            </div>
-                        </div>
-                    </Col>
-
-                    <Col lg={containerWidth} className={classes.containerContent_contentUnitPdfPpt} style={{padding:0}}>
-                        <img src='/assets/svg/Dashboard/pdf-icon.png' className={classes.containerContent_PdfPptIcon} />
-                        <div className={classes.contentUnit_buttons}>
-                            <div className={classes.delete_button} onClick={() => { setRemoveModalOpen(true) }}>
-                                <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image} />
-                                <p>Remove</p>
-                            </div>
-                            <div className={classes.delete_button} onClick={() => { setReplaceModalOpen(true) }}>
-                                <img src='/assets/svg/Dashboard/Replace-icon.svg' className={classes.replaceButton_image} />
-                                <p>Replace</p>
-                            </div>
-                        </div>
-                    </Col>
-
-                    <Col lg={containerWidth} className={classes.containerContent_contentUnitPdfPpt} style={{padding:0}}>
-                        <img src='/assets/svg/Dashboard/ppt-icon.png' className={classes.containerContent_PdfPptIcon} />
-                        <div className={classes.contentUnit_buttons}>
-                            <div className={classes.delete_button} onClick={() => { setRemoveModalOpen(true) }}>
-                                <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image} />
-                                <p>Remove</p>
-                            </div>
-                            <div className={classes.delete_button} onClick={() => { setReplaceModalOpen(true) }}>
-                                <img src='/assets/svg/Dashboard/Replace-icon.svg' className={classes.replaceButton_image} />
-                                <p>Replace</p>
-                            </div>
-                        </div>
-                    </Col>
-
-                    <Col lg={containerWidth} className={classes.containerContent_contentUnitUploadMore} onClick={() => { setUploadMoreModalOpen(true) }} >
-                        <img src='/assets/svg/Dashboard/upload-more-documents.svg' className={classes.containerContent_uploadMoreIcon} />
+                    <Col lg={containerWidth} className={classes.containerContent_contentUnitUploadMore} onClick={() => setShowUploadMore(category)}>
+                        <img src='/assets/svg/Dashboard/upload-more-documents.svg'
+                             className={classes.containerContent_uploadMoreIcon}/>
                         <div className={classes.uploadMore_buttonTitle}>
                             <p>Upload More Documents</p>
                         </div>
                     </Col>
-
-
                 </Row>
-            </div>
+            </div>)}
 
-
-            <div className={classes.marketing_contentContainer}>
-
-                <div className={classes.contentContainer_heading}>
-                    <p className={classes.heading_text}>Prospect Clients</p>
-                    <p><a href='#' className={classes.heading_link}>View More</a></p>
-                </div>
-
-                <Row className={classes.contentContainer_row}>
-                    <Col lg={containerWidth} className={classes.containerContent_contentUnit} style={{padding:0}}>
-                        <div className={classes.contentUnit_buttons}>
-                            <div className={classes.delete_button} onClick={() => { setRemoveModalOpen(true) }}>
-                                <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image} />
-                                <p>Remove</p>
-                            </div>
-                            <div className={classes.delete_button} onClick={() => { setReplaceModalOpen(true) }}>
-                                <img src='/assets/svg/Dashboard/Replace-icon.svg' className={classes.replaceButton_image} />
-                                <p>Replace</p>
-                            </div>
-                        </div>
-                    </Col>
-
-                    <Col lg={containerWidth} className={classes.containerContent_contentUnitPyramid} style={{padding:0}}>
-                        <div className={classes.contentUnit_buttons}>
-                            <div className={classes.delete_button} onClick={() => { setRemoveModalOpen(true) }}>
-                                <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image} />
-                                <p>Remove</p>
-                            </div>
-                            <div className={classes.delete_button} onClick={() => { setReplaceModalOpen(true) }}>
-                                <img src='/assets/svg/Dashboard/Replace-icon.svg' className={classes.replaceButton_image} />
-                                <p>Replace</p>
-                            </div>
-                        </div>
-                    </Col>
-
-                    <Col lg={containerWidth} className={classes.containerContent_contentUnitPdfPpt} style={{padding:0}}>
-                        <img src='/assets/svg/Dashboard/pdf-icon.png' className={classes.containerContent_PdfPptIcon} />
-                        <div className={classes.contentUnit_buttons}>
-                            <div className={classes.delete_button} onClick={() => { setRemoveModalOpen(true) }}>
-                                <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image} />
-                                <p>Remove</p>
-                            </div>
-                            <div className={classes.delete_button} onClick={() => { setReplaceModalOpen(true) }}>
-                                <img src='/assets/svg/Dashboard/Replace-icon.svg' className={classes.replaceButton_image} />
-                                <p>Replace</p>
-                            </div>
-                        </div>
-                    </Col>
-
-                    <Col lg={containerWidth} className={classes.containerContent_contentUnitPdfPpt} style={{padding:0}}>
-                        <img src='/assets/svg/Dashboard/ppt-icon.png' className={classes.containerContent_PdfPptIcon} />
-                        <div className={classes.contentUnit_buttons}>
-                            <div className={classes.delete_button} onClick={() => { setRemoveModalOpen(true) }}>
-                                <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image} />
-                                <p>Remove</p>
-                            </div>
-                            <div className={classes.delete_button} onClick={() => { setReplaceModalOpen(true) }}>
-                                <img src='/assets/svg/Dashboard/Replace-icon.svg' className={classes.replaceButton_image} />
-                                <p>Replace</p>
-                            </div>
-                        </div>
-                    </Col>
-
-                    <Col lg={containerWidth} className={classes.containerContent_contentUnitUploadMore} onClick={() => { setUploadMoreModalOpen(true) }} >
-                        <img src='/assets/svg/Dashboard/upload-more-documents.svg' className={classes.containerContent_uploadMoreIcon} />
-                        <div className={classes.uploadMore_buttonTitle}>
-                            <p>Upload More Documents</p>
-                        </div>
-                    </Col>
-
-
-                </Row>
-            </div>
-
-
-            
-
-
-
-
-                {/* Row 2 */}
-
-
-            {/* <div className={classes.marketing_contentContainer}>
-
-                <div className={classes.contentContainer_heading}>
-                    <p className={classes.heading_text}>Elevator Pitch for Prospect Clients</p>
-                    <p><a href='#' className={classes.heading_link}>View More</a></p>
-                </div>
-
-                <div className={classes.contentContainer_row}>
-                <div className={classes.containerContent_contentUnit}>
-                    <div className={classes.contentUnit_buttons}>
-                        <div className={classes.delete_button}>
-                            <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image}/>
-                            <p>Remove</p>
-                        </div>
-                        <div className={classes.delete_button}>
-                            <img src='/assets/svg/Dashboard/Replace-icon.svg' className={classes.replaceButton_image}/>
-                            <p>Replace</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={classes.containerContent_contentUnitPyramid}>
-                    <div className={classes.contentUnit_buttons}>
-                        <div className={classes.delete_button}>
-                            <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image}/>
-                            <p>Remove</p>
-                        </div>
-                        <div className={classes.delete_button}>
-                            <img src='/assets/svg/Dashboard/Replace-icon.svg' className={classes.replaceButton_image}/>
-                            <p>Replace</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={classes.containerContent_contentUnitPdfPpt}>
-                    <img src='/assets/svg/Dashboard/pdf-icon.png' className={classes.containerContent_PdfPptIcon} />
-                    <div className={classes.contentUnit_buttons}>
-                        <div className={classes.delete_button}>
-                            <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image}/>
-                            <p>Remove</p>
-                        </div>
-                        <div className={classes.delete_button}>
-                            <img src='/assets/svg/Dashboard/Replace-icon.svg' className={classes.replaceButton_image}/>
-                            <p>Replace</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={classes.containerContent_contentUnitPdfPpt}>
-                    <img src='/assets/svg/Dashboard/ppt-icon.png' className={classes.containerContent_PdfPptIcon} />
-                    <div className={classes.contentUnit_buttons}>
-                        <div className={classes.delete_button}>
-                            <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image}/>
-                            <p>Remove</p>
-                        </div>
-                        <div className={classes.delete_button}>
-                            <img src='/assets/svg/Dashboard/Replace-icon.svg' className={classes.replaceButton_image}/>
-                            <p>Replace</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={classes.containerContent_contentUnitUploadMore}>
-                <img src='/assets/svg/Dashboard/upload-more-documents.svg' className={classes.containerContent_uploadMoreIcon} />
-                    <div className={classes.uploadMore_buttonTitle}>
-                        <p>Upload More Documents</p>
-                    </div>
-                </div>
-
-
-            </div>
-            </div>
-
-
-
-
-                {/* Row 3 
-
-            <div className={classes.marketing_contentContainer}>
-
-                <div className={classes.contentContainer_heading}>
-                    <p className={classes.heading_text}>Elevator Pitch for Prospect Clients</p>
-                    <p><a href='#' className={classes.heading_link}>View More</a></p>
-                </div>
-
-                <div className={classes.contentContainer_row}>
-                <div className={classes.containerContent_contentUnit}>
-                    <div className={classes.contentUnit_buttons}>
-                        <div className={classes.delete_button}>
-                            <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image}/>
-                            <p>Remove</p>
-                        </div>
-                        <div className={classes.delete_button}>
-                            <img src='/assets/svg/Dashboard/Replace-icon.svg' className={classes.replaceButton_image}/>
-                            <p>Replace</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={classes.containerContent_contentUnitPyramid}>
-                    <div className={classes.contentUnit_buttons}>
-                        <div className={classes.delete_button}>
-                            <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image}/>
-                            <p>Remove</p>
-                        </div>
-                        <div className={classes.delete_button}>
-                            <img src='/assets/svg/Dashboard/Replace-icon.svg' className={classes.replaceButton_image}/>
-                            <p>Replace</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={classes.containerContent_contentUnitPdfPpt}>
-                    <img src='/assets/svg/Dashboard/pdf-icon.png' className={classes.containerContent_PdfPptIcon} />
-                    <div className={classes.contentUnit_buttons}>
-                        <div className={classes.delete_button}>
-                            <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image}/>
-                            <p>Remove</p>
-                        </div>
-                        <div className={classes.delete_button}>
-                            <img src='/assets/svg/Dashboard/Replace-icon.svg' className={classes.replaceButton_image}/>
-                            <p>Replace</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={classes.containerContent_contentUnitPdfPpt}>
-                    <img src='/assets/svg/Dashboard/ppt-icon.png' className={classes.containerContent_PdfPptIcon} />
-                    <div className={classes.contentUnit_buttons}>
-                        <div className={classes.delete_button}>
-                            <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image}/>
-                            <p>Remove</p>
-                        </div>
-                        <div className={classes.delete_button}>
-                            <img src='/assets/svg/Dashboard/Replace-icon.svg' className={classes.replaceButton_image}/>
-                            <p>Replace</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={classes.containerContent_contentUnitUploadMore}>
-                <img src='/assets/svg/Dashboard/upload-more-documents.svg' className={classes.containerContent_uploadMoreIcon} />
-                    <div className={classes.uploadMore_buttonTitle}>
-                        <p>Upload More Documents</p>
-                    </div>
-                </div>
-
-
-            </div>
-            </div> */}
-
-
-
-
-
-            <RemoveModal removeModalOpen={removeModalOpen} setRemoveModalOpen={setRemoveModalOpen} />
-            <ReplaceModal replaceModalOpen={replaceModalOpen} setReplaceModalOpen={setReplaceModalOpen} />
-            <UploadMoreModal uploadMoreModalOpen={uploadMoreModalOpen} setUploadMoreModalOpen={setUploadMoreModalOpen} />
-            <AddCategoryModal addCategoryModalOpen={addCategoryModalOpen} setAddCategoryModalOpen={setAddCategoryModalOpen} />
+            {showUploadMore ? <UploadMoreModal category={showUploadMore} onClose={(shouldReload) => {
+                setShowUploadMore(undefined);
+                if (shouldReload) refreshSummary()
+            }} /> : null}
+            {showReplaceMaterial ? <ReplaceModal document={showReplaceMaterial} onClose={(shouldReload) => {
+                setShowReplaceMaterial(undefined);
+                if (shouldReload) refreshSummary()
+            }} /> : null}
+            {showRemoveMaterial ? <RemoveModal document={showRemoveMaterial} onClose={(shouldReload) => {
+                setShowRemoveMaterial(undefined);
+                if (shouldReload) refreshSummary()
+            }} /> : null}
+            {showAddCategory ? <AddCategoryModal onClose={() => setShowAddCategory(false)}/> : null}
 
 
         </div>
 
-       
+
     )
 }
 
@@ -480,7 +151,7 @@ const useStyles = makeStyles() (() => ({
         borderRadius:"10px",
         padding:"11px 12px 10px 18px"
     },
-    
+
     marketing_contentContainer:{
         display:"flex",
         flexDirection:"column",
@@ -496,44 +167,24 @@ const useStyles = makeStyles() (() => ({
         display:"flex",
         flexDirection:"row",
         //justifyContent:"space-evenly",
-        gap:"1%", 
+        gap:"1%",
     },
-    
-    containerContent_contentUnit:{
-        background:"url(/assets/svg/Dashboard/data-img.svg)",
-        backgroundRepeat:"no-repeat",
-        backgroundSize:"cover",
-        minWidth:"220px",
-        height:"252px",
-        border:"1px solid #D6D9DB",
-        display:"flex",
-        flexDirection:"column-reverse",
-        borderRadius:"10px"
 
-    },
-    containerContent_contentUnitPyramid:{
-        background:"url(/assets/svg/Dashboard/pyramid.svg)",
-        backgroundRepeat:"no-repeat",
-        backgroundSize:"cover",
+    containerContent_contentUnit:{
+        position: "relative",
         minWidth:"220px",
         height:"252px",
         border:"1px solid #D6D9DB",
         display:"flex",
         flexDirection:"column-reverse",
-        borderRadius:"10px"
-    },
-    containerContent_contentUnitPdfPpt:{
-        // background:"url(/assets/svg/Dashboard/pdf-icon.png)",
-        // backgroundRepeat:"no-repeat",
-        // backgroundSize:"cover",
-        minWidth:"220px",
-        height:"252px",
-        border:"1px solid #D6D9DB",
-        display:"flex",
-        flexDirection:"column",
-        justifyContent:"space-between",
         borderRadius:"10px",
-        backgroundColor:"#F8F8F8"
+        overflow: 'hidden'
+    },
+    contentUnit_image: {
+        position: 'absolute',
+        objectFit: 'cover',
+        width: '100%',
+        height: 252
     },
     containerContent_contentUnitUploadMore:{
         minWidth:"220px",
@@ -567,8 +218,9 @@ const useStyles = makeStyles() (() => ({
         color:"#ffffff",
         marginTop:"18px",
         marginLeft:"10px",
-        marginRight:"10px"
-        
+        marginRight:"10px",
+        cursor: 'pointer'
+
     },
     deleteButton_image:{
         //filter: "invert(100%) sepia(100%) saturate(0%) hue-rotate(46deg) brightness(107%) contrast(102%);",
@@ -582,9 +234,10 @@ const useStyles = makeStyles() (() => ({
         height:"19.86px"
     },
     containerContent_PdfPptIcon:{
-        // width:"108px",
-        // height:"108px",
-        // margin:"50px auto 35px auto"
+        position: 'absolute',
+        objectFit: 'cover',
+        width: '100%',
+        height: 252
     },
     containerContent_uploadMoreIcon:{
         width:"108px",
@@ -617,10 +270,10 @@ const useStyles = makeStyles() (() => ({
         fontSize:"18px",
         lineHeight:"25px",
     }
-    
-    
-    
-    
+
+
+
+
 }))
 
 export default MarketingMaterials

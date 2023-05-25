@@ -19,7 +19,7 @@ function MarketingMaterialsMobile(): JSX.Element {
     const [removeModalOpen, setRemoveModalOpen] = useState(false)
     const [replaceModalOpen, setReplaceModalOpen] = useState(false)
     const [uploadMoreModalOpen, setUploadMoreModalOpen] = useState(false)
-    const [addCategoryModalOpen, setAddCategoryModalOpen] = useState(false)
+    const [showAddCategory, setShowAddCategory] = useState<boolean>(false)
     const [elevatorPitchToggle, setElevatorPitchToggle] = useState(false)
     const [prospectRepsToggle, setProspectRepsToggle] = useState(false)
     const [prospectClientToggle, setProspectClientToggle] = useState(false)
@@ -31,7 +31,7 @@ function MarketingMaterialsMobile(): JSX.Element {
 
             <div className={classes.marketing_headerContainer}>
                 <p className={classes.headerContainer_heading}>Upload Documents</p>
-                <button className={classes.headerContainer_button} onClick={() => { setAddCategoryModalOpen(true) }}>+ Add Category</button>
+                <button className={classes.headerContainer_button} onClick={() => setShowAddCategory(true)}>+ Add Category</button>
             </div>
 
             <div className={classes.marketing_contentContainer}>
@@ -286,10 +286,7 @@ function MarketingMaterialsMobile(): JSX.Element {
 
 
 
-            <RemoveModal removeModalOpen={removeModalOpen} setRemoveModalOpen={setRemoveModalOpen} />
-            <ReplaceModal replaceModalOpen={replaceModalOpen} setReplaceModalOpen={setReplaceModalOpen} />
-            <UploadMoreModal uploadMoreModalOpen={uploadMoreModalOpen} setUploadMoreModalOpen={setUploadMoreModalOpen} />
-            <AddCategoryModal addCategoryModalOpen={addCategoryModalOpen} setAddCategoryModalOpen={setAddCategoryModalOpen} />
+            {showAddCategory ? <AddCategoryModal onClose={() => setShowAddCategory(false)}/> : null}
 
 
         </div>
