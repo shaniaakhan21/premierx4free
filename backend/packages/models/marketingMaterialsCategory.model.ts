@@ -116,8 +116,8 @@ export class MarketingMaterialsCategory extends ModelInterface {
     return instanceToPlain(plainToInstance(MarketingMaterialsCategory, document.toJSON(), options), options)
   }
 
-  public static getSummary(this: ReturnModelType<typeof MarketingMaterialsCategory>, roles: Roles[] = []) {
-    const documents = MarketingMaterialsModel.aggregate([
+  public static async getSummary(this: ReturnModelType<typeof MarketingMaterialsCategory>, roles: Roles[] = []) {
+    const documents = await MarketingMaterialsModel.aggregate<SummaryType>([
       {
         $lookup: {
           from: 'marketingMaterialsCategory',
@@ -154,14 +154,14 @@ export class MarketingMaterialsCategory extends ModelInterface {
           ]
         }
       }
-    ])
+    ]).exec()
 
     const options: ClassTransformOptions = {
       groups: roles,
       enableCircularCheck: true,
       strategy: 'excludeAll'
     }
-    return instanceToPlain(plainToInstance(SummaryType, documents, options), options)
+    return instanceToPlain(plainToInstance(SummaryType, documents[0], options), options)
   }
 }
 

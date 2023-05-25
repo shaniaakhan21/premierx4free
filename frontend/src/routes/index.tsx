@@ -24,14 +24,15 @@ function AppRouter(): JSX.Element {
 			<Route path='/faq' element={<FaqPage />} />
 			<Route path='/admin' element={<AdminDashboard />} />
 			<Route path='/signup' element={<SignUpPage />} />
+			<Route path='/r/:id' element={<SignUpPage />} />
 			<Route path='/signin' element={<SignInPage />} />
 			<Route path='/resetpassword' element={<ForgotPassword />} />
 			{/* <Route path='/agent-dashboard' element={<AgentDashboard />} /> */}
 			<Route element={<ProtectedAgentDashboard />}>
 				<Route path='/agent-dashboard' element={<AgentDashboard />} />
 			</Route>
-			
-			
+
+
 		</Routes>
 	)
 }

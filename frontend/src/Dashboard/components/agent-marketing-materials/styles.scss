@@ -1,0 +1,94 @@
+.MarketingMaterials-documents {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.MarketingMaterials-document-card {
+  width: 17.8%;
+  margin: 1%;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  flex-wrap: nowrap;
+  height: 100%;
+  @media (max-width: 768px) {
+    width: 45% !important;
+    margin: 2% !important;
+  }
+}
+
+.MarketingMaterials-document-icon img {
+  min-height: 200px;
+  object-fit: cover;
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.MarketingMaterials-document-details {
+  padding: 5%;
+}
+
+.MarketingMaterials-document-name {
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.MarketingMaterials-document-preview {
+  font-size: 15px;
+}
+
+.MarketingMaterials-filter-button {
+  border: 1px solid #86A9B8;
+  background-color: transparent;
+  border-radius: 70px;
+  color: #000000;
+  padding: 10px 38px;
+  @media (max-width: 768px) {
+    font-size: 12px !important;
+    margin-bottom: 1%;
+    padding: 5px 15px;
+  }
+
+  @media (max-width: 400px) {
+    font-size: 9px !important;
+    margin-bottom: 1%;
+    padding: 5px 6px;
+  }
+}
+
+.MarketingMaterials-filter-button:hover, .MarketingMaterials-filter-button:active, .MarketingMaterials-filter-button:focus-visible, .active-filter {
+  border: 1px solid #64B5F6 !important;
+  box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.25) !important;
+  background-color: #64B5F6 !important;
+  border-radius: 70px !important;
+  color: white !important;
+}
+
+.MarketingMaterials-filters {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+}
+
+.MarketingMaterials {
+  padding-left: 3%;
+  padding-right: 3%;
+  @media (max-width: 400px) {
+    padding: 0 5%;
+  }
+}
+
+.MarketingMaterials .textCustom {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 5rem;
+  margin-left: 9px;
+}

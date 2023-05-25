@@ -16,6 +16,6 @@ marketingMaterialsRouter.get('/summary', AuthenticateToken([Roles.Admin]), Error
 marketingMaterialsRouter.put('', AuthenticateToken([Roles.Admin]), ErrorHandler(createMarketingMaterial))
 marketingMaterialsRouter.patch('', AuthenticateToken([Roles.Admin]), ErrorHandler(createMarketingMaterial))
 marketingMaterialsRouter.delete('/:id', AuthenticateToken([Roles.Admin]), ErrorHandler(deleteMarketingMaterial))
-marketingMaterialsRouter.get('', AuthenticateToken([Roles.Admin]), ErrorHandler(getMarketingMaterials))
+marketingMaterialsRouter.get('', AuthenticateToken([Roles.Admin, Roles.Agent]), ErrorHandler(getMarketingMaterials))
 
 export default marketingMaterialsRouter

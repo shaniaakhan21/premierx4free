@@ -1,6 +1,6 @@
 import {createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState} from "react";
 import User from "../models/user.model";
-import {createCustomSetStateFn, loadLocalStorage} from "../helpers/ global";
+import {createCustomSetStateFn, loadLocalStorage} from "../helpers/global";
 import axios from "axios";
 
 type AuthContextType = {

@@ -1,9 +1,9 @@
 import "./styles.css";
 import { Table, Modal, Button } from 'react-bootstrap';
-import { useState } from "react";
+import {useMemo, useState} from "react";
 import AgentProfile from "../../../models/agentProfile.model";
 import AgentCustomers from "../agent-customers/AgentCustomers";
-import {useMyDashboard} from "../../../services/my";
+import {MyDashboardResponseRow, useMyDashboard} from "../../../services/my";
 import {useAuth} from "../../../contexts/auth.context";
 
 type Props = {
@@ -13,7 +13,7 @@ type Props = {
 const AgentTeam = ({ title }: Props) => {
     const { user } = useAuth()
     const { data } = useMyDashboard(user!)
-    const [viewMore, setViewMore] = useState<AgentProfile | undefined>();
+    const [viewMore, setViewMore] = useState<MyDashboardResponseRow | undefined>();
 
     return (
         <div className="box-main team-box">
@@ -30,15 +30,15 @@ const AgentTeam = ({ title }: Props) => {
                     {data?.data.map((agent, idx) => (
                         <tr key={idx} style={{ backgroundColor: 'white' }}>
                             <td>{agent.agent.name}</td>
-                            <td>{agent.commission}$</td>
-                            <td >{(agent.agent.companies?.length ?? 0) > 0 ? <a onClick={() => setViewMore(agent.agent)} className="color-link">View More</a> : null}</td>
+                            <td>{(agent.commission) * (agent.agent.companies?.length ?? 0)}$</td>
+                            <td >{(agent.agent.companies?.length ?? 0) > 0 ? <a onClick={() => setViewMore(agent)} className="color-link">View More</a> : null}</td>
                         </tr>
                     ))}
                 </tbody>
             </Table>
             <Modal show={!!viewMore} onHide={() => setViewMore(undefined)} className='boxModal'>
                 <Modal.Body>
-                <AgentCustomers agent={viewMore} title="View Direct Clients " />
+                <AgentCustomers agent={viewMore?.agent} commission={viewMore?.commission} title="View Direct Clients " />
                 </Modal.Body>
                 <Modal.Footer className='modalFooter'>
                     <Button variant="secondary" onClick={() => setViewMore(undefined)} className='buttonBlue'>

@@ -3,14 +3,15 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap';
 import { Row, Col } from 'react-bootstrap';
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 const imgSignin = '/assets/svg/SignIn/sigin-img.svg';
 import {register} from "../../../services/register";
 
 function SignUp(): JSX.Element {
+    const { id } = useParams()
     const { classes } = useStyles();
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
@@ -20,12 +21,24 @@ function SignUp(): JSX.Element {
     const [state, setState] = useState("");
     const [zipcode, setZipCode] = useState("");
     const [referral, setReferral] = useState("");
+    const [disableReferral, setDisableReferral] = useState(false);
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [showPassword1, setShowPassword1] = useState(false);
     const [showPassword2, setShowPassword2] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
     const history = useNavigate();
+
+    useEffect(() => {
+        const agentId = id?.split('-')[0]
+        if (agentId) {
+            setReferral(agentId ?? '')
+            setDisableReferral(true)
+        }
+        return () => {
+            setDisableReferral(false)
+        }
+    }, [id])
 
     async function submit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -37,17 +50,17 @@ function SignUp(): JSX.Element {
                 return
             }
             const res = await register( {
-                name:fullName,
+                name: fullName,
                 email,
-                contactNo:phoneNumber,
+                contactNo: phoneNumber,
                 password,
                 location:{
                     address,
                     city,
                     state,
-                    zip:zipcode,
+                    zip: zipcode,
                 },
-                referralCode:referral,
+                referralCode: referral,
             });
 
             console.log('Response data:', res);
@@ -58,7 +71,6 @@ function SignUp(): JSX.Element {
             }
         } catch (error: any){
             if (error.response && error.response.status === 400) {
-                // User already exists
                 setErrorMsg(error.response.data.message);
             } else {
                 console.error('Error during registration:', error);
@@ -151,11 +163,12 @@ function SignUp(): JSX.Element {
                             onChange={(e) => { setZipCode(e.target.value) }}
                         />
                         <input
-                            type="text"
+                            type="number"
                             className={`${classes.formControl} form-control`}
                             id="link-ref"
-                            placeholder="Referral Link"
+                            placeholder="Referral Code"
                             value={referral}
+                            disabled={disableReferral}
                             onChange={(e) => { setReferral(e.target.value) }}
                         />
                     </div>

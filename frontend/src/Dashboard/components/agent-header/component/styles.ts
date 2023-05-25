@@ -55,6 +55,7 @@ const useStyles = makeStyles()(() => ({
     },
 
     copylinkit: {
+        cursor: 'pointer',
         display: 'flex',
         alignItems: 'center',
         '& img': {
