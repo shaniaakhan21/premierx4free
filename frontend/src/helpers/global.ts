@@ -42,3 +42,13 @@ export function createCustomSetStateFn<T>(
     }
   }
 }
+
+export function generateUrlFriendlyString(name: string): string {
+  name = name.trim();
+  name = name.toLowerCase();
+  name = name.replace(/\s+/g, '-');
+  name = name.replace(/[^a-z0-9-]/g, '');
+  name = name.replace(/-+/g, '-');
+  name = name.replace(/^-+|-+$/g, '');
+  return name;
+}

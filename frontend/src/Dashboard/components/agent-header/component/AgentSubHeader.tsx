@@ -1,7 +1,8 @@
-import { useState } from "react";
+import {useCallback, useState} from "react";
 import { Modal, Button } from "react-bootstrap";
 import useStyles from "./styles"
 import {useAuth} from "../../../../contexts/auth.context";
+import {generateUrlFriendlyString} from "../../../../helpers/global";
 
 interface PopupProps {
   show: boolean;
@@ -37,6 +38,11 @@ const AgentSubHeader = (props: AgentSubHeaderProps): JSX.Element => {
   const { user } = useAuth()
   const classes = useStyles();
 
+  const copyLink = useCallback(() => {
+    const url = `${window.location.origin}/r/${user?.agentProfile?.agentId}-${generateUrlFriendlyString(user?.agentProfile?.name ?? '')}`
+    navigator.clipboard.writeText(url)
+  }, [user])
+
   return (
     <div className={`${classes.classes.mainConatiner} row`}>
       <div className="col-lg-6 col-sm-12">
@@ -58,9 +64,9 @@ const AgentSubHeader = (props: AgentSubHeaderProps): JSX.Element => {
             <img src={"/assets/svg/Dashboard/referrals.svg"} />
             <div className={classes.classes.agentbox}>
               <span>Refer Agent</span>
-              <div className={classes.classes.copylinkit}>
+              <div onClick={copyLink} className={classes.classes.copylinkit}>
                 <img src={"/assets/svg/Dashboard/copy-link.svg"} />
-                <a href="#">Copy Referral Link </a>
+                <a>Copy Referral Link </a>
               </div>
             </div>
           </div>
