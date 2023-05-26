@@ -158,18 +158,7 @@ function AgentTabs(props: Props): JSX.Element {
                             </Tab.Pane>
                             <Tab.Pane eventKey="fifth" className='tab-pane-fifth'>
                                 <div className="container no-m-y-p">
-                                    <AgentSettings
-                                        imageUrl={profile.imageUrl}
-                                        fullName={profile.fullName}
-                                        email={profile.email}
-                                        phone={profile.phone}
-                                        zip={profile.zip}
-                                        currentPassword={profile.currentPassword}
-                                        newPassword={profile.newPassword}
-                                        confirmNewPassword={profile.confirmNewPassword}
-                                        onCancel={handleCancel}
-                                        onSave={handleSave}
-                                    />
+                                    <AgentSettings />
                                 </div>
                             </Tab.Pane>
                             <Tab.Pane eventKey="sixth" className='tab-pane-sixth'>
