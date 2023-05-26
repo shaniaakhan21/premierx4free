@@ -1,11 +1,14 @@
 import { makeStyles } from '../../../../utils/makeStyles';
 import * as React from 'react';
+import {useAuth} from "../../../../contexts/auth.context";
 
 interface event {
     eventNumber:number
     setEventNumber:any
 }
 function Sidebar(props:event):JSX.Element{
+    const { user } = useAuth()
+
     const {eventNumber,setEventNumber} = props
     const {classes} = useStyles()
     return(
@@ -18,8 +21,8 @@ function Sidebar(props:event):JSX.Element{
                     <img src='/assets/svg/Dashboard/dummy.svg' className={classes.displayImage} />
                 </div>
                 <div className={classes.topRectangle_text}>
-                    <p className={classes.nameText}>Heather Stephens</p>
-                    <span className={classes.emailText}>heatherstephens@gmail.com</span>
+                    <p className={classes.nameText}>{user?.agentProfile?.name}</p>
+                    <span className={classes.emailText}>{user?.email}</span>
                 </div>
             </div>
 

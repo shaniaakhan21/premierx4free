@@ -5,6 +5,8 @@ import User from "../models/user.model";
 import MarketingMaterialsCategory from "../models/marketingMaterialsCategory.model";
 import MarketingMaterial from "../models/marketingMaterial.model";
 import axios from "axios";
+import AgentProfile, {AgentProfileCompany} from "../models/agentProfile.model";
+import Contract from "../models/contract.model";
 
 export type CreateCategoryRequest = {
   name: string
@@ -41,3 +43,24 @@ export const updateMarketingMaterial = async (user: User, data: MarketingMateria
   Object.entries(data).forEach(([key, value]) => formData.append(key, value as File));
   return patchFetcher<FormData, MarketingMaterial>(['/admin/marketingMaterials', formData, user, undefined, undefined])
 }
+
+export enum ContactSearchBy {
+  All = 'all',
+  Name = 'name',
+  ContactNo = 'contactNo',
+  CompanyName = 'companies.name',
+  Email = 'user.email',
+  ContactPersonName = 'companies.contactPersonName',
+  ContactPersonPhone = 'companies.contactPersonPhone',
+  Comment = 'companies.comment'
+}
+
+export type ContractSearchResponse = {
+  count: number
+  data: (AgentProfile & {
+    companies: AgentProfileCompany
+    contracts: Contract
+  })[]
+}
+
+export const useContractSearch = (user: User, q?: string, limit?: number, skip?: number, by?: ContactSearchBy) => useSWR(['/admin/contract/search', user, [limit, skip], { q, by }], getFetcher<GenericResponse<ContractSearchResponse>>)

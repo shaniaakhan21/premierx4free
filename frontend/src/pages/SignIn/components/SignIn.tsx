@@ -2,14 +2,15 @@ import useStyles from './styles';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap';
 import {FormEventHandler, useState} from "react";
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useNavigate } from 'react-router-dom';
-const imgSignin = '/assets/svg/SignIn/sigin-img.svg';
-import { Row, Col } from 'react-bootstrap';
-import axios from 'axios';
+import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {useNavigate} from 'react-router-dom';
+import {Col, Row} from 'react-bootstrap';
 import {login} from "../../../services/auth";
 import {useAuth} from "../../../contexts/auth.context";
+import {Roles} from "../../../models/user.model";
+
+const imgSignin = '/assets/svg/SignIn/sigin-img.svg';
 
 function SignIn(): JSX.Element {
     const { classes } = useStyles();
@@ -29,7 +30,11 @@ function SignIn(): JSX.Element {
              })
             if (response.data.success) {
                 setUser(response.data.data)
-                history("/agent-dashboard")
+                if (response.data.data.roles.includes(Roles.Admin)) {
+                    history("/admin")
+                } else {
+                    history("/agent-dashboard")
+                }
             } else {
                 setErrorMsg("Invalid email or password");
             }
