@@ -8,7 +8,7 @@ import {useEffect} from "react";
 type Props = {
     title: string;
     agentUserId?: number
-    agent?: AgentProfile,
+    agent?: AgentProfile | Pick<AgentProfile, 'companies'>,
     commission?: number
 }
 

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import './styles.css';
 import AgentCustomers from '../agent-customers/AgentCustomers';
 import AgentTeam from '../agent-team/AgentTeam';
-import Commission from '../comission/Comission';
+import Commission from '../comission/Commission';
 import AgentFooter from '../agent-footer/AgentFooter';
 import AgentReport from '../agent-report/AgentReport';
 import AgentSubHeader from '../agent-header/component/AgentSubHeader';
@@ -12,6 +12,8 @@ import AgentSettings from '../agent-settings/AgentSettings';
 import MarketingMaterials from '../agent-marketing-materials/MarketingMaterials';
 import AgentProfile from '../agent-profile/AgentProfile';
 import User from "../../../models/user.model";
+import {useMyDashboard} from "../../../services/my";
+import {useAuth} from "../../../contexts/auth.context";
 
 
 const initialProfile = {
@@ -30,33 +32,19 @@ interface Props {
 }
 
 function AgentTabs(props: Props): JSX.Element {
+    const [from, setFrom] = useState(new Date());
+    const [to, setTo] = useState(() => {
+        const date = new Date();
+        date.setMonth(date.getMonth() + 1);
+        return date;
+    });
+    const { user } = useAuth()
+    const { data } = useMyDashboard(user!, from, to)
     const [showTabs, setShowTabs] = useState(false);
 
     const handleToggleTabs = () => {
         setShowTabs(!showTabs);
     };
-
-    const data = [
-        { col1: 'Acme Corporation', col2: '50', col3: '$ 500', col4: 'Active', col5: 'Lorem Ipsum is simply dummy text of the printing ...' },
-        { col1: 'Vehement Capital.Inc', col2: '50', col3: '$ 500', col4: 'Pending', col5: 'Lorem Ipsum is simply dummy text of the printing ...' },
-        { col1: 'Massive Dynamic.LLC', col2: '50', col3: '$ 400', col4: 'Pending', col5: 'Lorem Ipsum is simply dummy text of the printing ...' },
-    ]
-
-    const teamdata = [
-        { col1: 'John Smith', col2: '$ 5', col3: 'View More' },
-        { col1: 'William Oliver', col2: '$ 3', col3: 'View More' },
-        { col1: 'Benjamin Lucas', col2: '$ 8', col3: 'View More' },
-        { col1: 'Benjamin Lucas', col2: '$ 12', col3: 'View More' },
-        { col1: 'Benjamin Lucas', col2: '$ 10', col3: 'View More' }
-    ]
-
-    const reportdata = [
-        { col1: 'John Smith', col2: 'Active', col3: '2023-04-30', col4: '2023-04-30', col5: 'Acme Corporation', col6: '10', col7: '2023-04-30', col8: '$ 1,200,000', col9: 'Level 1' },
-        { col1: 'John Smith', col2: 'Inactive', col3: '2023-04-30', col4: '2023-04-30', col5: 'Acme Corporation', col6: '10', col7: '2023-04-30', col8: '$ 1,200,000', col9: 'Level 1' },
-        { col1: 'John Smith', col2: 'Inactive', col3: '2023-04-30', col4: '2023-04-30', col5: 'Acme Corporation', col6: '10', col7: '2023-04-30', col8: '$ 1,200,000', col9: 'Level 2' },
-        { col1: 'John Smith', col2: 'Active', col3: '2023-04-30', col4: '2023-04-30', col5: 'Acme Corporation', col6: '10', col7: '2023-04-30', col8: '$ 1,200,000', col9: 'Level 3' },
-        { col1: 'John Smith', col2: 'Active', col3: '2023-04-30', col4: '2023-04-30', col5: 'Acme Corporation', col6: '10', col7: '2023-04-30', col8: '$ 1,200,000', col9: 'Level 3' },
-    ]
 
     const [profile, setProfile] = useState(initialProfile);
     const handleCancel = () => {
@@ -155,15 +143,15 @@ function AgentTabs(props: Props): JSX.Element {
                         <Tab.Content>
                             <Tab.Pane eventKey="first" className="tab-pane-first">
                                 <AgentSubHeader />
-                                <AgentCustomers title="Direct Clients" />
-                                <AgentTeam title="Referral Clients" />
-                                <Commission spanText="Commission Summary" />
+                                <AgentCustomers agent={{ companies: data?.data?.directs ?? [] }} title="Direct Clients" />
+                                <AgentTeam data={data?.data.referrals ?? []} title="Referral Clients" />
+                                <Commission data={data?.data?.summary} title="Commission Summary" />
                             </Tab.Pane>
                             <Tab.Pane eventKey="second" className="tab-pane-second">
                                 <AgentSubmitCompany />
                             </Tab.Pane>
                             <Tab.Pane eventKey="third" className="tab-pane-third">
-                                <AgentReport data={reportdata} spanText="Reports" col1head='Representative' col2head='Contract Status' col3head='Contract End Date' col4head='Pay Date' col5head='Company Name' col6head='Active Employees' col7head='Payment Date' col8head='Payment Amount' col9head='Level' />
+                                {/*<AgentReport data={reportdata} spanText="Reports" col1head='Representative' col2head='Contract Status' col3head='Contract End Date' col4head='Pay Date' col5head='Company Name' col6head='Active Employees' col7head='Payment Date' col8head='Payment Amount' col9head='Level' />*/}
                             </Tab.Pane>
                             <Tab.Pane eventKey="fourth" className='tab-pane-fourth'>
                                 <MarketingMaterials />

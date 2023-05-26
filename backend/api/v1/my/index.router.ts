@@ -13,7 +13,7 @@ const myRouter = express.Router()
 
 myRouter.get('/subordinates/:level?', AuthenticateToken([Roles.Agent]), ErrorHandler(subordinates))
 myRouter.patch('/updateProfile', AuthenticateToken([Roles.Agent]), ErrorHandler(updateProfile))
-myRouter.get('/dashboard', AuthenticateToken([Roles.Agent]), ErrorHandler(dashboard))
+myRouter.get('/dashboard/:from/:to', AuthenticateToken([Roles.Agent]), ErrorHandler(dashboard))
 myRouter.put('/company', AuthenticateToken([Roles.Agent]), ErrorHandler(createUpdateCompany))
 myRouter.patch('/company', AuthenticateToken([Roles.Agent]), ErrorHandler(createUpdateCompany))
 myRouter.delete('/company/:id', AuthenticateToken([Roles.Agent]), ErrorHandler(deleteCompany))
