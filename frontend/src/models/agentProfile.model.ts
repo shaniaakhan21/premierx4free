@@ -7,6 +7,8 @@ export enum AgentStatus {
 }
 
 export type AgentProfileCompany = {
+  contractEndDate: any
+  contractStartDate: any
   _id?: string
   name?: string
   phone?: string

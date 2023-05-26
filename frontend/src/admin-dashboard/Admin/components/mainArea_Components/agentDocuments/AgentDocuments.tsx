@@ -12,14 +12,15 @@ function AgentDocuments():JSX.Element{
     const {classes} = useStyles()
     const [data,setData] = useState<any []>()
     const {user} = useAuth()
-    console.log("agentData is",agentData)
+    console.log("agentData is",user)
+    const [thisUser,setThisUser] = useState(JSON.parse(localStorage.getItem('user') ?? ""))
 
     const getAllAgentsFunc = async() => {
-        const resp= await getAllAgents(user?.jwtToken ?? "")
+        console.log("auth token is",thisUser?.jwtToken)
+        const resp= await getAllAgents(thisUser?.jwtToken ?? "")
         console.log("response from agent docs",resp.data.data)
         setData(resp.data.data)
     }
-    console.log("response from agent docs as ddata",data)
     return(
         <div >
             <p className={classes.agentdocuments_Headingtext}>Agent Documents</p>

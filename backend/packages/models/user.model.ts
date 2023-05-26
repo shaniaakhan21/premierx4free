@@ -71,7 +71,6 @@ export const AuditTrace: (action: SysFunction, method: SysMethod) => RequestHand
 export const AuthenticateToken: (roles?: Roles[]) => RequestHandler = (roles) => (req: CustomReq, res, next) => {
   const authHeader = req.headers.authorization
   const token = authHeader && authHeader.split(' ')[1]
-
   if (token == null) {
     res.sendStatus(HttpStatus.UNAUTHORIZED)
     return
@@ -79,7 +78,6 @@ export const AuthenticateToken: (roles?: Roles[]) => RequestHandler = (roles) =>
 
   jwt.verify(token, process.env.TOKEN_SECRET as string, (err: any, user: any) => {
     if (err) {
-      console.log('error while verifying', err)
       res.sendStatus(HttpStatus.FORBIDDEN)
       return
     }

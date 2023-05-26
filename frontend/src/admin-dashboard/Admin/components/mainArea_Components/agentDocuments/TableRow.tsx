@@ -146,7 +146,10 @@ function TableRow(props:dataRow):JSX.Element{
                             </div>
                             </div>
                         </div>
-                        <button onClick={() => {uploadFile()}}>save</button>
+                        
+                    </div>
+                    <div style={{backgroundColor:"lightgreen",display:"flex",flexDirection:"row-reverse"}}>
+                    <button style={{backgroundColor:"#FFFFFF"}} onClick={() => {uploadFile()}}>save</button>
                     </div>
                 </div>
             </div>: <></>}
