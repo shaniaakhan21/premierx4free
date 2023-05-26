@@ -14,7 +14,7 @@ export const buildFetcher = async <RequestType, ResponseType>(
   const options: AxiosRequestConfig<any> = {
     params: queryParams,
     paramsSerializer: (params) => {
-      return Object.entries(params).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&')
+      return Object.entries(params).filter(([k, v]) => v !== undefined && v !== null).map(([key, value]) => `${key}=${encodeURIComponent(value.toString())}`).join('&')
     },
     headers: {
       'Accept': 'application/json',
