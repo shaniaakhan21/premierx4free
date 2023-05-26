@@ -44,6 +44,8 @@ export default class AgentProfile {
 
   public nda?: string
 
+  public profileImage?: string
+
   public status!: AgentStatus
 
   public contract?: string

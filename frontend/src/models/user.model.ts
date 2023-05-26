@@ -13,6 +13,8 @@ export default class User {
 
   public jwtToken!: string
 
+  public password?: string
+
   public roles!: Roles[]
 
   public agentProfile?: AgentProfile

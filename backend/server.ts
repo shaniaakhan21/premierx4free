@@ -62,6 +62,7 @@ app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     message: err.message,
     stack: err.stack
   })
+  console.error(err)
 })
 
 app.listen(PORT, () => {

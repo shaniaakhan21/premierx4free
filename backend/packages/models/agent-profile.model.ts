@@ -181,6 +181,12 @@ export class AgentProfile extends ModelInterface {
   @Expose()
   public name!: string
 
+  @IsString()
+  @IsOptional()
+  @prop()
+  @Expose()
+  public profileImage?: string
+
   @ValidateNested()
   @Type(() => AgentProfileLocation)
   @prop({ type: AgentProfileLocation })
