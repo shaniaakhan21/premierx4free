@@ -3,17 +3,16 @@ import { Table, Modal, Button } from 'react-bootstrap';
 import {useMemo, useState} from "react";
 import AgentProfile from "../../../models/agentProfile.model";
 import AgentCustomers from "../agent-customers/AgentCustomers";
-import {MyDashboardResponseRow, useMyDashboard} from "../../../services/my";
+import {ReferralClient, useMyDashboard} from "../../../services/my";
 import {useAuth} from "../../../contexts/auth.context";
 
 type Props = {
     title: string;
+    data: ReferralClient[]
 }
 
-const AgentTeam = ({ title }: Props) => {
-    const { user } = useAuth()
-    const { data } = useMyDashboard(user!)
-    const [viewMore, setViewMore] = useState<MyDashboardResponseRow | undefined>();
+const AgentTeam = ({ title, data }: Props) => {
+    const [viewMore, setViewMore] = useState<ReferralClient | undefined>();
 
     return (
         <div className="box-main team-box">
@@ -27,7 +26,7 @@ const AgentTeam = ({ title }: Props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data?.data.map((agent, idx) => (
+                    {data?.map((agent, idx) => (
                         <tr key={idx} style={{ backgroundColor: 'white' }}>
                             <td>{agent.agent.name}</td>
                             <td>{(agent.commission) * (agent.agent.companies?.length ?? 0)}$</td>
