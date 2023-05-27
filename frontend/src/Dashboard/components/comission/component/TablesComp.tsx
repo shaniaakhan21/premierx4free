@@ -1,6 +1,7 @@
 import { Table } from 'react-bootstrap';
 import './styles.css';
 import footer from "../../../../components/Footer";
+import {Skeleton} from "@mui/material";
 
 type TableHading<T> = {
     title: string

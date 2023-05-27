@@ -1,5 +1,6 @@
 import { makeStyles } from '../../../../utils/makeStyles';
 import * as React from 'react';
+import {useAuth} from "../../../../contexts/auth.context";
 
 interface event {
     eventNumber:number
@@ -7,7 +8,9 @@ interface event {
     user:any
 }
 function Sidebar(props:event):JSX.Element{
-    const {eventNumber,setEventNumber,user} = props
+    const { user } = useAuth()
+
+    const {eventNumber,setEventNumber} = props
     const {classes} = useStyles()
     return(
         <div className={classes.sidebar_mainContainer}>

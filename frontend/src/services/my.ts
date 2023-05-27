@@ -1,14 +1,30 @@
 import useSWR from "swr"
-import {getFetcher} from "../helpers/axiosFetchers";
+import {getFetcher, patchFetcher} from "../helpers/axiosFetchers";
 import {GenericResponse} from "./genericResponse.type";
 import User from "../models/user.model";
 import AgentProfile, {AgentProfileCompany} from "../models/agentProfile.model";
 import Contract from "../models/contract.model";
+import {useAuth} from "../contexts/auth.context";
 
 export type ReferralClient = {
   commission: number
   agent: AgentProfile
 }
+
+export type UpdateProfileRequest = {
+  name: string
+  email: string
+  contactNo: string
+  zip: string
+  password?: string
+  newPassword?: string
+  profileImage: File | string
+}
+
+export type UseUpdateProfileReturn = {
+  mutate: (request?: UpdateProfileRequest) => Promise<User>
+}
+
 export const useMyDashboard = (user: User, from: Date, to: Date) => useSWR(['/my/dashboard', user, [from.toISOString().split('T')[0], to.toISOString().split('T')[0]]], getFetcher<GenericResponse<{
   referrals: ReferralClient[],
   directs: AgentProfileCompany[],
@@ -17,3 +33,19 @@ export const useMyDashboard = (user: User, from: Date, to: Date) => useSWR(['/my
     directs: Contract[],
   }
 }>>)
+
+export const useUpdateProfile = (request?: UpdateProfileRequest) => {
+  const { user, setUser } = useAuth()
+  const mutate = async (request2?: UpdateProfileRequest) => {
+    const formData = new FormData()
+    Object.entries((request2 ?? request) ?? {}).forEach(([key, value]) => formData.append(key, value as (string | File)));
+    const resp = await patchFetcher<FormData | undefined, GenericResponse<User>>(['/my/updateProfile', formData, user, undefined, undefined])
+    if (resp) {
+      setUser(resp.data)
+      return resp.data
+    }
+  }
+  return {
+    mutate
+  }
+}

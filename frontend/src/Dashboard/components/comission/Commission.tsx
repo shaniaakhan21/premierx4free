@@ -3,7 +3,7 @@ import "./styles.css";
 import { Tabs, Tab } from 'react-bootstrap';
 import Contract from "../../../models/contract.model";
 import AgentProfile, {AgentProfileCompany} from "../../../models/agentProfile.model";
-import {useMemo} from "react";
+//import {JSXElementConstructor, ReactElement, ReactFragment, ReactPortal, JSXElementConstructor, ReactElement, ReactFragment, ReactPortal, JSXElementConstructor, ReactElement, ReactFragment, ReactPortal, JSXElementConstructor, ReactElement, ReactFragment, ReactPortal, JSXElementConstructor, ReactElement, ReactFragment, ReactPortal, JSXElementConstructor, ReactElement, ReactFragment, ReactPortal, JSXElementConstructor, ReactElement, ReactFragment, ReactPortal, useMemo} from "react";
 import moment from "moment-timezone";
 
 type CommissionProps = {
@@ -67,28 +67,28 @@ const Commission = ({ title, data }: CommissionProps) => {
                         <TablesComp data={data?.directs ?? []} headings={[
                           {
                               title: 'Company Name',
-                              renderData: r => <td>{(r.agent as AgentProfile)?.companies?.find(c => c._id === r.company)?.name}</td>
+                              renderData: (r: { agent: AgentProfile; company: string | undefined; }) => <td>{(r.agent as AgentProfile)?.companies?.find(c => c._id === r.company)?.name}</td>
                           }, {
                             title: 'Contract Start Date',
-                            renderData: r => <td>{moment(r.start).format('YYYY-MM-DD')}</td>
+                            renderData: (r: { start: moment.MomentInput; }) => <td>{moment(r.start).format('YYYY-MM-DD')}</td>
                           }, {
                             title: 'Contract End Date',
-                            renderData: r => <td>{moment(r.end).format('YYYY-MM-DD')}</td>
+                            renderData: (r: { end: moment.MomentInput; }) => <td>{moment(r.end).format('YYYY-MM-DD')}</td>
                           }, {
                             title: 'Monthly Membership paid (No. of People)',
-                            renderData: r => <td>{r.employeeCount}</td>
+                            renderData: (r: { employeeCount: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | null | undefined; }) => <td>{r.employeeCount}</td>
                           }, {
                             title: 'Amount Paid Per Person',
                             renderHeading: () => <th style={{ textAlign: 'right' }}>Amount Paid Per Person</th>,
-                            renderData: r => <td style={{ textAlign: 'right' }}>${r.amountPerPerson}</td>
+                            renderData: (r: { amountPerPerson: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | null | undefined; }) => <td style={{ textAlign: 'right' }}>${r.amountPerPerson}</td>
                           }, {
                             title: 'Commission Rate',
                             renderHeading: () => <th style={{ textAlign: 'right' }}>Commission Rate</th>,
-                            renderData: r => <td style={{ textAlign: 'right' }}>{r.commissionRate}</td>
+                            renderData: (r: { commissionRate: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | null | undefined; }) => <td style={{ textAlign: 'right' }}>{r.commissionRate}</td>
                           }, {
                             title: 'Total Pay',
                             renderHeading: () => <th style={{ textAlign: 'right' }}>Total Pay</th>,
-                            renderData: r => <td style={{ textAlign: 'right' }}>${r.commissionRate * r.employeeCount * r.amountPerPerson}</td>
+                            renderData: (r: { commissionRate: number; employeeCount: number; amountPerPerson: number; }) => <td style={{ textAlign: 'right' }}>${r.commissionRate * r.employeeCount * r.amountPerPerson}</td>
                           }
                         ]} footer={<div className='grid-for-total'>
                                 <div className='box-for-total'>
@@ -110,31 +110,31 @@ const Commission = ({ title, data }: CommissionProps) => {
                         <TablesComp data={data?.referrals ?? []} headings={[
                             {
                                 title: 'Company Name',
-                                renderData: r => <td>{(r.agent as AgentProfile)?.companies?.find(c => c._id === r.company)?.name}</td>
+                                renderData: (r: { agent: AgentProfile; company: string | undefined; }) => <td>{(r.agent as AgentProfile)?.companies?.find(c => c._id === r.company)?.name}</td>
                             }, {
                                 title: 'Referral Agent',
-                                renderData: r => <td>{(r.agent as AgentProfile)?.name}</td>
+                                renderData: (r: { agent: AgentProfile; }) => <td>{(r.agent as AgentProfile)?.name}</td>
                             }, {
                                 title: 'Contract Start Date',
-                                renderData: r => <td>{moment(r.start).format('YYYY-MM-DD')}</td>
+                                renderData: (r: { start: moment.MomentInput; }) => <td>{moment(r.start).format('YYYY-MM-DD')}</td>
                             }, {
                                 title: 'Contract End Date',
-                                renderData: r => <td>{moment(r.end).format('YYYY-MM-DD')}</td>
+                                renderData: (r: { end: moment.MomentInput; }) => <td>{moment(r.end).format('YYYY-MM-DD')}</td>
                             }, {
                                 title: 'Monthly Membership paid (No. of People)',
-                                renderData: r => <td>{r.employeeCount}</td>
+                                renderData: (r: { employeeCount: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | null | undefined; }) => <td>{r.employeeCount}</td>
                             }, {
                                 title: 'Amount Paid Per Person',
                                 renderHeading: () => <th style={{ textAlign: 'right' }}>Amount Paid Per Person</th>,
-                                renderData: r => <td style={{ textAlign: 'right' }}>${r.amountPerPerson}</td>
+                                renderData: (r: { amountPerPerson: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | null | undefined; }) => <td style={{ textAlign: 'right' }}>${r.amountPerPerson}</td>
                             }, {
                                 title: 'Commission Rate',
                                 renderHeading: () => <th style={{ textAlign: 'right' }}>Commission Rate</th>,
-                                renderData: r => <td style={{ textAlign: 'right' }}>{r.commissionRate}</td>
+                                renderData: (r: { commissionRate: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | null | undefined; }) => <td style={{ textAlign: 'right' }}>{r.commissionRate}</td>
                             }, {
                                 title: 'Total Pay',
                                 renderHeading: () => <th style={{ textAlign: 'right' }}>Total Pay</th>,
-                                renderData: r => <td style={{ textAlign: 'right' }}>${r.commissionRate * r.employeeCount * r.amountPerPerson}</td>
+                                renderData: (r: { commissionRate: number; employeeCount: number; amountPerPerson: number; }) => <td style={{ textAlign: 'right' }}>${r.commissionRate * r.employeeCount * r.amountPerPerson}</td>
                             }
                         ]} footer={<div className='grid-for-total'>
                             <div className='box-for-total'>
@@ -160,7 +160,7 @@ const Commission = ({ title, data }: CommissionProps) => {
                         }, {
                           title: 'Commission',
                           renderHeading: () => <th style={{ textAlign: 'right' }}>Commission</th>,
-                          renderData: r => <td style={{ textAlign: 'right' }}>{r.commission}</td>
+                          renderData: (r: { commission: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | null | undefined; }) => <td style={{ textAlign: 'right' }}>{r.commission}</td>
                         }
                       ]} footer={<div className='grid-for-total'>
                         <div className='box-for-total'>

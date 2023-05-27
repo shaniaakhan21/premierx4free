@@ -11,22 +11,30 @@ export type SearchResponseRow = AgentProfile & {
   contracts: Contract[]
 }
 
-export type SearchBy =
-  | 'name'
-  | 'contactNo'
-  | 'companies.name'
-  | 'user.email'
-  | 'companies.contactPersonName'
-  | 'companies.contactPersonPhone'
-  | 'companies.comment'
+export type AggregatedSearchResponse = {
+  count: number
+  data: SearchResponseRow[]
+}
+
+export enum SearchBy {
+  All = 'all',
+  Name = 'name',
+  ContactNo = 'contactNo',
+  CompanyName = 'companies.name',
+  Email = 'user.email',
+  ContactPersonName = 'companies.contactPersonName',
+  ContactPersonPhone = 'companies.contactPersonPhone',
+  Comment = 'companies.comment'
+}
 
 const searchContacts: CustomRequestHandler<
   { skip?: string; limit?: string },
-  SuccessResponse<SearchResponseRow[]>,
+  SuccessResponse<AggregatedSearchResponse>,
   any,
   { q: string; by?: SearchBy }
 > = async (req, res) => {
-  if (!req.query.q) throw new Error('Query is required')
+  // if (!req.query.q) throw new Error('Query is required')
+  if (req.query.by && Object.values(SearchBy).indexOf(req.query.by) === -1) throw new Error('Invalid search by')
   const query: PipelineStage[] = [
     {
       $lookup: {
@@ -42,29 +50,34 @@ const searchContacts: CustomRequestHandler<
     {
       $unwind: '$companies'
     },
-    {
-      $match: req.query.by
-        ? {
-            [req.query.by]: {
-              $regex: new RegExp(`.*${req.query.q}.*`, 'i')
-            }
+    ...(req.query.q
+      ? [
+          {
+            $match:
+              req.query.by && req.query.by !== SearchBy.All
+                ? {
+                    [req.query.by]: {
+                      $regex: new RegExp(`.*${req.query.q}.*`, 'i')
+                    }
+                  }
+                : {
+                    $or: [
+                      'name',
+                      'contactNo',
+                      'companies.name',
+                      'user.email',
+                      'companies.contactPersonName',
+                      'companies.contactPersonPhone',
+                      'companies.comment'
+                    ].map((field) => ({
+                      [field]: {
+                        $regex: new RegExp(`.*${req.query.q}.*`, 'i')
+                      }
+                    }))
+                  }
           }
-        : {
-            $or: [
-              'name',
-              'contactNo',
-              'companies.name',
-              'user.email',
-              'companies.contactPersonName',
-              'companies.contactPersonPhone',
-              'companies.comment'
-            ].map((field) => ({
-              [field]: {
-                $regex: new RegExp(`.*${req.query.q}.*`, 'i')
-              }
-            }))
-          }
-    },
+        ]
+      : []),
     {
       $lookup: {
         from: 'contract',
@@ -80,21 +93,42 @@ const searchContacts: CustomRequestHandler<
         ],
         as: 'contracts'
       }
+    },
+    {
+      $unwind: '$contracts'
+    },
+    {
+      $facet: {
+        count: [
+          {
+            $group: {
+              _id: null,
+              count: { $sum: 1 }
+            }
+          }
+        ],
+        data: [
+          {
+            $group: {
+              _id: '$_id',
+              documents: { $first: '$$ROOT' }
+            }
+          },
+          ...(req.params?.skip ? [{ $skip: parseInt(req.params?.skip ?? '0', 10) }] : []),
+          ...(req.params?.limit ? [{ $limit: parseInt(req.params?.limit ?? '10', 10) }] : [])
+        ]
+      }
+    },
+    {
+      $project: {
+        count: { $arrayElemAt: ['$count.count', 0] },
+        data: '$data.documents'
+      }
     }
   ]
 
-  if (req.params?.limit) {
-    if (req.params?.skip)
-      query.push({
-        $skip: parseInt(req.params?.skip ?? '0', 10)
-      })
-    query.push({
-      $limit: parseInt(req.params?.limit ?? '10', 10)
-    })
-  }
-
-  const data = await AgentProfileModel.aggregate<SearchResponseRow>(query)
-  res.json(successResponse(data))
+  const data = await AgentProfileModel.aggregate<AggregatedSearchResponse>(query)
+  res.json(successResponse(data?.[0]))
 }
 
 export default searchContacts
