@@ -1,15 +1,12 @@
 import { Table } from 'react-bootstrap';
 import './styles.css';
+import footer from "../../../../components/Footer";
 
-type TableData = {
-    col1?: string | number;
-    col2?: string | number;
-    col3?: string | number;
-    col4?: string | number;
-    col5?: string | number;
-    col6?: string | number;
-    col7?: string | number;
-    [key: string]: string | number | undefined;
+type TableHading<T> = {
+    title: string
+    key?: keyof T
+    renderHeading?: (key?: keyof T) => JSX.Element
+    renderData?: (row: T) => JSX.Element | string | number | undefined
 };
 
 type Props = {
@@ -39,7 +36,7 @@ function TablesComp({ data, col1head, col2head, col3head, col4head, col5head, co
     }, 0);
 
     return (
-        <div>
+        <>
             <Table bordered hover responsive style={{ borderRadius: '5%' }} className='tableDesign'>
                 <thead>
                     <tr style={{ backgroundColor: '#F4F6F8' }}>
@@ -120,7 +117,7 @@ function TablesComp({ data, col1head, col2head, col3head, col4head, col5head, co
                     <div className='grid-for-number'>$ {lastColumnTotal}</div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
 

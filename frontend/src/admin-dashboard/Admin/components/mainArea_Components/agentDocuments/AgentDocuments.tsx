@@ -19,7 +19,9 @@ function AgentDocuments():JSX.Element{
         console.log("auth token is",thisUser?.jwtToken)
         const resp= await getAllAgents(thisUser?.jwtToken ?? "")
         console.log("response from agent docs",resp.data.data)
-        setData(resp.data.data)
+        let filteredData=resp.data.data.filter((data:typeof resp.data.data[0]) => {return data.status==="Pending"})
+        console.log("filteredData",filteredData)
+        setData(filteredData)
     }
     return(
         <div >

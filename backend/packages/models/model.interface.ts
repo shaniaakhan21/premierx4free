@@ -12,7 +12,7 @@ export default class ModelInterface extends TimeStamps {
 
     return 'unknown value'
   })
-  public _id!: string | mongoose.Types.ObjectId
+  public _id?: string | mongoose.Types.ObjectId
 
   public __v!: number
 }
