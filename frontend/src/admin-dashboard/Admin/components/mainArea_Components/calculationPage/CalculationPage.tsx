@@ -1,11 +1,12 @@
 import {makeStyles} from '../../../../../utils/makeStyles';
-import CalculationPageSecondTable from './CalculationPageSecondTable';
-import {agentCalculationData} from '../customData';
+import { tableCellClasses } from '@mui/material/TableCell';
 import React, {useState} from "react";
-import useDebounceState from "../../../../../hooks/useDebounceState";
-import {ContactSearchBy, useContractSearch} from "../../../../../services/admin";
+import { styled } from '@mui/material/styles';
+import AddIcon from '@mui/icons-material/Add';
+import {ContactSearchBy, ContractSearchResponse, useContractSearch} from "../../../../../services/admin";
 import {Pagination} from "@mui/lab";
 import {
+  Fab,
   FormControl,
   InputLabel,
   MenuItem,
@@ -19,6 +20,29 @@ import {
 import {useAuth} from "../../../../../contexts/auth.context";
 import TablesComp from "../../../../../Dashboard/components/comission/component/TablesComp";
 import moment from 'moment';
+import useDebounceState from "../../../../../hooks/useDebounceState";
+import CreateContract from './createContract';
+import Contract from '../../../../../models/contract.model';
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(odd)': {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  '&:last-child td, &:last-child th': {
+    border: 0,
+  },
+}));
 
 function CalculationPage(): JSX.Element {
     const { user } = useAuth()
@@ -26,15 +50,28 @@ function CalculationPage(): JSX.Element {
     const [by, setBy] = useState<ContactSearchBy>(ContactSearchBy.All)
     const [limit, setLimit] = useState(10)
     const [skip, setSkip] = useState(0)
+    const [showCreateContract, setShowCreateContract] = useState(false)
+    const [showEditContract, setShowEditContract] = useState<ContractSearchResponse['data'][0] | undefined>()
 
-    const { data, isLoading } = useContractSearch(user!, query, limit, skip, by)
+    const { data, isLoading, mutate } = useContractSearch(user!, query, limit, skip, by)
+
 
     const { classes } = useStyles()
     return (
-        <div className={classes.calculationPage_mainContainer} >
+        <div className={classes.calculationPage_mainContainer}>
+            <Fab onClick={() => setShowCreateContract(true)} color="primary" aria-label="add" style={{ position: 'fixed', bottom: 50, right: 70 }}>
+              <AddIcon />
+            </Fab>
+            {(showCreateContract || showEditContract) && <CreateContract contract={showEditContract} onClose={(shouldReload) => {
+              setShowCreateContract(false)
+              setShowEditContract(undefined)
+              if (shouldReload) {
+                mutate()
+              }
+            }} />}
             <div style={{ display: 'flex' }}>
               <TextField
-                style={{ minWidth: 400, marginLeft: 10 }}
+                style={{ minWidth: 400 }}
                 id="query" label="Search" variant="outlined" autoComplete='search' onChange={e => setQuery(e.target.value)} />
               <TextField
                 style={{ minWidth: 200, marginLeft: 10 }}
@@ -53,41 +90,42 @@ function CalculationPage(): JSX.Element {
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Agent Name</TableCell>
-                    <TableCell>Company Name</TableCell>
-                    <TableCell align="right">Commission Rate</TableCell>
-                    <TableCell align="right">Contract Start Date</TableCell>
-                    <TableCell align="right">Contract End Date</TableCell>
-                    <TableCell align="right">Monthly Membership Paid (No. of People)</TableCell>
-                    <TableCell align="right">Amount Paid Per Person</TableCell>
-                    <TableCell align="right">Total Pay</TableCell>
+                    <StyledTableCell>Agent Name</StyledTableCell>
+                    <StyledTableCell>Company Name</StyledTableCell>
+                    <StyledTableCell align="right">Commission Rate</StyledTableCell>
+                    <StyledTableCell align="right">Contract Start Date</StyledTableCell>
+                    <StyledTableCell align="right">Contract End Date</StyledTableCell>
+                    <StyledTableCell align="right">Monthly Membership Paid (No. of People)</StyledTableCell>
+                    <StyledTableCell align="right">Amount Paid Per Person</StyledTableCell>
+                    <StyledTableCell align="right">Total Pay</StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {isLoading
                     ? [...Array(8).keys()].map((k) => <TableRow>
-                      <TableCell><Skeleton key={k} height={15} width='100%' /></TableCell>
-                      <TableCell><Skeleton key={k} height={15} width='100%' /></TableCell>
-                      <TableCell><Skeleton key={k} height={15} width='100%' /></TableCell>
-                      <TableCell><Skeleton key={k} height={15} width='100%' /></TableCell>
-                      <TableCell><Skeleton key={k} height={15} width='100%' /></TableCell>
-                      <TableCell><Skeleton key={k} height={15} width='100%' /></TableCell>
-                      <TableCell><Skeleton key={k} height={15} width='100%' /></TableCell>
-                      <TableCell><Skeleton key={k} height={15} width='100%' /></TableCell>
+                      <StyledTableCell><Skeleton key={k} height={15} width='100%' /></StyledTableCell>
+                      <StyledTableCell><Skeleton key={k} height={15} width='100%' /></StyledTableCell>
+                      <StyledTableCell><Skeleton key={k} height={15} width='100%' /></StyledTableCell>
+                      <StyledTableCell><Skeleton key={k} height={15} width='100%' /></StyledTableCell>
+                      <StyledTableCell><Skeleton key={k} height={15} width='100%' /></StyledTableCell>
+                      <StyledTableCell><Skeleton key={k} height={15} width='100%' /></StyledTableCell>
+                      <StyledTableCell><Skeleton key={k} height={15} width='100%' /></StyledTableCell>
+                      <StyledTableCell><Skeleton key={k} height={15} width='100%' /></StyledTableCell>
                     </TableRow>)
                     : data?.data?.data.map((row) => (
                     <TableRow
-                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                      sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer', '&:hover': { backgroundColor: '#f5f5f5' } }}
                       key={row.contracts._id}
+                      onClick={() => setShowEditContract(row)}
                     >
-                      <TableCell>{row.name}</TableCell>
-                      <TableCell>{row.companies.name}</TableCell>
-                      <TableCell align="right">{row.contracts.commissionRate}</TableCell>
-                      <TableCell align="center">{moment(row.contracts.start).format('YYYY-MM-DD')}</TableCell>
-                      <TableCell align="center">{moment(row.contracts.end).format('YYYY-MM-DD')}</TableCell>
-                      <TableCell align="right">{row.contracts.employeeCount}</TableCell>
-                      <TableCell align="right">${row.contracts.amountPerPerson}</TableCell>
-                      <TableCell align="right">${row.contracts.amountPerPerson * row.contracts.employeeCount * row.contracts.commissionRate}</TableCell>
+                      <StyledTableCell>{row.name}</StyledTableCell>
+                      <StyledTableCell>{row.companies.name}</StyledTableCell>
+                      <StyledTableCell align="right">{row.contracts.commissionRate}</StyledTableCell>
+                      <StyledTableCell align="center">{moment(row.contracts.start).format('YYYY-MM-DD')}</StyledTableCell>
+                      <StyledTableCell align="center">{moment(row.contracts.end).format('YYYY-MM-DD')}</StyledTableCell>
+                      <StyledTableCell align="right">{row.contracts.employeeCount}</StyledTableCell>
+                      <StyledTableCell align="right">${row.contracts.amountPerPerson}</StyledTableCell>
+                      <StyledTableCell align="right">${row.contracts.amountPerPerson * row.contracts.employeeCount * row.contracts.commissionRate}</StyledTableCell>
                     </TableRow>
                   ))}
                 </TableBody>

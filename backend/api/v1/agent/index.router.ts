@@ -4,11 +4,13 @@ import { AuthenticateToken } from '@models/user.model'
 import express from 'express'
 
 import get from './get'
+import getProfile from './getProfile'
 import searchAgents from './search'
 
 const agentRouter = express.Router()
 
 agentRouter.get('/search/:limit?/:skip?', AuthenticateToken([Roles.Admin]), ErrorHandler(searchAgents))
 agentRouter.get('/:id', AuthenticateToken([Roles.Admin, Roles.Agent]), ErrorHandler(get))
+agentRouter.get('/profile/:id', AuthenticateToken([Roles.Admin, Roles.Agent]), ErrorHandler(getProfile))
 
 export default agentRouter

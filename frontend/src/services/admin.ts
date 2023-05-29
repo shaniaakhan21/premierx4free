@@ -64,3 +64,11 @@ export type ContractSearchResponse = {
 }
 
 export const useContractSearch = (user: User, q?: string, limit?: number, skip?: number, by?: ContactSearchBy) => useSWR(['/admin/contract/search', user, [limit, skip], { q, by }], getFetcher<GenericResponse<ContractSearchResponse>>)
+
+export const createContract = (user: User, data: Omit<Contract, '_id' | 'createdAt' | 'createdBy' | 'updatedAt' | 'updatedBy'>) => {
+  return putFetcher<Omit<Contract, Contract['_id']>, Contract>(['/admin/contract', data, user, undefined, undefined])
+}
+
+export const updateContract = (user: User, data: Omit<Contract, 'createdAt' | 'createdBy' | 'updatedAt' | 'updatedBy'>) => {
+  return patchFetcher<Omit<Contract, 'createdAt' | 'createdBy' | 'updatedAt' | 'updatedBy'>, Contract>(['/admin/contract', data, user, undefined, undefined])
+}
