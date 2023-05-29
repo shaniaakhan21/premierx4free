@@ -6,6 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import {ContactSearchBy, ContractSearchResponse, useContractSearch} from "../../../../../services/admin";
 import {Pagination} from "@mui/lab";
 import {
+  Button,
   Fab,
   FormControl,
   InputLabel,
@@ -59,9 +60,6 @@ function CalculationPage(): JSX.Element {
     const { classes } = useStyles()
     return (
         <div className={classes.calculationPage_mainContainer}>
-            <Fab onClick={() => setShowCreateContract(true)} color="primary" aria-label="add" style={{ position: 'fixed', bottom: 50, right: 70 }}>
-              <AddIcon />
-            </Fab>
             {(showCreateContract || showEditContract) && <CreateContract contract={showEditContract} onClose={(shouldReload) => {
               setShowCreateContract(false)
               setShowEditContract(undefined)
@@ -69,7 +67,7 @@ function CalculationPage(): JSX.Element {
                 mutate()
               }
             }} />}
-            <div style={{ display: 'flex' }}>
+            <div style={{ display: 'flex', alignItems: 'flex-end' }}>
               <TextField
                 style={{ minWidth: 400 }}
                 id="query" label="Search" InputLabelProps={{ shrink: true }} variant="outlined" autoComplete='search' onChange={e => setQuery(e.target.value)} />
@@ -87,6 +85,10 @@ function CalculationPage(): JSX.Element {
                   <MenuItem value={value}>{key}</MenuItem>
                 ))}
               </TextField>
+              <div style={{ flex: 1 }} />
+              <Button style={{ backgroundColor: '#64b5f6' }} startIcon={<AddIcon />} onClick={() => setShowCreateContract(true)} variant='contained' color="primary" aria-label="add" >
+                &nbsp;Add new
+              </Button>
             </div>
             <TableContainer component={Paper} style={{ marginTop: 20, marginBottom: 20 }}>
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
