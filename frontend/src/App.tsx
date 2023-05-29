@@ -13,6 +13,8 @@ import axios from "axios";
 import {AuthProvider} from "./contexts/auth.context";
 
 import { Theme } from '@mui/material/styles';
+import {LocalizationProvider} from "@mui/x-date-pickers";
+import {AdapterMoment} from "@mui/x-date-pickers/AdapterMoment";
 
 export const muiCache = createCache({
   key: 'premierx-theme',
@@ -33,8 +35,10 @@ function App() {
         <CacheProvider value={muiCache}>
           <ThemeProvider theme={theme}>
             <BrowserRouter>
+              <LocalizationProvider dateAdapter={AdapterMoment}>
               <CookieBanner />
               <AppRouter />
+              </LocalizationProvider>
             </BrowserRouter>
           </ThemeProvider>
         </CacheProvider>
