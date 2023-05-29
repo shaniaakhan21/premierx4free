@@ -72,14 +72,16 @@ function CalculationPage(): JSX.Element {
             <div style={{ display: 'flex' }}>
               <TextField
                 style={{ minWidth: 400 }}
-                id="query" label="Search" variant="outlined" autoComplete='search' onChange={e => setQuery(e.target.value)} />
+                id="query" label="Search" InputLabelProps={{ shrink: true }} variant="outlined" autoComplete='search' onChange={e => setQuery(e.target.value)} />
               <TextField
                 style={{ minWidth: 200, marginLeft: 10 }}
+                InputLabelProps={{ shrink: true }}
                 select
                 id="limit"
                 label="Search By"
                 onChange={e => setBy(e.target.value as ContactSearchBy)}
                 value={by}
+                variant="outlined"
               >
                 {Object.entries(ContactSearchBy).map(([key, value], index) => (
                   <MenuItem value={value}>{key}</MenuItem>
