@@ -28,13 +28,17 @@ function Sidebar(props:event):JSX.Element{
             </div>
 
             <div className={classes.sidebar_navigation}>
-                        <div className={eventNumber ==1 ?classes.navigation_li_selected:classes.navigation_li} onClick={() => {setEventNumber(1)}}>
+                        <div className={eventNumber == 1 ? classes.navigation_li_selected : classes.navigation_li} onClick={() => {setEventNumber(1)}}>
                             <img src='/assets/svg/documents.svg' className={classes.navigation_img} />
                             <p>Agent Documents</p>
                         </div>
-                        <div className={eventNumber ==2 ?classes.navigation_li_selected:classes.navigation_li} onClick={() => {setEventNumber(2)}}>
+                        <div className={eventNumber == 2 ? classes.navigation_li_selected : classes.navigation_li} onClick={() => {setEventNumber(2)}}>
                             <img src='/assets/svg/calculator.svg' className={classes.navigation_img} />
                             <p>Calculation Page</p>
+                        </div>
+                        <div className={eventNumber == 5 ? classes.navigation_li_selected : classes.navigation_li} onClick={() => {setEventNumber(5)}}>
+                            <img src='/assets/svg/calculator.svg' className={classes.navigation_img} />
+                            <p>Agent Search</p>
                         </div>
                         <div className={classes.navigation_li} onClick={() => {setEventNumber(3)}}>
                             <img src='/assets/svg/marketing.svg' className={classes.navigation_img}/>

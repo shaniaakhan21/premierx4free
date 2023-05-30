@@ -1,5 +1,5 @@
 import { CustomRequestHandler } from '@helpers/errorHandler'
-import { AggregatedFacetedResponse, generateFacetCountQuery } from '@helpers/mongoDB'
+import { AggregatedFacetedResponse } from '@helpers/mongoDB'
 import { SuccessResponse, successResponse } from '@helpers/response'
 import AgentProfileModel, { AgentProfile } from '@models/agent-profile.model'
 import { User } from '@models/user.model'
@@ -26,7 +26,7 @@ const searchAgents: CustomRequestHandler<
   any,
   { q: string; by?: SearchBy; picker?: string }
 > = async (req, res) => {
-  if (!req.query.picker && !req.query.q) throw new Error('Query is required')
+  // if (!req.query.picker && !req.query.q) throw new Error('Query is required')
   const query: PipelineStage[] = [
     {
       $lookup: {
@@ -39,22 +39,26 @@ const searchAgents: CustomRequestHandler<
     {
       $unwind: '$user'
     },
-    {
-      $match:
-        req.query.by && req.query.by !== SearchBy.All
-          ? {
-              [req.query.by]: {
-                $regex: new RegExp(`.*${req.query.q}.*`, 'i')
-              }
-            }
-          : {
-              $or: Object.values(SearchBy).map((field) => ({
-                [field]: {
-                  $regex: new RegExp(`.*${req.query.q}.*`, 'i')
-                }
-              }))
-            }
-    },
+    ...(req.query.q
+      ? [
+          {
+            $match:
+              req.query.by && req.query.by !== SearchBy.All
+                ? {
+                    [req.query.by]: {
+                      $regex: new RegExp(`.*${req.query.q}.*`, 'i')
+                    }
+                  }
+                : {
+                    $or: Object.values(SearchBy).map((field) => ({
+                      [field]: {
+                        $regex: new RegExp(`.*${req.query.q}.*`, 'i')
+                      }
+                    }))
+                  }
+          }
+        ]
+      : []),
     ...(req.query.picker
       ? [
           {
@@ -67,10 +71,39 @@ const searchAgents: CustomRequestHandler<
           }
         ]
       : []),
-    ...generateFacetCountQuery(
-      req.params.skip ? parseInt(req.params.skip, 10) : undefined,
-      req.params.limit ? parseInt(req.params.limit, 10) : undefined
-    )
+    {
+      $facet: {
+        count: [
+          {
+            $group: {
+              _id: null,
+              count: { $sum: 1 }
+            }
+          }
+        ],
+        data: [
+          {
+            $group: {
+              _id: '$_id',
+              documents: { $first: '$$ROOT' }
+            }
+          },
+          {
+            $sort: {
+              'documents._id': -1
+            }
+          },
+          ...(req.params.skip ? [{ $skip: parseInt(req.params.skip, 10) }] : []),
+          ...(req.params.limit ? [{ $limit: parseInt(req.params.limit, 10) }] : [])
+        ]
+      }
+    },
+    {
+      $project: {
+        count: { $arrayElemAt: ['$count.count', 0] },
+        data: '$data.documents'
+      }
+    }
   ]
 
   const data = await AgentProfileModel.aggregate<AggregatedFacetedResponse<SearchResponseRow>>(query)

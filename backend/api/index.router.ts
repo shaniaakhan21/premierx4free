@@ -23,7 +23,8 @@ apiRouter.get('/secret', async (_req, res) => {
   res.send('This is a secret')
 })
 
-apiRouter.get('*', () => {
+apiRouter.get('*', (req) => {
+  if (req.url.startsWith('/uploads')) throw new RecordNotFoundError('File not found')
   throw new APINotImplementedError('API not implemented')
 })
 

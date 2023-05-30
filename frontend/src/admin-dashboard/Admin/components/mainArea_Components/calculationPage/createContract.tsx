@@ -163,7 +163,7 @@ export default function CreateContract({ onClose, contract }: CreateContractProp
                     setQuery(v);
                   }}
                   renderInput={(params) => (
-                    <TextField {...params} label="Select Agent" placeholder="Select Agent" />
+                    <TextField {...params} label="Select Agent" placeholder="Select Agent" InputLabelProps={{ shrink: true }} />
                   )}
                   getOptionLabel={(option) => option?.name ?? ''}
                   value={state.agent || null}
@@ -179,7 +179,7 @@ export default function CreateContract({ onClose, contract }: CreateContractProp
             </Grid>
             <Grid item xs={12} md={6}>
               <FormControl fullWidth>
-                <InputLabel id="company-label">Company</InputLabel>
+                <InputLabel id="company-label" shrink disabled={!state.agent}>Company</InputLabel>
                 <Select
                   disabled={!state.agent}
                   labelId="company-label"
@@ -193,6 +193,7 @@ export default function CreateContract({ onClose, contract }: CreateContractProp
             </Grid>
             <Grid item xs={12} md={6}>
               <TextField
+                InputLabelProps={{ shrink: true }}
                 disabled={!state.agent}
                 name="commissionRate"
                 label="Commission Rate"
@@ -205,6 +206,7 @@ export default function CreateContract({ onClose, contract }: CreateContractProp
             </Grid>
             <Grid item xs={12} md={6}>
               <TextField
+                InputLabelProps={{ shrink: true }}
                 disabled={!state.agent}
                 name="employeeCount"
                 label="Employee Count"
@@ -216,6 +218,7 @@ export default function CreateContract({ onClose, contract }: CreateContractProp
             </Grid>
             <Grid item xs={12} md={6}>
               <TextField
+                InputLabelProps={{ shrink: true }}
                 disabled={!state.agent}
                 name="amountPerPerson"
                 label="Amount Per Person"
@@ -228,8 +231,8 @@ export default function CreateContract({ onClose, contract }: CreateContractProp
           </Grid>
         </DialogContent>
         <DialogActions>
-          <Button color='error' onClick={() => onClose()}>Cancel</Button>
-          <Button onClick={onSubmit}>{contract ? 'Update' : 'Create'}</Button>
+          <Button variant='contained' color='error' onClick={() => onClose()}>Cancel</Button>
+          <Button variant='contained' onClick={onSubmit}>{contract ? 'Update' : 'Create'}</Button>
         </DialogActions>
       </Dialog>
     </>

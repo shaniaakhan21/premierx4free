@@ -2,11 +2,9 @@ import {makeStyles} from '../../../../../utils/makeStyles';
 import { tableCellClasses } from '@mui/material/TableCell';
 import React, {useState} from "react";
 import { styled } from '@mui/material/styles';
-import AddIcon from '@mui/icons-material/Add';
-import {ContactSearchBy, ContractSearchResponse, useContractSearch} from "../../../../../services/admin";
 import {Pagination} from "@mui/lab";
 import {
-  Button,
+  Button, Chip,
   Fab,
   FormControl,
   InputLabel,
@@ -22,8 +20,19 @@ import {useAuth} from "../../../../../contexts/auth.context";
 import TablesComp from "../../../../../Dashboard/components/comission/component/TablesComp";
 import moment from 'moment';
 import useDebounceState from "../../../../../hooks/useDebounceState";
-import CreateContract from './createContract';
+import EditAgent from './editAgent';
 import Contract from '../../../../../models/contract.model';
+import {
+  AgentSearchBy,
+  AgentSearchNormalResponse,
+  AgentSearchResponse,
+  useAgentSearch
+} from "../../../../../services/agent";
+import AgentProfile, {AgentStatus} from "../../../../../models/agentProfile.model";
+import User from "../../../../../models/user.model";
+import DoneIcon from '@mui/icons-material/Done'
+import UpdateIcon from '@mui/icons-material/Update'
+import KeyOffIcon from '@mui/icons-material/KeyOff'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -45,26 +54,35 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function CalculationPage(): JSX.Element {
+const renderStatus = (status: AgentStatus) => {
+  switch (status) {
+    case AgentStatus.Active:
+      return <Chip icon={<DoneIcon />} label="Active" color="success" />
+    case AgentStatus.Pending:
+      return <Chip icon={<UpdateIcon />} label="Pending" color="warning" />
+    case AgentStatus.Suspended:
+      return <Chip icon={<KeyOffIcon />} label="Suspended" color="error" />
+  }
+}
+
+function AgentSearchPage(): JSX.Element {
     const { user } = useAuth()
     const [query, setQuery] = useDebounceState('', 200)
-    const [by, setBy] = useState<ContactSearchBy>(ContactSearchBy.All)
+    const [by, setBy] = useState<AgentSearchBy>(AgentSearchBy.All)
     const [limit, setLimit] = useState(10)
     const [skip, setSkip] = useState(0)
-    const [showCreateContract, setShowCreateContract] = useState(false)
-    const [showEditContract, setShowEditContract] = useState<ContractSearchResponse['data'][0] | undefined>()
+    const [showCreate, setShowCreate] = useState(false)
+    const [showEdit, setShowEdit] = useState<AgentSearchResponse<AgentSearchNormalResponse>['data'][0] | undefined>()
 
-    const { data, isLoading, mutate } = useContractSearch(user!, query, limit, skip, by)
+    const { data, isLoading, mutate } = useAgentSearch<AgentSearchNormalResponse>(user!, query, limit, skip, by)
 
-
-    console.log("data from cal c page",data)
 
     const { classes } = useStyles()
     return (
         <div className={classes.calculationPage_mainContainer}>
-            {(showCreateContract || showEditContract) && <CreateContract contract={showEditContract} onClose={(shouldReload) => {
-              setShowCreateContract(false)
-              setShowEditContract(undefined)
+            {(showCreate || showEdit) && <EditAgent agent={showEdit} onClose={(shouldReload) => {
+              setShowCreate(false)
+              setShowEdit(undefined)
               if (shouldReload) {
                 mutate()
               }
@@ -79,31 +97,25 @@ function CalculationPage(): JSX.Element {
                 select
                 id="limit"
                 label="Search By"
-                onChange={e => setBy(e.target.value as ContactSearchBy)}
+                onChange={e => setBy(e.target.value as AgentSearchBy)}
                 value={by}
                 variant="outlined"
               >
-                {Object.entries(ContactSearchBy).map(([key, value], index) => (
+                {Object.entries(AgentSearchBy).map(([key, value], index) => (
                   <MenuItem value={value}>{key}</MenuItem>
                 ))}
               </TextField>
-              <div style={{ flex: 1 }} />
-              <Button style={{ backgroundColor: '#64b5f6' }} startIcon={<AddIcon />} onClick={() => setShowCreateContract(true)} variant='contained' color="primary" aria-label="add" >
-                &nbsp;Add new
-              </Button>
             </div>
             <TableContainer component={Paper} style={{ marginTop: 20, marginBottom: 20 }}>
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
                     <StyledTableCell>Agent Name</StyledTableCell>
-                    <StyledTableCell>Company Name</StyledTableCell>
-                    <StyledTableCell align="right">Commission Rate</StyledTableCell>
-                    <StyledTableCell align="right">Contract Start Date</StyledTableCell>
-                    <StyledTableCell align="right">Contract End Date</StyledTableCell>
-                    <StyledTableCell align="right">Monthly Membership Paid (No. of People)</StyledTableCell>
-                    <StyledTableCell align="right">Amount Paid Per Person</StyledTableCell>
-                    <StyledTableCell align="right">Total Pay</StyledTableCell>
+                    <StyledTableCell>Email address</StyledTableCell>
+                    <StyledTableCell align="center">Status</StyledTableCell>
+                    <StyledTableCell align="center">Companies</StyledTableCell>
+                    <StyledTableCell align="center">Referral Code</StyledTableCell>
+                    <StyledTableCell align="center">Contract / NDA Status</StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -121,17 +133,21 @@ function CalculationPage(): JSX.Element {
                     : data?.data?.data.map((row) => (
                     <TableRow
                       sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer', '&:hover': { backgroundColor: '#f5f5f5' } }}
-                      key={row.contracts._id}
-                      onClick={() => setShowEditContract(row)}
+                      key={row._id}
+                      onClick={() => setShowEdit(row)}
                     >
                       <StyledTableCell>{row.name}</StyledTableCell>
-                      <StyledTableCell>{row.companies.name}</StyledTableCell>
-                      <StyledTableCell align="right">{row.contracts.commissionRate}</StyledTableCell>
-                      <StyledTableCell align="center">{moment(row.contracts.start).format('YYYY-MM-DD')}</StyledTableCell>
-                      <StyledTableCell align="center">{moment(row.contracts.end).format('YYYY-MM-DD')}</StyledTableCell>
-                      <StyledTableCell align="right">{row.contracts.employeeCount}</StyledTableCell>
-                      <StyledTableCell align="right">${row.contracts.amountPerPerson}</StyledTableCell>
-                      <StyledTableCell align="right">${row.contracts.amountPerPerson * row.contracts.employeeCount * row.contracts.commissionRate}</StyledTableCell>
+                      <StyledTableCell>{row.user.email}</StyledTableCell>
+                      <StyledTableCell align="center">{renderStatus(row.status)}</StyledTableCell>
+                      <StyledTableCell>{row.companies?.map(c => <Chip style={{ margin: 2 }} key={c._id} label={c.name} variant="outlined" />)}</StyledTableCell>
+                      <StyledTableCell align="center">{row.agentId}</StyledTableCell>
+                      <StyledTableCell align="center">
+                        {row.nda ? <Chip style={{ margin: 2 }} icon={<DoneIcon sx={{ fontSize: 24, color: 'white' }} />} label="NDA" color="success" /> : null}
+                        {row.contract ? <Chip style={{ margin: 2 }} icon={<DoneIcon sx={{ fontSize: 24, color: 'white' }} />} label="Contract" color="success" /> : null}
+                      </StyledTableCell>
+                      {/*<StyledTableCell align="right">{row.contracts.employeeCount}</StyledTableCell>*/}
+                      {/*<StyledTableCell align="right">${row.contracts.amountPerPerson}</StyledTableCell>*/}
+                      {/*<StyledTableCell align="right">${row.contracts.amountPerPerson * row.contracts.employeeCount * row.contracts.commissionRate}</StyledTableCell>*/}
                     </TableRow>
                   ))}
                 </TableBody>
@@ -164,4 +180,4 @@ const useStyles = makeStyles()(() => ({
     }
 }))
 
-export default CalculationPage
+export default AgentSearchPage

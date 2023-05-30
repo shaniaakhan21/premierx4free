@@ -9,6 +9,7 @@ import MarketingMaterials from './mainArea_Components/marketingMaterials/Marketi
 import * as React from 'react';
 import AgentHeader from '../../../Dashboard/components/agent-header/AgentHeader';
 import TopBar from './top-bar/TopBar'
+import AgentSearchPage from './mainArea_Components/agentSearch/AgentSearchPage';
 interface event {
     eventNumber:number
     // setEventNumber:any
@@ -36,6 +37,10 @@ function MainArea(props:event): JSX.Element{
         {
             setMainAreaContent(<AdminSettings />)
         }
+        if (eventNumber == 5)
+        {
+            setMainAreaContent(<AgentSearchPage />)
+        }
     },[eventNumber])
     return(
         <div className={classes.mainArea_mainContainer}>
@@ -45,8 +50,8 @@ function MainArea(props:event): JSX.Element{
             <div className={classes.mainContainer_mainContent}>
                 {/* <AgentDocuments /> */}
                 {/* <CalculationPage /> */}
-                
-                
+
+
                 {mainAreaContent}
 
                 {/* <AdminSettings /> */}

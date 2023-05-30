@@ -1,9 +1,7 @@
 export enum AgentStatus {
-  Registered = 'Registered',
-  PendingSign = 'PendingSign',
+  Pending = 'Pending',
   Active = 'Active',
-  Suspended = 'Suspended',
-  Terminated = 'Terminated'
+  Suspended = 'Suspended'
 }
 
 export type AgentProfileCompany = {

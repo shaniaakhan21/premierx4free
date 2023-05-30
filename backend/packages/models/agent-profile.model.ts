@@ -19,7 +19,7 @@ import mongoose from 'mongoose'
 export enum AgentStatus {
   Pending = 'Pending',
   Active = 'Active',
-  Registered = 'Registered'
+  Suspended = 'Suspended'
 }
 
 @Exclude()
