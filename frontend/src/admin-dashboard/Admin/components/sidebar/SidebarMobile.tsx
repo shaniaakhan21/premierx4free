@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { makeStyles } from '../../../../utils/makeStyles';
 import * as React from 'react';
 
@@ -9,8 +10,9 @@ interface event {
     user:any
 }
 function SidebarMobile(props:event):JSX.Element{
-    const {eventNumber,setEventNumber,user} = props
+    const {eventNumber,setEventNumber,user,setSidebarToggle} = props
     const {classes} = useStyles()
+    const navigate = useNavigate()
     return(
 
 
@@ -29,23 +31,39 @@ function SidebarMobile(props:event):JSX.Element{
             </div>
 
             <div className={classes.sidebar_navigation}>
-                        <div className={eventNumber ==1 ?classes.navigation_li_selected:classes.navigation_li} onClick={() => {setEventNumber(1)}}>
+                        <div className={eventNumber ==1 ?classes.navigation_li_selected:classes.navigation_li} onClick={() => {
+                            setEventNumber(1)
+                            setSidebarToggle(false)
+                            }}>
                             <img src='/assets/svg/documents.svg' className={classes.navigation_img} />
                             <p>Agent Documents</p>
                         </div>
-                        <div className={eventNumber ==2 ?classes.navigation_li_selected:classes.navigation_li} onClick={() => {setEventNumber(2)}}>
+                        <div className={eventNumber ==2 ?classes.navigation_li_selected:classes.navigation_li} onClick={() => {
+                            setEventNumber(2)
+                            setSidebarToggle(false)
+                            }}>
                             <img src='/assets/svg/calculator.svg' className={classes.navigation_img} />
                             <p>Calculation Page</p>
                         </div>
-                        <div className={classes.navigation_li} onClick={() => {setEventNumber(3)}}>
+                        <div className={classes.navigation_li} onClick={() => {
+                            setEventNumber(3)
+                            setSidebarToggle(false)
+                            }}>
                             <img src='/assets/svg/marketing.svg' className={classes.navigation_img}/>
                             <p>Marketing Materials</p>
                         </div>
-                        <div className={classes.navigation_li} onClick={() => {setEventNumber(4)}}>
+                        <div className={classes.navigation_li} onClick={() => {
+                            setEventNumber(4)
+                            setSidebarToggle(false)
+                            }}>
                             <img src='/assets/svg/setting.svg' className={classes.navigation_img}/>
                             <p>Settings</p>
                         </div>
-                        <div className={classes.navigation_li} onClick={() => {setEventNumber(4)}}>
+                        <div className={classes.navigation_li} onClick={() => {
+                            navigate('/')
+                            localStorage.removeItem('user')
+                            setSidebarToggle(false)
+                            }}>
                             <img src='/assets/svg/logout.svg' className={classes.navigation_img}/>
                             <p>Logout</p>
                         </div>

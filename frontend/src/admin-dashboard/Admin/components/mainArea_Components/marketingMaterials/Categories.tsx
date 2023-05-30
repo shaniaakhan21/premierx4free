@@ -6,12 +6,12 @@ import Col from 'react-bootstrap/Col';
 //import { Repeat } from '@mui/icons-material';
 //import { color, display, fontWeight } from '@mui/system';
 import RemoveModal from '../modal_popups/RemoveModal';
-import {useMemo, useState} from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import ReplaceModal from '../modal_popups/ReplaceModal';
 import UploadMoreModal from '../modal_popups/UploadMore';
 import AddCategoryModal from '../modal_popups/AddCategory';
 //import * as React from 'react';
-import './marketingMaterials.css'
+//import './marketingMaterials.css'
 //import axios from 'axios'
 import {useAuth} from "../../../../../contexts/auth.context";
 import {
@@ -43,14 +43,27 @@ function Categories(props:CategoryData):JSX.Element{
     const containerSm = 6
     let {category} = props
 
-     window.addEventListener('resize',()=>{
-        console.log(window.innerWidth)
+    const innerWidthAdjust = () => {
         if(window.innerWidth<=768 && maxElements===4)
         {
             console.log("transiting ui")
             setMaxElements(1)
         }
+        else if(window.innerWidth>768 && maxElements===1)
+        {
+            console.log("reverting back")
+            setMaxElements(4)
+        }
+
+    }
+
+     window.addEventListener('resize',()=>{
+        console.log(window.innerWidth)
+        innerWidthAdjust()
+        
     })
+
+    useEffect(innerWidthAdjust,[])
 
    
 
@@ -81,7 +94,7 @@ function Categories(props:CategoryData):JSX.Element{
                 </div>
 
                 {summaryIndexed[category._id]?.documents?.length<=maxElements ?
-                <Row className={classes.contentContainer_row}>
+                <Row className={classes.contentContainer_row} >
                     {summaryIndexed[category._id]?.documents?.map((document, index: any) => 
                     <Col key={document._id} xs={5} lg={containerWidth} className={classes.containerContent_contentUnit} style={{padding: 0}}>
                         <MarketingDocumentPreview fileName={document?.document} alt={document?.head} className={classes.containerContent_PdfPptIcon} />
@@ -225,17 +238,25 @@ const useStyles = makeStyles() (() => ({
         flexDirection:"row",
         //justifyContent:"space-evenly",
         gap:"1%",
+        '@media(max-width: 768px)':{
+            gap:"1%",
+            justifyContent:"space-between"
+        }
     },
 
     containerContent_contentUnit:{
         position: "relative",
-        minWidth:"220px",
-        height:"252px",
+        //minWidth:"220px",
+        //height:"252px",
         border:"1px solid #D6D9DB",
         display:"flex",
-        flexDirection:"column-reverse",
+        flexDirection:"column",
+        gap:"18%",
         borderRadius:"10px",
-        overflow: 'hidden'
+        overflow: 'hidden',
+        '@media(max-width: 768px)':{
+            minWidth:"120px"
+        }
     },
     contentUnit_image: {
         position: 'absolute',
@@ -244,8 +265,8 @@ const useStyles = makeStyles() (() => ({
         height: 252
     },
     containerContent_contentUnitUploadMore:{
-        minWidth:"220px",
-        height:"252px",
+        //minWidth:"220px",
+        //height:"252px",
         border:"1px dashed #3AA6DD",
         display:"flex",
         flexDirection:"column",
@@ -256,6 +277,10 @@ const useStyles = makeStyles() (() => ({
         boxShadow:"0px 0px 34px rgba(125, 141, 148, 0.25)",
         "&:hover":{
             cursor:"pointer"
+        },
+        '@media(max-width: 768px)':{
+            minWidth:"120px",
+            gap:"2px"
         }
     },
     contentUnit_buttons:{
@@ -276,7 +301,15 @@ const useStyles = makeStyles() (() => ({
         marginTop:"18px",
         marginLeft:"10px",
         marginRight:"10px",
-        cursor: 'pointer'
+        cursor: 'pointer',
+        '@media(max-width: 768px)':{
+            marginLeft: "0px",
+            marginRight: "5px",
+            fontSize:"10px"
+        },
+        '& p':{
+            marginTop:"4px"
+        }
 
     },
     deleteButton_image:{
@@ -284,22 +317,38 @@ const useStyles = makeStyles() (() => ({
         filter:"invert(94%) sepia(94%) saturate(0%) hue-rotate(224deg) brightness(107%) contrast(106%)",
         width:"17.38px",
         height:"19.86px",
+        '@media(max-width: 768px)':{
+            width:"10px",
+        }
         //backgroundColor:"#FFFFFF"
     },
     replaceButton_image:{
         width:"17.38px",
-        height:"19.86px"
+        height:"19.86px",
+        '@media(max-width: 768px)':{
+            width:"10px",
+        }
     },
     containerContent_PdfPptIcon:{
-        position: 'absolute',
+        //position: 'absolute',
         objectFit: 'cover',
         width: '100%',
-        height: 252
+        height: 252,
+        '@media(max-width: 768px)':{
+            width:"100%",
+            height:"90px",
+            //margin:"28px auto 2px auto",
+        }
     },
     containerContent_uploadMoreIcon:{
         width:"108px",
         height:"108px",
-        margin:"28px auto 10px auto"
+        margin:"28px auto 10px auto",
+        '@media(max-width: 768px)':{
+            width:"90px",
+            height:"90px",
+            margin:"5px auto 2px auto",
+        }
     },
     uploadMore_buttonTitle:{
         textAlign:"center",
@@ -307,7 +356,12 @@ const useStyles = makeStyles() (() => ({
         fontWeight:"600",
         fontSize:"22px",
         lineHeight:"30.01px",
-        color:"#55666F"
+        color:"#55666F",
+        '@media(max-width: 768px)':{
+            fontSize:"15px",
+            fontWeight:"700",
+            lineHeight:"20.46px"
+        }
     },
     contentContainer_heading:{
         display:"flex",

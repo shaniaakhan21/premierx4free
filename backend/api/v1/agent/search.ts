@@ -1,4 +1,5 @@
 import { CustomRequestHandler } from '@helpers/errorHandler'
+import { AggregatedFacetedResponse, generateFacetCountQuery } from '@helpers/mongoDB'
 import { SuccessResponse, successResponse } from '@helpers/response'
 import AgentProfileModel, { AgentProfile } from '@models/agent-profile.model'
 import { User } from '@models/user.model'
@@ -8,22 +9,24 @@ export type SearchResponseRow = AgentProfile & {
   user: User
 }
 
-export type SearchBy =
-  | 'name'
-  | 'contactNo'
-  | 'companies.name'
-  | 'user.email'
-  | 'companies.contactPersonName'
-  | 'companies.contactPersonPhone'
-  | 'companies.comment'
+export enum SearchBy {
+  All = 'all',
+  Name = 'name',
+  ContactNo = 'contactNo',
+  CompanyName = 'companies.name',
+  Email = 'user.email',
+  ContactPersonName = 'companies.contactPersonName',
+  ContactPersonPhone = 'companies.contactPersonPhone',
+  Comment = 'companies.comment'
+}
 
 const searchAgents: CustomRequestHandler<
   { skip?: string; limit?: string },
-  SuccessResponse<SearchResponseRow[]>,
+  SuccessResponse<AggregatedFacetedResponse<SearchResponseRow>>,
   any,
-  { q: string; by?: SearchBy }
+  { q: string; by?: SearchBy; picker?: string }
 > = async (req, res) => {
-  if (!req.query.q) throw new Error('Query is required')
+  if (!req.query.picker && !req.query.q) throw new Error('Query is required')
   const query: PipelineStage[] = [
     {
       $lookup: {
@@ -37,42 +40,41 @@ const searchAgents: CustomRequestHandler<
       $unwind: '$user'
     },
     {
-      $match: req.query.by
-        ? {
-            [req.query.by]: {
-              $regex: new RegExp(`.*${req.query.q}.*`, 'i')
-            }
-          }
-        : {
-            $or: [
-              'name',
-              'contactNo',
-              'companies.name',
-              'user.email',
-              'companies.contactPersonName',
-              'companies.contactPersonPhone',
-              'companies.comment'
-            ].map((field) => ({
-              [field]: {
+      $match:
+        req.query.by && req.query.by !== SearchBy.All
+          ? {
+              [req.query.by]: {
                 $regex: new RegExp(`.*${req.query.q}.*`, 'i')
               }
-            }))
+            }
+          : {
+              $or: Object.values(SearchBy).map((field) => ({
+                [field]: {
+                  $regex: new RegExp(`.*${req.query.q}.*`, 'i')
+                }
+              }))
+            }
+    },
+    ...(req.query.picker
+      ? [
+          {
+            $project: {
+              _id: 1,
+              name: 1,
+              agentId: 1,
+              companies: 1
+            }
           }
-    }
+        ]
+      : []),
+    ...generateFacetCountQuery(
+      req.params.skip ? parseInt(req.params.skip, 10) : undefined,
+      req.params.limit ? parseInt(req.params.limit, 10) : undefined
+    )
   ]
 
-  if (req.params?.limit) {
-    if (req.params?.skip)
-      query.push({
-        $skip: parseInt(req.params?.skip ?? '0', 10)
-      })
-    query.push({
-      $limit: parseInt(req.params?.limit ?? '10', 10)
-    })
-  }
-
-  const data = await AgentProfileModel.aggregate<SearchResponseRow>(query)
-  res.json(successResponse(data))
+  const data = await AgentProfileModel.aggregate<AggregatedFacetedResponse<SearchResponseRow>>(query)
+  res.json(successResponse(data?.[0]))
 }
 
 export default searchAgents

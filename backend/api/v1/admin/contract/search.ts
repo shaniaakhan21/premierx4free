@@ -1,4 +1,5 @@
 import { CustomRequestHandler } from '@helpers/errorHandler'
+import { AggregatedFacetedResponse, generateFacetCountQuery } from '@helpers/mongoDB'
 import { SuccessResponse, successResponse } from '@helpers/response'
 import AgentProfileModel, { AgentProfile, AgentProfileCompany } from '@models/agent-profile.model'
 import { Contract } from '@models/contract.model'
@@ -9,11 +10,6 @@ export type SearchResponseRow = AgentProfile & {
   user: User
   companies: AgentProfileCompany
   contracts: Contract[]
-}
-
-export type AggregatedSearchResponse = {
-  count: number
-  data: SearchResponseRow[]
 }
 
 export enum SearchBy {
@@ -29,7 +25,7 @@ export enum SearchBy {
 
 const searchContacts: CustomRequestHandler<
   { skip?: string; limit?: string },
-  SuccessResponse<AggregatedSearchResponse>,
+  SuccessResponse<AggregatedFacetedResponse<SearchResponseRow>>,
   any,
   { q: string; by?: SearchBy }
 > = async (req, res) => {
@@ -50,7 +46,7 @@ const searchContacts: CustomRequestHandler<
     {
       $unwind: '$companies'
     },
-    ...(req.query.q
+    ...(req.query.q && req.query.q !== ''
       ? [
           {
             $match:
@@ -61,15 +57,7 @@ const searchContacts: CustomRequestHandler<
                     }
                   }
                 : {
-                    $or: [
-                      'name',
-                      'contactNo',
-                      'companies.name',
-                      'user.email',
-                      'companies.contactPersonName',
-                      'companies.contactPersonPhone',
-                      'companies.comment'
-                    ].map((field) => ({
+                    $or: Object.values(SearchBy).map((field) => ({
                       [field]: {
                         $regex: new RegExp(`.*${req.query.q}.*`, 'i')
                       }
@@ -98,36 +86,19 @@ const searchContacts: CustomRequestHandler<
       $unwind: '$contracts'
     },
     {
-      $facet: {
-        count: [
-          {
-            $group: {
-              _id: null,
-              count: { $sum: 1 }
-            }
-          }
-        ],
-        data: [
-          {
-            $group: {
-              _id: '$_id',
-              documents: { $first: '$$ROOT' }
-            }
-          },
-          ...(req.params?.skip ? [{ $skip: parseInt(req.params?.skip ?? '0', 10) }] : []),
-          ...(req.params?.limit ? [{ $limit: parseInt(req.params?.limit ?? '10', 10) }] : [])
-        ]
+      $sort: {
+        createdAt: -1,
+        'companies.createdAt': -1,
+        'contracts.createdAt': -1
       }
     },
-    {
-      $project: {
-        count: { $arrayElemAt: ['$count.count', 0] },
-        data: '$data.documents'
-      }
-    }
+    ...generateFacetCountQuery(
+      req.params.skip ? parseInt(req.params.skip, 10) : undefined,
+      req.params.limit ? parseInt(req.params.limit, 10) : undefined
+    )
   ]
 
-  const data = await AgentProfileModel.aggregate<AggregatedSearchResponse>(query)
+  const data = await AgentProfileModel.aggregate<AggregatedFacetedResponse<SearchResponseRow>>(query)
   res.json(successResponse(data?.[0]))
 }
 

@@ -11,7 +11,7 @@ import ReplaceModal from '../modal_popups/ReplaceModal';
 import UploadMoreModal from '../modal_popups/UploadMore';
 import AddCategoryModal from '../modal_popups/AddCategory';
 // import * as React from 'react';
-import './marketingMaterials.css'
+//import './marketingMaterials.css'
 // import axios from 'axios'
 import {useAuth} from "../../../../../contexts/auth.context";
 import {
@@ -123,7 +123,14 @@ const useStyles = makeStyles() (() => ({
         backgroundColor:"#64B5F6",
         border:"none",
         borderRadius:"10px",
-        padding:"11px 12px 10px 18px"
+        padding:"11px 12px 10px 18px",
+        '@media(max-width: 768px)':{
+            fontWeight:"700",
+            fontSize:"15px",
+            lineHeight:"20.46px",
+            padding:"10px 10px 10px 11px"
+        },
+        
     },
 
     marketing_contentContainer:{
@@ -193,7 +200,7 @@ const useStyles = makeStyles() (() => ({
         marginTop:"18px",
         marginLeft:"10px",
         marginRight:"10px",
-        cursor: 'pointer'
+        cursor: 'pointer',
 
     },
     deleteButton_image:{

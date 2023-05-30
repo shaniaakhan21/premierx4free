@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col';
 import {useEffect, useState} from 'react'
 import { uploadFileRequest } from '../../../../../services/uploadFile';
 import { useAuth } from '../../../../../contexts/auth.context';
+import { useNavigate } from 'react-router-dom';
 
 
 interface dataRow {
@@ -26,6 +27,7 @@ function TableRow(props:dataRow):JSX.Element{
     const [agentFiles,setAgentFiles] = useState<agentFilesInterface>()
     const {user} = useAuth()
     console.log('agent data from table row',data,index,dataLength)
+    const navigate = useNavigate()
 
     
 
@@ -46,6 +48,7 @@ function TableRow(props:dataRow):JSX.Element{
             console.log("user from agent data dash",)
             await uploadFileRequest(formData,user?.jwtToken ?? "",{agentID:data?.agentId,fileType:"contract"})
         }
+        window.location.reload()
     }
     
     return(
@@ -173,8 +176,8 @@ function TableRow(props:dataRow):JSX.Element{
                         </Col>
                         
                     </Row>
-                    <div style={{backgroundColor:"lightgreen",display:"flex",flexDirection:"row-reverse"}}>
-                    <button style={{backgroundColor:"#FFFFFF"}} onClick={() => {uploadFile()}}>save</button>
+                    <div style={{display:"flex",flexDirection:"row-reverse"}}>
+                    <button className={classes.saveButton} onClick={() => {uploadFile()}}>save</button>
                     </div>
                 </div>
             </div>: <></>}
@@ -328,25 +331,31 @@ const useStyles = makeStyles() (() => ({
         lineHeight:"24.55px",
         color:"#596778"
     },
-    reject_button_container:{
-        display:"flex",
-        flexDirection:"row",
-        justifyContent:"space-between",
-        border:"2px solid #D44141",
-        borderRadius:"10px",
-        padding:"11px 43px 12px 33px"
-    },
-    approve_button_container:{
-        display:"flex",
-        flexDirection:"row",
-        justifyContent:"space-between",
-        border:"2px solid #80CA46",
-        borderRadius:"10px",
-        padding:"11px 43px 12px 33px"
-    },
-    buttonIcon:{
-        width:"20px",
-        height:"20px"
+    // reject_button_container:{
+    //     display:"flex",
+    //     flexDirection:"row",
+    //     justifyContent:"space-between",
+    //     border:"2px solid #D44141",
+    //     borderRadius:"10px",
+    //     padding:"11px 43px 12px 33px"
+    // },
+    // approve_button_container:{
+    //     display:"flex",
+    //     flexDirection:"row",
+    //     justifyContent:"space-between",
+    //     border:"2px solid #80CA46",
+    //     borderRadius:"10px",
+    //     padding:"11px 43px 12px 33px"
+    // },
+    // buttonIcon:{
+    //     width:"20px",
+    //     height:"20px"
+    // },
+    saveButton:{
+        padding:"12px 42px 11px 42px",
+        backgroundColor:"#64B5F6",
+        borderRadius:"6px",
+        margin:"10px"
     },
     tableRow_agentDetails:{
         display:"flex",

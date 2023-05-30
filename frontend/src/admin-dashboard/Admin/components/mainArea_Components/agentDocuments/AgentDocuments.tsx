@@ -12,7 +12,7 @@ function AgentDocuments():JSX.Element{
     const {classes} = useStyles()
     const [data,setData] = useState<[]>()
     const {user} = useAuth()
-    const [limit, setLimit] = useState(1)
+    const [limit, setLimit] = useState(10)
     const [skip, setSkip] = useState(0)
     console.log("agentData is",skip,limit)
     const [thisUser,setThisUser] = useState(JSON.parse(localStorage.getItem('user') ?? ""))
@@ -31,7 +31,7 @@ function AgentDocuments():JSX.Element{
             <div className={classes.tableContainer}>
                 <p className={classes.agentdocuments_text}>Upload Documents</p>
                 <div className={classes.agentTable}>
-                    {data?.map((dt,i)=>(
+                    {data?.slice(skip,limit+skip).map((dt,i)=>(
                         <TableRow data={dt} index={i} dataLength={data.length} />
                     ))}
                 </div>
