@@ -23,7 +23,7 @@ export const useInputState = <T>(initialState: T): UseInputState<T> => {
         value = e.target.value;
     }
 
-    setFormData({ ...formData, [e.target.name]: value });
+    setFormData(cs => ({ ...cs, [e.target.name]: value }));
   };
 
   return [formData, handleChange, setFormData];
