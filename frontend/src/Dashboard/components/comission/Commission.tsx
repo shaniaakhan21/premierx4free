@@ -41,13 +41,13 @@ const Commission = ({ title, data }: CommissionProps) => {
         }
     }
 
-    const directTotal = useMemo(() => data?.directs?.reduce<number>((a, c) => a + (c.employeeCount * c.commissionRate * c.amountPerPerson), 0), [data?.directs])
+    //const directTotal = useMemo(() => data?.directs?.reduce<number>((a, c) => a + (c.employeeCount * c.commissionRate * c.amountPerPerson), 0), [data?.directs])
 
-    const referralTotal = useMemo(() => data?.referrals?.reduce<number>((a, c) => a + (c.employeeCount * c.commissionRate * c.amountPerPerson), 0), [data?.referrals])
+    //const referralTotal = useMemo(() => data?.referrals?.reduce<number>((a, c) => a + (c.employeeCount * c.commissionRate * c.amountPerPerson), 0), [data?.referrals])
 
     return (
         <div className="box-main-commission">
-            <div className="box-it">
+            {/* <div className="box-it">
                 <span className='textCustom'>{title}</span>
             </div>
             <Tabs
@@ -171,7 +171,7 @@ const Commission = ({ title, data }: CommissionProps) => {
                       />
                     </div>
                 </Tab>
-            </Tabs>
+            </Tabs> */}
         </div>
     )
 }

@@ -42,6 +42,7 @@ const comission3data = [
 ]
 
 const Comission = ({ spanText,agent,agentUserId,commission }: Props) => {
+    console.log("in comission data")
     const { user } = useAuth()
 
     const { data: agentInfo } = useAgentInfo(user!, !agent ? (agentUserId ?? user?.userId?.toString()!) : undefined)

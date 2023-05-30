@@ -3,7 +3,7 @@ import { useState } from 'react';
 import './styles.css';
 import AgentCustomers from '../agent-customers/AgentCustomers';
 import AgentTeam from '../agent-team/AgentTeam';
-import Commission from '../comission/Commission';
+import Comission from '../comission/Comission';
 import AgentFooter from '../agent-footer/AgentFooter';
 import AgentReport from '../agent-report/AgentReport';
 import AgentSubHeader from '../agent-header/component/AgentSubHeader';
@@ -145,7 +145,8 @@ function AgentTabs(props: Props): JSX.Element {
                                 <AgentSubHeader />
                                 <AgentCustomers agent={{ companies: data?.data?.directs ?? [] }} title="Direct Clients" />
                                 <AgentTeam data={data?.data.referrals ?? []} title="Referral Clients" />
-                                <Commission data={data?.data?.summary} title="Commission Summary" />
+                                {/* <Comission data={data?.data?.summary} title="Commission Summary" /> */}
+                                <Comission spanText='Commission Summary'/>
                             </Tab.Pane>
                             <Tab.Pane eventKey="second" className="tab-pane-second">
                                 <AgentSubmitCompany />
