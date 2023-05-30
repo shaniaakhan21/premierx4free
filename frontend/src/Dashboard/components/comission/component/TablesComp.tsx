@@ -31,10 +31,10 @@ function TablesComp<DataType>({ data, headings, getRowKey, footer, loading }: Ta
                 </thead>
                 <tbody>
                     {loading
-                      ? [...Array(8).keys()].map((k) => <Skeleton key={k} height={50} width='100%' />)
+                      ? [...Array(8).keys()].map((k) => <tr>{headings.map((_, k2) => <td><Skeleton key={`${k}_${k2}`} height={20} width='100%' /></td>)}</tr>)
                       : data?.map((row, index) => (
                         <tr key={getRowKey ? getRowKey(row) : index} style={{ backgroundColor: 'white' }}>
-                            {headings.map((heading, index) => (heading?.renderData ? heading.renderData(row) : <td key={index}>{heading.key ? row[heading.key]?.toString?.() : ''}</td>))}
+                            {headings.map((heading, index2) => (heading?.renderData ? heading.renderData(row) : <td key={`${index}_${index2}`}>{heading.key ? row[heading.key]?.toString?.() : ''}</td>))}
                         </tr>
                     ))}
                 </tbody>

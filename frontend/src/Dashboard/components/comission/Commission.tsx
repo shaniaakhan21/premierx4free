@@ -17,10 +17,11 @@ type CommissionProps = {
     from: Date,
     setFrom: Dispatch<SetStateAction<Date>>,
     to: Date,
-    setTo: Dispatch<SetStateAction<Date>>
+    setTo: Dispatch<SetStateAction<Date>>,
+    isLoading: boolean
 }
 
-const Commission = ({ title, data, from, setFrom, to, setTo }: CommissionProps) => {
+const Commission = ({ title, data, from, setFrom, to, setTo, isLoading }: CommissionProps) => {
     const handleTabSelect = (key: string | null) => {
         if (key) {
             const tabContent = document.querySelector(`#${key}`);
@@ -63,7 +64,7 @@ const Commission = ({ title, data, from, setFrom, to, setTo }: CommissionProps) 
             >
                 <Tab eventKey="customers" title="Direct Clients">
                     <div id="customers-tab-content">
-                        <TablesComp data={data?.directs ?? []} headings={[
+                        <TablesComp loading={isLoading} data={data?.directs ?? []} headings={[
                           {
                               title: 'Company Name',
                               renderData: r => <td>{(r.agent as AgentProfile)?.companies?.find(c => c._id === r.company)?.name}</td>
@@ -100,7 +101,7 @@ const Commission = ({ title, data, from, setFrom, to, setTo }: CommissionProps) 
                 </Tab>
                 <Tab eventKey="refferalscustomers" title="Referral Clients">
                     <div id="customers-tab-content">
-                        <TablesComp data={data?.referrals ?? []} headings={[
+                        <TablesComp loading={isLoading} data={data?.referrals ?? []} headings={[
                             {
                                 title: 'Company Name',
                                 renderData: r => <td>{(r.agent as AgentProfile)?.companies?.find(c => c._id === r.company)?.name}</td>
@@ -140,7 +141,7 @@ const Commission = ({ title, data, from, setFrom, to, setTo }: CommissionProps) 
                 </Tab>
                 <Tab eventKey="summary" title="Summary">
                     <div id="customers-tab-content">
-                      <TablesComp data={directTotal && referralTotal ? [{ client: 'Direct', commission: `$${directTotal}` }, { client: 'Referral', commission: `$${referralTotal}` }] : []} headings={[
+                      <TablesComp loading={isLoading} data={directTotal && referralTotal ? [{ client: 'Direct', commission: `$${directTotal}` }, { client: 'Referral', commission: `$${referralTotal}` }] : []} headings={[
                         {
                           title: 'Clients',
                           key: 'client'
