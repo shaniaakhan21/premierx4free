@@ -20,6 +20,7 @@ import { ClassTransformOptions } from 'class-transformer/types/interfaces'
 import { IsEmail, IsString, MinLength } from 'class-validator'
 import { Request } from 'express'
 import { ParamsDictionary, RequestHandler } from 'express-serve-static-core'
+// eslint-disable-next-line import/no-extraneous-dependencies
 import * as HttpStatus from 'http-status'
 import jwt from 'jsonwebtoken'
 import mongoose from 'mongoose'
@@ -70,7 +71,6 @@ export const AuditTrace: (action: SysFunction, method: SysMethod) => RequestHand
 export const AuthenticateToken: (roles?: Roles[]) => RequestHandler = (roles) => (req: CustomReq, res, next) => {
   const authHeader = req.headers.authorization
   const token = authHeader && authHeader.split(' ')[1]
-
   if (token == null) {
     res.sendStatus(HttpStatus.UNAUTHORIZED)
     return

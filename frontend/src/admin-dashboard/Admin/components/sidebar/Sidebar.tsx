@@ -5,6 +5,7 @@ import {useAuth} from "../../../../contexts/auth.context";
 interface event {
     eventNumber:number
     setEventNumber:any
+    user:any
 }
 function Sidebar(props:event):JSX.Element{
     const { user } = useAuth()

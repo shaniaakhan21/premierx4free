@@ -57,6 +57,8 @@ function CalculationPage(): JSX.Element {
     const { data, isLoading, mutate } = useContractSearch(user!, query, limit, skip, by)
 
 
+    console.log("data from cal c page",data)
+
     const { classes } = useStyles()
     return (
         <div className={classes.calculationPage_mainContainer}>

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import path from 'path'
 
 import { CustomRequestHandler, RecordNotFoundError } from '@helpers/errorHandler'
@@ -10,11 +11,11 @@ const uploadContract: CustomRequestHandler<{ agentId: string }> = async (req, re
   const agent = await AgentProfileModel.findByAgentId(parseInt(req.params.agentId, 10))
   if (!agent) throw new RecordNotFoundError('Agent not found')
 
-  if (!req.files?.document) throw new RecordNotFoundError('Contract file not found')
+  if (!req.files?.file) throw new RecordNotFoundError('Contract file not found')
 
-  const fileName = generateFileName((req.files.document as UploadedFile).name)
+  const fileName = generateFileName((req.files.file as UploadedFile).name)
 
-  const file = req.files?.document as UploadedFile
+  const file = req.files?.file as UploadedFile
   await file.mv(path.resolve(__dirname, '../../../uploads/contract', fileName))
 
   agent.contract = fileName

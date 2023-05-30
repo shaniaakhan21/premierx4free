@@ -25,9 +25,9 @@ function TablesComp<DataType>({ data, headings, getRowKey, footer, loading }: Ta
         <>
             <Table bordered hover responsive style={{ borderRadius: '5%' }} className='tableDesign'>
                 <thead>
-                    <tr style={{ backgroundColor: '#F4F6F8' }}>
-                        {headings.map((heading, index) => (heading?.renderHeading ? heading.renderHeading(heading.key) : <th key={index}>{heading.title}</th>))}
-                    </tr>
+                <tr style={{ backgroundColor: '#F4F6F8' }}>
+                    {headings.map((heading, index) => (heading?.renderHeading ? heading.renderHeading(heading.key) : <th key={index}>{heading.title}</th>))}
+                </tr>
                 </thead>
                 <tbody>
                     {loading
@@ -39,7 +39,6 @@ function TablesComp<DataType>({ data, headings, getRowKey, footer, loading }: Ta
                     ))}
                 </tbody>
             </Table>
-            {footer}
         </>
     );
 }

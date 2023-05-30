@@ -2,11 +2,15 @@ import useSWR from "swr";
 import {getFetcher, patchFetcher, putFetcher} from "../helpers/axiosFetchers";
 import {GenericResponse} from "./genericResponse.type";
 import User, {Roles} from "../models/user.model";
+import axios from "axios";
+
+export const useAgentInfo = (user: User, agentId?: number | string) => useSWR(agentId ? ['/agent', user, [agentId]] : null, getFetcher<GenericResponse<User>>)
+export const getAllAgents = async(token:string) =>{
+    return await axios.get('/agent/data/getAll',{headers:{"Authorization":`Bearer ${token}`}})
+}
 import {ContactSearchBy, ContractSearchResponse} from "./admin";
 import AgentProfile, {AgentProfileCompany} from "../models/agentProfile.model";
 import Contract from "../models/contract.model";
-
-export const useAgentInfo = (user: User, agentId?: number | string) => useSWR(agentId ? ['/agent', user, [agentId]] : null, getFetcher<GenericResponse<User>>)
 
 export enum AgentSearchBy {
   All = 'all',

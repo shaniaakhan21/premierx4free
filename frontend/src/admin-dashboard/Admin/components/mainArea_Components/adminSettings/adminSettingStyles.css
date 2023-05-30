@@ -189,3 +189,16 @@
     padding: 15px 61px;
     margin-left: 18px;
 }
+
+@media only screen and (max-width: 768px) {
+    .settings-container {
+        margin: 14px 26px 0px 25px;
+    }
+    .mainBox {
+        width: 100%;
+    
+    }
+    .card-container {
+       text-align: center;
+    }
+  }

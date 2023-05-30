@@ -32,6 +32,7 @@ function SignIn(): JSX.Element {
                 setUser(response.data.data)
                 if (response.data.data.roles.includes(Roles.Admin)) {
                     history("/admin")
+                    return
                 } else {
                     history("/agent-dashboard")
                 }

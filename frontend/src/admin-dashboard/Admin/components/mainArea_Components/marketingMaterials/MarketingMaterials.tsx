@@ -1,27 +1,28 @@
-import { jsx } from '@emotion/react';
+// import { jsx } from '@emotion/react';
 import { makeStyles } from '../../../../../utils/makeStyles';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import { Repeat } from '@mui/icons-material';
-import { color, display, fontWeight } from '@mui/system';
+// import Container from 'react-bootstrap/Container';
+// import Row from 'react-bootstrap/Row';
+// import Col from 'react-bootstrap/Col';
+//import { Repeat } from '@mui/icons-material';
+//import { color, display, fontWeight } from '@mui/system';
 import RemoveModal from '../modal_popups/RemoveModal';
 import {useMemo, useState} from 'react';
 import ReplaceModal from '../modal_popups/ReplaceModal';
 import UploadMoreModal from '../modal_popups/UploadMore';
 import AddCategoryModal from '../modal_popups/AddCategory';
-import * as React from 'react';
-import './marketingMaterials.css'
-import axios from 'axios'
+// import * as React from 'react';
+//import './marketingMaterials.css'
+// import axios from 'axios'
 import {useAuth} from "../../../../../contexts/auth.context";
 import {
-    MarketingMaterialsSummaryResponse,
+    //MarketingMaterialsSummaryResponse,
     useMarketingMaterialsCategories,
     useMarketingMaterialsSummary
 } from "../../../../../services/admin";
 import MarketingMaterialsCategory from "../../../../../models/marketingMaterialsCategory.model";
 import MarketingMaterial from "../../../../../models/marketingMaterial.model";
-import MarketingDocumentPreview from "../modal_popups/MarketingDocumentPreview";
+// import MarketingDocumentPreview from "../modal_popups/MarketingDocumentPreview";
+import Categories from './Categories';
 
 
 function MarketingMaterials():JSX.Element{
@@ -33,22 +34,22 @@ function MarketingMaterials():JSX.Element{
     const [showReplaceMaterial, setShowReplaceMaterial] = useState<MarketingMaterial | undefined>()
     const [showUploadMore, setShowUploadMore] = useState<MarketingMaterialsCategory | undefined>()
     const [showAddCategory, setShowAddCategory] = useState<boolean>(false)
-    const containerWidth = 2
-    const containerSm = 6
 
-    const summaryIndexed = useMemo(() => {
-        if (!summaryData) return {}
-        const cats: { [key: string]: Pick<MarketingMaterialsCategory, '_id' | 'name'> & { count: number, documents: MarketingMaterial[] } } = {};
-        summaryData?.data?.categories?.map(({ count, ...info }) => {
-            if (!cats[info._id]) cats[info._id] = { ...info, count: 0, documents: [] }
-            cats[info._id].count = count
-        })
-        summaryData?.data?.data?.map(({ documents, ...info }) => {
-            if (!cats[info._id]) cats[info._id] = { ...info, count: 0, documents: [] }
-            cats[info._id].documents = documents
-        })
-        return cats
-    }, [summaryData])
+    console.log("datafrom summary page",typeof categories)
+
+    // const summaryIndexed = useMemo(() => {
+    //     if (!summaryData) return {}
+    //     const cats: { [key: string]: Pick<MarketingMaterialsCategory, '_id' | 'name'> & { count: number, documents: MarketingMaterial[] } } = {};
+    //     summaryData?.data?.categories?.map(({ count, ...info }) => {
+    //         if (!cats[info._id]) cats[info._id] = { ...info, count: 0, documents: [] }
+    //         cats[info._id].count = count
+    //     })
+    //     summaryData?.data?.data?.map(({ documents, ...info }) => {
+    //         if (!cats[info._id]) cats[info._id] = { ...info, count: 0, documents: [] }
+    //         cats[info._id].documents = documents
+    //     })
+    //     return cats
+    // }, [summaryData])
 
     return(
         <div className={classes.marketing_mainContainer}>
@@ -59,36 +60,9 @@ function MarketingMaterials():JSX.Element{
                 <button className={classes.headerContainer_button} onClick={() => setShowAddCategory(true)}>+ Add Category</button>
             </div>
 
-            {categories?.data?.map(category => <div key={category._id} className={classes.marketing_contentContainer}>
-                <div className={classes.contentContainer_heading}>
-                    <p className={classes.heading_text}>{category.name}</p>
-                    <p><a href='#' className={classes.heading_link}>View More</a></p>
-                </div>
-
-                <Row className={classes.contentContainer_row}>
-                    {summaryIndexed[category._id]?.documents?.map((document, index) => <Col key={document._id} lg={containerWidth} className={classes.containerContent_contentUnit} style={{padding: 0}}>
-                        <MarketingDocumentPreview fileName={document?.document} alt={document?.head} className={classes.containerContent_PdfPptIcon} />
-                        <div className={classes.contentUnit_buttons}>
-                            <div className={classes.delete_button} onClick={() => setShowRemoveMaterial(document)}>
-                                <img src='/assets/svg/Dashboard/delete.svg' className={classes.deleteButton_image} alt='Remove' />
-                                <p>Remove</p>
-                            </div>
-                            <div className={classes.delete_button} onClick={() => setShowReplaceMaterial(document)}>
-                                <img src='/assets/svg/Dashboard/Replace-icon.svg' className={classes.replaceButton_image} alt='Replace'/>
-                                <p>Replace</p>
-                            </div>
-                        </div>
-                    </Col>)}
-
-                    <Col lg={containerWidth} className={classes.containerContent_contentUnitUploadMore} onClick={() => setShowUploadMore(category)}>
-                        <img src='/assets/svg/Dashboard/upload-more-documents.svg'
-                             className={classes.containerContent_uploadMoreIcon}/>
-                        <div className={classes.uploadMore_buttonTitle}>
-                            <p>Upload More Documents</p>
-                        </div>
-                    </Col>
-                </Row>
-            </div>)}
+            {categories?.data?.map(category => 
+               <Categories category={category} /> 
+            )}
 
             {showUploadMore ? <UploadMoreModal category={showUploadMore} onClose={(shouldReload) => {
                 setShowUploadMore(undefined);
@@ -149,7 +123,14 @@ const useStyles = makeStyles() (() => ({
         backgroundColor:"#64B5F6",
         border:"none",
         borderRadius:"10px",
-        padding:"11px 12px 10px 18px"
+        padding:"11px 12px 10px 18px",
+        '@media(max-width: 768px)':{
+            fontWeight:"700",
+            fontSize:"15px",
+            lineHeight:"20.46px",
+            padding:"10px 10px 10px 11px"
+        },
+        
     },
 
     marketing_contentContainer:{
@@ -219,7 +200,7 @@ const useStyles = makeStyles() (() => ({
         marginTop:"18px",
         marginLeft:"10px",
         marginRight:"10px",
-        cursor: 'pointer'
+        cursor: 'pointer',
 
     },
     deleteButton_image:{
