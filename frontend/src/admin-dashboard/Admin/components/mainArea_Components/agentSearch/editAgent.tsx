@@ -8,15 +8,13 @@ import DialogTitle from '@mui/material/DialogTitle';
 import {
   AgentSearchBy, AgentSearchNormalResponse,
   AgentSearchPickerResponse, AgentSearchResponse,
-  getAgentProfile, updateAgentProfile, UpdateAgentProfileRequest,
+  updateAgentProfile, UpdateAgentProfileRequest,
   useAgentSearch
 } from "../../../../../services/agent";
 import useDebounceState from "../../../../../hooks/useDebounceState";
 import {useAuth} from "../../../../../contexts/auth.context";
-import {ContactSearchBy, ContractSearchResponse, createContract, updateContract} from "../../../../../services/admin";
 import AgentProfile, {AgentProfileCompany, AgentStatus} from "../../../../../models/agentProfile.model";
 import {useCallback, useEffect, useState} from "react";
-import {Dropdown} from "react-bootstrap";
 import {
   Accordion, AccordionDetails,
   AccordionSummary, Alert, Avatar,
@@ -24,7 +22,6 @@ import {
   CircularProgress,
   FormControl, FormControlLabel,
   Grid,
-  InputAdornment,
   InputLabel,
   MenuItem, OutlinedInput,
   Select, Typography
@@ -32,9 +29,6 @@ import {
 import {useInputState} from "../../../../../hooks/useInputState";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import moment, { Moment } from "moment-timezone";
-import { MobileDatePicker } from '@mui/x-date-pickers';
-import { MuiFileInput } from 'mui-file-input';
 import {uploadDocument} from "../../../../../services/upload";
 import {Roles} from "../../../../../models/user.model";
 import {AlertTitle} from "@mui/lab";
