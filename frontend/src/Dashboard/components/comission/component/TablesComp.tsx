@@ -39,6 +39,7 @@ function TablesComp<DataType>({ data, headings, getRowKey, footer, loading }: Ta
                     ))}
                 </tbody>
             </Table>
+            {footer}
         </>
     );
 }
