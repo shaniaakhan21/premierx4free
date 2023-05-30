@@ -39,7 +39,7 @@ function AgentTabs(props: Props): JSX.Element {
         return date;
     });
     const { user } = useAuth()
-    const { data } = useMyDashboard(user!, from, to)
+    const { data, isLoading } = useMyDashboard(user!, from, to)
     const [showTabs, setShowTabs] = useState(false);
 
     const handleToggleTabs = () => {
@@ -145,7 +145,7 @@ function AgentTabs(props: Props): JSX.Element {
                                 <AgentSubHeader />
                                 <AgentCustomers agent={{ companies: data?.data?.directs ?? [] }} title="Direct Clients" />
                                 <AgentTeam data={data?.data.referrals ?? []} title="Referral Clients" />
-                                <Commission data={data?.data?.summary} title="Commission Summary" />
+                                <Commission isLoading={isLoading} from={from} setFrom={setFrom} to={to} setTo={setTo} data={data?.data?.summary} title="Commission Summary" />
                             </Tab.Pane>
                             <Tab.Pane eventKey="second" className="tab-pane-second">
                                 <AgentSubmitCompany />

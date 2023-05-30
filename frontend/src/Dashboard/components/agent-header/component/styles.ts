@@ -7,6 +7,7 @@ const useStyles = makeStyles()(() => ({
         display: 'flex',
         position: 'relative',
         top: '15px',
+        left: '12px',
         padding: '6%',
         borderBottom: '1px solid #D6D9DB',
         borderTop: 0,
@@ -14,9 +15,6 @@ const useStyles = makeStyles()(() => ({
         '@media (max-width:768px)': {
             flexDirection: 'column',
         },
-
-
-
     },
 
     subcontainer: {
