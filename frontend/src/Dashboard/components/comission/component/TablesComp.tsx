@@ -39,12 +39,6 @@ function TablesComp<DataType>({ data, headings, getRowKey, footer, loading }: Ta
                     ))}
                 </tbody>
             </Table>
-            <div className='grid-for-total'>
-                <div className='box-for-total'>
-                    <div className='grid-for-text'>Total:</div>
-                    <div className='grid-for-number'>$ {lastColumnTotal}</div>
-                </div>
-            </div>
         </>
     );
 }

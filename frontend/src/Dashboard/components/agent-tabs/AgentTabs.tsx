@@ -14,6 +14,7 @@ import AgentProfile from '../agent-profile/AgentProfile';
 import User from "../../../models/user.model";
 import {useMyDashboard} from "../../../services/my";
 import {useAuth} from "../../../contexts/auth.context";
+import Commission from "../comission/Commission";
 
 
 const initialProfile = {
@@ -151,7 +152,7 @@ function AgentTabs(props: Props): JSX.Element {
                                 <AgentSubmitCompany />
                             </Tab.Pane>
                             <Tab.Pane eventKey="third" className="tab-pane-third">
-                                {/*<AgentReport data={reportdata} spanText="Reports" col1head='Representative' col2head='Contract Status' col3head='Contract End Date' col4head='Pay Date' col5head='Company Name' col6head='Active Employees' col7head='Payment Date' col8head='Payment Amount' col9head='Level' />*/}
+
                             </Tab.Pane>
                             <Tab.Pane eventKey="fourth" className='tab-pane-fourth'>
                                 <MarketingMaterials />
