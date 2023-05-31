@@ -35,9 +35,9 @@
         "baseUrl": ".",
 
         "paths": {
-            "@config/*": ["./packages/config/*"],
-            "@helpers/*": ["./packages/helpers/*"],
-            "@models/*": ["./packages/models/*"]
+            "@config/*": ["./dist/packages/config/*"],
+            "@helpers/*": ["./dist/packages/helpers/*"],
+            "@models/*": ["./dist/packages/models/*"]
         },
         "plugins": [
             { "transform": "typescript-transform-paths" },

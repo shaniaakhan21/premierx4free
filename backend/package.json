@@ -9,6 +9,8 @@
     "lint-fix": "eslint --ext .js,.ts . --fix",
     "lint-staged": "lint-staged",
     "build-types": "tsc --noEmit --pretty",
+    "build": "tsc --project tsconfig.json && tscpaths -p tsconfig.release.json -s ./api -o ./dist",
+    "run-prod": "node dist/server.js",
     "start": "nodemon --watch"
   },
   "keywords": [],
@@ -34,6 +36,7 @@
     "nodemon": "^2.0.22",
     "qs": "^6.11.2",
     "reflect-metadata": "^0.1.13",
+    "tscpaths": "^0.0.9",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
@@ -57,6 +60,7 @@
     "lint-staged": "^13.2.2",
     "prettier": "^2.6.1",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "typescript-transform-paths": "^3.4.6"
   }
 }
