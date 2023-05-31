@@ -1,3 +1,5 @@
+import { sendEmail } from '@helpers/email'
+import ErrorHandler from '@helpers/errorHandler'
 import express from 'express'
 
 import adminRouter from './admin/index.router'
@@ -13,5 +15,16 @@ v1Router.use('/admin', adminRouter)
 v1Router.use('/agent', agentRouter)
 v1Router.use('/my', myRouter)
 v1Router.use('/upload', uploadRouter)
+
+v1Router.post(
+  '/contactUs',
+  ErrorHandler(async (req, res) => {
+    if (!req.body) throw new Error('Invalid request')
+    const { message } = req.body
+    if (!message) throw new Error('Invalid request')
+    await sendEmail('info@premierx4free.com', 'Contact Us', message)
+    res.send('OK')
+  })
+)
 
 export default v1Router

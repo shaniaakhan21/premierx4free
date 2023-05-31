@@ -7,6 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { QueryStatus } from "../../../types/form";
 import useStyles from "./styles";
+import {postContactUs} from "../../../services/contactUs";
 
 const usFlag = '/assets/svg/Contact/flag-us.svg'
 
@@ -109,7 +110,7 @@ function ContactForm(): JSX.Element {
 	const onSubmit = async (data: any) => {
 		try {
 			setFormStatus(QueryStatus.LOADING)
-			await axios.post('/api/webhook/PremieRx4FreeContactUs', data)
+			await postContactUs({ message: Object.entries(data).map(([k, v]) => `${k}: ${v}`).join('\n\n') })
 			setFormStatus(QueryStatus.SUCCESS)
 			reset();
 		} catch (error) {
