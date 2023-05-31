@@ -10,7 +10,7 @@ export const useInputState = <T>(initialState: T): UseInputState<T> => {
   const [formData, setFormData] = useState<T>(initialState);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    let value: string | boolean | File | undefined;
+    let value: string | number | boolean | File | undefined;
 
     switch (e.target.type) {
       case 'checkbox':
@@ -20,7 +20,7 @@ export const useInputState = <T>(initialState: T): UseInputState<T> => {
         value = (e.target as HTMLInputElement).files ? (e.target as HTMLInputElement).files?.[0] : undefined;
         break;
       default:
-        value = e.target.value;
+        value = e.target.type === 'number' ? parseInt(e.target.value, 10) : e.target.value;
     }
 
     setFormData(cs => ({ ...cs, [e.target.name]: value }));

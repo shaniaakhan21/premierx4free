@@ -9,7 +9,7 @@
     "lint-fix": "eslint --ext .js,.ts . --fix",
     "lint-staged": "lint-staged",
     "build-types": "tsc --noEmit --pretty",
-    "build": "tsc --project tsconfig.json && tscpaths -p tsconfig.release.json -s ./api -o ./dist",
+    "build": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s . -o ./dist",
     "run-prod": "node dist/server.js",
     "start": "nodemon --watch"
   },

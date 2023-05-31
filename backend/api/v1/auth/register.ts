@@ -8,12 +8,12 @@ import UserModel, { User } from '@models/user.model'
 type RegisterRequest = Omit<AgentProfile, 'agentId'> & Pick<User, 'email' | 'password'> & { referrer?: number }
 
 const register: CustomRequestHandler<{}, any, RegisterRequest> = async (req, res) => {
-  const exist = await UserModel.findByEmail(req.body.email)
+  const exist = await UserModel.findByEmail(req.body.email.toLowerCase())
 
   if (exist) throw new RecordAlreadyExistsError('Agent with this email already exists')
 
   const user = await UserModel.create({
-    email: req.body.email,
+    email: req.body.email.toLowerCase(),
     password: req.body.password,
     roles: [Roles.Agent]
   })

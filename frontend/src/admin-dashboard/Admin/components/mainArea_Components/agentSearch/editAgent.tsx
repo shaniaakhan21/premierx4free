@@ -391,7 +391,7 @@ export default function EditAgent({ onClose, agent }: CreateContractProps) {
                     InputLabelProps={{ shrink: true }}
                     name="commissionRate"
                     label="Commission Rate"
-                    type="text"
+                    type="number"
                     fullWidth
                     value={expanded?.commissionRate ?? ''}
                     onChange={onChangeCompany}
@@ -402,7 +402,7 @@ export default function EditAgent({ onClose, agent }: CreateContractProps) {
                     InputLabelProps={{ shrink: true }}
                     name="employeeCount"
                     label="Employee Count"
-                    type="text"
+                    type="number"
                     fullWidth
                     value={expanded?.employeeCount ?? ''}
                     onChange={onChangeCompany}
