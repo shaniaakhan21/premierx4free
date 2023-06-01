@@ -194,11 +194,13 @@
     .settings-container {
         margin: 14px 26px 0px 25px;
     }
+
     .mainBox {
         width: 100%;
-    
+
     }
+
     .card-container {
-       text-align: center;
+        text-align: center;
     }
-  }
+}

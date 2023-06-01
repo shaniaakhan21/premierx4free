@@ -10,30 +10,28 @@ import SignUpPage from "../pages/SignUp";
 import SignInPage from "../pages/SignIn";
 import ForgotPassword from "../pages/ForgotPassword";
 import AgentDashboard from "../Dashboard";
-import { ProtectedAgentDashboard } from "./ProtectedRoutes";
+import { ProtectedRotes } from "./ProtectedRoutes";
 
 function AppRouter(): JSX.Element {
-	const userAgent = localStorage.getItem('data')
-	return (
-		<Routes>
-			<Route path='/' element={<AboutPage />} />
-			<Route path='/team' element={<TeamPage />} />
-			<Route path='/partners' element={<PartnersPage />} />
-			<Route path='/plans' element={<Plan />} />
-			<Route path='/contact' element={<ContactPage />} />
-			<Route path='/faq' element={<FaqPage />} />
-			<Route path='/admin' element={<AdminDashboard />} />
-			<Route path='/signup' element={<SignUpPage />} />
-			<Route path='/r/:id' element={<SignUpPage />} />
-			<Route path='/signin' element={<SignInPage />} />
-			<Route path='/resetpassword' element={<ForgotPassword />} />
-			{/* <Route path='/agent-dashboard' element={<AgentDashboard />} /> */}
-			<Route element={<ProtectedAgentDashboard />}>
-				<Route path='/agent-dashboard' element={<AgentDashboard />} />
-			</Route>
-
-
-		</Routes>
-	)
+  const userAgent = localStorage.getItem('data')
+  return (<Routes>
+    <Route path='/' element={<AboutPage />} />
+    <Route path='/team' element={<TeamPage />} />
+    <Route path='/partners' element={<PartnersPage />} />
+    <Route path='/plans' element={<Plan />} />
+    <Route path='/contact' element={<ContactPage />} />
+    <Route path='/faq' element={<FaqPage />} />
+    <Route path='/signup' element={<SignUpPage />} />
+    <Route path='/r/:id' element={<SignUpPage />} />
+    <Route path='/signin' element={<SignInPage />} />
+    <Route path='/resetpassword' element={<ForgotPassword />} />
+    <Route path='/admin/*' element={<ProtectedRotes>
+      <AdminDashboard />
+    </ProtectedRotes>} />
+    <Route path='/agent-dashboard/*' element={<ProtectedRotes>
+      <AgentDashboard />
+    </ProtectedRotes>} />
+  </Routes>)
 }
+
 export default AppRouter

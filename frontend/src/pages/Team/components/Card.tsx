@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from '@mui/material';
-import {makeStyles} from "../../../utils/makeStyles";
+import { makeStyles } from "../../../utils/makeStyles";
 
 const useStyles = makeStyles<{ marginTop: number }>()((theme, { marginTop }) => ({
   container: {
@@ -32,8 +32,8 @@ const useStyles = makeStyles<{ marginTop: number }>()((theme, { marginTop }) => 
     fontFamily: 'Nunito Sans',
     color: '#136DA7',
     ['@media screen and (max-width: 768px)']: {
-			marginBottom: '2%',
-		},
+      marginBottom: '2%',
+    },
   },
   text: {
     marginTop: theme.spacing(2),
@@ -45,8 +45,8 @@ const useStyles = makeStyles<{ marginTop: number }>()((theme, { marginTop }) => 
     borderRadius: 0,
     boxShadow: 'none',
     ['@media screen and (max-width: 768px)']: {
-			padding: '3% 12%',
-		},
+      padding: '3% 12%',
+    },
   },
 
   buttonMargin: {

@@ -18,35 +18,58 @@
     box-shadow: 0px 4px 34px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
 
-    @media (max-width: 768px) {
-        margin: 35% 10%;
-    }
+@media (max-width: 768px) {
+    margin:
 
-    
-    @media (max-width: 400px) {
-        margin: 25% 5%;
-        width: 75%;
-    }
+35% 10%;
+}
+
+
+@media (max-width: 400px) {
+    margin:
+
+25% 5%;
+    width:
+
+75%;
+}
+
 }
 
 .cookie-banner-overlay .modal-dialog .modal-content {
     flex-direction: row;
 
-    
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
+
+@media (max-width: 768px) {
+    flex-direction: column
+
+;
 }
 
-.cookie-banner-overlay .modal-dialog .modal-content .modal-body{
+}
+
+.cookie-banner-overlay .modal-dialog .modal-content .modal-body {
     padding: 5%;
     background: white;
     border-radius: 0px 20px 20px 0px;
-        
-    @media (max-width: 768px) {
-    flex-direction: column;
-    border-radius: 0px 0px 20px 20px;
-  }
+
+@media (max-width: 768px) {
+    flex-direction: column
+
+;
+    border-radius:
+
+0px
+
+0px
+
+20px
+
+20px
+
+;
+}
+
 }
 
 .cookie-banner-overlay .modal-dialog .modal-content .modal-header {
@@ -54,10 +77,23 @@
     background: linear-gradient(34.23deg, #0556A7 16.67%, #64B5F6 98.06%);
     border-radius: 20px 0px 0px 20px;
 
-    @media (max-width: 768px) {
-        border-radius: 20px 20px 0px 0px;
-        padding: 10% 15%;
-    }
+@media (max-width: 768px) {
+    border-radius:
+
+20px
+
+20px
+
+0px
+
+0px
+
+;
+    padding:
+
+10% 15%;
+}
+
 }
 
 .cookie-banner-overlay .modal-dialog .modal-content .modal-title img {
@@ -67,16 +103,25 @@
 .cookie-banner-overlay .modal-dialog .modal-content h4 {
     font-weight: 700;
 
-    @media (max-width: 768px) {
-        text-align: center;
-    }
+@media (max-width: 768px) {
+    text-align: center
+
+;
+}
+
 }
 
 
 .cookie-banner-overlay .modal-dialog .modal-content p {
-    @media (max-width: 768px) {
-        font-size: 10px;
-    }
+
+@media (max-width: 768px) {
+    font-size:
+
+10px
+
+;
+}
+
 }
 
 .cookie-banner-overlay .modal-dialog .modal-content .cookie-banner-btns {
@@ -84,9 +129,12 @@
     flex-direction: row;
     justify-content: flex-end;
 
-    @media (max-width: 768px) {
-        justify-content: space-evenly;
-    }
+@media (max-width: 768px) {
+    justify-content: space-evenly
+
+;
+}
+
 }
 
 .cookie-banner-overlay .modal-dialog .modal-content .cookie-banner-btns button {

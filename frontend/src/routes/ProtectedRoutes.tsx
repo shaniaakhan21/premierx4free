@@ -1,18 +1,16 @@
-import { ReactNode } from "react"
-import { Navigate, Route, RouteProps, Outlet} from "react-router-dom"
+import { Navigate } from "react-router-dom"
 import { useAuth } from "../contexts/auth.context";
 
-interface Props {
-    isAuth?:boolean
-    path?:string,
-    element?:any
+interface ProtectedRotesProps {
+  children: JSX.Element
 }
 
-export const ProtectedAgentDashboard = ({isAuth,...routeProps }: Props) => {
-    const { user } = useAuth()
-    if (!user)
-        return(
-            <Navigate to='/signin' replace />
-        )
-    return <Outlet />
+export const ProtectedRotes = ({ children }: ProtectedRotesProps) => {
+  const { user } = useAuth()
+
+  if (!user)
+    return (
+      <Navigate to='/signin' replace />
+    )
+  return children;
 }

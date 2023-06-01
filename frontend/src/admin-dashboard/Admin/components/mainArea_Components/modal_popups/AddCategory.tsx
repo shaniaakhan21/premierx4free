@@ -1,15 +1,13 @@
-import {Dispatch, SetStateAction, useState} from 'react';
-import Button from 'react-bootstrap/Button';
+import * as React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { makeStyles } from '../../../../../utils/makeStyles'
 import './addCategory.css'
-import * as React from 'react';
 
 interface AddCategoryModalProps {
   onClose: () => void;
 }
 
-function AddCategoryModal({ onClose }: AddCategoryModalProps):JSX.Element {
+function AddCategoryModal({ onClose }: AddCategoryModalProps): JSX.Element {
 
 
   return (
@@ -43,8 +41,8 @@ function AddCategoryModal({ onClose }: AddCategoryModalProps):JSX.Element {
   );
 }
 
-const useStyles = makeStyles() (() => ({
-  removeModal_footer:{
+const useStyles = makeStyles()(() => ({
+  removeModal_footer: {
     // backgroundColor:"teal"
   },
 }))

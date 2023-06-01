@@ -1,10 +1,8 @@
-import {Dispatch, SetStateAction} from "react";
-import {uploadDocument} from "../services/upload";
-import User from "../models/user.model";
+import { Dispatch, SetStateAction } from "react";
 
 export function loadLocalStorage<T>(
   path: string,
-  setStateFn?: Dispatch<SetStateAction<T>>
+  setStateFn?: Dispatch<SetStateAction<T | undefined>>
 ): T | null {
   const data = localStorage.getItem(path)
   if (data) {
