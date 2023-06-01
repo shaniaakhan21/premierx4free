@@ -1,4 +1,4 @@
-import {useState, useRef, Dispatch, SetStateAction} from 'react';
+import { Dispatch, SetStateAction, useRef, useState } from 'react';
 
 function useDebounceState<T>(initialValue: T, delay: number): [T, Dispatch<SetStateAction<T>>] {
   const handlerRef = useRef<ReturnType<typeof setTimeout>>();

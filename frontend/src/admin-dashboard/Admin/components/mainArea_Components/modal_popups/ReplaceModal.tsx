@@ -1,12 +1,11 @@
-import {useCallback, useEffect, useState} from 'react';
-import Button from 'react-bootstrap/Button';
+import * as React from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { makeStyles } from '../../../../../utils/makeStyles'
 import './replaceModal.css'
-import * as React from 'react';
 import MarketingMaterial from "../../../../../models/marketingMaterial.model";
-import {useAuth} from "../../../../../contexts/auth.context";
-import {removeMarketingMaterial, updateMarketingMaterial} from "../../../../../services/admin";
+import { useAuth } from "../../../../../contexts/auth.context";
+import { updateMarketingMaterial } from "../../../../../services/admin";
 import MarketingDocumentPreview from "./MarketingDocumentPreview";
 import MarketingMaterialsCategory from "../../../../../models/marketingMaterialsCategory.model";
 
@@ -15,7 +14,7 @@ interface ReplaceModalProps {
   document: MarketingMaterial;
 }
 
-function ReplaceModal({ onClose, document }: ReplaceModalProps):JSX.Element {
+function ReplaceModal({ onClose, document }: ReplaceModalProps): JSX.Element {
   const { user } = useAuth()
 
   const [state, setState] = useState<Partial<MarketingMaterial>>({})
@@ -52,18 +51,18 @@ function ReplaceModal({ onClose, document }: ReplaceModalProps):JSX.Element {
 
           <div className='replaceModal_content'>
             <div>
-                <p>Current Document</p>
-                <MarketingDocumentPreview fileName={document?.document} alt={document?.head} />
+              <p>Current Document</p>
+              <MarketingDocumentPreview fileName={document?.document} alt={document?.head} />
             </div>
 
             <div className='upload_newDocument_container'>
-                <p>Upload New Document</p>
-                <div className='uploadFile_form_container'>
-                    <input type='file' onChange={e => {
-                      if (e.target.files?.[0]) setState(cs => ({ ...cs, document: e.target.files?.[0] as any }))
-                    }} className='uploadFile_form_input' />
-                    <div className='uploadFile_form_button'>Upload File</div>
-                </div>
+              <p>Upload New Document</p>
+              <div className='uploadFile_form_container'>
+                <input type='file' onChange={e => {
+                  if (e.target.files?.[0]) setState(cs => ({ ...cs, document: e.target.files?.[0] as any }))
+                }} className='uploadFile_form_input' />
+                <div className='uploadFile_form_button'>Upload File</div>
+              </div>
             </div>
           </div>
 
@@ -91,8 +90,8 @@ function ReplaceModal({ onClose, document }: ReplaceModalProps):JSX.Element {
   );
 }
 
-const useStyles = makeStyles() (() => ({
-  removeModal_footer:{
+const useStyles = makeStyles()(() => ({
+  removeModal_footer: {
     // backgroundColor:"teal"
   },
 }))

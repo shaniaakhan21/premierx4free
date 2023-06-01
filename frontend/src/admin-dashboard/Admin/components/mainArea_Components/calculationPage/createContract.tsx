@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -13,23 +14,11 @@ import {
   useAgentSearch
 } from "../../../../../services/agent";
 import useDebounceState from "../../../../../hooks/useDebounceState";
-import {useAuth} from "../../../../../contexts/auth.context";
-import {ContactSearchBy, ContractSearchResponse, createContract, updateContract} from "../../../../../services/admin";
-import AgentProfile, {AgentProfileCompany} from "../../../../../models/agentProfile.model";
-import {useCallback, useEffect, useState} from "react";
+import { useAuth } from "../../../../../contexts/auth.context";
+import { ContractSearchResponse, createContract, updateContract } from "../../../../../services/admin";
 import Contract from "../../../../../models/contract.model";
-import {Dropdown} from "react-bootstrap";
-import {
-  Backdrop,
-  CircularProgress,
-  FormControl,
-  Grid,
-  InputAdornment,
-  InputLabel,
-  MenuItem,
-  Select
-} from "@mui/material";
-import {useInputState} from "../../../../../hooks/useInputState";
+import { Backdrop, CircularProgress, FormControl, Grid, InputLabel, MenuItem, Select } from "@mui/material";
+import { useInputState } from "../../../../../hooks/useInputState";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import moment, { Moment } from "moment-timezone";
 import { MobileDatePicker } from '@mui/x-date-pickers';
@@ -43,7 +32,12 @@ export default function CreateContract({ onClose, contract }: CreateContractProp
   const { user } = useAuth()
   const [query, setQuery] = useDebounceState('', 200);
   const { data, isLoading } = useAgentSearch<AgentSearchPickerResponse>(user!, query, 10, 0, AgentSearchBy.Name, true);
-  const [state, onChange, setState] = useInputState<Partial<Pick<Contract, 'company' | 'start' | 'end'> & { agent: AgentSearchPickerResponse, employeeCount: string, commissionRate: string, amountPerPerson: string }>>({
+  const [state, onChange, setState] = useInputState<Partial<Pick<Contract, 'company' | 'start' | 'end'> & {
+    agent: AgentSearchPickerResponse,
+    employeeCount: string,
+    commissionRate: string,
+    amountPerPerson: string
+  }>>({
     start: moment().startOf('month').toDate(),
     end: moment().endOf('month').toDate(),
   })
@@ -54,7 +48,11 @@ export default function CreateContract({ onClose, contract }: CreateContractProp
     if (state.agent && state.company && !contract) {
       const company = state.agent.companies?.find(c => c._id === state.company)
       if (!company) return
-      setState(cs => ({ ...cs, employeeCount: company.employeeCount?.toString(), commissionRate: company.commissionRate?.toString() }))
+      setState(cs => ({
+        ...cs,
+        employeeCount: company.employeeCount?.toString(),
+        commissionRate: company.commissionRate?.toString()
+      }))
     }
   }, [state.agent, state.company, contract])
 
@@ -127,7 +125,8 @@ export default function CreateContract({ onClose, contract }: CreateContractProp
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.modal + 1, flexDirection: 'column' }}
         open={showBackDrop}
       >
-        {loading?.endsWith('successfully') ? <CheckCircleIcon sx={{ fontSize: 50, color: 'white' }} /> : <CircularProgress color="inherit" />}
+        {loading?.endsWith('successfully') ? <CheckCircleIcon sx={{ fontSize: 50, color: 'white' }} /> :
+          <CircularProgress color="inherit" />}
         {loading}
       </Backdrop>
       <Dialog maxWidth='lg' fullWidth open onClose={() => onClose()}>
@@ -163,7 +162,8 @@ export default function CreateContract({ onClose, contract }: CreateContractProp
                     setQuery(v);
                   }}
                   renderInput={(params) => (
-                    <TextField {...params} label="Select Agent" placeholder="Select Agent" InputLabelProps={{ shrink: true }} />
+                    <TextField {...params} label="Select Agent" placeholder="Select Agent"
+                               InputLabelProps={{ shrink: true }} />
                   )}
                   getOptionLabel={(option) => option?.name ?? ''}
                   value={state.agent || null}

@@ -4,6 +4,7 @@ export enum Roles {
   Admin = 'Admin',
   Agent = 'Agent'
 }
+
 export default class User {
   public _id!: string
 

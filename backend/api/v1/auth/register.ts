@@ -5,7 +5,7 @@ import { successResponse } from '@helpers/response'
 import AgentProfileModel, { AgentProfile } from '@models/agent-profile.model'
 import UserModel, { User } from '@models/user.model'
 
-type RegisterRequest = Omit<AgentProfile, 'agentId'> & Pick<User, 'email' | 'password'> & { referrer?: number }
+type RegisterRequest = Omit<AgentProfile, 'agentId'> & Pick<User, 'email' | 'password'> & { referralCode?: string }
 
 const register: CustomRequestHandler<{}, any, RegisterRequest> = async (req, res) => {
   const exist = await UserModel.findByEmail(req.body.email.toLowerCase())
@@ -29,8 +29,8 @@ const register: CustomRequestHandler<{}, any, RegisterRequest> = async (req, res
     }
   }
 
-  if (req.body.referrer && req.body.referrer?.toString() !== '') {
-    const referrer = await AgentProfileModel.findByAgentId(req.body.referrer)
+  if (req.body.referralCode && req.body.referralCode?.toString() !== '') {
+    const referrer = await AgentProfileModel.findByAgentId(parseInt(req.body.referralCode, 10))
     if (referrer) agentData.referrer = referrer._id
   }
 

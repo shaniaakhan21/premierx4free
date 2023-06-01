@@ -1,10 +1,10 @@
 import useSWR from "swr"
-import {getFetcher, patchFetcher} from "../helpers/axiosFetchers";
-import {GenericResponse} from "./genericResponse.type";
+import { getFetcher, patchFetcher } from "../helpers/axiosFetchers";
+import { GenericResponse } from "./genericResponse.type";
 import User from "../models/user.model";
-import AgentProfile, {AgentProfileCompany} from "../models/agentProfile.model";
+import AgentProfile, { AgentProfileCompany } from "../models/agentProfile.model";
 import Contract from "../models/contract.model";
-import {useAuth} from "../contexts/auth.context";
+import { useAuth } from "../contexts/auth.context";
 
 export type ReferralClient = {
   commission: number

@@ -1,8 +1,8 @@
-import {useCallback, useState} from "react";
-import { Modal, Button } from "react-bootstrap";
+import { useCallback } from "react";
+import { Button, Modal } from "react-bootstrap";
 import useStyles from "./styles"
-import {useAuth} from "../../../../contexts/auth.context";
-import {generateUrlFriendlyString} from "../../../../helpers/global";
+import { useAuth } from "../../../../contexts/auth.context";
+import { generateUrlFriendlyString } from "../../../../helpers/global";
 
 interface PopupProps {
   show: boolean;
@@ -13,7 +13,7 @@ interface PopupProps {
 }
 
 const Popup = ({ show, onClose, onSave, title, content }: PopupProps) => {
-    const classes = useStyles();
+  const classes = useStyles();
   return (
     <Modal show={show} onHide={onClose} className={classes.classes.boxModal}>
       <Modal.Header className={classes.classes.modalHeader}>
@@ -32,7 +32,8 @@ const Popup = ({ show, onClose, onSave, title, content }: PopupProps) => {
   );
 };
 
-interface AgentSubHeaderProps {}
+interface AgentSubHeaderProps {
+}
 
 const AgentSubHeader = (props: AgentSubHeaderProps): JSX.Element => {
   const { user } = useAuth()

@@ -1,4 +1,4 @@
-import axios, {AxiosRequestConfig, AxiosResponse} from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import User from "../models/user.model";
 
 export const buildFetcher = async <RequestType, ResponseType>(
@@ -22,7 +22,7 @@ export const buildFetcher = async <RequestType, ResponseType>(
   }
   if (user?.jwtToken) options.headers!['Authorization'] = `Bearer ${user.jwtToken}`
 
-  if ([ 'get', 'delete', 'head', 'options' ].includes(method)) {
+  if (['get', 'delete', 'head', 'options'].includes(method)) {
     return (await axios[method]<any, AxiosResponse<ResponseType>>(endpointURL, options)).data
   }
   return (await axios[method]<any, AxiosResponse<ResponseType>>(endpointURL, data, options)).data

@@ -1,82 +1,52 @@
-
 import { makeStyles } from '../../../utils/makeStyles';
 import FootBar from './FootBar';
 import AgentDocuments from './mainArea_Components/agentDocuments/AgentDocuments';
 import CalculationPage from './mainArea_Components/calculationPage/CalculationPage';
 import AdminSettings from './mainArea_Components/adminSettings/AdminSettings';
-import {useEffect, useState} from 'react';
-import MarketingMaterials from './mainArea_Components/marketingMaterials/MarketingMaterials';
 import * as React from 'react';
+import MarketingMaterials from './mainArea_Components/marketingMaterials/MarketingMaterials';
 import AgentHeader from '../../../Dashboard/components/agent-header/AgentHeader';
-import TopBar from './top-bar/TopBar'
 import AgentSearchPage from './mainArea_Components/agentSearch/AgentSearchPage';
-interface event {
-    eventNumber:number
-    // setEventNumber:any
+import { Route, Routes } from "react-router-dom";
+
+function MainArea(): JSX.Element {
+  const { classes } = useStyles()
+
+  return (
+    <div className={classes.mainArea_mainContainer}>
+      <div className={classes.agentHeader}>
+        <AgentHeader />
+      </div>
+      <div className={classes.mainContainer_mainContent}>
+        <Routes>
+          <Route path="/calculation" element={<CalculationPage />} />
+          <Route path="/marketingMaterials" element={<MarketingMaterials />} />
+          <Route path="/settings" element={<AdminSettings />} />
+          <Route path="/agents" element={<AgentSearchPage />} />
+          <Route path="/" element={<AgentDocuments />} />
+        </Routes>
+      </div>
+      <FootBar />
+    </div>
+  )
 }
 
-function MainArea(props:event): JSX.Element{
-    const {classes} = useStyles()
-    const {eventNumber} = props
-    const [mainAreaContent, setMainAreaContent] = useState(<></>)
-    console.log("event from main area",eventNumber)
-    useEffect(() => {
-        if(eventNumber == 1)
-        {
-            setMainAreaContent(<AgentDocuments />)
-        }
-        if (eventNumber == 2)
-        {
-            setMainAreaContent(<CalculationPage />)
-        }
-        if (eventNumber == 3)
-        {
-            setMainAreaContent(<MarketingMaterials />)
-        }
-        if (eventNumber == 4)
-        {
-            setMainAreaContent(<AdminSettings />)
-        }
-        if (eventNumber == 5)
-        {
-            setMainAreaContent(<AgentSearchPage />)
-        }
-    },[eventNumber])
-    return(
-        <div className={classes.mainArea_mainContainer}>
-            <div className={classes.agentHeader}>
-            <AgentHeader />
-            </div>
-            <div className={classes.mainContainer_mainContent}>
-                {/* <AgentDocuments /> */}
-                {/* <CalculationPage /> */}
-
-
-                {mainAreaContent}
-
-                {/* <AdminSettings /> */}
-            </div>
-            <FootBar />
-        </div>
-    )
-}
-
-const useStyles = makeStyles() (() => ({
-    mainArea_mainContainer:{
-        display:"flex",
-        flexDirection:"column",
-        width:"100%"
-    },
-    mainContainer_mainContent:{
-        //height:"90%",
-        margin:"30px 20px 0px 30px",
-        // width:"100%"
-    },
-    agentHeader:{
-        '@media(max-width:768px)':{
-            display:"none"
-        }
+const useStyles = makeStyles()(() => ({
+  mainArea_mainContainer: {
+    display: "flex",
+    flexDirection: "column",
+    width: "100%"
+  },
+  mainContainer_mainContent: {
+    //height:"90%",
+    margin: "30px 20px 0px 30px",
+    // width:"100%"
+  },
+  agentHeader: {
+    '@media(max-width:768px)': {
+      display: "none"
     }
+  }
 }))
 
 export default MainArea

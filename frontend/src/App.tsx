@@ -10,11 +10,9 @@ import './components/FontawesomeIcons';
 import '@fontsource/nunito-sans';
 import CookieBanner from './components/cookie';
 import axios from "axios";
-import {AuthProvider} from "./contexts/auth.context";
-
-import { Theme } from '@mui/material/styles';
-import {LocalizationProvider} from "@mui/x-date-pickers";
-import {AdapterMoment} from "@mui/x-date-pickers/AdapterMoment";
+import { AuthProvider } from "./contexts/auth.context";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 
 export const muiCache = createCache({
   key: 'premierx-theme',
@@ -36,8 +34,8 @@ function App() {
           <ThemeProvider theme={theme}>
             <BrowserRouter>
               <LocalizationProvider dateAdapter={AdapterMoment}>
-              <CookieBanner />
-              <AppRouter />
+                <CookieBanner />
+                <AppRouter />
               </LocalizationProvider>
             </BrowserRouter>
           </ThemeProvider>

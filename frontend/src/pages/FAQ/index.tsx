@@ -79,8 +79,8 @@ const faqData = [
 function FaqPage(): JSX.Element {
   return (
     <>
-    <Navbar />
-      <h1 className='heading'>Please see below for  Frequently Asked Questions</h1>
+      <Navbar />
+      <h1 className='heading'>Please see below for Frequently Asked Questions</h1>
       <Accordion defaultActiveKey="0" className='accordionContainer'>
         {faqData.map((item, index) => (
           <Accordion.Item eventKey={index.toString()} key={index}>

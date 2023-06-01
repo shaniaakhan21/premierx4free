@@ -1,21 +1,20 @@
-import {useCallback, useEffect, useState} from 'react';
-import Button from 'react-bootstrap/Button';
+import * as React from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { makeStyles } from '../../../../../utils/makeStyles'
 import './uploadMore.css'
-import * as React from 'react';
 import MarketingMaterial from "../../../../../models/marketingMaterial.model";
 import MarketingMaterialsCategory from "../../../../../models/marketingMaterialsCategory.model";
-import {useAuth} from "../../../../../contexts/auth.context";
-import {createMarketingMaterial, updateMarketingMaterial} from "../../../../../services/admin";
-import {useInputState} from "../../../../../hooks/useInputState";
+import { useAuth } from "../../../../../contexts/auth.context";
+import { createMarketingMaterial } from "../../../../../services/admin";
+import { useInputState } from "../../../../../hooks/useInputState";
 
 interface UploadMoreModalProps {
   onClose: (shouldRemove?: boolean) => void
   category: MarketingMaterialsCategory
 }
 
-function UploadMoreModal({ category, onClose }: UploadMoreModalProps):JSX.Element {
+function UploadMoreModal({ category, onClose }: UploadMoreModalProps): JSX.Element {
   const { user } = useAuth()
 
   const [state, onChange, setState] = useInputState<Partial<Pick<MarketingMaterial, 'head' | 'description' | 'document' | 'category'>>>({})
@@ -50,27 +49,27 @@ function UploadMoreModal({ category, onClose }: UploadMoreModalProps):JSX.Elemen
           <code>{JSON.stringify(state)}</code>
 
           <div className='uploadMore_content'>
-            <div style={{marginTop:"28px"}}>
-            <label className='formLabel'>Upload Documents</label>
+            <div style={{ marginTop: "28px" }}>
+              <label className='formLabel'>Upload Documents</label>
               <div className='uploadDocument_form_container'>
-                  <input name='document' type='file' onChange={onChange} className='uploadDocument_form_input' />
-                  <div className='uploadDocument_form_button'>Upload File</div>
+                <input name='document' type='file' onChange={onChange} className='uploadDocument_form_input' />
+                <div className='uploadDocument_form_button'>Upload File</div>
               </div>
             </div>
 
+            <div className='head_form_container'>
               <div className='head_form_container'>
-                  <div className='head_form_container'>
-                      <label className='formLabel'>Head</label>
-                      <input name='head' type='text' className='head_form_input' onChange={onChange} />
-                  </div>
+                <label className='formLabel'>Head</label>
+                <input name='head' type='text' className='head_form_input' onChange={onChange} />
               </div>
+            </div>
 
+            <div className='description_form_container'>
               <div className='description_form_container'>
-                  <div className='description_form_container'>
-                    <label className='formLabel'>Description</label>
-                      <textarea name='description' className='description_form_input' onChange={onChange} />
-                  </div>
+                <label className='formLabel'>Description</label>
+                <textarea name='description' className='description_form_input' onChange={onChange} />
               </div>
+            </div>
           </div>
 
           <div className='uploadMore_button_container'>
@@ -88,8 +87,8 @@ function UploadMoreModal({ category, onClose }: UploadMoreModalProps):JSX.Elemen
   );
 }
 
-const useStyles = makeStyles() (() => ({
-  removeModal_footer:{
+const useStyles = makeStyles()(() => ({
+  removeModal_footer: {
     // backgroundColor:"teal"
   },
 }))

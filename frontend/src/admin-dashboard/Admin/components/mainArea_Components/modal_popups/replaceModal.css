@@ -1,24 +1,23 @@
-.modal-footer
-{
+.modal-footer {
     background-color: teal;
 }
-.removeModal{
-   
+
+.removeModal {
+
 }
 
-.modal{
-    --bs-modal-width:596px;
-    --bs-modal-height:347px;
-    --bs-modal-border-radius:30px;
+.modal {
+    --bs-modal-width: 596px;
+    --bs-modal-height: 347px;
+    --bs-modal-border-radius: 30px;
 }
 
-.currentDocumentIcon
-{
+.currentDocumentIcon {
     width: 191.84px;
-    height:99.06px;
+    height: 99.06px;
 }
 
-.replaceModal_content{
+.replaceModal_content {
     display: flex;
     flex-direction: row;
     margin-top: 18px;
@@ -29,20 +28,21 @@
     /* justify-content: center; */
 }
 
-.uploadFile_form_container{
+.uploadFile_form_container {
     display: flex;
     flex-direction: row;
     background: #FFFFFF;
     border: 1px solid #D6D9DB;
     border-radius: 6px;
-    width:100%
+    width: 100%
 }
-.uploadFile_form_input
-{
-    border:none;
+
+.uploadFile_form_input {
+    border: none;
     width: 60%;
 }
-.uploadFile_form_button{
+
+.uploadFile_form_button {
     background-color: #64B5F6;
     border-radius: 0 6px 6px 0px;
     text-align: center;
@@ -51,42 +51,42 @@
     font-weight: 600;
     font-size: 18px;
     line-height: 24.55px;
-    width:40%
+    width: 40%
 }
-.Replacemodal_button_container
-{
+
+.Replacemodal_button_container {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    gap:18px;
+    gap: 18px;
     margin-top: 21px;
     margin-bottom: 38px;
 }
-.replace_cancel_button
-{
+
+.replace_cancel_button {
     background-color: #FFFFFF;
-    border : 1px solid #86A9B8;
+    border: 1px solid #86A9B8;
     border-radius: 10px;
     padding: 15px 63px 15px 63px;
     color: #48748D;
 }
 
-.replace_save_button
-{
+.replace_save_button {
     border-radius: 10px;
     padding: 15px 72px 15px 73px;
     background-color: #64B5F6;
     color: #FFFFFF;
-    border:none;
+    border: none;
 }
-.modal-heading{
+
+.modal-heading {
     font-weight: 768px;
     font-size: 22px;
     line-height: 30px;
     color: #000000;
     /* font-family: 'Nunito Sans'; */
 }
-.upload_newDocument_container
-{
+
+.upload_newDocument_container {
     width: 100%;
 }

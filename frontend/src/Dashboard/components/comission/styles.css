@@ -1,94 +1,123 @@
-  .box-main-commission {
+.box-main-commission {
     padding: 2% 3% 0;
 
-    @media (max-width: 400px) {
-      padding: 6% !important;
-    }
-  }
+@media (max-width: 400px) {
+    padding:
 
-  .box-main-commission .textCustom {
+6% !important;
+}
+
+}
+
+.box-main-commission .textCustom {
     font-weight: 600;
     font-size: 24px;
     line-height: 33px;
     font-family: "Nunito Sans";
 
-    @media (max-width: 768px) {
-      font-size: 20px !important;
-    }
-  }
+@media (max-width: 768px) {
+    font-size:
 
-  .box-main-commission .table-responsive {
+20px
+
+!important;
+}
+
+}
+
+.box-main-commission .table-responsive {
     border-radius: 10px !important;
     margin-top: 1%;
     border: 1px solid #D6D9DB;
-  }
+}
 
-  .box-main-commission .table {
+.box-main-commission .table {
     border-color: #F4F6F8;
     margin: 0 !important;
 
-    @media (max-width: 768px) {
-      width: 200%;
-    }
+@media (max-width: 768px) {
+    width:
 
-    @media (max-width: 400px) {
-      width: 370%;
-    }
-  }
+200%;
+}
 
-  .box-main-commission .table-bordered {
+@media (max-width: 400px) {
+    width:
+
+370%;
+}
+
+}
+
+.box-main-commission .table-bordered {
     border-width: 1px;
-  }
+}
 
-  .table-bordered>:not(caption)>*>* {
+.table-bordered > :not(caption) > * > * {
     border-width: 0;
-  }
+}
 
-  .box-main-commission .table-hover>tbody>tr:hover>* {
+.box-main-commission .table-hover > tbody > tr:hover > * {
     --bs-table-accent-bg: rgb(244, 246, 248);
     color: var(--bs-table-hover-color);
-  }
+}
 
-  .box-main-commission td {
+.box-main-commission td {
     color: #667B8B;
     font-size: 15px;
 
-    @media (max-width: 768px) {
-      font-size: 13px;
-    }
-  }
+@media (max-width: 768px) {
+    font-size:
 
-  .box-main-commission th {
+13px
+
+;
+}
+
+}
+
+.box-main-commission th {
     font-weight: 400;
     font-size: 16px;
     line-height: 27px;
     padding: 1% 1% 1% 8px;
 
 
-    @media (max-width: 768px) {
-      font-size: 16px !important;
-      font-weight: 500 !important;
-      line-height: 18px !important;
-    }
-  }
+@media (max-width: 768px) {
+    font-size:
 
-  .nav-tabs .nav-link {
+16px
+
+!important;
+    font-weight:
+
+500 !important;
+    line-height:
+
+18px
+
+!important;
+}
+
+}
+
+.nav-tabs .nav-link {
     color: #667B8B;
-  }
+}
 
-  .nav-tabs .nav-link.active {
+.nav-tabs .nav-link.active {
     color: #0556A7;
     border: none;
     border-bottom: 4px solid #0556A7;
     padding-left: 0;
     padding-right: 0;
-  }
+}
 
-  .nav-tabs .nav-link:hover {
+.nav-tabs .nav-link:hover {
     border: none;
-  }
+}
 
-  .tab-options {
+.tab-options {
     width: 14%;
     display: flex;
     align-items: center;
@@ -98,79 +127,91 @@
     border-radius: 50px;
     padding: 6px;
 
-  }
+}
 
 
-  @media (max-width: 1500px) {
+@media (max-width: 1500px) {
     .tab-options {
-      width: 18%;
+        width: 18%;
     }
-  }
+}
 
-  @media (max-width: 1200px) {
+@media (max-width: 1200px) {
     .tab-options {
-      width: 20%;
+        width: 20%;
     }
-  }
+}
 
-  @media (max-width:700px) {
+@media (max-width: 700px) {
     .tab-options {
-      left: 0rem;
-      width: 40%;
-      padding: 1.5%;
+        left: 0rem;
+        width: 40%;
+        padding: 1.5%;
     }
-  }
+}
 
-  @media (max-width:400px) {
+@media (max-width: 400px) {
     .tab-options {
-      left: 0rem;
-      width: 61%;
-      padding: 1.5%;
+        left: 0rem;
+        width: 61%;
+        padding: 1.5%;
     }
-  }
+}
 
 
-  .tab-options-box {
+.tab-options-box {
     display: flex;
     justify-content: flex-end;
-  }
+}
 
-  .tab-options img {
-    @media (max-width: 768px) {
-      width: 8%;
-    }
-  }
+.tab-options img {
 
-  .tab-options div {
+@media (max-width: 768px) {
+    width:
+
+8%;
+}
+
+}
+
+.tab-options div {
     display: flex;
     align-items: center;
     cursor: pointer;
-  }
+}
 
-  .tab-options span {
+.tab-options span {
     margin-left: 5px;
 
-    @media (max-width: 768px) {
-      font-size: 13px !important;
-    }
-  }
+@media (max-width: 768px) {
+    font-size:
 
-  .box-main-commission .box-it {
+13px
+
+!important;
+}
+
+}
+
+.box-main-commission .box-it {
     display: flex;
     flex-direction: row;
 
-    @media (max-width: 768px) {
-      justify-content: space-between;
-    }
-  }
+@media (max-width: 768px) {
+    justify-content: space-between
 
-  .box-main-commission .line {
+;
+}
+
+}
+
+.box-main-commission .line {
     border-right: 2px solid #DEE1EB;
     height: 18px;
     padding-left: 9%;
-  }
+}
 
-  .box-main-commission .last-col {
+.box-main-commission .last-col {
     text-align: end;
     padding-right: 2.5%;
-  }
+}

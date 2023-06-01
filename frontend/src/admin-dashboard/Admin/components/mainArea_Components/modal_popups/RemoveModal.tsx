@@ -1,19 +1,18 @@
-import {useCallback, useState} from 'react';
-import Button from 'react-bootstrap/Button';
+import * as React from 'react';
+import { useCallback, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { makeStyles } from '../../../../../utils/makeStyles'
 import './removeModal.css'
-import * as React from 'react';
 import MarketingMaterial from "../../../../../models/marketingMaterial.model";
-import {removeMarketingMaterial} from "../../../../../services/admin";
-import {useAuth} from "../../../../../contexts/auth.context";
+import { removeMarketingMaterial } from "../../../../../services/admin";
+import { useAuth } from "../../../../../contexts/auth.context";
 
 interface RemoveModalProps {
   onClose: (shouldReload?: boolean) => void
   document: MarketingMaterial
 }
 
-function RemoveModal({ onClose, document }: RemoveModalProps):JSX.Element {
+function RemoveModal({ onClose, document }: RemoveModalProps): JSX.Element {
   const { user } = useAuth()
 
   const [loading, setLoading] = useState<boolean>(false)
@@ -56,8 +55,8 @@ function RemoveModal({ onClose, document }: RemoveModalProps):JSX.Element {
   );
 }
 
-const useStyles = makeStyles() (() => ({
-  removeModal_footer:{
+const useStyles = makeStyles()(() => ({
+  removeModal_footer: {
     // backgroundColor:"teal"
   },
 }))

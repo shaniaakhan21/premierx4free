@@ -2,13 +2,18 @@ form {
     width: 80%;
     padding: 3%;
 
-    @media (max-width: 768px) {
-        width: 100%;
-    }
+@media (max-width: 768px) {
+    width:
 
-    @media (max-width: 400px) {
-        width: 100%;
-    }
+100%;
+}
+
+@media (max-width: 400px) {
+    width:
+
+100%;
+}
+
 }
 
 .box-with-shadow {
@@ -20,15 +25,23 @@ form {
 }
 
 .company-form .first-phone-row {
-    @media (max-width: 768px) {
-        flex-direction: column;
-    }
+
+@media (max-width: 768px) {
+    flex-direction: column
+
+;
+}
+
 }
 
 .form-label {
-    @media (max-width: 768px) {
-        flex-direction: column;
-    }
+
+@media (max-width: 768px) {
+    flex-direction: column
+
+;
+}
+
 }
 
 .company-form .textCustom {
@@ -43,9 +56,14 @@ form .row {
 .long-text-area {
     height: 233px;
 
-    @media (max-width: 768px) {
-        height: 110px;
-    }
+@media (max-width: 768px) {
+    height:
+
+110px
+
+;
+}
+
 }
 
 .flex-box-it {
@@ -62,9 +80,12 @@ form .row {
     padding: 10% 35% !important;
     text-align: center !important;
 
-    @media (max-width: 768px) {
-        padding: 10% 45% !important;
-    }
+@media (max-width: 768px) {
+    padding:
+
+10% 45% !important;
+}
+
 }
 
 .box-with-shadow .btn-primary {
@@ -75,23 +96,35 @@ form .row {
     padding: 10% 45% !important;
     text-align: center !important;
 
-    @media (max-width: 768px) {
-        padding: 10% 45% !important;
-    }
+@media (max-width: 768px) {
+    padding:
+
+10% 45% !important;
+}
+
 }
 
 .Btn-Custom {
     text-align: end;
 
-    @media (max-width: 768px) {
-        width: 25%;
-        margin: 0 2% 1% 7%;
-    }
+@media (max-width: 768px) {
+    width:
 
-    @media (max-width: 400px) {
-        width: 25%;
-        margin: 0 6% 1% 11%;
-    }
+25%;
+    margin:
+
+0 2% 1% 7%;
+}
+
+@media (max-width: 400px) {
+    width:
+
+25%;
+    margin:
+
+0 6% 1% 11%;
+}
+
 }
 
 .align-it-end {
@@ -99,31 +132,52 @@ form .row {
     margin-top: 4%;
     margin-right: 2%;
 
-    @media (max-width: 768px) {
-        flex-wrap: nowrap;
-        align-items: center;
-        justify-content: flex-end;
-    }
+@media (max-width: 768px) {
+    flex-wrap: nowrap
+
+;
+    align-items: center
+
+;
+    justify-content: flex-end
+
+;
+}
+
 }
 
 .another-flex {
-    @media (max-width: 768px) {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-    }
+
+@media (max-width: 768px) {
+    display: flex
+
+;
+    flex-direction: row
+
+;
+    align-items: center
+
+;
+}
+
 }
 
 .another-flex .form-label {
 
-    @media (max-width: 768px) {
-        margin-right: 10%;
-    }
+@media (max-width: 768px) {
+    margin-right:
+
+10%;
 }
 
-.company-form{
-    
-    @media (max-width: 400px) {
-       padding: 6% 6% 6% 8%;
-    }
+}
+
+.company-form {
+
+@media (max-width: 400px) {
+    padding:
+
+6% 6% 6% 8%;
+}
+
 }
