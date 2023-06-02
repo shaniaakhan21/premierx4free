@@ -15,6 +15,5 @@ master:
     - cd /home/gitlab-runner/publicwebsite/backend
     - npm i
     - npm run build
-    - sudo npm i -g pm2
     - pm2 delete "premierx-backend" || exit_code=$?
     - pm2 start premieRx.pm2.config.js --env production
