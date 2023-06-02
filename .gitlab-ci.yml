@@ -8,7 +8,12 @@ master:
     - cd /home/gitlab-runner/publicwebsite/frontend
     - git fetch origin master
     - git reset --hard origin/master
-    - git clean -n -f -d
+    - git clean -f -d
     - git pull
     - npm i --force
     - npm run build
+    - cd /home/gitlab-runner/publicwebsite/backend
+    - npm i
+    - npm run build
+    - pm2 delete "premierx-backend" || exit_code=$?
+    - pm2 start premieRx.pm2.config.js --env production
