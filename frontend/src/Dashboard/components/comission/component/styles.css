@@ -1,10 +1,10 @@
-.grid-for-total{
+.grid-for-total {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
 }
 
-.box-for-total{
+.box-for-total {
     display: flex;
     width: 14%;
     flex-direction: row;
@@ -15,55 +15,51 @@
     justify-content: flex-end;
 }
 
-.grid-for-text{
+.grid-for-text {
     margin: 5% 10%;
 }
 
-.grid-for-number{
+.grid-for-number {
     font-size: 1rem;
     font-weight: bold;
     margin: 5% 9%;
 }
 
 
-@media only screen and (max-width:1700px)
-{
-    .grid-for-number{
+@media only screen and (max-width: 1700px) {
+    .grid-for-number {
         font-size: 1rem;
     }
 
-    .box-for-total{
+    .box-for-total {
         width: 20%;
     }
 
 }
 
 
-@media only screen and (max-width:1200px)
-{
-    .grid-for-number{
+@media only screen and (max-width: 1200px) {
+    .grid-for-number {
         font-size: 0.9rem;
     }
 }
 
 
-@media only screen and (max-width:600px)
-{
-    .grid-for-number{
+@media only screen and (max-width: 600px) {
+    .grid-for-number {
         font-size: 0.8rem;
     }
 
-    .box-for-total{
+    .box-for-total {
         width: 45%;
     }
 
 }
 
 
-@media only screen and (max-width:400px)
-{
+@media only screen and (max-width: 400px) {
 
-    .box-for-total{
+    .box-for-total {
         width: 60%;
     }
 

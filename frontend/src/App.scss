@@ -1,71 +1,73 @@
 /*  GLOBAL LAYOUT */
 html, body, #root, .App {
-	margin: 0 !important;
-    padding: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 #root {
-	overflow-y: auto;
+  overflow-y: auto;
 }
 
 .App {
-	height: 100vh;
-}
-body {
-	overflow: hidden;
-	min-height: 100%;
-	font-family: "Nunito Sans";
+  height: 100vh;
 }
 
-p{
-	font-family: "Nunito Sans";
+body {
+  overflow: hidden;
+  min-height: 100%;
+  font-family: "Nunito Sans";
+}
+
+p {
+  font-family: "Nunito Sans";
 }
 
 .MuiButton-containedPrimary:hover {
-    background-color: #136DA7!important;
+  background-color: #136DA7 !important;
 }
 
 .MuiFormControl-root {
-	> label {
-		font-family: 'Nunito Sans';
-		position: relative;
-		font-size: 23px;
-		font-weight: bold;
-		color: black;
-		transform-origin: bottom left;
-	}
+  > label {
+    font-family: 'Nunito Sans';
+    position: relative;
+    font-size: 23px;
+    font-weight: bold;
+    color: black;
+    transform-origin: bottom left;
+  }
 
-	fieldset {
-		top: 0;
-		legend {
-			display: none;
-		}
-	}
+  fieldset {
+    top: 0;
+
+    legend {
+      display: none;
+    }
+  }
 }
 
 .MuiTableContainer-root {
-	box-shadow: none;
-	border: 1px solid #d6d9db;
+  box-shadow: none;
+  border: 1px solid #d6d9db;
 
-	.MuiTableCell-root {
-		font-size: 16px;
-	}
+  .MuiTableCell-root {
+    font-size: 16px;
+  }
 
-	.MuiTable-root {
-		.MuiTableHead-root .MuiTableCell-root {
-			background-color: #f4f6f8;
-			color: black;
-		}
-	}
+  .MuiTable-root {
+    .MuiTableHead-root .MuiTableCell-root {
+      background-color: #f4f6f8;
+      color: black;
+    }
+  }
 }
 
 .MuiPagination-root {
-	.Mui-selected {
-		background-color: #64b5f6;
-		color: white;
-	}
+  .Mui-selected {
+    background-color: #64b5f6;
+    color: white;
+  }
 
-	.MuiPaginationItem-text {
-		font-size: 18px;
-	}
+  .MuiPaginationItem-text {
+    font-size: 18px;
+  }
 }

@@ -1,4 +1,4 @@
-import AgentProfile, {AgentProfileCompany} from "./agentProfile.model";
+import AgentProfile, { AgentProfileCompany } from "./agentProfile.model";
 import User from "./user.model";
 
 export default class Contract {

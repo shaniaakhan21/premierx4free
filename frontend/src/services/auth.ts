@@ -1,6 +1,6 @@
 import User from "../models/user.model";
-import axios, {AxiosResponse} from "axios";
-import {GenericResponse} from "./genericResponse.type";
+import axios, { AxiosResponse } from "axios";
+import { GenericResponse } from "./genericResponse.type";
 
 export type LoginRequest = {
   email: string

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -6,32 +7,43 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import {
-  AgentSearchBy, AgentSearchNormalResponse,
-  AgentSearchPickerResponse, AgentSearchResponse,
-  updateAgentProfile, UpdateAgentProfileRequest,
+  AgentSearchBy,
+  AgentSearchNormalResponse,
+  AgentSearchPickerResponse,
+  AgentSearchResponse,
+  updateAgentProfile,
+  UpdateAgentProfileRequest,
   useAgentSearch
 } from "../../../../../services/agent";
 import useDebounceState from "../../../../../hooks/useDebounceState";
-import {useAuth} from "../../../../../contexts/auth.context";
-import AgentProfile, {AgentProfileCompany, AgentStatus} from "../../../../../models/agentProfile.model";
-import {useCallback, useEffect, useState} from "react";
+import { useAuth } from "../../../../../contexts/auth.context";
+import AgentProfile, { AgentProfileCompany, AgentStatus } from "../../../../../models/agentProfile.model";
 import {
-  Accordion, AccordionDetails,
-  AccordionSummary, Alert, Avatar,
-  Backdrop, Box, Checkbox, Chip,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Alert,
+  Avatar,
+  Backdrop,
+  Box,
+  Checkbox,
+  Chip,
   CircularProgress,
-  FormControl, FormControlLabel,
+  FormControl,
+  FormControlLabel,
   Grid,
   InputLabel,
-  MenuItem, OutlinedInput,
-  Select, Typography
+  MenuItem,
+  OutlinedInput,
+  Select,
+  Typography
 } from "@mui/material";
-import {useInputState} from "../../../../../hooks/useInputState";
+import { useInputState } from "../../../../../hooks/useInputState";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import {uploadDocument} from "../../../../../services/upload";
-import {Roles} from "../../../../../models/user.model";
-import {AlertTitle} from "@mui/lab";
+import { uploadDocument } from "../../../../../services/upload";
+import { Roles } from "../../../../../models/user.model";
+import { AlertTitle } from "@mui/lab";
 
 export type CreateContractProps = {
   agent?: AgentSearchResponse<AgentSearchNormalResponse>['data'][0]
@@ -110,7 +122,8 @@ export default function EditAgent({ onClose, agent }: CreateContractProps) {
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.modal + 1, flexDirection: 'column' }}
         open={showBackDrop}
       >
-        {loading?.endsWith('successfully') ? <CheckCircleIcon sx={{ fontSize: 50, color: 'white' }} /> : <CircularProgress color="inherit" />}
+        {loading?.endsWith('successfully') ? <CheckCircleIcon sx={{ fontSize: 50, color: 'white' }} /> :
+          <CircularProgress color="inherit" />}
         {loading}
       </Backdrop>
       <Dialog maxWidth='lg' fullWidth open onClose={() => onClose()}>
@@ -118,11 +131,13 @@ export default function EditAgent({ onClose, agent }: CreateContractProps) {
         <DialogContent>
           <Alert severity="warning">
             <AlertTitle>Warning</AlertTitle>
-            Removing company is irreversible & uploading new NDA / Contract / Profile Image will <strong>replace existing one</strong> and <strong>no longer be accessible</strong>.
+            Removing company is irreversible & uploading new NDA / Contract / Profile Image will <strong>replace
+            existing one</strong> and <strong>no longer be accessible</strong>.
           </Alert>
           <Grid container spacing={2} style={{ marginTop: 5 }}>
             <Grid item xs={12} md={6} style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-              <Avatar sx={{ width: 100, height: 100 }} alt={state.name?.toUpperCase() ?? ''} variant='rounded' sizes='100%' src={agent?.profileImage && `/api/uploads/profileImage/${agent?.profileImage}`} />
+              <Avatar sx={{ width: 100, height: 100 }} alt={state.name?.toUpperCase() ?? ''} variant='rounded'
+                      sizes='100%' src={agent?.profileImage && `/api/uploads/profileImage/${agent?.profileImage}`} />
               <TextField
                 InputLabelProps={{ shrink: true }}
                 type="file"
@@ -134,14 +149,16 @@ export default function EditAgent({ onClose, agent }: CreateContractProps) {
                 value={''}
                 onChange={handleFileChange('profileImage')}
               />
-              {state?.profileImage && <Button onClick={() => setState(cs => ({ ...cs, profileImage: undefined }))} variant='contained' color='error' style={{
-                marginTop: 10,
-                marginLeft: 10,
-                paddingLeft: 25,
-                paddingRight: 25,
-                paddingTop: 16,
-                paddingBottom: 16
-              }}>Remove</Button>}
+              {state?.profileImage &&
+                <Button onClick={() => setState(cs => ({ ...cs, profileImage: undefined }))} variant='contained'
+                        color='error' style={{
+                  marginTop: 10,
+                  marginLeft: 10,
+                  paddingLeft: 25,
+                  paddingRight: 25,
+                  paddingTop: 16,
+                  paddingBottom: 16
+                }}>Remove</Button>}
             </Grid>
             <Grid item xs={12} md={6}>
               <FormControl fullWidth>
@@ -289,14 +306,16 @@ export default function EditAgent({ onClose, agent }: CreateContractProps) {
                   paddingBottom: 16
                 }}>Download</Button>
               </a>}
-              {state?.nda && <Button onClick={() => setState(cs => ({ ...cs, nda: undefined }))} variant='contained' color='error' style={{
-                marginTop: 10,
-                marginLeft: 10,
-                paddingLeft: 25,
-                paddingRight: 25,
-                paddingTop: 16,
-                paddingBottom: 16
-              }}>Remove</Button>}
+              {state?.nda &&
+                <Button onClick={() => setState(cs => ({ ...cs, nda: undefined }))} variant='contained' color='error'
+                        style={{
+                          marginTop: 10,
+                          marginLeft: 10,
+                          paddingLeft: 25,
+                          paddingRight: 25,
+                          paddingTop: 16,
+                          paddingBottom: 16
+                        }}>Remove</Button>}
             </Grid>
             <Grid sx={{ display: 'flex', alignItems: 'center' }} item xs={12} md={6}>
               <TextField
@@ -320,20 +339,25 @@ export default function EditAgent({ onClose, agent }: CreateContractProps) {
                   paddingBottom: 16
                 }}>Download</Button>
               </a>}
-              {state?.contract && <Button onClick={() => setState(cs => ({ ...cs, contract: undefined }))} variant='contained' color='error' style={{
-                marginTop: 10,
-                marginLeft: 10,
-                paddingLeft: 25,
-                paddingRight: 25,
-                paddingTop: 16,
-                paddingBottom: 16
-              }}>Remove</Button>}
+              {state?.contract &&
+                <Button onClick={() => setState(cs => ({ ...cs, contract: undefined }))} variant='contained'
+                        color='error' style={{
+                  marginTop: 10,
+                  marginLeft: 10,
+                  paddingLeft: 25,
+                  paddingRight: 25,
+                  paddingTop: 16,
+                  paddingBottom: 16
+                }}>Remove</Button>}
             </Grid>
           </Grid>
           <Typography sx={{ marginTop: 2, marginBottom: 1, marginLeft: 2, fontWeight: 'bold', fontSize: 18 }}>
             Companies
           </Typography>
-          {state.companies?.map(company => <Accordion key={company._id} expanded={expanded?._id === company._id} onChange={() => { setExpanded(c => !c || c?._id !== company?._id ? {...company} : undefined) }}>
+          {state.companies?.map(company => <Accordion key={company._id} expanded={expanded?._id === company._id}
+                                                      onChange={() => {
+                                                        setExpanded(c => !c || c?._id !== company?._id ? { ...company } : undefined)
+                                                      }}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1bh-content"
@@ -342,7 +366,8 @@ export default function EditAgent({ onClose, agent }: CreateContractProps) {
               <Typography sx={{ width: '33%', flexShrink: 0 }}>
                 {company.name}
               </Typography>
-              {company.typeOfBusiness && <Typography sx={{color: 'text.secondary'}}>{company.typeOfBusiness}</Typography>}
+              {company.typeOfBusiness &&
+                <Typography sx={{ color: 'text.secondary' }}>{company.typeOfBusiness}</Typography>}
             </AccordionSummary>
             <AccordionDetails>
               <Grid container spacing={2} style={{ marginTop: 5 }}>
@@ -420,13 +445,19 @@ export default function EditAgent({ onClose, agent }: CreateContractProps) {
                   />
                 </Grid>
                 <Grid item xs={12} md={6} textAlign='center'>
-                  <FormControlLabel control={<Checkbox name="fullInsured" onChange={onChangeCompany} checked={expanded?.fullInsured ?? false} />} label="Full Insured" />
+                  <FormControlLabel control={<Checkbox name="fullInsured" onChange={onChangeCompany}
+                                                       checked={expanded?.fullInsured ?? false} />}
+                                    label="Full Insured" />
                 </Grid>
                 <Grid item xs={12} md={6} textAlign='center'>
-                  <FormControlLabel control={<Checkbox name="selfInsured" onChange={onChangeCompany} checked={expanded?.selfInsured ?? false} />} label="Self Insured" />
+                  <FormControlLabel control={<Checkbox name="selfInsured" onChange={onChangeCompany}
+                                                       checked={expanded?.selfInsured ?? false} />}
+                                    label="Self Insured" />
                 </Grid>
                 <Grid item xs={12} md={6} textAlign='center'>
-                  <FormControlLabel control={<Checkbox name="notInsured" onChange={onChangeCompany} checked={expanded?.notInsured ?? false} />} label="Not Insured" />
+                  <FormControlLabel control={<Checkbox name="notInsured" onChange={onChangeCompany}
+                                                       checked={expanded?.notInsured ?? false} />}
+                                    label="Not Insured" />
                 </Grid>
                 <Grid item xs={12} md={12}>
                   <TextField
@@ -442,9 +473,15 @@ export default function EditAgent({ onClose, agent }: CreateContractProps) {
                 </Grid>
               </Grid>
               <div style={{ marginTop: 10, display: 'flex', justifyContent: 'flex-end', gap: 10 }}>
-                <Button variant='contained' color='error' onClick={() => setState(cs => ({ ...cs, companies: cs.companies?.filter(c => c._id !== expanded?._id) }))}>Delete</Button>
+                <Button variant='contained' color='error' onClick={() => setState(cs => ({
+                  ...cs,
+                  companies: cs.companies?.filter(c => c._id !== expanded?._id)
+                }))}>Delete</Button>
                 <Button variant='contained' onClick={() => {
-                  setState(cs => ({ ...cs, companies: cs.companies?.map(c => c._id === expanded?._id ? expanded! : c) }))
+                  setState(cs => ({
+                    ...cs,
+                    companies: cs.companies?.map(c => c._id === expanded?._id ? expanded! : c)
+                  }))
                   setExpanded(undefined)
                 }}>Save</Button>
               </div>

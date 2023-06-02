@@ -24,7 +24,7 @@
 }
 
 .nav-pills .nav-link.active,
-.nav-pills .show>.nav-link {
+.nav-pills .show > .nav-link {
     background-color: #F4F6F8 !important;
     color: black !important;
 }
@@ -36,9 +36,12 @@
     padding: 6% 6% 1% 6%;
     display: none;
 
-    @media (max-width: 768px) {
-        display: flex;
-    }
+@media (max-width: 768px) {
+    display: flex
+
+;
+}
+
 }
 
 .phone-logo {
@@ -54,15 +57,18 @@
     width: 100%;
 }
 
-.mobile-hide{
+.mobile-hide {
     display: block;
 
-    @media (max-width: 768px) {
-        display:none;
-    }
+@media (max-width: 768px) {
+    display:none
+
+;
 }
 
-.no-m-y-p{
-    margin: 0!important;
+}
+
+.no-m-y-p {
+    margin: 0 !important;
     padding: 3%;
 }

@@ -1,4 +1,4 @@
-import {putFetcher} from "../helpers/axiosFetchers";
+import { putFetcher } from "../helpers/axiosFetchers";
 import User from "../models/user.model";
 
 export const uploadDocument = (user: User, document: File | File[]) => {

@@ -1,6 +1,6 @@
 import User from "../models/user.model";
-import axios, {AxiosResponse} from "axios";
-import {GenericResponse} from "./genericResponse.type";
+import axios, { AxiosResponse } from "axios";
+import { GenericResponse } from "./genericResponse.type";
 
 // export type submitCompanyRequest = {
 //     name: string
@@ -21,4 +21,4 @@ import {GenericResponse} from "./genericResponse.type";
 
 export type LoginResponse = User
 
-export const submitCompany = (data: any,token:string) => axios.put<any, AxiosResponse<GenericResponse<LoginResponse>>>('/my/company', data,{headers:{"Authorization":`Bearer ${token}`}})
+export const submitCompany = (data: any, token: string) => axios.put<any, AxiosResponse<GenericResponse<LoginResponse>>>('/my/company', data, { headers: { "Authorization": `Bearer ${token}` } })
