@@ -34,7 +34,7 @@ function App() {
           <ThemeProvider theme={theme}>
             <BrowserRouter>
               <LocalizationProvider dateAdapter={AdapterMoment}>
-                <CookieBanner />
+                {/*<CookieBanner />*/}
                 <AppRouter />
               </LocalizationProvider>
             </BrowserRouter>
