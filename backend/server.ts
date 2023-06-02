@@ -21,7 +21,6 @@ dotenv.config({ path: path.resolve(__dirname, `.env.${process.env.NODE_ENV}`) })
 
 console.info('Starting Premierx4free Backend')
 
-const staticRoot = path.join(__dirname, '/../frontend/dist')
 const app = express()
 
 // Express plugins
@@ -35,22 +34,22 @@ app.use(
   })
 )
 
-app.use(express.static(staticRoot))
+// app.use(express.static(staticRoot))
 
 connectDB()
   .then(() => console.info('Connected to MongoDB'))
   .catch((e) => console.error('Error connecting to MongoDB', e))
 
-app.use('/api', apiRouter)
+app.use(apiRouter)
 
-app.get('*', (req, res) => {
-  if (req.get('Content-Type') === 'application/json') throw new APINotImplementedError('API not implemented')
-  try {
-    res.sendFile(path.resolve(staticRoot, 'index.html'))
-  } catch (e) {
-    res.send('Oops! unexpected error')
-  }
-})
+// app.get('*', (req, res) => {
+//   if (req.get('Content-Type') === 'application/json') throw new APINotImplementedError('API not implemented')
+//   try {
+//     res.sendFile(path.resolve(staticRoot, 'index.html'))
+//   } catch (e) {
+//     res.send('Oops! unexpected error')
+//   }
+// })
 
 app.use((_req, _res, _next) => {
   throw new APINotImplementedError('API not implemented')
