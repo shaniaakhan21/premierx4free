@@ -9,6 +9,7 @@ import { Col, Row } from 'react-bootstrap';
 import { login } from "../../../services/auth";
 import { useAuth } from "../../../contexts/auth.context";
 import { Roles } from "../../../models/user.model";
+import { useTranslation } from "react-i18next";
 
 const imgSignin = '/assets/svg/SignIn/sigin-img.svg';
 
@@ -20,6 +21,9 @@ function SignIn(): JSX.Element {
   const [errorMsg, setErrorMsg] = useState("");
   const history = useNavigate();
   const { setUser } = useAuth()
+  const [tr] = useTranslation();
+
+  const t = (key: string) => tr(`signin.${key}`);
 
   const onSubmit: FormEventHandler<any> = async (e) => {
     e.preventDefault()
@@ -37,10 +41,10 @@ function SignIn(): JSX.Element {
           history("/agent-dashboard")
         }
       } else {
-        setErrorMsg("Invalid email or password");
+        setErrorMsg(t('invalid-credentials'));
       }
     } catch (error) {
-      setErrorMsg("An error occurred, please try again later.");
+      setErrorMsg(t('error-other'));
     }
   }
 
@@ -50,7 +54,7 @@ function SignIn(): JSX.Element {
         <img src={imgSignin} />
       </Col>
       <Col className={classes.siginform} lg="4" md="6">
-        <h1>Welcome back! <br></br>Please, log in to continue</h1>
+        <h1>{t('welcome-back')}<br></br>{t('title')}</h1>
         <form action='POST' className={classes.formhere} onSubmit={onSubmit}>
           {errorMsg && (
             <div className="alert alert-danger" role="alert">
@@ -58,12 +62,12 @@ function SignIn(): JSX.Element {
             </div>
           )}
           <div className="form-group">
-            <label className={classes.label} htmlFor="email">Email Address</label>
+            <label className={classes.label} htmlFor="email">{t('email')}</label>
             <input
               type="email"
               className={`${classes.formControl} form-control`}
               id="email"
-              placeholder="Enter your email address"
+              placeholder={t('email-placeholder')}
               value={email || errorMsg}
               onChange={(e) => {
                 setEmail(e.target.value)
@@ -71,13 +75,13 @@ function SignIn(): JSX.Element {
             />
           </div>
           <div className="form-group">
-            <label className={classes.label} htmlFor="password">Password</label>
+            <label className={classes.label} htmlFor="password">{t('password')}</label>
             <div className={` ${classes.cstmpsdbox} "input-group" `}>
               <input
                 type={showPassword1 ? "text" : "password"}
                 className={`${classes.formControl} ${classes.custompsd} form-control`}
                 id="password"
-                placeholder="Input Password"
+                placeholder={t('password-placeholder')}
                 value={password}
                 onChange={(e) => {
                   setPassword(e.target.value)
@@ -96,14 +100,14 @@ function SignIn(): JSX.Element {
           </div>
 
           <button type="submit" className={`${classes.buttonstyle} btn btn-primary`}>
-            Log In
+            {t('login')}
           </button>
           <div className={classes.linktosignindiv}>
-            <a href='/resetpassword' className={classes.linktosignin}>I can’t remember my password</a>
+            <a href='/resetpassword' className={classes.linktosignin}>{t('reset-password')}</a>
           </div>
           <div className={`${classes.linktosignindiv} ${classes.extrapadding}`}>
-            <span className={classes.notalink}>Don’t have an account yet? </span>
-            <a href='/signup' className={classes.linktosignin}>Register</a>
+            <span className={classes.notalink}>{t('dont-have-account')}</span>
+            <a href='/signup' className={classes.linktosignin}>{t('register')}</a>
           </div>
 
         </form>

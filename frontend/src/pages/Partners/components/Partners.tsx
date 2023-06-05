@@ -5,6 +5,7 @@ import useWindowSize from '../../../hooks/useWindowSize';
 import { COLLAPSE_THRESHOLD } from '../Home.constants';
 // import NSURInfo from './NSURInfo';
 import { makeStyles } from '../../../utils/makeStyles';
+import { useTranslation } from "react-i18next";
 
 const partellIcon = '/assets/svg/Home/icon-partell-colored.svg'
 const bmaIcon = '/assets/svg/Home/icon-bma-colored.svg'
@@ -18,23 +19,23 @@ interface InfoProps {
 function PartellInfo(props: InfoProps): JSX.Element {
   const { descriptionVisible } = props
   const { classes } = useStyles();
+  const [tr] = useTranslation();
+
+  const t = (key: string) => tr(`partners.parteell.${key}`);
 
   return (
     <>
       <Typography className={classes.infoTitle}>
-        Partell Pharmacy
+        {t('title')}
       </Typography>
       {
         descriptionVisible && (
           <div className={classes.partnerDescription}>
             <Typography className={classes.infoSubtitle} style={{ color: '#136DA7!important' }}>
-              We care about our community
+              {t('subtitle')}
             </Typography>
             <Typography className={classes.infoText}>
-              At Partell Pharmacy, we've made it our mission to provide unique and high-quality solutions for physicians
-              and patients with customized, compound medications. We're here to better your health, together. With
-              licenses and/or relationships in all 50 States, we can deliver your medications to your doorstep anywhere in
-              the US.
+              {t('description')}
             </Typography>
           </div>
         )
@@ -47,27 +48,24 @@ function BMAInfo(props: InfoProps): JSX.Element {
   const { descriptionVisible } = props
   const { classes } = useStyles();
   //const windowSize = useWindowSize()
+  const [tr] = useTranslation();
+
+  const t = (key: string) => tr(`partners.bm.${key}`);
 
   return (
     <>
 
       <Typography className={classes.infoTitle}>
-        BM Allies
+        {t('title')}
       </Typography>
       {
         descriptionVisible && (
           <div className={classes.partnerDescription}>
-            <Typography className={classes.infoTitle} style={{ textDecoration: 'none' }}>
-              Who is BMA
+            <Typography className={classes.infoSubtitle} style={{ textDecoration: 'none' }}>
+              {t('subtitle')}
             </Typography>
             <Typography className={classes.infoText}>
-              We are a health-centric organization that prides itself on over 20 years of industry expertise and vast
-              national relationships. As a result of this, we specialize in mass marketing and distribution of
-              unparalleled unique product offerings. These offerings include one-of-a-kind non-insurance and
-              scientifically advanced products, many of which were not previously available to our verticals of
-              distribution. Our services do not stop here. Learn more about our Prescription Benefit Program through
-              PremieRx4free that can help anyone and everyone save money on their prescription drugs and have better
-              services.
+              {t('description')}
             </Typography>
           </div>
         )
@@ -79,23 +77,23 @@ function BMAInfo(props: InfoProps): JSX.Element {
 function NSURXInfo(props: InfoProps): JSX.Element {
   const { descriptionVisible } = props
   const { classes } = useStyles();
+  const [tr] = useTranslation();
+
+  const t = (key: string) => tr(`partners.nsurx.${key}`);
 
   return (
     <>
       <Typography className={classes.infoTitle}>
-        NSURx Prescription Savings Card
+        {t('title')}
       </Typography>
       {
         descriptionVisible && (
           <div className={classes.partnerDescription}>
             <Typography className={classes.infoSubtitle} style={{ color: "#64B5F6" }}>
-              The revolutionary prescription discount
+              {t('subtitle')}
             </Typography>
             <Typography className={classes.infoText}>
-              Unlike traditional prescription discount cards that are only available in physical form, NSURx is a digital
-              card that can be downloaded by installing the NSURx app on Google store or Apple Store. It’s free to
-              download and use. With this digital card, users can get up to 80% off on their prescription drugs as well as
-              earn NSUR tokens as a reward for each prescription filled.
+              {t('description')}
             </Typography>
             {/* <Typography className={classes.infoText}>
 							NSUR Inc. is dedicated to providing an innovative and convenient solution for prescription drug savings. By utilizing blockchain technology and offering unique rewards, NSURx sets itself apart from traditional prescription discount cards. Not only does it provide discounts, but it also rewards users with NSUR tokens which can be used to purchase products on the NSUR marketplace
@@ -110,30 +108,26 @@ function NSURXInfo(props: InfoProps): JSX.Element {
 function SwiftMDInfo(props: InfoProps): JSX.Element {
   const { descriptionVisible } = props
   const { classes } = useStyles();
+  const [tr] = useTranslation();
+
+  const t = (key: string) => tr(`partners.swiftmd.${key}`);
 
   return (
     <>
       <Typography className={classes.infoTitle}>
-        SwiftMD
+        {t('title')}
       </Typography>
       {
         descriptionVisible && (
           <div className={classes.partnerDescription}>
             <Typography className={classes.infoSubtitle} style={{ color: "#64B5F6" }}>
-              What difference it from other tele-health services?
+              {t('subtitle')}
             </Typography>
             <Typography className={classes.infoText}>
-              We are leading the modernization of routine medical care for patients and reducing costs for our clients.
-              Here are the ways SwiftMD is different from all the other platforms.
+              {t('subtitle2')}
             </Typography>
             <Typography className={classes.infoText}>
-              We select the best doctors who are passionate about online healthcare services and work only for SwiftMD.
-              They work exclusively with us in telemedicine, and they develop relationships with our members through
-              repeat virtual doctor visits. Their doctors are available 24/7 with an average wait time of 9 minutes to
-              speak to
-              a doctor. There are no additional fees above the PremieRx4free membership costs for each consultation,
-              savings significant $$$ on every call. The end result for companies, is that they save untold thousands to
-              hundreds of thousands of dollars every year on unnecessary ER visits.
+              {t('description')}
             </Typography>
           </div>
         )
@@ -147,12 +141,15 @@ function Partners(): JSX.Element {
   const windowSize = useWindowSize()
   const [hoveredIdx, setHoveredIdx] = useState(-1);
   const isCollapsed = windowSize.width < COLLAPSE_THRESHOLD
+  const [tr] = useTranslation()
+
+  const t = (key: string) => tr(`partners.${key}`)
 
   return (
     <div className={classes.container}>
       <div className={classes.titleContainer}>
         <Typography className={classes.title}>
-          STRATEGIC PARTNERS FOR <img src={'/assets/svg/logo-black.svg'} />
+          {t('title')} <img src={'/assets/svg/logo-black.svg'} />
         </Typography>
       </div>
       <Grid container className={classes.content} style={{ display: isCollapsed ? 'none' : 'flex' }}>

@@ -26,7 +26,6 @@ function PartnerChart(props: PartnerChartProps): JSX.Element {
   const { classes } = useStyles();
 
   const onImageHovered = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, idx: number) => {
-    console.log('idx ', idx)
     onHover(idx)
   }
 

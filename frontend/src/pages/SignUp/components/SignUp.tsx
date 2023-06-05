@@ -7,6 +7,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate, useParams } from 'react-router-dom';
 import { register } from "../../../services/register";
+import { useTranslation } from "react-i18next";
 
 const imgSignin = '/assets/svg/SignIn/sigin-img.svg';
 
@@ -28,6 +29,10 @@ function SignUp(): JSX.Element {
   const [showPassword2, setShowPassword2] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const history = useNavigate();
+  const [tr] = useTranslation();
+
+  const t = (key: string) => tr(`signup.${key}`);
+  const tf = (key: string) => tr(`signup.form.${key}`);
 
   useEffect(() => {
     const agentId = id?.split('-')[0]
@@ -45,7 +50,7 @@ function SignUp(): JSX.Element {
 
     try {
       if (password !== confirmPassword) {
-        setErrorMsg("passwords did not match")
+        setErrorMsg(t('error-passwords-dont-match'))
         return
       }
       const res = await register({
@@ -65,15 +70,14 @@ function SignUp(): JSX.Element {
       console.log('Response data:', res);
 
       if (res.status === 200) {
-        console.log('User registered successfully');
+        console.log(t('success-registration'));
         history('/signin');
       }
     } catch (error: any) {
       if (error.response && error.response.status === 400) {
         setErrorMsg(error.response.data.message);
       } else {
-        console.error('Error during registration:', error);
-        setErrorMsg('Something went wrong, please try again later');
+        setErrorMsg(t('error-registration'));
       }
     }
   }
@@ -84,15 +88,15 @@ function SignUp(): JSX.Element {
         <img src={imgSignin} />
       </Col>
       <Col className={classes.siginform} lg="4" md="5" sm="4" xs="12">
-        <h1>Please register to have an account</h1>
+        <h1>{tf('title')}</h1>
         <form onSubmit={submit} className={classes.formhere}>
           <div className="form-group">
-            <label className={classes.label} htmlFor="fullName">Full Name</label>
+            <label className={classes.label} htmlFor="fullName">{tf('full-name')}</label>
             <input
               type="text"
               className={`${classes.formControl} form-control`}
               id="fullName"
-              placeholder="Enter your full name"
+              placeholder={tf('full-name-placeholder')}
               value={fullName}
               onChange={(e) => {
                 setFullName(e.target.value)
@@ -100,19 +104,19 @@ function SignUp(): JSX.Element {
             />
           </div>
           <div className="form-group">
-            <label className={classes.label} htmlFor="email">Email Address</label>
+            <label className={classes.label} htmlFor="email">{tf('email')}</label>
             <input
               type="email"
               className={`${classes.formControl} form-control`}
               id="email"
-              placeholder="Enter your email address"
+              placeholder={tf('email-placeholder')}
               value={email || errorMsg}
               onChange={(e) => {
                 setEmail(e.target.value)
               }}
             />
             <small id="emailHelp" className="form-text text-muted">
-              We’ll send a confirmation email to your inbox, make sure you have access to this email address.
+              {t('email-help')}
             </small>
             {errorMsg && (
               <div className="alert alert-danger" role="alert">
@@ -121,12 +125,12 @@ function SignUp(): JSX.Element {
             )}
           </div>
           <div className="form-group">
-            <label className={classes.label} htmlFor="phoneNumber">Phone Number</label>
+            <label className={classes.label} htmlFor="phoneNumber">{tf('phone')}</label>
             <input
               type="tel"
               className={`${classes.formControl} form-control`}
               id="phoneNumber"
-              placeholder="Enter your phone number"
+              placeholder={tf('phone-placeholder')}
               value={phoneNumber}
               onChange={(e) => {
                 setPhoneNumber(e.target.value)
@@ -134,12 +138,12 @@ function SignUp(): JSX.Element {
             />
           </div>
           <div className="form-group">
-            <label className={classes.label} htmlFor="address">Address</label>
+            <label className={classes.label} htmlFor="address">{tf('address')}</label>
             <input style={{ height: '100px' }}
                    type="text"
                    className={`${classes.formControl} form-control`}
                    id="address"
-                   placeholder=""
+                   placeholder={tf('address-placeholder')}
                    value={address}
                    onChange={(e) => {
                      setAddress(e.target.value)
@@ -149,7 +153,7 @@ function SignUp(): JSX.Element {
               type="text"
               className={`${classes.formControl} form-control`}
               id="city"
-              placeholder="City"
+              placeholder={tf('city')}
               value={city}
               onChange={(e) => {
                 setCity(e.target.value)
@@ -159,7 +163,7 @@ function SignUp(): JSX.Element {
               type="text"
               className={`${classes.formControl} form-control`}
               id="state"
-              placeholder="State"
+              placeholder={tf('state')}
               value={state}
               onChange={(e) => {
                 setState(e.target.value)
@@ -169,7 +173,7 @@ function SignUp(): JSX.Element {
               type="text"
               className={`${classes.formControl} form-control`}
               id="zipcode"
-              placeholder="Zip Code"
+              placeholder={tf('zipcode')}
               value={zipcode}
               onChange={(e) => {
                 setZipCode(e.target.value)
@@ -179,7 +183,7 @@ function SignUp(): JSX.Element {
               type="number"
               className={`${classes.formControl} form-control`}
               id="link-ref"
-              placeholder="Referral Code"
+              placeholder={tf('referral-code')}
               value={referral}
               disabled={disableReferral}
               onChange={(e) => {
@@ -194,7 +198,7 @@ function SignUp(): JSX.Element {
                 type={showPassword1 ? "text" : "password"}
                 className={`${classes.formControl} ${classes.custompsd} form-control`}
                 id="password"
-                placeholder="Input Password"
+                placeholder={tf('password')}
                 value={password}
                 onChange={(e) => {
                   setPassword(e.target.value)
@@ -218,7 +222,7 @@ function SignUp(): JSX.Element {
                 type={showPassword2 ? "text" : "password"}
                 className={`${classes.formControl} ${classes.custompsd} form-control`}
                 id="confirmPassword"
-                placeholder="Confirm Password"
+                placeholder={tf('confirm-password')}
                 value={confirmPassword}
                 onChange={(e) => {
                   setConfirmPassword(e.target.value)
@@ -239,8 +243,8 @@ function SignUp(): JSX.Element {
             Register
           </button>
           <div className={`${classes.linktosignindiv} ${classes.extrapadding}`}>
-            <span className={classes.notalink}>Already have an account? </span>
-            <a href='/signin' className={classes.linktosignin}>Log in</a>
+            <span className={classes.notalink}>{t('already-have-account')}</span>
+            <a href='/signin' className={classes.linktosignin}>{t('log-in')}</a>
           </div>
 
         </form>
