@@ -7,6 +7,7 @@ import * as Yup from 'yup';
 import { QueryStatus } from "../../../types/form";
 import useStyles from "./styles";
 import { postContactUs } from "../../../services/contactUs";
+import { Trans, useTranslation } from "react-i18next";
 
 const usFlag = '/assets/svg/Contact/flag-us.svg'
 
@@ -21,58 +22,62 @@ type FormFieldMultipleRow = FormFieldSingleRow & { flex: number }
 
 type FormField = FormFieldMultipleRow[] | FormFieldSingleRow
 
-const FORM_FIELDS: FormField[] = [
-  {
-    key: 'companyName',
-    placeholder: 'Your Company Name'
-  },
-  {
-    key: 'businessType',
-    placeholder: 'Nature of Business'
-  },
-  [
-    {
-      key: 'address',
-      placeholder: 'Address',
-      flex: 5,
-    },
-    {
-      key: 'zipcode',
-      placeholder: 'Postcode',
-      type: 'number',
-      flex: 2
-    },
-  ],
-  {
-    key: 'name',
-    placeholder: 'Contact Name'
-  },
-  {
-    key: 'phone',
-    placeholder: 'Contact Phone',
-    type: 'number',
-    pattern: /^[0-9]*$/,
-    patternError: "Numerical characters only"
-  },
-  {
-    key: 'email',
-    placeholder: 'email@gmail.com',
-    type: 'email',
-    pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-    patternError: "Please enter a valid email address"
-  },
-  {
-    key: 'linkedin',
-    placeholder: 'Linkedin'
-  },
-  {
-    key: 'message',
-    placeholder: 'Let\s talk about your idea'
-  },
-]
-
 
 function ContactForm(): JSX.Element {
+  const [tr] = useTranslation()
+
+  const t = (key: string) => tr(`contact-us.form.${key}`)
+
+  const FORM_FIELDS: FormField[] = [
+    {
+      key: 'companyName',
+      placeholder: t('company-name')
+    },
+    {
+      key: 'businessType',
+      placeholder: t('business-type')
+    },
+    [
+      {
+        key: 'address',
+        placeholder: t('address'),
+        flex: 5,
+      },
+      {
+        key: 'zipcode',
+        placeholder: t('zipcode'),
+        type: 'number',
+        flex: 2
+      },
+    ],
+    {
+      key: 'name',
+      placeholder: t('name')
+    },
+    {
+      key: 'phone',
+      placeholder: t('phone'),
+      type: 'number',
+      pattern: /^[0-9]*$/,
+      patternError: "Numerical characters only"
+    },
+    {
+      key: 'email',
+      placeholder: t('email'),
+      type: 'email',
+      pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+      patternError: "Please enter a valid email address"
+    },
+    {
+      key: 'linkedin',
+      placeholder: t('linkedin')
+    },
+    {
+      key: 'message',
+      placeholder: t('message'),
+    },
+  ]
+
   const FORM_FIELDS_FLAT = FORM_FIELDS.flat(2);
   const FORM_FIELDS_FLAT_MAP = useMemo(() => (FORM_FIELDS_FLAT.reduce((map: any, obj: any) => {
       map[obj.key] = obj;
@@ -186,7 +191,7 @@ function ContactForm(): JSX.Element {
   return (
     <div>
       <Typography className={classes.title}>
-        Fill out the form below and BM Allies will reach out to you as soon as possible!
+        {t('title')}
       </Typography>
       <Grid container>
         <Grid item xs={12} sm={6}>
@@ -206,12 +211,12 @@ function ContactForm(): JSX.Element {
             </LoadingButton>
             {formStatus === QueryStatus.SUCCESS && (
               <Typography className={classes.confirmationMessage}>
-                Your form has been submitted. A representative from our team will be in touch with you soon!
+                {t('success-message')}
               </Typography>
             )}
             {formStatus === QueryStatus.FAILED && (
               <Typography className={classes.confirmationMessage}>
-                Your form has could not be submitted. Please try again!
+                {t('error-message')}
               </Typography>
             )}
           </FormControl>
@@ -219,19 +224,18 @@ function ContactForm(): JSX.Element {
         <Grid item xs={12} sm={6} className={classes.contactInfo}>
           <br />
           <Typography className={classes.contactInfoTitle}>
-            Offices
+            {tr('contact-us.offices')}
           </Typography>
           <Typography className={classes.contactInfoText}>
-            2500 Chandler Ave, Suite 11
-            <br />
-            Las Vegas, Nevada 89120
+            <Trans i18nKey="contact-us.address" components={{ br: <br /> }} />
           </Typography>
           <Typography className={classes.contactInfoTitle}>
-            For Quick Inquiries
+            {tr('contact-us.inquiries')}
           </Typography>
           <Typography className={classes.contactInfoText}>
             <img src={usFlag} />
-            {' '}+1 833-464-4774
+            {' '}
+            {tr('contact-us.phone')}
           </Typography>
         </Grid>
       </Grid>

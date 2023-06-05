@@ -1,10 +1,28 @@
 import { Grid, Link, Typography } from '@mui/material';
-import { FOOTER_ITEMS, FOOTER_SOCIAL_SHARE_ITEMS } from './Footer.constants';
 import { FooterColumn, FooterItem, FooterSocialShare } from './Footer.types';
 import useStyles from './styles';
+import { useTranslation } from "react-i18next";
 
 function Footer(): JSX.Element {
   const { classes } = useStyles();
+  const [tr] = useTranslation();
+  const t = (key: string) => tr(`footer.${key}`);
+
+  const FOOTER_ITEMS: FooterColumn[] = [
+    {
+      title: t('items[0].title'),
+      items: [
+        {
+          title: t('items[0].items[0].title'),
+          link: '/contact'
+        },
+      ]
+    },
+  ]
+
+  const FOOTER_SOCIAL_SHARE_ITEMS: FooterSocialShare[] = [
+
+  ]
 
   const renderFooterItem = (item: FooterItem, index: number) => {
     return (<Grid item style={{ marginTop: 4 }} key={index}>

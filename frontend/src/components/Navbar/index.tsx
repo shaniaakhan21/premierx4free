@@ -2,10 +2,14 @@ import { Nav, Navbar } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from '../Logo';
 import useStyles from "./styles"
+import { useTranslation } from "react-i18next";
 
 function AppNavbar() {
   const { classes } = useStyles();
   const location = useLocation();
+  const [tr] = useTranslation();
+
+  const t = (key: string) => tr(`nav.${key}`);
 
   return (
     <Navbar bg="white" expand="lg">
@@ -16,25 +20,16 @@ function AppNavbar() {
         <Navbar.Toggle aria-controls="navbar-nav" />
         <Navbar.Collapse id="navbar-nav">
           <Nav className="ms-auto">
-            <Link to="/" className={`${classes.link} nav-link ${location.pathname === "/" ? "active" : ""}`}>About
-              Us</Link>
-            <Link to="/team" className={`${classes.link} nav-link ${location.pathname === "/team" ? "active" : ""}`}>Meet
-              the Team</Link>
-            <Link to="/partners"
-                  className={`${classes.link} nav-link ${location.pathname === "/partners" ? "active" : ""}`}>Strategic
-              Partners</Link>
-            <Link to="/plans" className={`${classes.link} nav-link ${location.pathname === "/plans" ? "active" : ""}`}>Plan
-              Options</Link>
-            <Link to="/contact"
-                  className={`${classes.link} nav-link ${location.pathname === "/contact" ? "active" : ""}`}>Contact
-              Us</Link>
-            <Link to="/faq"
-                  className={`${classes.link} nav-link ${location.pathname === "/faq" ? "active" : ""}`}>FAQ</Link>
-            <Link to="/signup"
-                  className={`${classes.link} nav-link ${location.pathname === "/signup" ? "active" : ""}`}>Register</Link>
-            <Link to="/signin"
-                  className={`${classes.link} nav-link ${location.pathname === "/signin" ? "active" : ""}`}>Log
-              In</Link>
+            {[
+              [t('about-us'), "/"],
+              [t('meet-the-team'), "/team"],
+              [t('strategic-partners'), "/partners"],
+              [t('plan-options'), "/plans"],
+              [t('contact-us'), "/contact"],
+              [t('faq'), "/faq"],
+              [t('register'), "/signup"],
+              [t('log-in'), "/signin"]
+            ].map((item) => <Link to={item[1]} className={`${classes.link} nav-link ${location.pathname === item[1] ? "active" : ""}`}>{item[0]}</Link>)}
           </Nav>
         </Navbar.Collapse>
       </div>
