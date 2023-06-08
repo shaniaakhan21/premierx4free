@@ -40,6 +40,7 @@ connectDB()
   .then(() => console.info('Connected to MongoDB'))
   .catch((e) => console.error('Error connecting to MongoDB', e))
 
+app.use('/api', apiRouter)
 app.use(apiRouter)
 
 // app.get('*', (req, res) => {

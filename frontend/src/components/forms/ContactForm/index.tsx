@@ -90,13 +90,14 @@ function ContactForm(): JSX.Element {
     if (field.pattern) {
       schema = schema.matches(field.pattern, field.patternError)
     }
-    return schema
+    return field.key === 'linkedin' ? Yup.string() : schema
   }
 
   const validationSchema = Yup.object().shape(FORM_FIELDS_FLAT.reduce((prev, field) => ({
     ...prev,
     [field.key]: getValidationSchemaFromField(FORM_FIELDS_FLAT_MAP[field.key])
   }), {}))
+
   const {
     formState: { errors },
     register,

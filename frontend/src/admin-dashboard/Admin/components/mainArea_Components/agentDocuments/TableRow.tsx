@@ -115,7 +115,7 @@ function TableRow(props: TableRowProps) {
             </Col>
             <Col md={3}>
               <p className={classes.detailHeading}>Referrel Link <br /> <span
-                className={classes.detailText}>{`${window.location.origin}/r/${data?.agentId}-${generateUrlFriendlyString(user?.agentProfile?.name ?? '')}`}</span>
+                className={classes.detailText}>{`${window.location.origin}/r/${data?.agentId}-${generateUrlFriendlyString(data?.name ?? '')}`}</span>
               </p>
             </Col>
           </Row>

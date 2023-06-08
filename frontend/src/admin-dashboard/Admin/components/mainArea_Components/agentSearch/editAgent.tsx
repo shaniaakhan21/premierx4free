@@ -166,6 +166,7 @@ export default function EditAgent({ onClose, agent }: CreateContractProps) {
                 <Select<Roles[]>
                   labelId="role-label"
                   multiple
+                  name="roles"
                   value={state.roles ?? []}
                   onChange={onChange as any}
                   input={<OutlinedInput label="Roles" />}

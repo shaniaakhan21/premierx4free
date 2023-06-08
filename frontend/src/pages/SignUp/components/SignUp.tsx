@@ -179,17 +179,17 @@ function SignUp(): JSX.Element {
                 setZipCode(e.target.value)
               }}
             />
-            <input
-              type="number"
-              className={`${classes.formControl} form-control`}
-              id="link-ref"
-              placeholder={tf('referral-code')}
-              value={referral}
-              disabled={disableReferral}
-              onChange={(e) => {
-                setReferral(e.target.value)
-              }}
-            />
+            {/*<input*/}
+            {/*  type="hidden"*/}
+            {/*  className={`${classes.formControl} form-control`}*/}
+            {/*  id="link-ref"*/}
+            {/*  placeholder={tf('referral-code')}*/}
+            {/*  value={referral}*/}
+            {/*  disabled={disableReferral}*/}
+            {/*  onChange={(e) => {*/}
+            {/*    setReferral(e.target.value)*/}
+            {/*  }}*/}
+            {/*/>*/}
           </div>
 
           <div className="form-group">

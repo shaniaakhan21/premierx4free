@@ -33,7 +33,7 @@ function PremierXInfo() {
           </Typography>
           <div className={classes.text}>
             <ul>
-              {[0, 1, 2, 3, 4, 5, 6].map((n) => <li>{t(`how-we-do-it[${n}]`)}</li>)}
+              {[0, 1, 2, 3, 4, 5].map((n) => <li>{t(`how-we-do-it[${n}]`)}</li>)}
             </ul>
           </div>
         </Grid>
