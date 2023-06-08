@@ -4,13 +4,14 @@ import { getAllAgents } from '../../../../../services/agent';
 import { useAuth } from '../../../../../contexts/auth.context';
 import { useEffect, useState } from 'react';
 import { Pagination } from "@mui/lab";
+import AgentProfile from "../../../../../models/agentProfile.model";
 
 function AgentDocuments() {
   useEffect(() => {
     getAllAgentsFunc()
   }, [])
   const { classes } = useStyles()
-  const [data, setData] = useState<[]>()
+  const [data, setData] = useState<AgentProfile[]>()
   const { user } = useAuth()
   const [limit, setLimit] = useState(10)
   const [skip, setSkip] = useState(0)
@@ -33,7 +34,7 @@ function AgentDocuments() {
         <p className={classes.agentdocuments_text}>Upload Documents</p>
         <div className={classes.agentTable}>
           {data?.slice(skip, limit + skip).map((dt, i) => (
-            <TableRow data={dt} index={i} dataLength={data.length} />
+            <TableRow reqReload={() => getAllAgentsFunc()} data={dt} index={i} dataLength={data.length} />
           ))}
         </div>
       </div>

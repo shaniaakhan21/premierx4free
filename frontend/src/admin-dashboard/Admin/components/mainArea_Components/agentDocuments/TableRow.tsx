@@ -1,48 +1,55 @@
 import { makeStyles } from '../../../../../utils/makeStyles';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { uploadFileRequest } from '../../../../../services/uploadFile';
 import { useAuth } from '../../../../../contexts/auth.context';
 import { generateUrlFriendlyString } from "../../../../../helpers/global";
+import { AlertTitle } from "@mui/lab";
+import { Alert } from "@mui/material";
+import * as React from "react";
+import AgentProfile from "../../../../../models/agentProfile.model";
 
 
 interface TableRowProps {
-  data: any,
+  data: AgentProfile,
+  reqReload?: () => void,
   index: number,
   dataLength: number
 }
 
 
-function TableRow(props: TableRowProps) {
+function TableRow({ data, index, dataLength, reqReload }: TableRowProps) {
   interface agentFilesInterface {
     ndaFile?: any,
     contractFile?: any
   }
 
-  const { data, index, dataLength } = props
   const { classes } = useStyles()
   const [toggle, setToggle] = useState(false)
   const [agentFiles, setAgentFiles] = useState<agentFilesInterface>()
   const { user } = useAuth()
+  const [showSuccess, setShowSuccess] = useState<'nda' | 'contract' | undefined>()
 
-  const uploadFile = async () => {
-    if (agentFiles?.ndaFile) {
-      let formData = new FormData()
-      formData.append("file", agentFiles?.ndaFile[0]);
-      formData.append("fileName", agentFiles?.ndaFile[0].name);
-      console.log("user from agent data dash",)
-      await uploadFileRequest(formData, user?.jwtToken ?? "", { agentID: data?.agentId, fileType: "NDA" })
-    }
-    if (agentFiles?.contractFile) {
-      let formData = new FormData()
-      formData.append("file", agentFiles?.contractFile[0]);
-      formData.append("fileName", agentFiles?.contractFile[0].name);
-      console.log("user from agent data dash",)
+  const uploadFile = useCallback(async (file: File, type: 'nda' | 'contract') => {
+    let formData = new FormData()
+    formData.append("file", file);
+    formData.append("fileName", file.name);
+    if (type === 'nda') {
+      return await uploadFileRequest(formData, user?.jwtToken ?? "", { agentID: data?.agentId, fileType: "NDA" })
+    } else {
       await uploadFileRequest(formData, user?.jwtToken ?? "", { agentID: data?.agentId, fileType: "contract" })
     }
-    window.location.reload()
-  }
+    setShowSuccess(type)
+    setTimeout(() => {
+      setShowSuccess(undefined)
+      reqReload?.()
+    }, 3000);
+  }, [data, reqReload, user?.jwtToken])
+
+  const handleFileChange = useCallback((type: 'nda' | 'contract') => (e: any) => {
+    uploadFile(e.target.files?.[0], type)
+  }, [uploadFile])
 
   return (
     <>
@@ -97,21 +104,21 @@ function TableRow(props: TableRowProps) {
             </Col>
             <Col md={3}>
               <p className={classes.detailHeading}>Address <br /> <span
-                className={classes.detailText}>{data.location.address}</span></p>
+                className={classes.detailText}>{data.location?.address}</span></p>
             </Col>
             <Col md={3}>
               <p className={classes.detailHeading}>City <br /> <span
-                className={classes.detailText}>{data.location.city}</span></p>
+                className={classes.detailText}>{data.location?.city}</span></p>
             </Col>
           </Row>
           <Row>
             <Col md={3}>
               <p className={classes.detailHeading}>State <br /> <span
-                className={classes.detailText}>{data.location.state}</span></p>
+                className={classes.detailText}>{data.location?.state}</span></p>
             </Col>
             <Col md={3}>
               <p className={classes.detailHeading}>Zip Code <br /> <span
-                className={classes.detailText}>{data.location.zip}</span></p>
+                className={classes.detailText}>{data.location?.zip}</span></p>
             </Col>
             <Col md={3}>
               <p className={classes.detailHeading}>Referrel Link <br /> <span
@@ -128,12 +135,18 @@ function TableRow(props: TableRowProps) {
                 <input className={classes.upload_file_input}
                        value={agentFiles?.ndaFile[0] ? agentFiles.ndaFile[0].name : ""} />
                 <label className={classes.upload_file_button}>
-                  <input type='file' style={{ display: "none" }} onChange={(e) => {
-                    setAgentFiles({ ...agentFiles, ndaFile: e.target?.files })
-                  }} />
+                  <input type='file' style={{ display: "none" }} onChange={handleFileChange('nda')} />
                   Upload File
                 </label>
               </div>
+              {showSuccess === 'nda' && <Alert severity="success" style={{ marginTop: 10 }}>
+                <AlertTitle>Success</AlertTitle>
+                NDA Agreement Uploaded Successfully
+              </Alert>}
+              {data?.nda && <Alert severity="warning" style={{ marginTop: 10 }}>
+                <AlertTitle>Warning</AlertTitle>
+                User already has an NDA Agreement. Uploading a new one will replace the old one.
+              </Alert>}
             </Col>
             <Col md={4} className={classes.form_container_element}>
               <p>Commission Agreement</p>
@@ -141,18 +154,21 @@ function TableRow(props: TableRowProps) {
                 <input className={classes.upload_file_input}
                        value={agentFiles?.contractFile ? agentFiles.contractFile[0].name : ""} />
                 <label className={classes.upload_file_button}>
-                  <input type='file' style={{ display: "none" }} onChange={(e) => {
-                    setAgentFiles({ ...agentFiles, contractFile: e.target?.files })
-                  }} />
+                  <input type='file' style={{ display: "none" }} onChange={handleFileChange('contract')} />
                   Upload File
                 </label>
               </div>
+              {showSuccess === 'contract' && <Alert severity="success" style={{ marginTop: 10 }}>
+                <AlertTitle>Success</AlertTitle>
+                Commission Agreement Uploaded Successfully
+              </Alert>}
+              {data?.contract && <Alert severity="warning" style={{ marginTop: 10 }}>
+                <AlertTitle>Warning</AlertTitle>
+                User already has an Commission Agreement. Uploading a new one will replace the old one.
+              </Alert>}
             </Col>
 
           </Row>
-          <div style={{ display: "flex", flexDirection: "row-reverse" }}>
-            <button className={classes.saveButton} onClick={uploadFile}>save</button>
-          </div>
         </div>
       </div> : null}
     </>)
