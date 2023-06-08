@@ -25,26 +25,35 @@ function TableRow({ data, index, dataLength, reqReload }: TableRowProps) {
     contractFile?: any
   }
 
+  const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
   const { classes } = useStyles()
   const [toggle, setToggle] = useState(false)
   const [agentFiles, setAgentFiles] = useState<agentFilesInterface>()
   const { user } = useAuth()
   const [showSuccess, setShowSuccess] = useState<'nda' | 'contract' | undefined>()
+  const [showLoading, setShowLoading] = useState<'nda' | 'contract' | undefined>()
 
   const uploadFile = useCallback(async (file: File, type: 'nda' | 'contract') => {
-    let formData = new FormData()
-    formData.append("file", file);
-    formData.append("fileName", file.name);
-    if (type === 'nda') {
-      return await uploadFileRequest(formData, user?.jwtToken ?? "", { agentID: data?.agentId, fileType: "NDA" })
-    } else {
-      await uploadFileRequest(formData, user?.jwtToken ?? "", { agentID: data?.agentId, fileType: "contract" })
+    setShowLoading(type)
+    try {
+      await wait(2000)
+      let formData = new FormData()
+      formData.append("file", file);
+      formData.append("fileName", file.name);
+      if (type === 'nda') {
+        await uploadFileRequest(formData, user?.jwtToken ?? "", { agentID: data?.agentId, fileType: "NDA" })
+      } else {
+        await uploadFileRequest(formData, user?.jwtToken ?? "", { agentID: data?.agentId, fileType: "contract" })
+      }
+      setShowSuccess(type)
+      setTimeout(() => {
+        setShowSuccess(undefined)
+        reqReload?.()
+      }, 5000);
+    } finally {
+      setShowLoading(undefined)
     }
-    setShowSuccess(type)
-    setTimeout(() => {
-      setShowSuccess(undefined)
-      reqReload?.()
-    }, 3000);
   }, [data, reqReload, user?.jwtToken])
 
   const handleFileChange = useCallback((type: 'nda' | 'contract') => (e: any) => {
@@ -143,6 +152,10 @@ function TableRow({ data, index, dataLength, reqReload }: TableRowProps) {
                 <AlertTitle>Success</AlertTitle>
                 NDA Agreement Uploaded Successfully
               </Alert>}
+              {showLoading === 'nda' && <Alert severity="info" style={{ marginTop: 10 }}>
+                <AlertTitle>Information</AlertTitle>
+                Uploading NDA Agreement. Please wait...
+              </Alert>}
               {data?.nda && <Alert severity="warning" style={{ marginTop: 10 }}>
                 <AlertTitle>Warning</AlertTitle>
                 User already has an NDA Agreement. Uploading a new one will replace the old one.
@@ -161,6 +174,10 @@ function TableRow({ data, index, dataLength, reqReload }: TableRowProps) {
               {showSuccess === 'contract' && <Alert severity="success" style={{ marginTop: 10 }}>
                 <AlertTitle>Success</AlertTitle>
                 Commission Agreement Uploaded Successfully
+              </Alert>}
+              {showLoading === 'contract' && <Alert severity="info" style={{ marginTop: 10 }}>
+                <AlertTitle>Information</AlertTitle>
+                Uploading Commission Agreement. Please wait...
               </Alert>}
               {data?.contract && <Alert severity="warning" style={{ marginTop: 10 }}>
                 <AlertTitle>Warning</AlertTitle>
