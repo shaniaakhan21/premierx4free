@@ -26,7 +26,7 @@ function AppNavbar() {
               [t('strategic-partners'), "/partners"],
               [t('plan-options'), "/plans"],
               [t('contact-us'), "/contact"],
-              [t('faq'), "/faq"],
+              // [t('faq'), "/faq"],
               [t('register'), "/signup"],
               [t('log-in'), "/signin"]
             ].map((item) => <Link to={item[1]} className={`${classes.link} nav-link ${location.pathname === item[1] ? "active" : ""}`}>{item[0]}</Link>)}
