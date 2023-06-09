@@ -17,5 +17,6 @@ master:
     - npm run build
     - pm2 delete "premierx-backend" || exit_code=$?
     - pm2 start premieRx.pm2.config.js --env production
+    - ls -alh
     - chmod 777 -R upload
     - chmod 777 -R tmp
