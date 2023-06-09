@@ -8,7 +8,7 @@ master:
     - cd /home/gitlab-runner/publicwebsite/frontend
     - git fetch origin master
     - git reset --hard origin/master
-    - git clean -f -d
+#    - git clean -f -d
     - git pull
     - npm i --force
     - npm run build
@@ -17,6 +17,11 @@ master:
     - npm run build
     - pm2 delete "premierx-backend" || exit_code=$?
     - pm2 start premieRx.pm2.config.js --env production
-    - ls -alh
-    - chmod 777 -R uploads
-    - chmod 777 -R tmp
+    - mkdir -p /home/gitlab-runner/publicwebsite/backend/dist/uploads/contract/
+    - mkdir -p /home/gitlab-runner/publicwebsite/backend/dist/uploads/nda/
+    - mkdir -p /home/gitlab-runner/publicwebsite/backend/dist/uploads/marketingMaterials/
+    - mkdir -p /home/gitlab-runner/publicwebsite/backend/dist/uploads/temp/
+    - mkdir -p /home/gitlab-runner/publicwebsite/backend/dist/uploads/profileImage/
+    - mkdir -p /home/gitlab-runner/publicwebsite/backend/dist/tmp/
+    - chmod 777 -R /home/gitlab-runner/publicwebsite/backend/dist/uploads/
+    - chmod 777 -R /home/gitlab-runner/publicwebsite/backend/dist/tmp/
