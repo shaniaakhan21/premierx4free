@@ -2,6 +2,7 @@ import { Grid, Link, Typography } from '@mui/material';
 import { FooterColumn, FooterItem, FooterSocialShare } from './Footer.types';
 import useStyles from './styles';
 import { useTranslation } from "react-i18next";
+import Logo from "../Logo";
 
 function Footer(): JSX.Element {
   const { classes } = useStyles();
@@ -55,7 +56,7 @@ function Footer(): JSX.Element {
   return (<Grid container className={classes.container} alignItems='center'>
     <Grid item xs={12} md={2}>
       <Link href='/'>
-        <img src={'/assets/svg/logo.svg'} className={classes.logo} />
+        <Logo />
       </Link>
     </Grid>
     <Grid item xs={12} md={8}>
