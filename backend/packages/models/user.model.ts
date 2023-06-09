@@ -130,7 +130,7 @@ export class User extends ModelInterface {
   @Exclude()
   @IsString()
   @MinLength(8)
-  @prop({ unique: true })
+  @prop()
   public password!: string
 
   @Expose()
