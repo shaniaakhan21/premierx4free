@@ -32,9 +32,9 @@ function AgentDocuments() {
       <p className={classes.agentdocuments_Headingtext}>Agent Documents</p>
       <div className={classes.tableContainer}>
         <p className={classes.agentdocuments_text}>Upload Documents</p>
-        <div className={classes.agentTable}>
+        <div className={`${classes.agentTable} agentTable`}>
           {data?.slice(skip, limit + skip).map((dt, i) => (
-            <TableRow reqReload={() => getAllAgentsFunc()} data={dt} index={i} dataLength={data.length} />
+            <TableRow reqReload={() => getAllAgentsFunc()} data={dt} index={i} dataLength={data.length} limit={limit} />
           ))}
         </div>
       </div>

@@ -9,6 +9,8 @@ import AgentHeader from '../../../Dashboard/components/agent-header/AgentHeader'
 import AgentSearchPage from './mainArea_Components/agentSearch/AgentSearchPage';
 import { Route, Routes } from "react-router-dom";
 
+import './mainArea.scss'
+
 function MainArea(): JSX.Element {
   const { classes } = useStyles()
 

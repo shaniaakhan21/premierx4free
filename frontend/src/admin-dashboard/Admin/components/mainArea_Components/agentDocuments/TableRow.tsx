@@ -16,10 +16,11 @@ interface TableRowProps {
   reqReload?: () => void,
   index: number,
   dataLength: number
+  limit: number
 }
 
 
-function TableRow({ data, index, dataLength, reqReload }: TableRowProps) {
+function TableRow({ data, index, dataLength, reqReload, limit }: TableRowProps) {
   interface agentFilesInterface {
     ndaFile?: any,
     contractFile?: any
@@ -60,10 +61,15 @@ function TableRow({ data, index, dataLength, reqReload }: TableRowProps) {
     uploadFile(e.target.files?.[0], type)
   }, [uploadFile])
 
-  return (
-    <>
+  return (<>
+    <div
+      className={'tableRow'}>
       <div
-        className={index == 0 ? classes.firstTablerow : index == dataLength - 1 ? classes.lastTablerow : classes.tablerow}>
+        className='header'
+        onClick={() => {
+          setToggle(!toggle)
+        }}
+      >
         <div className={classes.tableRow_agentDetails}>
           <div className={classes.headingDescription}>
             <div><img src='/assets/svg/icons/icon_person.svg' className={classes.headingIcon} /></div>
@@ -84,13 +90,11 @@ function TableRow({ data, index, dataLength, reqReload }: TableRowProps) {
         <div onClick={() => {
           setToggle(!toggle)
         }}>
-          {toggle
-            ? <img src='/assets/svg/minus.svg' className={classes.headerSvg} />
-            : <img src='/assets/svg/plus.svg' className={classes.headerSvg} />
-          }
+          {toggle ? <img src='/assets/svg/minus.svg' className={classes.headerSvg} /> :
+            <img src='/assets/svg/plus.svg' className={classes.headerSvg} />}
         </div>
       </div>
-      {toggle ? <div className={classes.tablerow_extension}>
+      <div className={`tablerow_extension${toggle ? ' visible' : ''}`}>
         <div className={classes.table_agent_email}>
           <div className={classes.headingDescription}>
             <div><img src='/assets/svg/icons/iconEnvelopeClosed.svg' className={classes.headingIcon} /></div>
@@ -184,115 +188,41 @@ function TableRow({ data, index, dataLength, reqReload }: TableRowProps) {
                 User already has an Commission Agreement. Uploading a new one will replace the old one.
               </Alert>}
             </Col>
-
           </Row>
         </div>
-      </div> : null}
-    </>)
+      </div>
+    </div>
+  </>)
 }
 
 const useStyles = makeStyles()(() => ({
-  tablerow: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    fontFamily: "Nunito Sans",
-    border: "1px solid #D6D9DB",
-    //borderRadius:"10px 10px 0 0",
-    borderBottom: "0px",
-    padding: "22px 29px 23.62px 36px",
-    '@media (max-width:768px)': {
-      padding: "22px 16px 23px 16px"
-      //flexDirection:"column"
-    },
-  },
-  firstTablerow: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    fontFamily: "Nunito Sans",
-    border: "1px solid #D6D9DB",
-    borderBottom: "0px",
-    borderRadius: "10px 10px 0 0",
-    padding: "22px 29px 23.62px 36px",
-    '@media (max-width:768px)': {
-      padding: "22px 16px 23px 16px"
-      //flexDirection:"column"
-    },
-  },
-  lastTablerow: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    fontFamily: "Nunito Sans",
-    border: "1px solid #D6D9DB",
-    borderRadius: "0 0 10px 10px",
-    padding: "22px 29px 23.62px 36px",
-    '@media (max-width:768px)': {
-      padding: "22px 16px 23px 16px"
-      //flexDirection:"column"
-    },
-  },
-  tablerow_extension: {
-    border: "1px solid #D6D9DB",
-    padding: "13px 31px 21px 30px",
-    '@media (max-width:768px)': {
-      padding: 0,
-      //flexDirection:"column"
-    },
-  },
   detailHeading: {
-    fontFamily: "Nunito Sans",
-    fontWeight: "400",
-    fontSize: "16px",
-    lineHeight: "21.82px",
-    color: "#667B8B"
-  },
-  detailText: {
-    fontWeight: "768px",
-    fontSize: "18px",
-    lineHeight: "24.55px",
-    color: "#000000"
-  },
-  rowExtension_form_container: {
+    fontFamily: "Nunito Sans", fontWeight: "400", fontSize: "16px", lineHeight: "21.82px", color: "#667B8B"
+  }, detailText: {
+    fontWeight: "768px", fontSize: "18px", lineHeight: "24.55px", color: "#000000"
+  }, rowExtension_form_container: {
     display: "flex",
-    flexDirection: "row",
-    //gap:"5%",
+    flexDirection: "row", //gap:"5%",
     backgroundColor: "#D6D9DB",
     padding: "20px",
     fontFamily: "Nunito Sans",
     border: "1px solid #D6D9DB",
     borderRadius: "10px",
     '@media (max-width:768px)': {
-      margin: "0 !important",
-      padding: 0,
-      borderRadius: 0
+      margin: "0 !important", padding: 0, borderRadius: 0
       //flexDirection:"column"
     },
 
-  },
-  upload_file: {
-    display: "flex",
-    flexDirection: "row"
-  },
-  upload_file_input: {
-    width: "55%",
-    borderRadius: "6px 0 0 6px",
-    border: "1px solid #D6D9DB"
-  },
-  upload_file_button: {
-    backgroundColor: "#64B5F6",
-    padding: "9px 15px 8px 14px",
-    borderRadius: "0 6px 6px 0"
-  },
-  input_checkbox: {
-    width: '20px',
-    height: "20px",
-    clipPath: "circle(42% at 50% 50%)",
-    marginBottom: "15px"
+  }, upload_file: {
+    display: "flex", flexDirection: "row"
+  }, upload_file_input: {
+    width: "55%", borderRadius: "6px 0 0 6px", border: "1px solid #D6D9DB"
+  }, upload_file_button: {
+    backgroundColor: "#64B5F6", padding: "9px 15px 8px 14px", borderRadius: "0 6px 6px 0"
+  }, input_checkbox: {
+    width: '20px', height: "20px", clipPath: "circle(42% at 50% 50%)", marginBottom: "15px"
 
-  },
-  checkbox_label: {
+  }, checkbox_label: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
@@ -301,42 +231,27 @@ const useStyles = makeStyles()(() => ({
     fontSize: "18px",
     lineHeight: "24.55px",
     fontFamily: "Nunito Sans"
-  },
-  actionButton_container: {
-    marginTop: '18px',
-    display: "flex",
-    flexDirection: "row-reverse",
-    gap: "20px"
-  },
-  reject_button: {
+  }, actionButton_container: {
+    marginTop: '18px', display: "flex", flexDirection: "row-reverse", gap: "20px"
+  }, reject_button: {
     marginLeft: "16px"
-  },
-  headerSvg: {
-    width: "16px",
-    height: "16px"
-  },
-  headingDescription: {
-    display: "flex",
-    flexDirection: "row",
-    width: "50%",
-    '@media (max-width:768px)': {
+  }, headerSvg: {
+    width: "16px", height: "16px"
+  }, headingDescription: {
+    display: "flex", flexDirection: "row", width: "50%", '@media (max-width:768px)': {
       width: "100%"
       //flexDirection:"column"
     },
-  },
-  headingIcon: {
-    width: "22.1px",
-    height: "22.1px"
-  },
-  headingText: {
+  }, headingIcon: {
+    width: "22.1px", height: "22.1px"
+  }, headingText: {
     marginLeft: "15px",
     fontFamily: "Nunito Sans",
     fontWeight: "400",
     fontSize: "18px",
     lineHeight: "24.55px",
     color: "#596778"
-  },
-  // reject_button_container:{
+  }, // reject_button_container:{
   //     display:"flex",
   //     flexDirection:"row",
   //     justifyContent:"space-between",
@@ -357,42 +272,22 @@ const useStyles = makeStyles()(() => ({
   //     height:"20px"
   // },
   saveButton: {
-    padding: "12px 42px 11px 42px",
-    backgroundColor: "#64B5F6",
-    borderRadius: "6px",
-    margin: "10px"
-  },
-  tableRow_agentDetails: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    width: "100%",
-    '@media (max-width:768px)': {
+    padding: "12px 42px 11px 42px", backgroundColor: "#64B5F6", borderRadius: "6px", margin: "10px"
+  }, tableRow_agentDetails: {
+    display: "flex", flexDirection: "row", justifyContent: "space-evenly", width: "100%", '@media (max-width:768px)': {
       justifyContent: "space-between"
       //flexDirection:"column"
     },
-  },
-  tableRow_agentDetails_two: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    width: "100%",
-    '@media (max-width:768px)': {
-      display: "none",
-      //flexDirection:"column"
+  }, tableRow_agentDetails_two: {
+    display: "flex", flexDirection: "row", justifyContent: "space-evenly", width: "100%", '@media (max-width:768px)': {
+      display: "none", //flexDirection:"column"
     },
-  },
-  form_container_element: {
+  }, form_container_element: {
     marginTop: "17px !important"
-  },
-  table_agent_info: {
+  }, table_agent_info: {
     padding: "14px 86px 25px 15px"
-  },
-  table_agent_email: {
-    backgroundColor: "#D6D9DB",
-    width: "100%",
-    padding: "14px 86px 25px 15px",
-    '@media (min-width:768px)': {
+  }, table_agent_email: {
+    backgroundColor: "#D6D9DB", width: "100%", padding: "14px 86px 25px 15px", '@media (min-width:768px)': {
       display: "none"
       //flexDirection:"column"
     },

@@ -12,7 +12,6 @@ import AgentProfileModel, {
   AgentStatus
 } from '@models/agent-profile.model'
 import UserModel, { User } from '@models/user.model'
-import * as bcrypt from 'bcryptjs'
 import { Exclude, Expose, plainToClass, Type } from 'class-transformer'
 import { IsArray, IsEmail, IsEnum, IsOptional, IsString, ValidateNested } from 'class-validator'
 
@@ -140,12 +139,8 @@ const updateAgentProfile: CustomRequestHandler<{}, any, UpdateAgentRequest> = as
 
   user.email = request.email
   user.roles = request.roles
-  if (request.password) {
-    await bcrypt.hash(request.password, 10, (err, encryptedPass) => {
-      if (err) throw err
-      user.password = encryptedPass
-    })
-  }
+
+  if (request.password) user.password = request.password
 
   agent.profileImage = moveFile(request.profileImage, 'profileImage', agent.profileImage)
   agent.nda = moveFile(request.nda, 'nda', agent.nda)

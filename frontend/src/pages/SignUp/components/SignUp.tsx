@@ -139,8 +139,8 @@ function SignUp(): JSX.Element {
           </div>
           <div className="form-group">
             <label className={classes.label} htmlFor="address">{tf('address')}</label>
-            <input style={{ height: '100px' }}
-                   type="text"
+            <textarea
+                   rows={3}
                    className={`${classes.formControl} form-control`}
                    id="address"
                    placeholder={tf('address-placeholder')}
@@ -193,7 +193,7 @@ function SignUp(): JSX.Element {
           </div>
 
           <div className="form-group">
-            <div className={` ${classes.cstmpsdbox} "input-group" `}>
+            <div className={classes.cstmpsdbox}>
               <input
                 type={showPassword1 ? "text" : "password"}
                 className={`${classes.formControl} ${classes.custompsd} form-control`}
@@ -206,6 +206,7 @@ function SignUp(): JSX.Element {
               />
               <div className="input-group-append">
                 <button
+                  tabIndex={-1}
                   className={`${classes.eyebtn} btn btn-outline-secondary`}
                   type="button"
                   onClick={() => setShowPassword1(!showPassword1)}
@@ -217,7 +218,7 @@ function SignUp(): JSX.Element {
           </div>
 
           <div className="form-group">
-            <div className={` ${classes.cstmpsdbox} "input-group" `}>
+            <div className={classes.cstmpsdbox}>
               <input
                 type={showPassword2 ? "text" : "password"}
                 className={`${classes.formControl} ${classes.custompsd} form-control`}
@@ -230,6 +231,7 @@ function SignUp(): JSX.Element {
               />
               <div className="input-group-append">
                 <button
+                  tabIndex={-1}
                   className={`${classes.eyebtn} btn btn-outline-secondary`}
                   type="button"
                   onClick={() => setShowPassword2(!showPassword2)}

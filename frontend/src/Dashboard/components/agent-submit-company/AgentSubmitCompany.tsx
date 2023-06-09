@@ -23,7 +23,9 @@ function AgentSubmitCompany(): JSX.Element {
     typeOfBusiness?: string
   }
 
-  const [formData, setFormData] = useState<FormData>()
+  const [formData, setFormData] = useState<FormData>({
+    fullInsured: true
+  })
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     const form = event.currentTarget;
@@ -81,10 +83,10 @@ function AgentSubmitCompany(): JSX.Element {
             </Col>
           </Row>
           <Row>
-            <Col lg={6}>
+            <Col lg={12}>
               <Form.Group controlId="companyAddress">
                 <Form.Label>Company Address</Form.Label>
-                <Form.Control required type="text" className='long-text-area' onChange={(e) => {
+                <Form.Control required as="textarea" rows={3} onChange={(e) => {
                   setFormData({ ...formData, address: e.target.value })
                 }} />
                 <Form.Control.Feedback type="invalid">
@@ -132,7 +134,7 @@ function AgentSubmitCompany(): JSX.Element {
             <Col>
               <Form.Group controlId="fullTime">
                 <Form.Label>Full Time</Form.Label>
-                <Form.Control required type="text" onChange={(e) => {
+                <Form.Control required type="number" onChange={(e) => {
                   setFormData({ ...formData, fullTime: e.target.value })
                 }} />
                 <Form.Control.Feedback type="invalid">
@@ -143,7 +145,7 @@ function AgentSubmitCompany(): JSX.Element {
             <Col>
               <Form.Group controlId="partTime">
                 <Form.Label>Part Time</Form.Label>
-                <Form.Control required type="text" onChange={(e) => {
+                <Form.Control required type="number" onChange={(e) => {
                   setFormData({ ...formData, partTime: e.target.value })
                 }} />
                 <Form.Control.Feedback type="invalid">
@@ -179,83 +181,19 @@ function AgentSubmitCompany(): JSX.Element {
           <Row className="flex-box-it first-phone-row">
             <Col>
               <Form.Group controlId="fullInsured" className='another-flex'>
-                <Form.Label>Full Insured</Form.Label>
-                <div key="inline-radio">
-                  <Form.Check
-                    inline
-                    label="Yes"
-                    type="radio"
-                    id="fullInsuredYes"
-                    name="fullInsured"
-                    onChange={(e) => {
-                      setFormData({ ...formData, fullInsured: true })
-                    }}
-                  />
-                  <Form.Check
-                    inline
-                    label="No"
-                    type="radio"
-                    id="fullInsuredNo"
-                    name="fullInsured"
-                    onChange={(e) => {
-                      setFormData({ ...formData, fullInsured: false })
-                    }}
-                  />
-                </div>
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group controlId="selfInsured" className='another-flex'>
-                <Form.Label>Self Insured</Form.Label>
-                <div key="inline-radio">
-                  <Form.Check
-                    inline
-                    label="Yes"
-                    type="radio"
-                    id="selfInsuredYes"
-                    name="selfInsured"
-                    onChange={(e) => {
-                      setFormData({ ...formData, selfInsured: true })
-                    }}
-                  />
-                  <Form.Check
-                    inline
-                    label="No"
-                    type="radio"
-                    id="selfInsuredNo"
-                    name="selfInsured"
-                    onChange={(e) => {
-                      setFormData({ ...formData, selfInsured: false })
-                    }}
-                  />
-                </div>
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group controlId="noInsured" className='another-flex'>
-                <Form.Label>No Insured</Form.Label>
-                <div key="inline-radio">
-                  <Form.Check
-                    inline
-                    label="Yes"
-                    type="radio"
-                    id="noInsuredYes"
-                    name="noInsured"
-                    onChange={(e) => {
-                      setFormData({ ...formData, notInsured: true })
-                    }}
-                  />
-                  <Form.Check
-                    inline
-                    label="No"
-                    type="radio"
-                    id="noInsuredNo"
-                    name="noInsured"
-                    onChange={(e) => {
-                      setFormData({ ...formData, notInsured: false })
-                    }}
-                  />
-                </div>
+                <Form.Label>Insurance Type</Form.Label>
+                <Form.Select aria-label="Default select example" onChange={(e) => {
+                  setFormData(cs => {
+                    const fullInsured = e.target.value === 'full'
+                    const selfInsured = e.target.value === 'self'
+                    const notInsured = e.target.value === 'not'
+                    return ({ ...cs, fullInsured, selfInsured, notInsured })
+                  })
+                }}>
+                  <option value="full">Fully Insured</option>
+                  <option value="self">Self Insured</option>
+                  <option value="not">Not Insured</option>
+                </Form.Select>
               </Form.Group>
             </Col>
             <Col>

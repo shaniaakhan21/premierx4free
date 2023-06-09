@@ -106,7 +106,7 @@ function SignIn(): JSX.Element {
             <a href='/resetpassword' className={classes.linktosignin}>{t('reset-password')}</a>
           </div>
           <div className={`${classes.linktosignindiv} ${classes.extrapadding}`}>
-            <span className={classes.notalink}>{t('dont-have-account')}</span>
+            <span className={classes.notalink}>{t('dont-have-account')}</span>{' '}
             <a href='/signup' className={classes.linktosignin}>{t('register')}</a>
           </div>
 
