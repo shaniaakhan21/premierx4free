@@ -14,7 +14,11 @@ module.exports = {
         EMAIL_USERNAME: 'info@premierx4free.com',
         EMAIL_PASSWORD: 'rT@6_7cqT$',
         FRONTEND_URL: 'https://premierx4free.com',
-        NOTIFY_COMPANY_CREATE: 'info@premierx4free.com'
+        NOTIFY_COMPANY_CREATE: 'info@premierx4free.com',
+        AWS_ACCESS_KEY_ID: 'DO00YTWHX9E8V6PXDQ9B',
+        AWS_SECRET_ACCESS_KEY: 'tkOSuUFrZyoXktunYauz+UjA2nqa8M/jKWfqDVeY62U',
+        AWS_REGION: 'us-east-1',
+        AWS_ENDPOINT: 'https://nsur.nyc3.digitaloceanspaces.com'
       }
     }
   ]
