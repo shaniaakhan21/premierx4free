@@ -88,6 +88,10 @@ export const AuthenticateToken: (roles?: Roles[]) => RequestHandler = (roles) =>
 }
 
 @Exclude()
+@modelOptions({
+  options: { allowMixed: Severity.ERROR, customName: 'users' },
+  schemaOptions: { collection: 'users' }
+})
 @pre<User>('save', async function (next) {
   if (this.isModified('password') || this.isNew) {
     await bcrypt.hash(this.password, 10, (err, encryptedPass) => {
@@ -97,10 +101,6 @@ export const AuthenticateToken: (roles?: Roles[]) => RequestHandler = (roles) =>
     })
   }
   return next()
-})
-@modelOptions({
-  options: { allowMixed: Severity.ERROR, customName: 'users' },
-  schemaOptions: { collection: 'users' }
 })
 @plugin(AutoIncrementID, { field: 'userId' })
 export class User extends ModelInterface {
