@@ -333,7 +333,7 @@ export default function EditAgent({ onClose, agent }: CreateContractProps) {
                 value={''}
                 onChange={handleFileChange('nda')}
               />
-              {agent?.nda && <a href={`/api/uploads/nda/${agent?.nda}`} download>
+              {agent?.nda && <a target='_blank' href={agent?.nda} download>
                 <Button variant='contained' color='primary' style={{
                   marginTop: 10,
                   marginLeft: 10,
@@ -366,7 +366,7 @@ export default function EditAgent({ onClose, agent }: CreateContractProps) {
                 value={''}
                 onChange={handleFileChange('contract')}
               />
-              {agent?.contract && <a href={`/api/uploads/contract/${agent?.contract}`} download>
+              {agent?.contract && <a target='_blank' href={agent?.contract} download>
                 <Button variant='contained' color='primary' style={{
                   marginTop: 10,
                   marginLeft: 10,
