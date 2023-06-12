@@ -2,6 +2,7 @@ import { makeStyles } from '../../../../utils/makeStyles';
 import * as React from 'react';
 import { useAuth } from "../../../../contexts/auth.context";
 import { Link } from "react-router-dom";
+import { Avatar } from "@mui/material";
 
 function Sidebar(): JSX.Element {
   const { user } = useAuth()
@@ -14,7 +15,9 @@ function Sidebar(): JSX.Element {
           <a href='/'><img src='/assets/svg/logo_bold.svg' className={classes.logo} /></a>
         </div>
         <div className={classes.topRectangle_displayImage}>
-          <img src='/assets/svg/Dashboard/dummy.svg' className={classes.displayImage} />
+          <Avatar sx={{ width: 150, height: 150, marginBottom: 2 }} alt={user?.agentProfile?.name?.toUpperCase() ?? ''}
+                  variant='circular'
+                  src={user?.agentProfile?.profileImage} />
         </div>
         <div className={classes.topRectangle_text}>
           <p className={classes.nameText}>{user?.agentProfile?.name}</p>
@@ -59,7 +62,9 @@ const useStyles = makeStyles()(() => ({
     background: "linear-gradient(205.19deg, #64B5F6 1.82%, #0556A7 100%)"
   },
   topRectangle_displayImage: {
-    textAlign: "center"
+    display: "flex",
+    justifyContent: "center",
+    paddingTop: "10px"
   },
   topRectangle_logo: {
     textAlign: "center"

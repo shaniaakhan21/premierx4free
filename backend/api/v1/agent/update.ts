@@ -1,10 +1,8 @@
-import fs from 'fs'
-import path from 'path'
-
 import { ClassTransformerRoles, Roles } from '@helpers/access'
-import { CustomRequestHandler, RecordAlreadyExistsError, RecordNotFoundError } from '@helpers/errorHandler'
-import validateClass, { generateFileName, transactional } from '@helpers/global'
+import { CustomRequestHandler, RecordNotFoundError } from '@helpers/errorHandler'
+import validateClass, { transactional } from '@helpers/global'
 import { successResponse } from '@helpers/response'
+import { moveFile } from '@helpers/s3'
 import AgentProfileModel, {
   AgentProfile,
   AgentProfileCompany,
@@ -94,22 +92,6 @@ export class UpdateAgentRequest {
   public contract?: AgentProfile['contract']
 }
 
-const moveFile = (request: string | undefined, key: keyof AgentProfile, existing?: string) => {
-  if (request !== existing) {
-    if (!request) return undefined
-    try {
-      fs.renameSync(
-        path.join(__dirname, '../../../uploads/temp', request),
-        path.join(__dirname, `../../../uploads/${key}`, generateFileName(request))
-      )
-    } catch (e) {
-      throw new RecordAlreadyExistsError('File already used or invalid. Please re-upload.')
-    }
-    return request
-  }
-  return existing
-}
-
 const updateAgentProfile: CustomRequestHandler<{}, any, UpdateAgentRequest> = async (req, res) => {
   const admin = await UserModel.findByUserId(req.user!.subject)
   if (!admin) throw new RecordNotFoundError('Admin not found')
@@ -142,9 +124,9 @@ const updateAgentProfile: CustomRequestHandler<{}, any, UpdateAgentRequest> = as
 
   if (request.password) user.password = request.password
 
-  agent.profileImage = moveFile(request.profileImage, 'profileImage', agent.profileImage)
-  agent.nda = moveFile(request.nda, 'nda', agent.nda)
-  agent.contract = moveFile(request.contract, 'contract', agent.contract)
+  agent.profileImage = await moveFile(request.profileImage, 'profileImage', agent.profileImage)
+  agent.nda = await moveFile(request.nda, 'nda', agent.nda)
+  agent.contract = await moveFile(request.contract, 'contract', agent.contract)
 
   // Do not use `updateOne` method of mongoose, it will not trigger `pre` and `post` hooks
   await user.save()

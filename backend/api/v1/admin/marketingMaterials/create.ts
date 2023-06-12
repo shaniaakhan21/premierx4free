@@ -1,15 +1,13 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import fs from 'fs'
-import path from 'path'
 
 import { CustomRequestHandler } from '@helpers/errorHandler'
-import validateClass, { generateFileName } from '@helpers/global'
+import validateClass from '@helpers/global'
 import { successResponse } from '@helpers/response'
+import { moveFile } from '@helpers/s3'
 import MarketingMaterialsModel, { MarketingMaterials } from '@models/marketingMaterials.model'
 import MarketingMaterialsCategoryModel from '@models/marketingMaterialsCategory.model'
 import UserModel from '@models/user.model'
 import { plainToInstance } from 'class-transformer'
-import { UploadedFile } from 'express-fileupload'
 
 const createMarketingMaterial: CustomRequestHandler<{}, any, MarketingMaterials> = async (req, res) => {
   const me = await UserModel.findByUserId(req.user!.subject)
@@ -29,18 +27,9 @@ const createMarketingMaterial: CustomRequestHandler<{}, any, MarketingMaterials>
       ...request,
       lastUpdatedBy: me?._id
     }
-    if (req.files?.document && !(req.files?.document as UploadedFile[])?.[0]) {
-      const file = req.files?.document as UploadedFile
-      const fileName = generateFileName(file.name)
-      await file.mv(path.resolve(__dirname, '../../../../uploads/marketingMaterials', fileName))
-      if (existing.document) {
-        const existingFile = path.resolve(__dirname, '../../../../uploads/marketingMaterials', existing.document)
-        if (fs.existsSync(existingFile)) {
-          fs.unlinkSync(existingFile)
-        }
-      }
-      data.document = fileName
-    }
+
+    data.document = await moveFile(request.document, 'marketingMaterial', existing.document)
+
     existing.set(data)
     await existing.save()
     return res.json(successResponse(existing.format(req.user!.roles ?? [])))
@@ -49,12 +38,9 @@ const createMarketingMaterial: CustomRequestHandler<{}, any, MarketingMaterials>
     ...request,
     createdBy: me?._id
   }
-  if (req.files?.document && !(req.files?.document as UploadedFile[])?.[0]) {
-    const file = req.files?.document as UploadedFile
-    const fileName = generateFileName(file.name)
-    await file.mv(path.resolve(__dirname, '../../../../uploads/marketingMaterials', fileName))
-    data.document = fileName
-  }
+
+  data.document = await moveFile(request.document, 'marketingMaterial', undefined)
+
   const created = await MarketingMaterialsModel.create(data)
   return res.json(successResponse(created.format(req.user!.roles ?? [])))
 }

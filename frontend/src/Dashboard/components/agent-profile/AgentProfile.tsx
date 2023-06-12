@@ -20,7 +20,7 @@ function AgentProfile(props: Props): JSX.Element {
       <div className={`${classes.classes.cardCustBody}`}>
         <Avatar sx={{ width: 150, height: 150, marginBottom: 2 }} alt={user?.agentProfile?.name?.toUpperCase() ?? ''}
                 variant='circular'
-                src={user?.agentProfile?.profileImage && `/api/uploads/profileImage/${user?.agentProfile?.profileImage}`} />
+                src={user?.agentProfile?.profileImage} />
         <h3 className="card-title">{user?.agentProfile?.name}</h3>
         <span style={{ color: 'white!important' }} className="card-text">{user?.email}</span>
       </div>

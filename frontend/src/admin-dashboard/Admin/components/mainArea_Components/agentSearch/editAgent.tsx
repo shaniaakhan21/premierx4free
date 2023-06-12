@@ -10,7 +10,7 @@ import {
   AgentSearchBy,
   AgentSearchNormalResponse,
   AgentSearchPickerResponse,
-  AgentSearchResponse,
+  AgentSearchResponse, getAgentProfile, getAgentUser,
   updateAgentProfile,
   UpdateAgentProfileRequest,
   useAgentSearch
@@ -44,13 +44,17 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { uploadDocument } from "../../../../../services/upload";
 import { Roles } from "../../../../../models/user.model";
 import { AlertTitle } from "@mui/lab";
+import { useParams } from "react-router-dom";
+import { enqueueSnackbar, useSnackbar } from "notistack";
 
 export type CreateContractProps = {
   agent?: AgentSearchResponse<AgentSearchNormalResponse>['data'][0]
-  onClose: (shouldReload?: boolean) => void;
+  onClose?: (shouldReload?: boolean) => void;
 }
 
 export default function EditAgent({ onClose, agent }: CreateContractProps) {
+  const { enqueueSnackbar } = useSnackbar()
+  const { id } = useParams()
   const { user } = useAuth()
   const [query, setQuery] = useDebounceState('', 200);
   const { data, isLoading } = useAgentSearch<AgentSearchPickerResponse>(user!, query, 10, 0, AgentSearchBy.Name, true);
@@ -60,22 +64,54 @@ export default function EditAgent({ onClose, agent }: CreateContractProps) {
   const [expanded, onChangeCompany, setExpanded] = useInputState<AgentProfileCompany | undefined>(undefined);
 
   useEffect(() => {
-    setState({
-      roles: agent?.user.roles,
-      status: agent?.status,
-      name: agent?.name,
-      email: agent?.user?.email,
-      contactNo: agent?.contactNo,
-      companies: agent?.companies,
-      zip: agent?.location?.zip,
-      city: agent?.location?.city,
-      state: agent?.location?.state,
-      address: agent?.location?.address,
-      nda: agent?.nda,
-      contract: agent?.contract,
-      profileImage: agent?.profileImage
-    });
-  }, [agent])
+    if (agent) {
+      setState({
+        _id: agent?._id,
+        roles: agent?.user.roles,
+        status: agent?.status,
+        name: agent?.name,
+        email: agent?.user?.email,
+        contactNo: agent?.contactNo,
+        companies: agent?.companies,
+        zip: agent?.location?.zip,
+        city: agent?.location?.city,
+        state: agent?.location?.state,
+        address: agent?.location?.address,
+        nda: agent?.nda,
+        contract: agent?.contract,
+        profileImage: agent?.profileImage
+      });
+    }
+    if (id && id !== '') {
+      try {
+        setLoading('Loading agent details...')
+        getAgentUser(user!, parseInt(id, 10)).then((res) => {
+          const a = res.data.agentProfile
+          const u = res.data
+          setState({
+            _id: a?._id,
+            roles: u.roles,
+            status: a?.status,
+            name: a?.name,
+            email: u?.email,
+            contactNo: a?.contactNo,
+            companies: a?.companies,
+            zip: a?.location?.zip,
+            city: a?.location?.city,
+            state: a?.location?.state,
+            address: a?.location?.address,
+            nda: a?.nda,
+            contract: a?.contract,
+            profileImage: a?.profileImage
+          });
+        });
+      } catch (e: any) {
+        enqueueSnackbar(e.response?.data?.message ?? e.message, { variant: 'error' })
+      } finally {
+        setLoading(undefined)
+      }
+    }
+  }, [agent, id])
 
   const handleFileChange = useCallback((type: 'nda' | 'contract' | 'profileImage') => async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -95,18 +131,18 @@ export default function EditAgent({ onClose, agent }: CreateContractProps) {
   const onSubmit = useCallback(async () => {
     try {
 
-      setLoading(agent ? 'Updating agent' : 'Creating new agent')
+      setLoading((agent || !onClose) ? 'Updating agent' : 'Creating new agent')
       setShowBackDrop(true)
 
       await updateAgentProfile(user!, {
-        ...state,
-        _id: agent?._id!,
+        ...state
       })
 
-      setLoading(`Agent ${agent ? 'updated' : 'created'} successfully`)
+      setLoading(`Agent ${(agent || !onClose) ? 'updated' : 'created'} successfully`)
       setTimeout(() => {
         setShowBackDrop(false)
-        onClose(true)
+        onClose?.(true)
+        enqueueSnackbar(`Agent ${(agent || !onClose) ? 'updated' : 'created'} successfully`, { variant: 'success' })
       }, 1000)
     } catch (e: any) {
       alert(e.response?.data?.message ?? e.message)
@@ -126,8 +162,8 @@ export default function EditAgent({ onClose, agent }: CreateContractProps) {
           <CircularProgress color="inherit" />}
         {loading}
       </Backdrop>
-      <Dialog maxWidth='lg' fullWidth open onClose={() => onClose()}>
-        <DialogTitle>{agent ? `Update agent [ ${agent.name} ]` : 'Create new agent'}</DialogTitle>
+      <Dialog maxWidth='lg' fullWidth open onClose={() => onClose?.()}>
+        <DialogTitle>{(agent || !onClose) ? `Update agent [ ${agent?.name ?? id} ]` : 'Create new agent'}</DialogTitle>
         <DialogContent>
           <Alert severity="warning">
             <AlertTitle>Warning</AlertTitle>
@@ -137,7 +173,7 @@ export default function EditAgent({ onClose, agent }: CreateContractProps) {
           <Grid container spacing={2} style={{ marginTop: 5 }}>
             <Grid item xs={12} md={6} style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
               <Avatar sx={{ width: 100, height: 100 }} alt={state.name?.toUpperCase() ?? ''} variant='rounded'
-                      sizes='100%' src={agent?.profileImage && `/api/uploads/profileImage/${agent?.profileImage}`} />
+                      sizes='100%' src={agent?.profileImage ?? state?.profileImage} />
               <TextField
                 InputLabelProps={{ shrink: true }}
                 type="file"
@@ -490,8 +526,8 @@ export default function EditAgent({ onClose, agent }: CreateContractProps) {
           </Accordion>)}
         </DialogContent>
         <DialogActions>
-          <Button variant='contained' color='error' onClick={() => onClose()}>Cancel</Button>
-          <Button variant='contained' onClick={onSubmit}>{agent ? 'Update' : 'Create'}</Button>
+          {onClose && <Button variant='contained' color='error' onClick={() => onClose?.()}>Cancel</Button>}
+          <Button variant='contained' onClick={onSubmit}>{(agent || !onClose) ? 'Update' : 'Create'}</Button>
         </DialogActions>
       </Dialog>
     </>

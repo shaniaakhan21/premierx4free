@@ -8,6 +8,8 @@ import MarketingMaterialsCategory from "../../../../../models/marketingMaterials
 import { useAuth } from "../../../../../contexts/auth.context";
 import { createMarketingMaterial } from "../../../../../services/admin";
 import { useInputState } from "../../../../../hooks/useInputState";
+import { uploadDocument } from "../../../../../services/upload";
+import { useSnackbar } from "notistack";
 
 interface UploadMoreModalProps {
   onClose: (shouldRemove?: boolean) => void
@@ -15,6 +17,7 @@ interface UploadMoreModalProps {
 }
 
 function UploadMoreModal({ category, onClose }: UploadMoreModalProps): JSX.Element {
+  const { enqueueSnackbar } = useSnackbar()
   const { user } = useAuth()
 
   const [state, onChange, setState] = useInputState<Partial<Pick<MarketingMaterial, 'head' | 'description' | 'document' | 'category'>>>({})
@@ -26,17 +29,32 @@ function UploadMoreModal({ category, onClose }: UploadMoreModalProps): JSX.Eleme
       await createMarketingMaterial(user!, state as MarketingMaterial)
       onClose(true)
     } catch (e: any) {
-      alert(e.message)
+      enqueueSnackbar(e.message ?? 'Error creating marketing material', { variant: 'error' })
     } finally {
       setLoading(false)
+      enqueueSnackbar('Marketing material created successfully', { variant: 'success' })
     }
-  }, [user, category, onClose, state])
+  }, [user, onClose, state])
 
   useEffect(() => {
     setState({
       category: category._id
     })
   }, [category])
+
+  const handleFileChange = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      try {
+        enqueueSnackbar('Uploading marketing material...', { variant: 'info' })
+        const uploaded = await uploadDocument(user!, file)
+        setState(cs => ({ ...cs, document: uploaded?.[0] }))
+        enqueueSnackbar('Marketing material uploaded successfully', { variant: 'success' })
+      } catch (e) {
+        enqueueSnackbar('Failed to upload marketing material', { variant: 'error' })
+      }
+    }
+  }, [user])
 
   return (
     <>
@@ -45,14 +63,11 @@ function UploadMoreModal({ category, onClose }: UploadMoreModalProps): JSX.Eleme
           <div className='modal-heading'>
             <p>Upload More Documents</p>
           </div>
-
-          <code>{JSON.stringify(state)}</code>
-
           <div className='uploadMore_content'>
             <div style={{ marginTop: "28px" }}>
               <label className='formLabel'>Upload Documents</label>
               <div className='uploadDocument_form_container'>
-                <input name='document' type='file' onChange={onChange} className='uploadDocument_form_input' />
+                <input name='document' type='file' onChange={handleFileChange} className='uploadDocument_form_input' />
                 <div className='uploadDocument_form_button'>Upload File</div>
               </div>
             </div>

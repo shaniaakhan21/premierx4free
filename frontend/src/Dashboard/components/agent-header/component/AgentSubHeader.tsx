@@ -3,6 +3,7 @@ import { Button, Modal } from "react-bootstrap";
 import useStyles from "./styles"
 import { useAuth } from "../../../../contexts/auth.context";
 import { generateUrlFriendlyString } from "../../../../helpers/global";
+import { useSnackbar } from "notistack";
 
 interface PopupProps {
   show: boolean;
@@ -36,12 +37,14 @@ interface AgentSubHeaderProps {
 }
 
 const AgentSubHeader = (props: AgentSubHeaderProps): JSX.Element => {
+  const { enqueueSnackbar } = useSnackbar()
   const { user } = useAuth()
   const classes = useStyles();
 
   const copyLink = useCallback(() => {
     const url = `${window.location.origin}/r/${user?.agentProfile?.agentId}-${generateUrlFriendlyString(user?.agentProfile?.name ?? '')}`
     navigator.clipboard.writeText(url)
+    enqueueSnackbar("Link copied to clipboard", { variant: "success" })
   }, [user])
 
   return (
@@ -50,9 +53,9 @@ const AgentSubHeader = (props: AgentSubHeaderProps): JSX.Element => {
         <div className={classes.classes.subcontainer}>
           <span>Documents</span>
           <div className={classes.classes.subsubcontainer}>
-            <a href={`/api/uploads/nda/${user?.agentProfile?.nda}`} download>NDA</a>
+            <a target='_blank' href={user?.agentProfile?.nda} download>NDA</a>
             <div className={classes.classes.line}></div>
-            <a href={`/api/uploads/contract/${user?.agentProfile?.contract}`} download>Commission Agreement</a>
+            <a target='_blank' href={user?.agentProfile?.contract} download>Commission Agreement</a>
           </div>
         </div>
       </div>

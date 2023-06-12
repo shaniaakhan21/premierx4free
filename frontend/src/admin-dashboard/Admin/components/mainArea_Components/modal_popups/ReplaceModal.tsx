@@ -8,13 +8,16 @@ import { useAuth } from "../../../../../contexts/auth.context";
 import { updateMarketingMaterial } from "../../../../../services/admin";
 import MarketingDocumentPreview from "./MarketingDocumentPreview";
 import MarketingMaterialsCategory from "../../../../../models/marketingMaterialsCategory.model";
+import { uploadDocument } from "../../../../../services/upload";
+import { useSnackbar } from "notistack";
 
 interface ReplaceModalProps {
   onClose: (shouldRemove?: boolean) => void;
   document: MarketingMaterial;
 }
 
-function ReplaceModal({ onClose, document }: ReplaceModalProps): JSX.Element {
+function ReplaceModal({ onClose, document }: ReplaceModalProps) {
+  const { enqueueSnackbar } = useSnackbar()
   const { user } = useAuth()
 
   const [state, setState] = useState<Partial<MarketingMaterial>>({})
@@ -26,9 +29,10 @@ function ReplaceModal({ onClose, document }: ReplaceModalProps): JSX.Element {
       await updateMarketingMaterial(user!, state as MarketingMaterial)
       onClose(true)
     } catch (e: any) {
-      alert(e.message)
+      enqueueSnackbar(e.message ?? 'Error updating marketing material', { variant: 'error' })
     } finally {
       setLoading(false)
+      enqueueSnackbar('Marketing material updated successfully', { variant: 'success' })
     }
   }, [user, document, onClose, state])
 
@@ -40,6 +44,20 @@ function ReplaceModal({ onClose, document }: ReplaceModalProps): JSX.Element {
       category: (document?.category as MarketingMaterialsCategory)?._id ?? document.category
     })
   }, [document])
+
+  const handleFileChange = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      try {
+        enqueueSnackbar('Uploading marketing material...', { variant: 'info' })
+        const uploaded = await uploadDocument(user!, file)
+        setState(cs => ({ ...cs, document: uploaded?.[0] }))
+        enqueueSnackbar('Marketing material uploaded successfully', { variant: 'success' })
+      } catch (e) {
+        enqueueSnackbar('Failed to upload marketing material', { variant: 'error' })
+      }
+    }
+  }, [user])
 
   return (
     <>
@@ -58,9 +76,7 @@ function ReplaceModal({ onClose, document }: ReplaceModalProps): JSX.Element {
             <div className='upload_newDocument_container'>
               <p>Upload New Document</p>
               <div className='uploadFile_form_container'>
-                <input type='file' onChange={e => {
-                  if (e.target.files?.[0]) setState(cs => ({ ...cs, document: e.target.files?.[0] as any }))
-                }} className='uploadFile_form_input' />
+                <input type='file' onChange={handleFileChange} className='uploadFile_form_input' />
                 <div className='uploadFile_form_button'>Upload File</div>
               </div>
             </div>

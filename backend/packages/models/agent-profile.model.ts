@@ -128,7 +128,7 @@ export class AgentProfileCompany {
   @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
   public insuranceInfo?: string
 
-  @IsNumber()
+  @IsNumber({ maxDecimalPlaces: 2 })
   @Min(0)
   @IsOptional()
   @prop()

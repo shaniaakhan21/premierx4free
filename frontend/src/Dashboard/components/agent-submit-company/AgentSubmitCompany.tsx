@@ -169,8 +169,8 @@ function AgentSubmitCompany(): JSX.Element {
             <Col lg={6}>
               <Form.Group controlId="insuranceInfo">
                 <Form.Label>Commission Rate</Form.Label>
-                <Form.Control required type="number" onChange={(e) => {
-                  setFormData({ ...formData, commissionRate: parseInt(e.target.value) })
+                <Form.Control step={0.01} required type="number" onChange={(e) => {
+                  setFormData({ ...formData, commissionRate: parseFloat(e.target.value) })
                 }} />
                 <Form.Control.Feedback type="invalid">
                   Please enter Commission Rate.

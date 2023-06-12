@@ -10,6 +10,7 @@ import AgentSearchPage from './mainArea_Components/agentSearch/AgentSearchPage';
 import { Route, Routes } from "react-router-dom";
 
 import './mainArea.scss'
+import EditAgent from "./mainArea_Components/agentSearch/editAgent";
 
 function MainArea(): JSX.Element {
   const { classes } = useStyles()
@@ -24,6 +25,7 @@ function MainArea(): JSX.Element {
           <Route path="/calculation" element={<CalculationPage />} />
           <Route path="/marketingMaterials" element={<MarketingMaterials />} />
           <Route path="/settings" element={<AdminSettings />} />
+          <Route path="/agents/:id" element={<EditAgent />} />
           <Route path="/agents" element={<AgentSearchPage />} />
           <Route path="/" element={<AgentDocuments />} />
         </Routes>

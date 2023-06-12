@@ -4,6 +4,9 @@ import { Col, Form, Image, Row } from 'react-bootstrap';
 import { useAuth } from "../../../../../contexts/auth.context";
 import { useInputState } from "../../../../../hooks/useInputState";
 import { UpdateProfileRequest, useUpdateProfile } from "../../../../../services/my";
+import { uploadDocument } from "../../../../../services/upload";
+import { enqueueSnackbar, useSnackbar } from "notistack";
+import { Avatar } from "@mui/material";
 
 interface Props {
   imageUrl: string;
@@ -19,7 +22,8 @@ interface Props {
 }
 
 
-function AdminSettings(): JSX.Element {
+function AdminSettings() {
+  const { enqueueSnackbar } = useSnackbar()
   const { user } = useAuth()
 
   const [state, onChange, setState] = useInputState<UpdateProfileRequest & { confirm?: string }>({
@@ -46,14 +50,11 @@ function AdminSettings(): JSX.Element {
       if (req.newPassword === '') delete req.newPassword
 
       await mutate(req)
-      alert('Profile updated successfully')
+      enqueueSnackbar('Profile updated successfully', { variant: 'success' })
     } catch (e: any) {
-      if (e.response?.data?.message) {
-        return alert(e.response.data.message)
-      }
-      alert(e.message)
+      enqueueSnackbar(e.response?.data?.message ?? e.message, { variant: 'error' })
     }
-  }, [state, mutate, user])
+  }, [state, mutate, user, enqueueSnackbar])
 
   useEffect(() => {
     if (user) {
@@ -63,7 +64,22 @@ function AdminSettings(): JSX.Element {
         email: user?.email ?? '',
         contactNo: user?.agentProfile?.contactNo ?? '',
         zip: user?.agentProfile?.location?.zip ?? '',
+        profileImage: user?.agentProfile?.profileImage ?? '',
       }))
+    }
+  }, [user])
+
+  const handleFileChange = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      try {
+        enqueueSnackbar('Uploading profile image...', { variant: 'info' })
+        const uploaded = await uploadDocument(user!, file)
+        setState(cs => ({ ...cs, profileImage: uploaded?.[0] }))
+        enqueueSnackbar('Profile image uploaded successfully', { variant: 'success' })
+      } catch (e) {
+        enqueueSnackbar('Failed to upload profile image', { variant: 'error' })
+      }
     }
   }, [user])
 
@@ -73,12 +89,12 @@ function AdminSettings(): JSX.Element {
       <div className="mainBox">
         <Row className='row-design'>
           <Col xs={3} lg={2} className='profile-position'>
-            <Image className="img-in-circle" roundedCircle
-                   src={`/api/uploads/profileImage/${user?.agentProfile?.profileImage}`} />
-            <input type='file' style={{ display: 'none' }} id='profileImage' name='profileImage' onChange={onChange} />
+            <Avatar className="img-in-circle"
+                   src={state.profileImage ?? ''} alt={user?.agentProfile?.name ?? ''} />
+            <input type='file' style={{ display: 'none' }} id='profileImage' name='profileImage' onChange={handleFileChange} />
             <div className="edit-icon">
               <label htmlFor='profileImage'>
-                <img src='assets/svg/Dashboard/pencil-icon.svg' />
+                <img src='/assets/svg/Dashboard/pencil-icon.svg' />
               </label>
             </div>
           </Col>

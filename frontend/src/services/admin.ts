@@ -32,15 +32,11 @@ export const removeMarketingMaterial = async (user: User, id: MarketingMaterial[
 }
 
 export const createMarketingMaterial = async (user: User, data: Omit<MarketingMaterial, MarketingMaterial['_id']>) => {
-  const formData = new FormData()
-  Object.entries(data).forEach(([key, value]) => formData.append(key, value as (string | File)));
-  return putFetcher<FormData, MarketingMaterial>(['/admin/marketingMaterials', formData, user, undefined, undefined])
+  return putFetcher<Omit<MarketingMaterial, MarketingMaterial['_id']>, MarketingMaterial>(['/admin/marketingMaterials', data, user, undefined, undefined])
 }
 
 export const updateMarketingMaterial = async (user: User, data: MarketingMaterial) => {
-  const formData = new FormData()
-  Object.entries(data).forEach(([key, value]) => formData.append(key, value as File));
-  return patchFetcher<FormData, MarketingMaterial>(['/admin/marketingMaterials', formData, user, undefined, undefined])
+  return patchFetcher<MarketingMaterial, MarketingMaterial>(['/admin/marketingMaterials', data, user, undefined, undefined])
 }
 
 export enum ContactSearchBy {

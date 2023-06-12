@@ -12,7 +12,9 @@ module.exports = {
         EMAIL_PORT: 587,
         EMAIL_FROM: 'PremieRx4Free <info@premierx4free.com>',
         EMAIL_USERNAME: 'info@premierx4free.com',
-        EMAIL_PASSWORD: 'rT@6_7cqT$'
+        EMAIL_PASSWORD: 'rT@6_7cqT$',
+        FRONTEND_URL: 'https://premierx4free.com',
+        NOTIFY_COMPANY_CREATE: 'info@premierx4free.com'
       }
     }
   ]

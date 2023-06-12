@@ -38,7 +38,6 @@ function TableRow({ data, index, dataLength, reqReload, limit }: TableRowProps) 
   const uploadFile = useCallback(async (file: File, type: 'nda' | 'contract') => {
     setShowLoading(type)
     try {
-      await wait(2000)
       let formData = new FormData()
       formData.append("file", file);
       formData.append("fileName", file.name);
@@ -140,55 +139,53 @@ function TableRow({ data, index, dataLength, reqReload, limit }: TableRowProps) 
             </Col>
           </Row>
         </div>
-        <div>
-          <Row className={classes.rowExtension_form_container}>
-            <Col md={4} className={classes.form_container_element}>
-              <p>NDA Agreement</p>
-              <div className={classes.upload_file}>
-                <input className={classes.upload_file_input}
-                       value={agentFiles?.ndaFile[0] ? agentFiles.ndaFile[0].name : ""} />
-                <label className={classes.upload_file_button}>
-                  <input type='file' style={{ display: "none" }} onChange={handleFileChange('nda')} />
-                  Upload File
-                </label>
-              </div>
-              {showSuccess === 'nda' && <Alert severity="success" style={{ marginTop: 10 }}>
-                <AlertTitle>Success</AlertTitle>
-                NDA Agreement Uploaded Successfully
-              </Alert>}
-              {showLoading === 'nda' && <Alert severity="info" style={{ marginTop: 10 }}>
-                <AlertTitle>Information</AlertTitle>
-                Uploading NDA Agreement. Please wait...
-              </Alert>}
-              {data?.nda && <Alert severity="warning" style={{ marginTop: 10 }}>
-                <AlertTitle>Warning</AlertTitle>
-                User already has an NDA Agreement. Uploading a new one will replace the old one.
-              </Alert>}
-            </Col>
-            <Col md={4} className={classes.form_container_element}>
-              <p>Commission Agreement</p>
-              <div className={classes.upload_file}>
-                <input className={classes.upload_file_input}
-                       value={agentFiles?.contractFile ? agentFiles.contractFile[0].name : ""} />
-                <label className={classes.upload_file_button}>
-                  <input type='file' style={{ display: "none" }} onChange={handleFileChange('contract')} />
-                  Upload File
-                </label>
-              </div>
-              {showSuccess === 'contract' && <Alert severity="success" style={{ marginTop: 10 }}>
-                <AlertTitle>Success</AlertTitle>
-                Commission Agreement Uploaded Successfully
-              </Alert>}
-              {showLoading === 'contract' && <Alert severity="info" style={{ marginTop: 10 }}>
-                <AlertTitle>Information</AlertTitle>
-                Uploading Commission Agreement. Please wait...
-              </Alert>}
-              {data?.contract && <Alert severity="warning" style={{ marginTop: 10 }}>
-                <AlertTitle>Warning</AlertTitle>
-                User already has an Commission Agreement. Uploading a new one will replace the old one.
-              </Alert>}
-            </Col>
-          </Row>
+        <div className={classes.rowExtension_form_container}>
+          <Col md={6} className={classes.form_container_element}>
+            <p>NDA Agreement</p>
+            <div className={classes.upload_file}>
+              <input className={classes.upload_file_input}
+                     value={agentFiles?.ndaFile[0] ? agentFiles.ndaFile[0].name : ""} />
+              <label className={classes.upload_file_button}>
+                <input type='file' style={{ display: "none" }} onChange={handleFileChange('nda')} />
+                Upload File
+              </label>
+            </div>
+            {showSuccess === 'nda' && <Alert severity="success" style={{ marginTop: 10 }}>
+              <AlertTitle>Success</AlertTitle>
+              NDA Agreement Uploaded Successfully
+            </Alert>}
+            {showLoading === 'nda' && <Alert severity="info" style={{ marginTop: 10 }}>
+              <AlertTitle>Information</AlertTitle>
+              Uploading NDA Agreement. Please wait...
+            </Alert>}
+            {data?.nda && <Alert severity="warning" style={{ marginTop: 10 }}>
+              <AlertTitle>Warning</AlertTitle>
+              User already has an NDA Agreement. Uploading a new one will replace the old one.
+            </Alert>}
+          </Col>
+          <Col md={6} className={classes.form_container_element}>
+            <p>Commission Agreement</p>
+            <div className={classes.upload_file}>
+              <input className={classes.upload_file_input}
+                     value={agentFiles?.contractFile ? agentFiles.contractFile[0].name : ""} />
+              <label className={classes.upload_file_button}>
+                <input type='file' style={{ display: "none" }} onChange={handleFileChange('contract')} />
+                Upload File
+              </label>
+            </div>
+            {showSuccess === 'contract' && <Alert severity="success" style={{ marginTop: 10 }}>
+              <AlertTitle>Success</AlertTitle>
+              Commission Agreement Uploaded Successfully
+            </Alert>}
+            {showLoading === 'contract' && <Alert severity="info" style={{ marginTop: 10 }}>
+              <AlertTitle>Information</AlertTitle>
+              Uploading Commission Agreement. Please wait...
+            </Alert>}
+            {data?.contract && <Alert severity="warning" style={{ marginTop: 10 }}>
+              <AlertTitle>Warning</AlertTitle>
+              User already has an Commission Agreement. Uploading a new one will replace the old one.
+            </Alert>}
+          </Col>
         </div>
       </div>
     </div>
@@ -283,7 +280,8 @@ const useStyles = makeStyles()(() => ({
       display: "none", //flexDirection:"column"
     },
   }, form_container_element: {
-    marginTop: "17px !important"
+    marginTop: "17px !important",
+    padding: "10px"
   }, table_agent_info: {
     padding: "14px 86px 25px 15px"
   }, table_agent_email: {

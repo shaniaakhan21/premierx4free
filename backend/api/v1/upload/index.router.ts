@@ -1,29 +1,29 @@
-import path from 'path'
-
 import { Roles } from '@helpers/access'
-import ErrorHandler, { CustomRequestHandler, InvalidRequestError } from '@helpers/errorHandler'
-import { generateFileName } from '@helpers/global'
+import ErrorHandler, { CustomRequestHandler } from '@helpers/errorHandler'
+import { s3, upload } from '@helpers/s3'
 import { AuthenticateToken } from '@models/user.model'
 import express from 'express'
-import { UploadedFile } from 'express-fileupload'
 
 const uploadRouter = express.Router()
 
 const uploadHandler: CustomRequestHandler<{}, any, any> = async (req, res) => {
-  if (!req.files?.document) throw new InvalidRequestError('No files found')
-  const files = (req.files?.document as UploadedFile[])?.[0]
-    ? (req.files.document as UploadedFile[])
-    : [req.files.document as UploadedFile]
-  const uploaded = await Promise.all(
-    files.map(async (file) => {
-      const fileName = generateFileName(file.name)
-      await file.mv(path.resolve(__dirname, `../../../uploads/temp`, fileName))
-      return fileName
-    })
-  )
-  res.json(uploaded)
+  // if (!req.file) throw new InvalidRequestError('No files found')
+  res.json(((req.files as unknown as Express.MulterS3.File[]) ?? [req.file]).map((file) => file.location))
 }
 
-uploadRouter.use('/', AuthenticateToken([Roles.Admin, Roles.Agent]), ErrorHandler(uploadHandler))
+uploadRouter.use(
+  '/list/:prefix?',
+  AuthenticateToken([Roles.Admin]),
+  ErrorHandler(async (req, res) => {
+    res.json(await s3.listObjects({ Bucket: 'nsur', Prefix: req.params.prefix }).promise())
+  })
+)
+
+uploadRouter.use(
+  '/',
+  AuthenticateToken([Roles.Admin, Roles.Agent]),
+  upload('premierx/temp').any(),
+  ErrorHandler(uploadHandler)
+)
 
 export default uploadRouter

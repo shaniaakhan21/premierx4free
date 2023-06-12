@@ -4,12 +4,15 @@ import { Button, Col, Form, Image, Row } from 'react-bootstrap';
 import { useAuth } from "../../../contexts/auth.context";
 import { useInputState } from "../../../hooks/useInputState";
 import { UpdateProfileRequest, useUpdateProfile } from "../../../services/my";
+import { uploadDocument } from "../../../services/upload";
+import { useSnackbar } from "notistack";
 
 interface Props {
 }
 
 
 const AgentSettings: React.FC<Props> = () => {
+  const { enqueueSnackbar } = useSnackbar()
   const { user } = useAuth()
 
   const [state, onChange, setState] = useInputState<UpdateProfileRequest & { confirm?: string }>({
@@ -36,12 +39,9 @@ const AgentSettings: React.FC<Props> = () => {
       if (req.newPassword === '') delete req.newPassword
 
       await mutate(req)
-      alert('Profile updated successfully')
+      enqueueSnackbar('Profile updated successfully', { variant: 'success' })
     } catch (e: any) {
-      if (e.response?.data?.message) {
-        return alert(e.response.data.message)
-      }
-      alert(e.message)
+      enqueueSnackbar(e.response?.data?.message ?? e.message, { variant: 'error' })
     }
   }, [state, mutate, user])
 
@@ -53,7 +53,22 @@ const AgentSettings: React.FC<Props> = () => {
         email: user?.email ?? '',
         contactNo: user?.agentProfile?.contactNo ?? '',
         zip: user?.agentProfile?.location?.zip ?? '',
+        profileImage: user?.agentProfile?.profileImage ?? '',
       }))
+    }
+  }, [user])
+
+  const handleFileChange = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      try {
+        enqueueSnackbar('Uploading profile image...', { variant: 'info' })
+        const uploaded = await uploadDocument(user!, file)
+        setState(cs => ({ ...cs, profileImage: uploaded?.[0] }))
+        enqueueSnackbar('Profile image uploaded successfully', { variant: 'success' })
+      } catch (e) {
+        enqueueSnackbar('Failed to upload profile image', { variant: 'error' })
+      }
     }
   }, [user])
 
@@ -64,8 +79,8 @@ const AgentSettings: React.FC<Props> = () => {
         <Row className='row-design'>
           <Col xs={5} lg={2} className='profile-position'>
             <Image className="img-in-circle" roundedCircle
-                   src={`/api/uploads/profileImage/${user?.agentProfile?.profileImage}`} />
-            <input type='file' style={{ display: 'none' }} id='profileImage' name='profileImage' onChange={onChange} />
+                   src={state.profileImage} />
+            <input type='file' style={{ display: 'none' }} id='profileImage' name='profileImage' onChange={handleFileChange} />
             <div className="edit-icon">
               <label htmlFor='profileImage'>
                 <img src='assets/svg/Dashboard/pencil-icon.svg' />

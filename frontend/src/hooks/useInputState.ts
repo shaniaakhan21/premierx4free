@@ -20,7 +20,7 @@ export const useInputState = <T>(initialState: T): UseInputState<T> => {
         value = (e.target as HTMLInputElement).files ? (e.target as HTMLInputElement).files?.[0] : undefined;
         break;
       case 'number':
-        value = parseInt(e.target.value, 10);
+        value = parseFloat(e.target.value);
         break;
       default:
         value = e.target.value;

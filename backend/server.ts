@@ -9,7 +9,6 @@ import * as bodyParser from 'body-parser'
 import cors from 'cors'
 import * as dotenv from 'dotenv'
 import express from 'express'
-import fileUpload from 'express-fileupload'
 import { NextFunction, Request, Response } from 'express-serve-static-core'
 import helmet from 'helmet'
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -28,11 +27,11 @@ app.use(helmet())
 app.use(cors())
 app.use(bodyParser.json({ limit: '50mb' }))
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }))
-app.use(
-  fileUpload({
-    useTempFiles: true
-  })
-)
+// app.use(
+//   fileUpload({
+//     useTempFiles: true
+//   })
+// )
 
 // app.use(express.static(staticRoot))
 

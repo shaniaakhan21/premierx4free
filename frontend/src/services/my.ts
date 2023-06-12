@@ -18,7 +18,7 @@ export type UpdateProfileRequest = {
   zip: string
   password?: string
   newPassword?: string
-  profileImage: File | string
+  profileImage: string
 }
 
 export type UseUpdateProfileReturn = {
@@ -36,10 +36,8 @@ export const useMyDashboard = (user: User, from: Date, to: Date) => useSWR(['/my
 
 export const useUpdateProfile = (request?: UpdateProfileRequest) => {
   const { user, setUser } = useAuth()
-  const mutate = async (request2?: UpdateProfileRequest) => {
-    const formData = new FormData()
-    Object.entries((request2 ?? request) ?? {}).forEach(([key, value]) => formData.append(key, value as (string | File)));
-    const resp = await patchFetcher<FormData | undefined, GenericResponse<User>>(['/my/updateProfile', formData, user, undefined, undefined])
+  const mutate = async (request?: UpdateProfileRequest) => {
+    const resp = await patchFetcher<UpdateProfileRequest | undefined, GenericResponse<User>>(['/my/updateProfile', request, user, undefined, undefined])
     if (resp) {
       setUser(resp.data)
       return resp.data

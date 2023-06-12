@@ -15,7 +15,7 @@ const MarketingDocumentPreview = ({
     fileName.endsWith('gif') || fileName.endsWith('JPG') ||
     fileName.endsWith('JPEG') ||
     fileName.endsWith('PNG')) return <img className='currentDocumentIcon'
-                                          src={`/api/uploads/marketingMaterials/${fileName}`} alt={alt} {...props} />
+                                          src={fileName} alt={alt} {...props} />
   if (fileName.endsWith('pdf')) return <img src='/assets/svg/Dashboard/pdf-icon.png' className='currentDocumentIcon'
                                             alt={alt} {...props} />
   return <img src='/assets/svg/Dashboard/pdf-icon.png' className='currentDocumentIcon' alt={alt} {...props} />

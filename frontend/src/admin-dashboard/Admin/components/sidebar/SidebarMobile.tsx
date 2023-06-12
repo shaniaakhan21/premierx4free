@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { makeStyles } from '../../../../utils/makeStyles';
 import * as React from 'react';
 import { useAuth } from "../../../../contexts/auth.context";
+import { Avatar } from "@mui/material";
 
 interface SidebarMobileProps {
   sidebarToggle: boolean,
@@ -24,7 +25,9 @@ function SidebarMobile(props: SidebarMobileProps) {
     <div className={classes.sidebar_mainContainer}>
       <div className={classes.sidebar_topRectangle}>
         <div className={classes.topRectangle_displayImage}>
-          <img src='/assets/svg/Dashboard/dummy.svg' className={classes.displayImage} />
+          <Avatar sx={{ width: 150, height: 150, marginBottom: 2 }} alt={user?.agentProfile?.name?.toUpperCase() ?? ''}
+                  variant='circular'
+                  src={user?.agentProfile?.profileImage} />
         </div>
         <div className={classes.topRectangle_text}>
           <p className={classes.nameText}>{user?.agentProfile?.name}</p>
@@ -73,7 +76,9 @@ const useStyles = makeStyles()(() => ({
     background: "linear-gradient(205.19deg, #64B5F6 1.82%, #0556A7 100%)"
   },
   topRectangle_displayImage: {
-    textAlign: "center"
+    display: "flex",
+    justifyContent: "center",
+    paddingTop: "40px"
   },
   topRectangle_logo: {
     textAlign: "center"

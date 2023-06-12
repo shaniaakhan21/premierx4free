@@ -1,15 +1,12 @@
-import fs from 'fs'
-import path from 'path'
-
 import { ClassTransformerRoles } from '@helpers/access'
 import { CustomRequestHandler, RecordNotFoundError } from '@helpers/errorHandler'
-import validateClass, { generateFileName, transactional } from '@helpers/global'
+import validateClass, { transactional } from '@helpers/global'
 import { successResponse } from '@helpers/response'
+import { moveFile } from '@helpers/s3'
 import AgentProfileModel, { AgentProfile, AgentProfileLocation } from '@models/agent-profile.model'
 import UserModel, { User } from '@models/user.model'
 import { Exclude, Expose, plainToClass } from 'class-transformer'
 import { IsEmail, IsOptional, IsString, MinLength } from 'class-validator'
-import { UploadedFile } from 'express-fileupload'
 
 @Exclude()
 export class UpdateProfileRequest {
@@ -67,18 +64,7 @@ const updateProfile: CustomRequestHandler<{}, any, UpdateProfileRequest> = async
   agent.set({ ...agentData, location: { ...agent.location, zip } })
   user.email = email
 
-  if (req.files?.profileImage && !(req.files?.profileImage as UploadedFile[])?.[0]) {
-    const file = req.files?.profileImage as UploadedFile
-    const fileName = generateFileName(file.name)
-    await file.mv(path.resolve(__dirname, '../../../uploads/profileImage', fileName))
-    if (agent.profileImage) {
-      const existingFile = path.resolve(__dirname, '../../../uploads/profileImage', agent.profileImage)
-      if (fs.existsSync(existingFile)) {
-        fs.unlinkSync(existingFile)
-      }
-    }
-    agent.profileImage = fileName
-  }
+  agent.profileImage = await moveFile(request.profileImage, 'profileImage', agent.profileImage)
 
   if (newPassword && password) {
     if (!(await user.comparePassword(password))) throw new Error('Invalid password')
