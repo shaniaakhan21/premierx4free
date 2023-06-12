@@ -93,13 +93,8 @@ export const AuthenticateToken: (roles?: Roles[]) => RequestHandler = (roles) =>
   schemaOptions: { collection: 'users' }
 })
 @pre<User>('save', async function (next) {
-  if (this.isModified('password') || this.isNew) {
-    await bcrypt.hash(this.password, 10, (err, encryptedPass) => {
-      if (err) return next(err)
-      this.password = encryptedPass
-      return next()
-    })
-  }
+  if (!this.isModified('password')) return next()
+  this.password = await bcrypt.hash(this.password, 10)
   return next()
 })
 @plugin(AutoIncrementID, { field: 'userId' })
@@ -145,6 +140,15 @@ export class User extends ModelInterface {
    */
   public async comparePassword(this: DocumentType<User>, password: string) {
     return bcrypt.compare(password, this.password)
+  }
+
+  /**
+   * Set password
+   * @param password - password to set
+   * @returns Promise<void>
+   */
+  public async setPassword(this: DocumentType<User>, password: string) {
+    this.password = await bcrypt.hash(password, 10)
   }
 
   /**
