@@ -2,9 +2,15 @@ import './styles.css';
 import React, { useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { submitCompany } from '../../../services/submitCompany';
+import { Backdrop, CircularProgress } from "@mui/material";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { useSnackbar } from "notistack";
 
 function AgentSubmitCompany(): JSX.Element {
+  const { enqueueSnackbar } = useSnackbar();
+
   const [validated, setValidated] = useState(false);
+  const [loading, setLoading] = useState<string | undefined>();
 
   interface FormData {
     name?: string,
@@ -13,8 +19,8 @@ function AgentSubmitCompany(): JSX.Element {
     contactPersonName?: string,
     contactPersonPhone?: string,
     employeeCount?: number,
-    fullTime?: string,
-    partTime?: string,
+    fullTime?: number,
+    partTime?: number,
     insuranceInfo?: string,
     commissionRate?: number,
     fullInsured?: boolean,
@@ -31,30 +37,35 @@ function AgentSubmitCompany(): JSX.Element {
     const form = event.currentTarget;
     event.preventDefault();
     if (form.checkValidity() === false) {
-
       event.stopPropagation();
-      // return
     }
     setValidated(true);
-    console.log("form Data after submit", formData)
-    const user = JSON.parse(localStorage.getItem('user') ?? "")
-    console.log("user from localstorage", user?.jwtToken)
-    const sendData = await submitCompany(formData, user?.jwtToken)
-    // axios.put("/api/v1/my/company",formData,{headers:{"Authorization":`Bearer ${user?.jwtToken}`}})
-    console.log("response of api", sendData)
-    if (sendData?.data?.success) {
-      alert("company data submitted successfully")
-      window.location.reload()
-    } else {
-      alert("some problem while submitting the company data please try again")
+    setLoading("Submitting Company Data")
+    try {
+      const user = JSON.parse(localStorage.getItem('user') ?? "")
+      if (!formData.fullTime || !formData.partTime || !formData.employeeCount || (formData.fullTime! + formData.partTime!) !== formData.employeeCount!) {
+        throw new Error('Employee Count does not match Full Time and Part Time')
+      }
+      await submitCompany(formData, user?.jwtToken)
+    } catch (e: any) {
+      enqueueSnackbar(e.response.data.message ?? e.message, { variant: 'error' });
+    } finally {
+      setLoading(undefined)
+      enqueueSnackbar("Company Submitted Successfully", { variant: 'success' });
     }
-    //window.location.reload()
-  };
+  }
 
 
   return (
     <>
-
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.modal + 1, flexDirection: 'column' }}
+        open={!!loading}
+      >
+        {loading?.endsWith('successfully') ? <CheckCircleIcon sx={{ fontSize: 50, color: 'white' }} /> :
+          <CircularProgress color="inherit" />}
+        {loading}
+      </Backdrop>
       <Form noValidate={false} validated={validated} onSubmit={handleSubmit} className='company-form'>
         <span className='textCustom'>Submit New Companies </span>
         <div className="box-with-shadow">
@@ -124,7 +135,7 @@ function AgentSubmitCompany(): JSX.Element {
               <Form.Group controlId="currentNumberOfEmployees">
                 <Form.Label>Current Number of Employees</Form.Label>
                 <Form.Control required type="number" onChange={(e) => {
-                  setFormData({ ...formData, employeeCount: parseInt(e.target.value) })
+                  setFormData({ ...formData, employeeCount: parseInt(e.target.value, 10) })
                 }} />
                 <Form.Control.Feedback type="invalid">
                   Please enter the current number of employees.
@@ -135,7 +146,7 @@ function AgentSubmitCompany(): JSX.Element {
               <Form.Group controlId="fullTime">
                 <Form.Label>Full Time</Form.Label>
                 <Form.Control required type="number" onChange={(e) => {
-                  setFormData({ ...formData, fullTime: e.target.value })
+                  setFormData({ ...formData, fullTime: parseInt(e.target.value, 10) })
                 }} />
                 <Form.Control.Feedback type="invalid">
                   Please enter the number of full-time employees.
@@ -146,7 +157,7 @@ function AgentSubmitCompany(): JSX.Element {
               <Form.Group controlId="partTime">
                 <Form.Label>Part Time</Form.Label>
                 <Form.Control required type="number" onChange={(e) => {
-                  setFormData({ ...formData, partTime: e.target.value })
+                  setFormData({ ...formData, partTime: parseInt(e.target.value, 10) })
                 }} />
                 <Form.Control.Feedback type="invalid">
                   Please enter the number of part-time employees.
@@ -155,7 +166,7 @@ function AgentSubmitCompany(): JSX.Element {
             </Col>
           </Row>
           <Row className='first-phone-row'>
-            <Col lg={6}>
+            <Col lg={12}>
               <Form.Group controlId="insuranceInfo">
                 <Form.Label>Insurance Info</Form.Label>
                 <Form.Control required type="text" onChange={(e) => {
@@ -163,17 +174,6 @@ function AgentSubmitCompany(): JSX.Element {
                 }} />
                 <Form.Control.Feedback type="invalid">
                   Please enter insurance info.
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Col>
-            <Col lg={6}>
-              <Form.Group controlId="insuranceInfo">
-                <Form.Label>Commission Rate</Form.Label>
-                <Form.Control step={0.01} required type="number" onChange={(e) => {
-                  setFormData({ ...formData, commissionRate: parseFloat(e.target.value) })
-                }} />
-                <Form.Control.Feedback type="invalid">
-                  Please enter Commission Rate.
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>

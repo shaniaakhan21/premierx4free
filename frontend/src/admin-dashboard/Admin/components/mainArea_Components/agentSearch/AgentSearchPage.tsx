@@ -21,7 +21,6 @@ import {
 } from "@mui/material";
 import { useAuth } from "../../../../../contexts/auth.context";
 import useDebounceState from "../../../../../hooks/useDebounceState";
-import EditAgent from './editAgent';
 import {
   AgentSearchBy,
   AgentSearchNormalResponse,
@@ -32,6 +31,7 @@ import { AgentStatus } from "../../../../../models/agentProfile.model";
 import DoneIcon from '@mui/icons-material/Done'
 import UpdateIcon from '@mui/icons-material/Update'
 import KeyOffIcon from '@mui/icons-material/KeyOff'
+import { useNavigate } from "react-router-dom";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -65,13 +65,12 @@ const renderStatus = (status: AgentStatus) => {
 }
 
 function AgentSearchPage(): JSX.Element {
+  const navigate = useNavigate()
   const { user } = useAuth()
   const [query, setQuery] = useDebounceState('', 200)
   const [by, setBy] = useState<AgentSearchBy>(AgentSearchBy.All)
   const [limit, setLimit] = useState(10)
   const [skip, setSkip] = useState(0)
-  const [showCreate, setShowCreate] = useState(false)
-  const [showEdit, setShowEdit] = useState<AgentSearchResponse<AgentSearchNormalResponse>['data'][0] | undefined>()
 
   const { data, isLoading, mutate } = useAgentSearch<AgentSearchNormalResponse>(user!, query, limit, skip, by)
 
@@ -79,13 +78,6 @@ function AgentSearchPage(): JSX.Element {
   const { classes } = useStyles()
   return (
     <div className={classes.calculationPage_mainContainer}>
-      {(showCreate || showEdit) && <EditAgent agent={showEdit} onClose={(shouldReload) => {
-        setShowCreate(false)
-        setShowEdit(undefined)
-        if (shouldReload) {
-          mutate()
-        }
-      }} />}
       <div style={{ display: 'flex', alignItems: 'flex-end' }}>
         <TextField
           style={{ minWidth: 400 }}
@@ -138,15 +130,14 @@ function AgentSearchPage(): JSX.Element {
                     '&:hover': { backgroundColor: '#f5f5f5' }
                   }}
                   key={row._id}
-                  onClick={() => setShowEdit(row)}
                 >
-                  <StyledTableCell>{row.name}</StyledTableCell>
-                  <StyledTableCell>{row.user.email}</StyledTableCell>
-                  <StyledTableCell align="center">{renderStatus(row.status)}</StyledTableCell>
-                  <StyledTableCell>{row.companies?.map(c => <Chip style={{ margin: 2 }} key={c._id} label={c.name}
+                  <StyledTableCell onClick={() => navigate(`/admin/agents/${row.user.userId}`)}>{row.name}</StyledTableCell>
+                  <StyledTableCell onClick={() => navigate(`/admin/agents/${row.user.userId}`)}>{row.user.email}</StyledTableCell>
+                  <StyledTableCell align="center" onClick={() => navigate(`/admin/agents/${row.user.userId}`)}>{renderStatus(row.status)}</StyledTableCell>
+                  <StyledTableCell>{row.companies?.map(c => <Chip onClick={() => navigate(`/admin/agents/${row.user.userId}/${c._id}`)} style={{ margin: 2 }} key={c._id} label={c.name}
                                                                   variant="outlined" />)}</StyledTableCell>
-                  <StyledTableCell align="center">{row.agentId}</StyledTableCell>
-                  <StyledTableCell align="center">
+                  <StyledTableCell align="center" onClick={() => navigate(`/admin/agents/${row.user.userId}`)}>{row.agentId}</StyledTableCell>
+                  <StyledTableCell align="center" onClick={() => navigate(`/admin/agents/${row.user.userId}`)}>
                     {row.nda ?
                       <Chip style={{ margin: 2 }} icon={<DoneIcon sx={{ fontSize: 24, color: 'white' }} />} label="NDA"
                             color="success" /> : null}

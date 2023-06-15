@@ -25,7 +25,8 @@ function MainArea(): JSX.Element {
           <Route path="/calculation" element={<CalculationPage />} />
           <Route path="/marketingMaterials" element={<MarketingMaterials />} />
           <Route path="/settings" element={<AdminSettings />} />
-          <Route path="/agents/:id" element={<EditAgent />} />
+          <Route path="/agents/:id/:company?" element={<EditAgent />} />
+          <Route path="/agent/create" element={<EditAgent onClose={() => {}} />} />
           <Route path="/agents" element={<AgentSearchPage />} />
           <Route path="/" element={<AgentDocuments />} />
         </Routes>

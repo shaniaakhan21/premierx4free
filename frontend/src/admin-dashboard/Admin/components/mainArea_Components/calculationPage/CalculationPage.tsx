@@ -106,14 +106,12 @@ function CalculationPage(): JSX.Element {
               <StyledTableCell align="right">Contract Start Date</StyledTableCell>
               <StyledTableCell align="right">Contract End Date</StyledTableCell>
               <StyledTableCell align="right">Monthly Membership Paid (No. of People)</StyledTableCell>
-              <StyledTableCell align="right">Amount Paid Per Person</StyledTableCell>
               <StyledTableCell align="right">Total Pay</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {isLoading
               ? [...Array(8).keys()].map((k) => <TableRow>
-                <StyledTableCell><Skeleton key={k} height={15} width='100%' /></StyledTableCell>
                 <StyledTableCell><Skeleton key={k} height={15} width='100%' /></StyledTableCell>
                 <StyledTableCell><Skeleton key={k} height={15} width='100%' /></StyledTableCell>
                 <StyledTableCell><Skeleton key={k} height={15} width='100%' /></StyledTableCell>
@@ -134,13 +132,12 @@ function CalculationPage(): JSX.Element {
                 >
                   <StyledTableCell>{row.name}</StyledTableCell>
                   <StyledTableCell>{row.companies.name}</StyledTableCell>
-                  <StyledTableCell align="right">{row.contracts.commissionRate}</StyledTableCell>
+                  <StyledTableCell align="right">${row.contracts.commissionRate}</StyledTableCell>
                   <StyledTableCell align="center">{moment(row.contracts.start).format('YYYY-MM-DD')}</StyledTableCell>
                   <StyledTableCell align="center">{moment(row.contracts.end).format('YYYY-MM-DD')}</StyledTableCell>
                   <StyledTableCell align="right">{row.contracts.employeeCount}</StyledTableCell>
-                  <StyledTableCell align="right">${row.contracts.amountPerPerson}</StyledTableCell>
                   <StyledTableCell
-                    align="right">${row.contracts.amountPerPerson * row.contracts.employeeCount * row.contracts.commissionRate}</StyledTableCell>
+                    align="right">${row.contracts.employeeCount * row.contracts.commissionRate}</StyledTableCell>
                 </TableRow>
               ))}
           </TableBody>
