@@ -89,6 +89,11 @@ export class UpdateAgentRequest {
   @IsString()
   @IsOptional()
   @Expose()
+  public adpId?: AgentProfile['adpId']
+
+  @IsString()
+  @IsOptional()
+  @Expose()
   public contract?: AgentProfile['contract']
 }
 
@@ -105,6 +110,11 @@ const updateAgentProfile: CustomRequestHandler<{}, any, UpdateAgentRequest> = as
   if (!user) throw new RecordNotFoundError('Agent not found')
   const agent = await AgentProfileModel.findById(req.body._id)
   if (!agent) throw new RecordNotFoundError('Agent not found')
+  if (request.adpId && request.adpId !== '' && (!agent.adpId || agent.adpId !== request.adpId?.toLowerCase())) {
+    const exisiting = await AgentProfileModel.findByADPId(request.adpId?.toLowerCase())
+    if (exisiting) throw new Error('ADP ID already exists')
+  }
+
   agent.set({
     name: request.name,
     contactNo: request.contactNo,
@@ -116,6 +126,7 @@ const updateAgentProfile: CustomRequestHandler<{}, any, UpdateAgentRequest> = as
     },
     companies: request.companies,
     status: request.status,
+    adpId: request.adpId?.toLowerCase(),
     updatedBy: admin._id
   })
 

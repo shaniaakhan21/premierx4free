@@ -44,7 +44,7 @@ export const getAgentProfile = async (user: User, agentId: AgentProfile['_id']) 
   return getFetcher<GenericResponse<AgentProfile>>(['/agent/profile', user, [agentId.toString()], undefined])
 }
 
-export type UpdateAgentProfileRequest = Partial<Pick<AgentProfile, '_id' | 'status' | 'profileImage' | 'nda' | 'contract' | 'companies' | 'name' | 'contactNo'> & {
+export type UpdateAgentProfileRequest = Partial<Pick<AgentProfile, '_id' | 'status' | 'profileImage' | 'nda' | 'contract' | 'companies' | 'name' | 'contactNo' | 'adpId'> & {
   email: string,
   password: string,
   roles: Roles[]

@@ -19,6 +19,11 @@ const createUpdateCompany: CustomRequestHandler<{}, any, AgentProfileCompany> = 
   if (!user) throw new RecordNotFoundError('Agent not found')
   const agent = await AgentProfileModel.findById(user.agentProfile)
   if (!agent) throw new RecordNotFoundError('Agent not found')
+  request.uniqueKey = `${request.name?.toLowerCase().replace(/[^a-z0-9]/g, '')}-${request.address
+    ?.toLowerCase()
+    .replace(/[^a-z0-9]/g, '')}-${request.employeeCount}`
+  const existing = await AgentProfileModel.findByCompanyUniqueKey(request.uniqueKey)
+  if (existing && (!request._id || agent._id !== existing._id)) throw new Error('Company already exists')
 
   if (request._id) {
     const company = agent.companies?.find((c) => c._id?.toString() === request._id)

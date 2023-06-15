@@ -43,15 +43,19 @@ function AgentSubmitCompany(): JSX.Element {
     setLoading("Submitting Company Data")
     try {
       const user = JSON.parse(localStorage.getItem('user') ?? "")
+      console.log('formData.fullTime', formData.fullTime)
+      console.log('formData.partTime', formData.partTime)
+      console.log('formData.employeeCount', formData.employeeCount)
+      console.log('formData.employeeCount 2', (!formData.fullTime || !formData.partTime || !formData.employeeCount || (formData.fullTime! + formData.partTime!) !== formData.employeeCount!))
       if (!formData.fullTime || !formData.partTime || !formData.employeeCount || (formData.fullTime! + formData.partTime!) !== formData.employeeCount!) {
         throw new Error('Employee Count does not match Full Time and Part Time')
       }
       await submitCompany(formData, user?.jwtToken)
+      enqueueSnackbar("Company Submitted Successfully", { variant: 'success' });
     } catch (e: any) {
-      enqueueSnackbar(e.response.data.message ?? e.message, { variant: 'error' });
+      enqueueSnackbar(e.response?.data?.message ?? e.message, { variant: 'error' });
     } finally {
       setLoading(undefined)
-      enqueueSnackbar("Company Submitted Successfully", { variant: 'success' });
     }
   }
 

@@ -110,17 +110,17 @@ export class AgentProfileCompany {
   @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
   public employeeCount?: number
 
-  @IsString()
+  @IsNumber()
   @IsOptional()
   @prop()
   @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
-  public fullTime?: string
+  public fullTime?: number
 
-  @IsString()
+  @IsNumber()
   @IsOptional()
   @prop()
   @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
-  public partTime?: string
+  public partTime?: number
 
   @IsString()
   @IsOptional()
@@ -158,6 +158,12 @@ export class AgentProfileCompany {
   @prop()
   @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
   public typeOfBusiness?: string
+
+  @IsString()
+  @IsOptional()
+  @prop()
+  @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
+  public uniqueKey?: string
 }
 
 @Exclude()
@@ -210,6 +216,10 @@ export class AgentProfile extends ModelInterface {
 
   @prop()
   @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
+  public adpId?: string
+
+  @prop()
+  @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
   public contract?: string
 
   @prop({ enum: AgentStatus, default: AgentStatus.Pending, index: true })
@@ -250,6 +260,15 @@ export class AgentProfile extends ModelInterface {
   }
 
   /**
+   * Find agent profile by adpId
+   * @param adpId
+   * @returns Promise<AgentProfile | null>
+   */
+  public static async findByADPId(this: ReturnModelType<typeof AgentProfile>, adpId: string) {
+    return this.findOne().where('adpId').equals(adpId).exec()
+  }
+
+  /**
    * Find agent profile by userId
    * @param userId
    * @returns Promise<AgentProfile | null>
@@ -257,6 +276,15 @@ export class AgentProfile extends ModelInterface {
   public static async findByUserId(this: ReturnModelType<typeof AgentProfile>, userId: number) {
     const agentProfileObjectId = (await UserModel.findByUserId(userId))?.agentProfile
     return this.findById(agentProfileObjectId).exec()
+  }
+
+  /**
+   * Find agent profile by company unique key
+   * @param uniqueKey
+   * @returns Promise<AgentProfile | null>
+   */
+  public static async findByCompanyUniqueKey(this: ReturnModelType<typeof AgentProfile>, uniqueKey: string) {
+    return this.findOne({ 'companies.uniqueKey': uniqueKey }).exec()
   }
 
   /**

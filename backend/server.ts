@@ -56,12 +56,11 @@ app.use((_req, _res, _next) => {
 })
 
 app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
-  res.statusCode = 500
+  res.statusCode = err.status ?? 500
   res.json({
     message: err.message,
     stack: err.stack
   })
-  console.error(err)
 })
 
 app.listen(PORT, () => {

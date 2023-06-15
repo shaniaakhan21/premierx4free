@@ -42,6 +42,8 @@ export default class AgentProfile {
 
   public agentId!: number
 
+  public adpId?: string
+
   public nda?: string
 
   public profileImage?: string

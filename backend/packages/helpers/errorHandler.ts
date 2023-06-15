@@ -61,10 +61,11 @@ export default function ErrorHandler(fn: CustomRequestHandler<any, any, any, any
     try {
       await fn(req, res, next)
     } catch (e: any) {
+      res.status(e.status || HttpStatus.INTERNAL_SERVER_ERROR)
       res.json({
         success: false,
         status: e.status || HttpStatus.INTERNAL_SERVER_ERROR,
-        message: e.publicMessage || 'Unhandled error',
+        message: e.publicMessage ?? e.message ?? 'Unhandled error',
         ...(process.env.NODE_ENV === 'development' ? { error: e.message } : {})
       })
       console.error(e)

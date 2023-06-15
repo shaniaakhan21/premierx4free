@@ -297,6 +297,17 @@ export default function EditAgent({ onClose, agent }: CreateContractProps) {
         <Grid item xs={12} md={6}>
           <TextField
             InputLabelProps={{ shrink: true }}
+            name="adpId"
+            label="ADP-ID"
+            type="text"
+            fullWidth
+            value={state.adpId ?? ''}
+            onChange={onChange}
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <TextField
+            InputLabelProps={{ shrink: true }}
             name="password"
             label="Password"
             type="password"
