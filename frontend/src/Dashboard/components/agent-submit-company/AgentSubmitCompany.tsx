@@ -1,5 +1,5 @@
 import './styles.css';
-import React, { useState } from 'react';
+import React, {useMemo, useState} from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { submitCompany } from '../../../services/submitCompany';
 import { Backdrop, CircularProgress } from "@mui/material";
@@ -59,6 +59,16 @@ function AgentSubmitCompany(): JSX.Element {
     }
   }
 
+  const insuranceMemo = useMemo(() => {
+    if (formData?.fullInsured) {
+      return 'full'
+    }
+    if (formData?.selfInsured) {
+      return 'self'
+    }
+    return 'not'
+  }, [formData?.fullInsured, formData?.selfInsured, formData?.notInsured])
+
 
   return (
     <>
@@ -79,7 +89,7 @@ function AgentSubmitCompany(): JSX.Element {
                 <Form.Label>Company Name</Form.Label>
                 <Form.Control required type="text" onChange={(e) => {
                   setFormData({ ...formData, name: e.target.value })
-                }} />
+                }} value={formData.name} />
                 <Form.Control.Feedback type="invalid">
                   Please enter a company name.
                 </Form.Control.Feedback>
@@ -88,7 +98,7 @@ function AgentSubmitCompany(): JSX.Element {
             <Col lg={6}>
               <Form.Group controlId="phoneNumber">
                 <Form.Label>Phone Number</Form.Label>
-                <Form.Control required type="text" onChange={(e) => {
+                <Form.Control value={formData.phone} required type="text" onChange={(e) => {
                   setFormData({ ...formData, phone: e.target.value })
                 }} />
                 <Form.Control.Feedback type="invalid">
@@ -103,7 +113,7 @@ function AgentSubmitCompany(): JSX.Element {
                 <Form.Label>Company Address</Form.Label>
                 <Form.Control required as="textarea" rows={3} onChange={(e) => {
                   setFormData({ ...formData, address: e.target.value })
-                }} />
+                }}>{formData.address}</Form.Control>
                 <Form.Control.Feedback type="invalid">
                   Please enter a company address.
                 </Form.Control.Feedback>
@@ -114,7 +124,7 @@ function AgentSubmitCompany(): JSX.Element {
             <Col>
               <Form.Group controlId="contactPersonName">
                 <Form.Label>Contact Person Name</Form.Label>
-                <Form.Control required type="text" onChange={(e) => {
+                <Form.Control value={formData.contactPersonName} required type="text" onChange={(e) => {
                   setFormData({ ...formData, contactPersonName: e.target.value })
                 }} />
                 <Form.Control.Feedback type="invalid">
@@ -125,7 +135,7 @@ function AgentSubmitCompany(): JSX.Element {
             <Col>
               <Form.Group controlId="contactPersonPhone">
                 <Form.Label>Contact Person Phone</Form.Label>
-                <Form.Control required type="text" onChange={(e) => {
+                <Form.Control value={formData.contactPersonPhone} required type="text" onChange={(e) => {
                   setFormData({ ...formData, contactPersonPhone: e.target.value })
                 }} />
                 <Form.Control.Feedback type="invalid">
@@ -138,7 +148,7 @@ function AgentSubmitCompany(): JSX.Element {
             <Col>
               <Form.Group controlId="currentNumberOfEmployees">
                 <Form.Label>Current Number of Employees</Form.Label>
-                <Form.Control required type="number" onChange={(e) => {
+                <Form.Control value={formData.employeeCount} required type="number" onChange={(e) => {
                   setFormData({ ...formData, employeeCount: parseInt(e.target.value, 10) })
                 }} />
                 <Form.Control.Feedback type="invalid">
@@ -149,7 +159,7 @@ function AgentSubmitCompany(): JSX.Element {
             <Col>
               <Form.Group controlId="fullTime">
                 <Form.Label>Full Time</Form.Label>
-                <Form.Control required type="number" onChange={(e) => {
+                <Form.Control value={formData.fullTime} required type="number" onChange={(e) => {
                   setFormData({ ...formData, fullTime: parseInt(e.target.value, 10) })
                 }} />
                 <Form.Control.Feedback type="invalid">
@@ -160,7 +170,7 @@ function AgentSubmitCompany(): JSX.Element {
             <Col>
               <Form.Group controlId="partTime">
                 <Form.Label>Part Time</Form.Label>
-                <Form.Control required type="number" onChange={(e) => {
+                <Form.Control value={formData.partTime} required type="number" onChange={(e) => {
                   setFormData({ ...formData, partTime: parseInt(e.target.value, 10) })
                 }} />
                 <Form.Control.Feedback type="invalid">
@@ -173,7 +183,7 @@ function AgentSubmitCompany(): JSX.Element {
             <Col lg={12}>
               <Form.Group controlId="insuranceInfo">
                 <Form.Label>Insurance Info</Form.Label>
-                <Form.Control required type="text" onChange={(e) => {
+                <Form.Control value={formData.insuranceInfo} required type="text" onChange={(e) => {
                   setFormData({ ...formData, insuranceInfo: e.target.value })
                 }} />
                 <Form.Control.Feedback type="invalid">
@@ -186,7 +196,7 @@ function AgentSubmitCompany(): JSX.Element {
             <Col>
               <Form.Group controlId="fullInsured" className='another-flex'>
                 <Form.Label>Insurance Type</Form.Label>
-                <Form.Select aria-label="Default select example" onChange={(e) => {
+                <Form.Select value={insuranceMemo} aria-label="Default select example" onChange={(e) => {
                   setFormData(cs => {
                     const fullInsured = e.target.value === 'full'
                     const selfInsured = e.target.value === 'self'
@@ -203,7 +213,7 @@ function AgentSubmitCompany(): JSX.Element {
             <Col>
               <Form.Group controlId="typeOfBusiness">
                 <Form.Label>Type of Business</Form.Label>
-                <Form.Control required type="text" onChange={(e) => {
+                <Form.Control value={formData.typeOfBusiness} required type="text" onChange={(e) => {
                   setFormData({ ...formData, typeOfBusiness: e.target.value })
                 }} />
                 <Form.Control.Feedback type="invalid">
@@ -214,7 +224,7 @@ function AgentSubmitCompany(): JSX.Element {
           </Row>
           <Row className='align-it-end'>
             <Col lg={2} sm={1} className="Btn-Custom">
-              <Button variant="secondary" type="button">
+              <Button onClick={() => setFormData({fullInsured: true})} variant="secondary" type="reset">
                 Cancel
               </Button>
             </Col>

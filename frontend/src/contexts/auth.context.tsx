@@ -2,14 +2,17 @@ import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffe
 import User from "../models/user.model";
 import { createCustomSetStateFn, loadLocalStorage } from "../helpers/global";
 import axios from "axios";
+import {getAgentUser} from "../services/agent";
 
 type AuthContextType = {
   user?: User
+  refreshed: boolean
   setUser: Dispatch<SetStateAction<User | undefined>>
 }
 
 const AuthContext = createContext<AuthContextType>({
   user: undefined,
+  refreshed: false,
   setUser: () => {
   }
 })
@@ -17,6 +20,7 @@ const AuthContext = createContext<AuthContextType>({
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | undefined>()
   const [loading, setLoading] = useState(true)
+  const [refreshed, setRefreshed] = useState(false)
 
   useEffect(() => {
     const data = loadLocalStorage<User>('user')
@@ -24,6 +28,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       axios.defaults.headers.common['Authorization'] = `Bearer ${data.jwtToken}`
       axios.defaults.baseURL = '/api/v1/'
       axios.defaults.headers.common['Content-Type'] = 'application/json'
+      if (!refreshed) getAgentUser(data, data?.userId).then((res) => {
+        setUser(res.data)
+        setRefreshed(true)
+      })
       setUser(data)
     }
     setLoading(false)
@@ -39,7 +47,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, setUser: createCustomSetStateFn('user', setUser) }}
+      value={{ user, refreshed, setUser: createCustomSetStateFn('user', setUser) }}
     >
       {!loading && children}
     </AuthContext.Provider>
