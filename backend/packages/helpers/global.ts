@@ -29,7 +29,7 @@ export const transactional: (fn: CustomRequestHandler) => CustomRequestHandler =
     }
   }
 
-export const generateFileName = (originalName: string) => `${uuidv4()}.${originalName.split('.').pop()}`
+export const generateFileName = (originalName: string) => `${uuidv4()}_${originalName.replace(/ /g, '_')}`
 
 export default async function validateClass(data: object) {
   try {

@@ -367,7 +367,7 @@ export default function EditAgent({ onClose, agent }: CreateContractProps) {
             onClick={() => document.getElementById('nda')?.click()}
             value={state.nda?.split('/').pop() ?? ''}
           />
-          {state?.nda && <a target='_blank' href={agent?.nda} download>
+          {state?.nda && <a target='_blank' href={state?.nda} download>
             <Button variant='contained' color='primary' style={{
               marginTop: 10,
               marginLeft: 10,
@@ -409,7 +409,7 @@ export default function EditAgent({ onClose, agent }: CreateContractProps) {
             onClick={() => document.getElementById('contract')?.click()}
             value={state.contract?.split('/').pop() ?? ''}
           />
-          {state?.contract && <a target='_blank' href={agent?.contract} download>
+          {state?.contract && <a target='_blank' href={state?.contract} download>
             <Button variant='contained' color='primary' style={{
               marginTop: 10,
               marginLeft: 10,
