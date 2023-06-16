@@ -8,10 +8,10 @@ type Props = {
   title: string;
   agentUserId?: number
   agent?: AgentProfile | Pick<AgentProfile, 'companies'>,
-  commission?: number
+  level?: number
 }
 
-const AgentCustomers = ({ title, agentUserId, agent, commission }: Props) => {
+const AgentCustomers = ({ title, agentUserId, agent, level }: Props) => {
   const { user } = useAuth()
 
   const { data: agentInfo } = useAgentInfo(user!, !agent ? (agentUserId ?? user?.userId?.toString()!) : undefined)
@@ -46,7 +46,7 @@ const AgentCustomers = ({ title, agentUserId, agent, commission }: Props) => {
           <tr key={index} style={{ backgroundColor: 'white' }}>
             <td>{company.name}</td>
             <td>{company.employeeCount}</td>
-            <td>{commission ?? company.commissionRate}$</td>
+            <td>{level ? company?.commissionRates?.[level] : company.commissionRates?.[0]}$</td>
             <td></td>
             <td></td>
           </tr>

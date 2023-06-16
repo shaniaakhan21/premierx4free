@@ -6,6 +6,7 @@ import { DocumentType } from '@typegoose/typegoose'
 import mongoose from 'mongoose'
 
 export type ReferralClient = {
+  level: number
   commission: number
   agent: AgentProfile
 }
@@ -19,6 +20,7 @@ async function getReferralClients(me: DocumentType<AgentProfile>) {
     ...referralClients,
     ...lv1.map((agent) => ({
       commission: process.env.REF_LV_1 ? parseInt(process.env.REF_LV_1, 10) : 2,
+      level: 1,
       agent
     }))
   ]
@@ -29,6 +31,7 @@ async function getReferralClients(me: DocumentType<AgentProfile>) {
     ...referralClients,
     ...lv2.map((agent) => ({
       commission: process.env.REF_LV_2 ? parseInt(process.env.REF_LV_2, 10) : 1,
+      level: 2,
       agent
     }))
   ]
@@ -67,14 +70,14 @@ async function getSummary(me: DocumentType<AgentProfile>, referrals: ReferralCli
   }).populate('agent')
 
   const indexedReferrals = referrals.reduce<{ [key: string]: number }>(
-    (acc, cur) => ({ ...acc, [cur.agent._id!.toString()]: cur.commission }),
+    (acc, cur) => ({ ...acc, [cur.agent._id!.toString()]: cur.level }),
     {}
   )
 
   return {
     referrals: contracts
       .filter((c) => (c.agent as AgentProfile)?._id!.toString() !== me._id.toString())
-      .map((c) => ({ ...c.toJSON(), commissionRate: indexedReferrals[(c.agent as AgentProfile)?._id!.toString()] })),
+      .map((c) => ({ ...c.toJSON(), level: indexedReferrals[(c.agent as AgentProfile)?._id!.toString()] })),
     directs: contracts.filter((c) => (c.agent as AgentProfile)?._id!.toString() === me._id.toString())
   }
 }

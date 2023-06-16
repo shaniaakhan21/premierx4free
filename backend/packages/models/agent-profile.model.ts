@@ -57,6 +57,8 @@ export class AgentProfileLocation {
   public zip?: string
 }
 
+export type AgentProfileCompanyCommissionRates = { [key: number]: number }
+
 @Exclude()
 export class AgentProfileCompany {
   constructor(d: Partial<AgentProfileLocation>) {
@@ -128,12 +130,11 @@ export class AgentProfileCompany {
   @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
   public insuranceInfo?: string
 
-  @IsNumber({ maxDecimalPlaces: 2 })
-  @Min(0)
+  @IsNumber({ maxDecimalPlaces: 2 }, { each: true })
+  @prop({ default: [5, 2, 1] })
   @IsOptional()
-  @prop()
   @Expose({ groups: [ClassTransformerRoles.Self, Roles.Admin] })
-  public commissionRate?: number
+  public commissionRates?: number[]
 
   @IsBoolean()
   @IsOptional()
@@ -168,7 +169,7 @@ export class AgentProfileCompany {
 
 @Exclude()
 @modelOptions({
-  options: { allowMixed: Severity.ERROR, customName: 'agentProfiles' },
+  options: { allowMixed: Severity.ALLOW, customName: 'agentProfiles' },
   schemaOptions: { collection: 'agentProfiles' }
 })
 @plugin(AutoIncrementID, { field: 'agentId' })

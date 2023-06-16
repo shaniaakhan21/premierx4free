@@ -35,7 +35,7 @@ export default function CreateContract({ onClose, contract }: CreateContractProp
   const [state, onChange, setState] = useInputState<Partial<Pick<Contract, 'company' | 'start' | 'end'> & {
     agent: AgentSearchPickerResponse,
     employeeCount: string,
-    commissionRate: string,
+    commissionRates: number[],
     amountPerPerson: string
   }>>({
     start: moment().startOf('month').toDate(),
@@ -51,7 +51,7 @@ export default function CreateContract({ onClose, contract }: CreateContractProp
       setState(cs => ({
         ...cs,
         employeeCount: company.employeeCount?.toString(),
-        commissionRate: company.commissionRate?.toString()
+        commissionRates: company.commissionRates
       }))
     }
   }, [state.agent, state.company, contract])
@@ -69,7 +69,7 @@ export default function CreateContract({ onClose, contract }: CreateContractProp
         start: contract.contracts.start,
         end: contract.contracts.end,
         employeeCount: contract.contracts.employeeCount.toString(),
-        commissionRate: contract.contracts.commissionRate.toString(),
+        commissionRates: contract.contracts.commissionRates,
         amountPerPerson: contract.contracts.amountPerPerson.toString(),
       });
     } finally {
@@ -89,7 +89,6 @@ export default function CreateContract({ onClose, contract }: CreateContractProp
       if (!state.start) throw new Error('Please select a start date')
       if (!state.end) throw new Error('Please select an end date')
       if (!state.employeeCount || parseInt(state.employeeCount, 10) < 1) throw new Error('Please enter valid Employee count')
-      if (!state.commissionRate || parseInt(state.commissionRate, 10) < 1) throw new Error('Please enter valid Commission rate')
       if (!state.amountPerPerson || parseInt(state.amountPerPerson, 10) < 1) throw new Error('Please enter valid Amount per person')
 
       setLoading(contract ? 'Updating contract' : 'Creating new contract')
@@ -102,7 +101,7 @@ export default function CreateContract({ onClose, contract }: CreateContractProp
         company: state.company!,
         agent: state.agent!._id,
         employeeCount: parseInt(state.employeeCount, 10),
-        commissionRate: parseInt(state.commissionRate, 10),
+        commissionRates: state.commissionRates ?? [],
         amountPerPerson: parseInt(state.amountPerPerson, 10),
       })
 
@@ -191,17 +190,37 @@ export default function CreateContract({ onClose, contract }: CreateContractProp
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={4} md={2}>
               <TextField
                 InputLabelProps={{ shrink: true }}
-                disabled={!state.agent}
                 name="commissionRate"
-                label="Commission Rate"
+                label="Commission Lv.0"
                 type="number"
                 fullWidth
-                prefix='$'
-                value={state.commissionRate ?? ''}
-                onChange={onChange}
+                value={state?.commissionRates?.[0] ?? ''}
+                onChange={(e) => setState(cs => (cs && { ...cs, commissionRates: cs.commissionRates?.map((c, idx) => idx === 0 ? parseFloat(e.target.value) : c) }))}
+              />
+            </Grid>
+            <Grid item xs={4} md={2}>
+              <TextField
+                InputLabelProps={{ shrink: true }}
+                name="commissionRate"
+                label="Commission Lv.1"
+                type="number"
+                fullWidth
+                value={state?.commissionRates?.[1] ?? ''}
+                onChange={(e) => setState(cs => (cs && { ...cs, commissionRates: cs.commissionRates?.map((c, idx) => idx === 1 ? parseFloat(e.target.value) : c) }))}
+              />
+            </Grid>
+            <Grid item xs={4} md={2}>
+              <TextField
+                InputLabelProps={{ shrink: true }}
+                name="commissionRate"
+                label="Commission Lv.2"
+                type="number"
+                fullWidth
+                value={state?.commissionRates?.[2] ?? ''}
+                onChange={(e) => setState(cs => (cs && { ...cs, commissionRates: cs.commissionRates?.map((c, idx) => idx === 2 ? parseFloat(e.target.value) : c) }))}
               />
             </Grid>
             <Grid item xs={12} md={6}>

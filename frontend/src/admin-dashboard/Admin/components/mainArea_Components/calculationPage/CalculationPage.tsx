@@ -102,7 +102,7 @@ function CalculationPage(): JSX.Element {
             <TableRow>
               <StyledTableCell>Agent Name</StyledTableCell>
               <StyledTableCell>Company Name</StyledTableCell>
-              <StyledTableCell align="right">Commission Rate</StyledTableCell>
+              <StyledTableCell align="center">Commission Rate <br />Lv.0 | Lv.1 | Lv.2</StyledTableCell>
               <StyledTableCell align="right">Contract Start Date</StyledTableCell>
               <StyledTableCell align="right">Contract End Date</StyledTableCell>
               <StyledTableCell align="right">Monthly Membership Paid (No. of People)</StyledTableCell>
@@ -132,12 +132,12 @@ function CalculationPage(): JSX.Element {
                 >
                   <StyledTableCell>{row.name}</StyledTableCell>
                   <StyledTableCell>{row.companies.name}</StyledTableCell>
-                  <StyledTableCell align="right">${row.contracts.commissionRate}</StyledTableCell>
+                  <StyledTableCell align="center">{row.contracts.commissionRates?.map((v, l) => `$${v}`)?.join(' | ')}</StyledTableCell>
                   <StyledTableCell align="center">{moment(row.contracts.start).format('YYYY-MM-DD')}</StyledTableCell>
                   <StyledTableCell align="center">{moment(row.contracts.end).format('YYYY-MM-DD')}</StyledTableCell>
                   <StyledTableCell align="right">{row.contracts.employeeCount}</StyledTableCell>
                   <StyledTableCell
-                    align="right">${row.contracts.employeeCount * row.contracts.commissionRate}</StyledTableCell>
+                    align="right">${row.contracts.employeeCount * row.contracts.commissionRates?.[0]}</StyledTableCell>
                 </TableRow>
               ))}
           </TableBody>

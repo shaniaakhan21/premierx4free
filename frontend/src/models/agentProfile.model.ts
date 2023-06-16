@@ -17,7 +17,7 @@ export type AgentProfileCompany = {
   fullTime?: string
   partTime?: string
   insuranceInfo?: string
-  commissionRate?: number
+  commissionRates?: number[]
   fullInsured?: boolean
   selfInsured?: boolean
   notInsured?: boolean

@@ -105,7 +105,7 @@ export default function EditAgent({ onClose, agent }: CreateContractProps) {
           if (companyId) {
             const c = a?.companies?.find((c) => c._id === companyId)
             if (c) {
-              setExpanded(c)
+              setExpanded({ ...c, commissionRates: [c.commissionRates?.[0] ?? 0, c.commissionRates?.[1] ?? 0, c.commissionRates?.[2] ?? 0] })
               setTimeout(() => {
                 document.getElementById(`${c._id}-header`)?.scrollIntoView({ behavior: "smooth" });
               }, 500);
@@ -492,15 +492,37 @@ export default function EditAgent({ onClose, agent }: CreateContractProps) {
                 onChange={onChangeCompany}
               />
             </Grid>))}
-            <Grid item xs={12} md={6}>
+            <Grid item xs={4} md={2}>
               <TextField
                 InputLabelProps={{ shrink: true }}
                 name="commissionRate"
-                label="Commission Rate"
+                label="Commission Lv.0"
                 type="number"
                 fullWidth
-                value={expanded?.commissionRate ?? ''}
-                onChange={onChangeCompany}
+                value={expanded?.commissionRates?.[0] ?? ''}
+                onChange={(e) => setExpanded(cs => (cs && { ...cs, commissionRates: cs.commissionRates?.map((c, idx) => idx === 0 ? parseFloat(e.target.value) : c) }))}
+              />
+            </Grid>
+            <Grid item xs={4} md={2}>
+              <TextField
+                InputLabelProps={{ shrink: true }}
+                name="commissionRate"
+                label="Commission Lv.1"
+                type="number"
+                fullWidth
+                value={expanded?.commissionRates?.[1] ?? ''}
+                onChange={(e) => setExpanded(cs => (cs && { ...cs, commissionRates: cs.commissionRates?.map((c, idx) => idx === 1 ? parseFloat(e.target.value) : c) }))}
+              />
+            </Grid>
+            <Grid item xs={4} md={2}>
+              <TextField
+                InputLabelProps={{ shrink: true }}
+                name="commissionRate"
+                label="Commission Lv.2"
+                type="number"
+                fullWidth
+                value={expanded?.commissionRates?.[2] ?? ''}
+                onChange={(e) => setExpanded(cs => (cs && { ...cs, commissionRates: cs.commissionRates?.map((c, idx) => idx === 2 ? parseFloat(e.target.value) : c) }))}
               />
             </Grid>
             <Grid item xs={12} md={6}>

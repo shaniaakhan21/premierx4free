@@ -8,7 +8,7 @@ export default class Contract {
 
   public company!: AgentProfileCompany | string
 
-  public commissionRate!: number
+  public commissionRates!: number[]
 
   public employeeCount!: number
 

@@ -27,7 +27,7 @@ const AgentTeam = ({ title, data }: Props) => {
         {data?.map((agent, idx) => (
           <tr key={idx} style={{ backgroundColor: 'white' }}>
             <td>{agent.agent.name}</td>
-            <td>{(agent.commission) * (agent.agent.companies?.length ?? 0)}$</td>
+            <td>{agent.agent.companies?.reduce((a, c) => a + c?.commissionRates![agent.level!] ?? 0, 0)}$</td>
             <td>{(agent.agent.companies?.length ?? 0) > 0 ?
               <a onClick={() => setViewMore(agent)} className="color-link">View More</a> : null}</td>
           </tr>
@@ -36,7 +36,7 @@ const AgentTeam = ({ title, data }: Props) => {
       </Table>
       <Modal show={!!viewMore} onHide={() => setViewMore(undefined)} className='boxModal'>
         <Modal.Body>
-          <AgentCustomers agent={viewMore?.agent} commission={viewMore?.commission} title="View Direct Clients " />
+          <AgentCustomers agent={viewMore?.agent} level={viewMore?.level} title="View Direct Clients " />
         </Modal.Body>
         <Modal.Footer className='modalFooter'>
           <Button variant="secondary" onClick={() => setViewMore(undefined)} className='buttonBlue'>

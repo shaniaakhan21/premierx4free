@@ -7,6 +7,7 @@ import Contract from "../models/contract.model";
 import { useAuth } from "../contexts/auth.context";
 
 export type ReferralClient = {
+  level: number
   commission: number
   agent: AgentProfile
 }

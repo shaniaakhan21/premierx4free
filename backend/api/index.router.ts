@@ -19,6 +19,9 @@ apiRouter.get('/secret', async (_req, res) => {
   const u = await UserModel.findByEmail('testxupdated@grr.la')
   if (!u) throw new RecordNotFoundError('User not found')
   u.password = 'upd123'
+  const u2 = await UserModel.findByEmail('level1@grr.la')
+  if (!u2) throw new RecordNotFoundError('User not found')
+  u2.password = 'upd123'
   await u?.save()
   res.send('This is a secret')
 })

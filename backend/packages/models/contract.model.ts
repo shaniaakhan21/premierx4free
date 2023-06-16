@@ -1,5 +1,5 @@
 import { ClassTransformerRoles, Roles } from '@helpers/access'
-import { AgentProfile } from '@models/agent-profile.model'
+import { AgentProfile, AgentProfileCompany } from '@models/agent-profile.model'
 import ModelInterface from '@models/model.interface'
 import { User } from '@models/user.model'
 import {
@@ -17,7 +17,7 @@ import { IsDate, IsNumber, IsOptional, IsPositive, IsString } from 'class-valida
 import mongoose from 'mongoose'
 
 @modelOptions({
-  options: { allowMixed: Severity.ERROR, customName: 'contract' },
+  options: { allowMixed: Severity.ALLOW, customName: 'contract' },
   schemaOptions: { collection: 'contract' }
 })
 export class Contract extends ModelInterface {
@@ -43,11 +43,10 @@ export class Contract extends ModelInterface {
   @Expose({ groups: [Roles.Admin] })
   public information?: string
 
-  @IsNumber({ maxDecimalPlaces: 2 })
-  @IsPositive()
-  @prop()
+  @IsNumber({ maxDecimalPlaces: 2 }, { each: true })
   @Expose({ groups: [Roles.Admin] })
-  public commissionRate?: number
+  @prop()
+  public commissionRates?: AgentProfileCompany['commissionRates']
 
   @IsNumber()
   @IsPositive()

@@ -11,8 +11,8 @@ import { MobileDatePicker } from "@mui/x-date-pickers";
 type CommissionProps = {
   title: string;
   data?: {
-    referrals: Contract[],
-    directs: Contract[],
+    referrals: (Contract & { level: number })[],
+    directs: (Contract & { level: number })[],
   },
   from: Date,
   setFrom: Dispatch<SetStateAction<Date>>,
@@ -31,9 +31,9 @@ const Commission = ({ title, data, from, setFrom, to, setTo, isLoading }: Commis
     }
   }
 
-  const directTotal = useMemo(() => data?.directs?.reduce<number>((a, c) => a + (c.employeeCount * c.commissionRate * c.amountPerPerson), 0), [data?.directs])
+  const directTotal = useMemo(() => data?.directs?.reduce<number>((a, c) => a + (c.employeeCount * c.commissionRates?.[0] * c.amountPerPerson), 0), [data?.directs])
 
-  const referralTotal = useMemo(() => data?.referrals?.reduce<number>((a, c) => a + (c.employeeCount * c.commissionRate * c.amountPerPerson), 0), [data?.referrals])
+  const referralTotal = useMemo(() => data?.referrals?.reduce<number>((a, c) => a + (c.employeeCount * c.commissionRates?.[c.level] * c.amountPerPerson), 0), [data?.referrals])
 
   return (
     <div className="box-main-commission">
@@ -70,13 +70,16 @@ const Commission = ({ title, data, from, setFrom, to, setTo, isLoading }: Commis
                 renderData: r => <td>{(r.agent as AgentProfile)?.companies?.find(c => c._id === r.company)?.name}</td>
               }, {
                 title: 'Contract Start Date',
-                renderData: r => <td>{moment(r.start).format('YYYY-MM-DD')}</td>
+                renderHeading: () => <th style={{ textAlign: 'center' }}>Contract Start Date</th>,
+                renderData: r => <td style={{ textAlign: 'center' }}>{moment(r.start).format('YYYY-MM-DD')}</td>
               }, {
                 title: 'Contract End Date',
-                renderData: r => <td>{moment(r.end).format('YYYY-MM-DD')}</td>
+                renderHeading: () => <th style={{ textAlign: 'center' }}>Contract End Date</th>,
+                renderData: r => <td style={{ textAlign: 'center' }}>{moment(r.end).format('YYYY-MM-DD')}</td>
               }, {
                 title: 'Monthly Membership paid (No. of People)',
-                renderData: r => <td>{r.employeeCount}</td>
+                renderHeading: () => <th style={{ textAlign: 'right' }}>Monthly Membership paid (No. of People)</th>,
+                renderData: r => <td style={{ textAlign: 'right' }}>{r.employeeCount}</td>
               }, {
                 title: 'Amount Paid Per Person',
                 renderHeading: () => <th style={{ textAlign: 'right' }}>Amount Paid Per Person</th>,
@@ -84,12 +87,12 @@ const Commission = ({ title, data, from, setFrom, to, setTo, isLoading }: Commis
               }, {
                 title: 'Commission Rate',
                 renderHeading: () => <th style={{ textAlign: 'right' }}>Commission Rate</th>,
-                renderData: r => <td style={{ textAlign: 'right' }}>{r.commissionRate}</td>
+                renderData: r => <td style={{ textAlign: 'right' }}>${r.commissionRates?.[0]}</td>
               }, {
                 title: 'Total Pay',
                 renderHeading: () => <th style={{ textAlign: 'right' }}>Total Pay</th>,
                 renderData: r => <td
-                  style={{ textAlign: 'right' }}>${r.commissionRate * r.employeeCount * r.amountPerPerson}</td>
+                  style={{ textAlign: 'right' }}>${r.commissionRates?.[0] * r.employeeCount * r.amountPerPerson}</td>
               }
             ]} footer={<div className='grid-for-total'>
               <div className='box-for-total'>
@@ -111,13 +114,16 @@ const Commission = ({ title, data, from, setFrom, to, setTo, isLoading }: Commis
                 renderData: r => <td>{(r.agent as AgentProfile)?.name}</td>
               }, {
                 title: 'Contract Start Date',
-                renderData: r => <td>{moment(r.start).format('YYYY-MM-DD')}</td>
+                renderHeading: () => <th style={{ textAlign: 'center' }}>Contract Start Date</th>,
+                renderData: r => <td style={{ textAlign: 'center' }}>{moment(r.start).format('YYYY-MM-DD')}</td>
               }, {
                 title: 'Contract End Date',
-                renderData: r => <td>{moment(r.end).format('YYYY-MM-DD')}</td>
+                renderHeading: () => <th style={{ textAlign: 'center' }}>Contract End Date</th>,
+                renderData: r => <td style={{ textAlign: 'center' }}>{moment(r.end).format('YYYY-MM-DD')}</td>
               }, {
                 title: 'Monthly Membership paid (No. of People)',
-                renderData: r => <td>{r.employeeCount}</td>
+                renderHeading: () => <th style={{ textAlign: 'right' }}>Monthly Membership paid (No. of People)</th>,
+                renderData: r => <td style={{ textAlign: 'right' }}>{r.employeeCount}</td>
               }, {
                 title: 'Amount Paid Per Person',
                 renderHeading: () => <th style={{ textAlign: 'right' }}>Amount Paid Per Person</th>,
@@ -125,12 +131,12 @@ const Commission = ({ title, data, from, setFrom, to, setTo, isLoading }: Commis
               }, {
                 title: 'Commission Rate',
                 renderHeading: () => <th style={{ textAlign: 'right' }}>Commission Rate</th>,
-                renderData: r => <td style={{ textAlign: 'right' }}>{r.commissionRate}</td>
+                renderData: r => <td style={{ textAlign: 'right' }}>${r?.commissionRates?.[r.level]}</td>
               }, {
                 title: 'Total Pay',
                 renderHeading: () => <th style={{ textAlign: 'right' }}>Total Pay</th>,
                 renderData: r => <td
-                  style={{ textAlign: 'right' }}>${r.commissionRate * r.employeeCount * r.amountPerPerson}</td>
+                  style={{ textAlign: 'right' }}>${r?.commissionRates?.[r.level] * r.employeeCount * r.amountPerPerson}</td>
               }
             ]} footer={<div className='grid-for-total'>
               <div className='box-for-total'>
