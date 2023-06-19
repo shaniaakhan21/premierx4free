@@ -1,14 +1,16 @@
 import './styles.css';
 import React, {useMemo, useState} from 'react';
-import { Button, Col, Form, Row } from 'react-bootstrap';
-import { submitCompany } from '../../../services/submitCompany';
-import { Backdrop, CircularProgress } from "@mui/material";
+import {Button, Col, Form, Row} from 'react-bootstrap';
+import {submitCompany} from '../../../services/submitCompany';
+import {Backdrop, CircularProgress} from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import { useSnackbar } from "notistack";
+import {useSnackbar} from "notistack";
+import {AsYouType} from "libphonenumber-js";
 
 function AgentSubmitCompany(): JSX.Element {
   const { enqueueSnackbar } = useSnackbar();
 
+  const [addressSpellCheck, setAddressSpellCheck] = useState<string | undefined>();
   const [validated, setValidated] = useState(false);
   const [loading, setLoading] = useState<string | undefined>();
 
@@ -65,6 +67,28 @@ function AgentSubmitCompany(): JSX.Element {
     return 'not'
   }, [formData?.fullInsured, formData?.selfInsured, formData?.notInsured])
 
+  const handleAddressChange = (event: any) => {
+    let { value } = event.target;
+
+    const lines = value.split('\n') as string[];
+    // const trimmedLines = lines.map((line) => line.trim());
+
+    const capitalizedLines = lines.map((line) => {
+      const words = line.split(' ');
+      const capitalizedWords = words.map((word) => {
+        if (word.length <= 2) {
+          // Capitalize two-letter words like "st", "rd", etc.
+          return word.toUpperCase();
+        }
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+      });
+      return capitalizedWords.join(' ');
+    });
+
+    const address = capitalizedLines.join('\n');
+
+    setFormData(cs => ({ ...cs, address }));
+  }
 
   return (
     <>
@@ -95,7 +119,7 @@ function AgentSubmitCompany(): JSX.Element {
               <Form.Group controlId="phoneNumber">
                 <Form.Label>Phone Number</Form.Label>
                 <Form.Control value={formData.phone} required type="text" onChange={(e) => {
-                  setFormData({ ...formData, phone: e.target.value })
+                  setFormData({ ...formData, phone: new AsYouType('US').input(e.target.value) })
                 }} />
                 <Form.Control.Feedback type="invalid">
                   Please enter a phone number.
@@ -107,9 +131,20 @@ function AgentSubmitCompany(): JSX.Element {
             <Col lg={12}>
               <Form.Group controlId="companyAddress">
                 <Form.Label>Company Address</Form.Label>
-                <Form.Control required as="textarea" rows={3} onChange={(e) => {
-                  setFormData({ ...formData, address: e.target.value })
-                }}>{formData.address}</Form.Control>
+                <Form.Control spellCheck aria-describedby="addressHelpBlock" onBlur={event => {
+                  let { value } = event.target;
+
+                  const lines = value.split('\n') as string[];
+                  const trimmedLines = lines.map((line) => {
+                    const trimmed = line.trim()
+                    if (trimmed.endsWith(',')) {
+                      return trimmed.slice(0, -1);
+                    }
+                    return trimmed;
+                  })
+
+                  setFormData(cs => ({ ...cs, address: trimmedLines.join(',\n') }));
+                }} value={formData.address} required as="textarea" rows={3} onChange={handleAddressChange}>{formData.address}</Form.Control>
                 <Form.Control.Feedback type="invalid">
                   Please enter a company address.
                 </Form.Control.Feedback>
@@ -132,7 +167,7 @@ function AgentSubmitCompany(): JSX.Element {
               <Form.Group controlId="contactPersonPhone">
                 <Form.Label>Contact Person Phone</Form.Label>
                 <Form.Control value={formData.contactPersonPhone} required type="text" onChange={(e) => {
-                  setFormData({ ...formData, contactPersonPhone: e.target.value })
+                  setFormData({ ...formData, contactPersonPhone: new AsYouType('US').input(e.target.value) })
                 }} />
                 <Form.Control.Feedback type="invalid">
                   Please enter a contact person phone number.

@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate, useParams } from 'react-router-dom';
 import { register } from "../../../services/register";
 import { useTranslation } from "react-i18next";
+import {AsYouType} from "libphonenumber-js";
 
 const imgSignin = '/assets/svg/SignIn/sigin-img.svg';
 
@@ -30,6 +31,27 @@ function SignUp(): JSX.Element {
   const [errorMsg, setErrorMsg] = useState("");
   const history = useNavigate();
   const [tr] = useTranslation();
+
+  const handleAddressChange = (event: any) => {
+    let { value } = event.target;
+
+    const lines = value.split('\n') as string[];
+    // const trimmedLines = lines.map((line) => line.trim());
+
+    const capitalizedLines = lines.map((line) => {
+      const words = line.split(' ');
+      const capitalizedWords = words.map((word) => {
+        if (word.length <= 2) {
+          // Capitalize two-letter words like "st", "rd", etc.
+          return word.toUpperCase();
+        }
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+      });
+      return capitalizedWords.join(' ');
+    });
+
+    setAddress(capitalizedLines.join('\n'));
+  }
 
   const t = (key: string) => tr(`signup.${key}`);
   const tf = (key: string) => tr(`signup.form.${key}`);
@@ -133,7 +155,7 @@ function SignUp(): JSX.Element {
               placeholder={tf('phone-placeholder')}
               value={phoneNumber}
               onChange={(e) => {
-                setPhoneNumber(e.target.value)
+                setPhoneNumber(new AsYouType('US').input(e.target.value))
               }}
             />
           </div>
@@ -145,9 +167,21 @@ function SignUp(): JSX.Element {
                    id="address"
                    placeholder={tf('address-placeholder')}
                    value={address}
-                   onChange={(e) => {
-                     setAddress(e.target.value)
+                   onBlur={event => {
+                     let { value } = event.target;
+
+                     const lines = value.split('\n') as string[];
+                     const trimmedLines = lines.map((line) => {
+                       const trimmed = line.trim()
+                       if (trimmed.endsWith(',')) {
+                         return trimmed.slice(0, -1);
+                       }
+                       return trimmed;
+                     })
+
+                     setAddress(trimmedLines.join(',\n'))
                    }}
+                   onChange={handleAddressChange}
             />
             <input
               type="text"
