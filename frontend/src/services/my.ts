@@ -30,8 +30,8 @@ export const useMyDashboard = (user: User, from: Date, to: Date) => useSWR(['/my
   referrals: ReferralClient[],
   directs: AgentProfileCompany[],
   summary: {
-    referrals: Contract[],
-    directs: Contract[],
+    referrals: (Contract & { level: number })[],
+    directs: (Contract & { level: number })[],
   }
 }>>)
 
