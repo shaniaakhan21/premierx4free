@@ -39,6 +39,7 @@ function AgentTabs(props: Props): JSX.Element {
   const { user } = useAuth()
   const { data, isLoading } = useMyDashboard(user!, from, to)
   const [showTabs, setShowTabs] = useState(false);
+  const [tabKey, setTabKey] = useState('first');
 
   const handleToggleTabs = () => {
     setShowTabs(!showTabs);
@@ -54,7 +55,6 @@ function AgentTabs(props: Props): JSX.Element {
   };
 
   return (
-
     <>
       <Row className='phone-row'>
         <Col sm="2" lg="12" className='phone-logo'>
@@ -68,8 +68,7 @@ function AgentTabs(props: Props): JSX.Element {
           </div>
         </Col>
       </Row>
-
-      <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+      <Tab.Container onSelect={key => setTabKey(key!)} activeKey={tabKey} id="left-tabs-example" defaultActiveKey="first">
         <Row>
           {showTabs && (
             <Col sm={2} className='tab-contains'>
@@ -146,9 +145,9 @@ function AgentTabs(props: Props): JSX.Element {
                 <Commission isLoading={isLoading} from={from} setFrom={setFrom} to={to} setTo={setTo}
                             data={data?.data?.summary} title="Commission Summary" />
               </Tab.Pane>
-              <Tab.Pane eventKey="second" className="tab-pane-second">
-                <AgentSubmitCompany />
-              </Tab.Pane>
+              {tabKey === 'second' && <Tab.Pane eventKey="second" className="tab-pane-second">
+                <AgentSubmitCompany setTabKey={setTabKey}/>
+              </Tab.Pane>}
               <Tab.Pane eventKey="third" className="tab-pane-third">
 
               </Tab.Pane>

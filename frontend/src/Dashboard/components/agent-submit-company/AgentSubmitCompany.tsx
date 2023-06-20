@@ -1,13 +1,15 @@
 import './styles.css';
-import React, {useMemo, useState} from 'react';
+import React, {Dispatch, SetStateAction, useMemo, useState} from 'react';
 import {Button, Col, Form, Row} from 'react-bootstrap';
 import {submitCompany} from '../../../services/submitCompany';
 import {Backdrop, CircularProgress} from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import {useSnackbar} from "notistack";
 import {AsYouType} from "libphonenumber-js";
+import {useNavigate} from "react-router-dom";
 
-function AgentSubmitCompany(): JSX.Element {
+function AgentSubmitCompany({ setTabKey }: { setTabKey: Dispatch<SetStateAction<string>> }): JSX.Element {
+  const navigate = useNavigate()
   const { enqueueSnackbar } = useSnackbar();
 
   const [addressSpellCheck, setAddressSpellCheck] = useState<string | undefined>();
@@ -50,6 +52,7 @@ function AgentSubmitCompany(): JSX.Element {
       }
       await submitCompany(formData, user?.jwtToken)
       enqueueSnackbar("Company Submitted Successfully", { variant: 'success' });
+      setTabKey('first')
     } catch (e: any) {
       enqueueSnackbar(e.response?.data?.message ?? e.message, { variant: 'error' });
     } finally {
@@ -255,7 +258,7 @@ function AgentSubmitCompany(): JSX.Element {
           </Row>
           <Row className='align-it-end'>
             <Col lg={2} sm={1} className="Btn-Custom">
-              <Button onClick={() => setFormData({fullInsured: true})} variant="secondary" type="reset">
+              <Button onClick={() => setTabKey('first')} variant="secondary" type="reset">
                 Cancel
               </Button>
             </Col>
