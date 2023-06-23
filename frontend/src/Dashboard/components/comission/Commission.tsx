@@ -31,9 +31,9 @@ const Commission = ({ title, data, from, setFrom, to, setTo, isLoading }: Commis
     }
   }
 
-  const directTotal = useMemo(() => data?.directs?.reduce<number>((a, c) => a + (c.employeeCount * c.commissionRates?.[0] * c.amountPerPerson), 0), [data?.directs])
+  const directTotal = useMemo(() => data?.directs?.reduce<number>((a, c) => a + (c.employeeCount * c.commissionRates?.[0]), 0), [data?.directs])
 
-  const referralTotal = useMemo(() => data?.referrals?.reduce<number>((a, c) => a + (c.employeeCount * c.commissionRates?.[c.level] * c.amountPerPerson), 0), [data?.referrals])
+  const referralTotal = useMemo(() => data?.referrals?.reduce<number>((a, c) => a + (c.employeeCount * c.commissionRates?.[c.level]), 0), [data?.referrals])
 
   return (
     <div className="box-main-commission">
@@ -92,7 +92,7 @@ const Commission = ({ title, data, from, setFrom, to, setTo, isLoading }: Commis
                 title: 'Total Pay',
                 renderHeading: () => <th style={{ textAlign: 'right' }}>Total Pay</th>,
                 renderData: r => <td
-                  style={{ textAlign: 'right' }}>${r.commissionRates?.[0] * r.employeeCount * r.amountPerPerson}</td>
+                  style={{ textAlign: 'right' }}>${r.commissionRates?.[0] * r.employeeCount}</td>
               }
             ]} footer={<div className='grid-for-total'>
               <div className='box-for-total'>
@@ -136,7 +136,7 @@ const Commission = ({ title, data, from, setFrom, to, setTo, isLoading }: Commis
                 title: 'Total Pay',
                 renderHeading: () => <th style={{ textAlign: 'right' }}>Total Pay</th>,
                 renderData: r => <td
-                  style={{ textAlign: 'right' }}>${r?.commissionRates?.[r.level] * r.employeeCount * r.amountPerPerson}</td>
+                  style={{ textAlign: 'right' }}>${r?.commissionRates?.[r.level] * r.employeeCount}</td>
               }
             ]} footer={<div className='grid-for-total'>
               <div className='box-for-total'>
