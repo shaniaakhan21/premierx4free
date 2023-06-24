@@ -1,7 +1,7 @@
 import { CustomRequestHandler } from '@helpers/errorHandler'
 import { successResponse } from '@helpers/response'
 import AgentProfileModel, { AgentProfile } from '@models/agent-profile.model'
-import ContractModel from '@models/contract.model'
+import ContractModel, { Contract } from '@models/contract.model'
 import { DocumentType } from '@typegoose/typegoose'
 import mongoose from 'mongoose'
 
@@ -41,33 +41,71 @@ async function getReferralClients(me: DocumentType<AgentProfile>) {
 
 async function getSummary(me: DocumentType<AgentProfile>, referrals: ReferralClient[], from: Date, to: Date) {
   const ids: (mongoose.Types.ObjectId | string)[] = []
-  me.companies?.map((c) => ids.push(c._id!))
-  referrals.map((r) => r.agent.companies?.map((c) => ids.push(c._id!)))
-  const contracts = await ContractModel.find({
-    $and: [
-      {
-        company: {
-          $in: ids
-        }
-      },
-      {
+  me.companies?.map((c) => ids.push(c._id!.toString()))
+  referrals.map((r) => r.agent.companies?.map((c) => ids.push(c._id!.toString())))
+  const contracts = await ContractModel.aggregate<Contract>([
+    {
+      $match: {
+        $and: [
+          {
+            company: {
+              $in: ids
+            }
+          },
+          {
+            $or: [
+              {
+                start: {
+                  $gte: from,
+                  $lte: to
+                }
+              },
+              {
+                end: {
+                  $gte: from,
+                  $lte: to
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      $lookup: {
+        from: 'agentProfiles',
+        localField: 'agent',
+        foreignField: '_id',
+        as: 'agent'
+      }
+    },
+    {
+      $unwind: {
+        path: '$agent'
+      }
+    },
+    {
+      $unwind: '$months'
+    },
+    {
+      $match: {
         $or: [
           {
-            start: {
+            'months.start': {
               $gte: from,
               $lte: to
             }
           },
           {
-            end: {
+            'months.end': {
               $gte: from,
               $lte: to
             }
           }
         ]
       }
-    ]
-  }).populate('agent')
+    }
+  ])
 
   const indexedReferrals = referrals.reduce<{ [key: string]: number }>(
     (acc, cur) => ({ ...acc, [cur.agent._id!.toString()]: cur.level }),
@@ -76,9 +114,9 @@ async function getSummary(me: DocumentType<AgentProfile>, referrals: ReferralCli
 
   return {
     referrals: contracts
-      .filter((c) => (c.agent as AgentProfile)?._id!.toString() !== me._id.toString())
-      .map((c) => ({ ...c.toJSON(), level: indexedReferrals[(c.agent as AgentProfile)?._id!.toString()] })),
-    directs: contracts.filter((c) => (c.agent as AgentProfile)?._id!.toString() === me._id.toString())
+      .filter((c) => c && (c.agent as AgentProfile)?._id!.toString() !== me._id.toString())
+      .map((c) => ({ ...c, level: indexedReferrals[(c.agent as AgentProfile)?._id!.toString()] })),
+    directs: contracts.filter((c) => c && (c.agent as AgentProfile)?._id!.toString() === me._id.toString())
   }
 }
 

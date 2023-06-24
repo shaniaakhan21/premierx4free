@@ -6,19 +6,51 @@ import {
   DocumentType,
   getModelForClass,
   modelOptions,
+  pre,
   prop,
   Ref,
   ReturnModelType,
   Severity
 } from '@typegoose/typegoose'
-import { Expose, instanceToPlain, plainToInstance, Type } from 'class-transformer'
+import { Exclude, Expose, instanceToPlain, plainToInstance, Type } from 'class-transformer'
 import { ClassTransformOptions } from 'class-transformer/types/interfaces'
 import { IsDate, IsNumber, IsOptional, IsPositive, IsString } from 'class-validator'
+import moment from 'moment-timezone'
 import mongoose from 'mongoose'
+
+@Exclude()
+export class ContractMonth {
+  @IsNumber()
+  @IsPositive()
+  @prop()
+  @Expose({ groups: [Roles.Admin] })
+  public employeeCount?: number
+
+  @IsDate()
+  @Type(() => Date)
+  @prop()
+  @Expose({ groups: [Roles.Admin] })
+  public start?: Date
+
+  @IsDate()
+  @Type(() => Date)
+  @prop()
+  @Expose({ groups: [Roles.Admin] })
+  public end?: Date
+}
 
 @modelOptions({
   options: { allowMixed: Severity.ALLOW, customName: 'contract' },
   schemaOptions: { collection: 'contract' }
+})
+@pre<Contract>('save', async function (next) {
+  if (!this.isNew) return next()
+  this.months = [...Array(moment(this.end).diff(this.start, 'months'))].map((_, i) => ({
+    employeeCount: this.employeeCount,
+    start: moment(this.start).add(i, 'months').startOf('month').toDate(),
+    end: moment(this.start).add(i, 'months').endOf('month').toDate()
+  }))
+  return next()
 })
 export class Contract extends ModelInterface {
   constructor(d: Partial<Contract>) {
@@ -59,6 +91,11 @@ export class Contract extends ModelInterface {
   @prop()
   @Expose({ groups: [Roles.Admin] })
   public amountPerPerson?: number
+
+  @prop({ type: () => ContractMonth })
+  @Type(() => ContractMonth)
+  @Expose({ groups: [Roles.Admin] })
+  public months?: ContractMonth[]
 
   @IsDate()
   @Type(() => Date)

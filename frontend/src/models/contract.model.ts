@@ -1,6 +1,16 @@
 import AgentProfile, { AgentProfileCompany } from "./agentProfile.model";
 import User from "./user.model";
 
+export class ContractMonth {
+  public _id!: string
+
+  public employeeCount!: number
+
+  public start!: string | Date
+
+  public end!: string | Date
+}
+
 export default class Contract {
   public _id!: string
 
@@ -13,6 +23,8 @@ export default class Contract {
   public employeeCount!: number
 
   public amountPerPerson!: number
+
+  public months?: ContractMonth[]
 
   public start!: string | Date
 

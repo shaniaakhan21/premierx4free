@@ -17,11 +17,24 @@ import useDebounceState from "../../../../../hooks/useDebounceState";
 import { useAuth } from "../../../../../contexts/auth.context";
 import { ContractSearchResponse, createContract, updateContract } from "../../../../../services/admin";
 import Contract from "../../../../../models/contract.model";
-import { Backdrop, CircularProgress, FormControl, Grid, InputLabel, MenuItem, Select } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Backdrop,
+  CircularProgress,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Paper,
+  Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography
+} from "@mui/material";
 import { useInputState } from "../../../../../hooks/useInputState";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import moment, { Moment } from "moment-timezone";
 import { MobileDatePicker } from '@mui/x-date-pickers';
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 export type CreateContractProps = {
   contract?: ContractSearchResponse['data'][0]
@@ -32,7 +45,7 @@ export default function CreateContract({ onClose, contract }: CreateContractProp
   const { user } = useAuth()
   const [query, setQuery] = useDebounceState('', 200);
   const { data, isLoading } = useAgentSearch<AgentSearchPickerResponse>(user!, query, 10, 0, AgentSearchBy.Name, true);
-  const [state, onChange, setState] = useInputState<Partial<Pick<Contract, 'company' | 'start' | 'end'> & {
+  const [state, onChange, setState] = useInputState<Partial<Pick<Contract, 'company' | 'start' | 'end' | 'months'> & {
     agent: AgentSearchPickerResponse,
     employeeCount: string,
     commissionRates: number[],
@@ -68,6 +81,7 @@ export default function CreateContract({ onClose, contract }: CreateContractProp
         company: contract.contracts.company,
         start: contract.contracts.start,
         end: contract.contracts.end,
+        months: contract.contracts.months,
         employeeCount: contract.contracts.employeeCount.toString(),
         commissionRates: contract.contracts.commissionRates,
         amountPerPerson: contract.contracts.amountPerPerson.toString(),
@@ -96,10 +110,11 @@ export default function CreateContract({ onClose, contract }: CreateContractProp
 
       await (contract ? updateContract : createContract)(user!, {
         _id: contract?.contracts?._id!,
-        start: moment(state.start).startOf('day').toDate(),
-        end: moment(state.end).endOf('day').toDate(),
+        start: moment(state.start).startOf('month').toDate(),
+        end: moment(state.end).endOf('month').toDate(),
         company: state.company!,
         agent: state.agent!._id,
+        months: state.months ?? [],
         employeeCount: parseInt(state.employeeCount, 10),
         commissionRates: state.commissionRates ?? [],
         amountPerPerson: parseInt(state.amountPerPerson, 10),
@@ -135,18 +150,20 @@ export default function CreateContract({ onClose, contract }: CreateContractProp
             <Grid item xs={12} md={6}>
               <FormControl fullWidth>
                 <MobileDatePicker<Moment>
+                  disabled={!!contract} // Disable if updating on edit mode
                   label="Start Date"
                   value={state.start ? moment(state.start) : moment()}
-                  onChange={(date) => setState(cs => ({ ...cs, start: date?.toDate() }))}
+                  onChange={(date) => setState(cs => ({ ...cs, start: date?.startOf('month')?.toDate() }))}
                 />
               </FormControl>
             </Grid>
             <Grid item xs={12} md={6}>
               <FormControl fullWidth>
                 <MobileDatePicker<Moment>
+                  disabled={!!contract} // Disable if updating on edit mode
                   label="End Date"
                   value={state.end ? moment(state.end) : moment()}
-                  onChange={(date) => setState(cs => ({ ...cs, end: date?.toDate() }))}
+                  onChange={(date) => setState(cs => ({ ...cs, end: date?.endOf('month')?.toDate() }))}
                 />
               </FormControl>
             </Grid>
@@ -247,6 +264,51 @@ export default function CreateContract({ onClose, contract }: CreateContractProp
                 onChange={onChange}
               />
             </Grid>
+            {contract && <Grid item md={12}>
+              <TableContainer component={Paper}>
+                <Table sx={{minWidth: 650}}>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell align='center'>From</TableCell>
+                      <TableCell align='center'>To</TableCell>
+                      <TableCell align='center'>No Of Employees</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {state?.months?.map(month => (<TableRow
+                      sx={{
+                        '&:last-child td, &:last-child th': {border: 0},
+                        backgroundColor: moment(month.end).isBefore(moment()) ? 'rgba(0,0,0,0.05)' : 'inherit'
+                      }}
+                    >
+                      <TableCell align='center'>
+                        {moment(month.start).format('MMM YYYY')}
+                      </TableCell>
+                      <TableCell align='center'>
+                        {moment(month.end).format('MMM YYYY')}
+                      </TableCell>
+                      <TableCell>
+                        <TextField
+                          InputLabelProps={{shrink: true}}
+                          disabled={!state.agent}
+                          name="amountPerPerson"
+                          type="number"
+                          fullWidth
+                          value={month?.employeeCount ?? ''}
+                          onChange={e => setState(cs => ({
+                            ...cs,
+                            months: cs.months?.map(m => m._id === month._id ? {
+                              ...m,
+                              employeeCount: parseInt(e.target.value, 10)
+                            } : m)
+                          }))}
+                        />
+                      </TableCell>
+                    </TableRow>))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Grid>}
           </Grid>
         </DialogContent>
         <DialogActions>

@@ -3,7 +3,7 @@ import { getFetcher, patchFetcher } from "../helpers/axiosFetchers";
 import { GenericResponse } from "./genericResponse.type";
 import User from "../models/user.model";
 import AgentProfile, { AgentProfileCompany } from "../models/agentProfile.model";
-import Contract from "../models/contract.model";
+import Contract, {ContractMonth} from "../models/contract.model";
 import { useAuth } from "../contexts/auth.context";
 
 export type ReferralClient = {
@@ -30,8 +30,8 @@ export const useMyDashboard = (user: User, from: Date, to: Date) => useSWR(['/my
   referrals: ReferralClient[],
   directs: AgentProfileCompany[],
   summary: {
-    referrals: (Contract & { level: number })[],
-    directs: (Contract & { level: number })[],
+    referrals: (Contract & { level: number, months: ContractMonth })[],
+    directs: (Contract & { level: number, months: ContractMonth })[],
   }
 }>>)
 

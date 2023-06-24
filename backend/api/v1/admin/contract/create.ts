@@ -18,15 +18,12 @@ export type CreateContractRequest = Omit<
 
 const createContract: CustomRequestHandler<{}, any, Contract> = async (req, res) => {
   const me = await UserModel.findByUserId(req.user!.subject)
-  console.log('before transform', req.body)
   const request = plainToInstance(Contract, req.body, {
     strategy: 'excludeAll',
     exposeUnsetFields: false,
     groups: req.user?.roles ?? []
   })
-  console.log('before validate', request)
   await validateClass(request)
-  console.log('after validate', request)
   const agent = await AgentProfileModel.findById(request.agent)
   if (!agent) throw new Error('Agent not found')
   const company = agent.companies?.find((c) => c._id!.toString() === request.company)

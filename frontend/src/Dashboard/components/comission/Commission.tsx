@@ -1,18 +1,19 @@
 import TablesComp from "./component/TablesComp";
 import "./styles.css";
 import { Tab, Tabs } from 'react-bootstrap';
-import Contract from "../../../models/contract.model";
+import Contract, {ContractMonth} from "../../../models/contract.model";
 import AgentProfile from "../../../models/agentProfile.model";
 import { Dispatch, SetStateAction, useMemo } from "react";
 import moment, { Moment } from "moment-timezone";
 import { FormControl } from "@mui/material";
 import { MobileDatePicker } from "@mui/x-date-pickers";
+import currencyFormat from "../../../utils/currencyFormat";
 
 type CommissionProps = {
   title: string;
   data?: {
-    referrals: (Contract & { level: number })[],
-    directs: (Contract & { level: number })[],
+    referrals: (Contract & { level: number, months: ContractMonth })[],
+    directs: (Contract & { level: number, months: ContractMonth })[],
   },
   from: Date,
   setFrom: Dispatch<SetStateAction<Date>>,
@@ -31,9 +32,9 @@ const Commission = ({ title, data, from, setFrom, to, setTo, isLoading }: Commis
     }
   }
 
-  const directTotal = useMemo(() => data?.directs?.reduce<number>((a, c) => a + (c.employeeCount * c.commissionRates?.[0]), 0), [data?.directs])
+  const directTotal = useMemo(() => data?.directs?.reduce<number>((a, c) => a + ((c.months?.employeeCount ?? 0) * c.commissionRates?.[0]), 0), [data?.directs])
 
-  const referralTotal = useMemo(() => data?.referrals?.reduce<number>((a, c) => a + (c.employeeCount * c.commissionRates?.[c.level]), 0), [data?.referrals])
+  const referralTotal = useMemo(() => data?.referrals?.reduce<number>((a, c) => a + ((c.months?.employeeCount ?? 0) * c.commissionRates?.[c.level]), 0), [data?.referrals])
 
   return (
     <div className="box-main-commission">
@@ -71,15 +72,15 @@ const Commission = ({ title, data, from, setFrom, to, setTo, isLoading }: Commis
               }, {
                 title: 'Contract Start Date',
                 renderHeading: () => <th style={{ textAlign: 'center' }}>Contract Start Date</th>,
-                renderData: r => <td style={{ textAlign: 'center' }}>{moment(r.start).format('YYYY-MM-DD')}</td>
+                renderData: r => <td style={{ textAlign: 'center' }}>{moment(r.months?.start).format('YYYY-MM-DD')}</td>
               }, {
                 title: 'Contract End Date',
                 renderHeading: () => <th style={{ textAlign: 'center' }}>Contract End Date</th>,
-                renderData: r => <td style={{ textAlign: 'center' }}>{moment(r.end).format('YYYY-MM-DD')}</td>
+                renderData: r => <td style={{ textAlign: 'center' }}>{moment(r.months?.end).format('YYYY-MM-DD')}</td>
               }, {
                 title: 'Monthly Membership paid (No. of People)',
                 renderHeading: () => <th style={{ textAlign: 'right' }}>Monthly Membership paid (No. of People)</th>,
-                renderData: r => <td style={{ textAlign: 'right' }}>{r.employeeCount}</td>
+                renderData: r => <td style={{ textAlign: 'right' }}>{r.months?.employeeCount}</td>
               }, {
                 title: 'Amount Paid Per Person',
                 renderHeading: () => <th style={{ textAlign: 'right' }}>Amount Paid Per Person</th>,
@@ -92,12 +93,12 @@ const Commission = ({ title, data, from, setFrom, to, setTo, isLoading }: Commis
                 title: 'Total Pay',
                 renderHeading: () => <th style={{ textAlign: 'right' }}>Total Pay</th>,
                 renderData: r => <td
-                  style={{ textAlign: 'right' }}>${r.commissionRates?.[0] * r.employeeCount}</td>
+                  style={{ textAlign: 'right' }}>${r.commissionRates?.[0] * (r.months?.employeeCount ?? 0)}</td>
               }
             ]} footer={<div className='grid-for-total'>
               <div className='box-for-total'>
                 <div className='grid-for-text'>Total:</div>
-                <div className='grid-for-number'>${directTotal}</div>
+                <div className='grid-for-number'>{currencyFormat(directTotal ?? 0)}</div>
               </div>
             </div>}
             />
@@ -115,15 +116,15 @@ const Commission = ({ title, data, from, setFrom, to, setTo, isLoading }: Commis
               }, {
                 title: 'Contract Start Date',
                 renderHeading: () => <th style={{ textAlign: 'center' }}>Contract Start Date</th>,
-                renderData: r => <td style={{ textAlign: 'center' }}>{moment(r.start).format('YYYY-MM-DD')}</td>
+                renderData: r => <td style={{ textAlign: 'center' }}>{moment(r.months?.start).format('YYYY-MM-DD')}</td>
               }, {
                 title: 'Contract End Date',
                 renderHeading: () => <th style={{ textAlign: 'center' }}>Contract End Date</th>,
-                renderData: r => <td style={{ textAlign: 'center' }}>{moment(r.end).format('YYYY-MM-DD')}</td>
+                renderData: r => <td style={{ textAlign: 'center' }}>{moment(r.months?.end).format('YYYY-MM-DD')}</td>
               }, {
                 title: 'Monthly Membership paid (No. of People)',
                 renderHeading: () => <th style={{ textAlign: 'right' }}>Monthly Membership paid (No. of People)</th>,
-                renderData: r => <td style={{ textAlign: 'right' }}>{r.employeeCount}</td>
+                renderData: r => <td style={{ textAlign: 'right' }}>{r.months?.employeeCount}</td>
               }, {
                 title: 'Amount Paid Per Person',
                 renderHeading: () => <th style={{ textAlign: 'right' }}>Amount Paid Per Person</th>,
@@ -136,12 +137,12 @@ const Commission = ({ title, data, from, setFrom, to, setTo, isLoading }: Commis
                 title: 'Total Pay',
                 renderHeading: () => <th style={{ textAlign: 'right' }}>Total Pay</th>,
                 renderData: r => <td
-                  style={{ textAlign: 'right' }}>${r?.commissionRates?.[r.level] * r.employeeCount}</td>
+                  style={{ textAlign: 'right' }}>${currencyFormat(r?.commissionRates?.[r.level] * (r.months?.employeeCount ?? 0))}</td>
               }
             ]} footer={<div className='grid-for-total'>
               <div className='box-for-total'>
                 <div className='grid-for-text'>Total:</div>
-                <div className='grid-for-number'>${referralTotal}</div>
+                <div className='grid-for-number'>{currencyFormat(referralTotal ?? 0)}</div>
               </div>
             </div>}
             />
@@ -151,8 +152,8 @@ const Commission = ({ title, data, from, setFrom, to, setTo, isLoading }: Commis
           <div id="customers-tab-content">
             <TablesComp data={directTotal && referralTotal ? [{
               client: 'Direct',
-              commission: `$${directTotal}`
-            }, { client: 'Referral', commission: `$${referralTotal}` }] : []} headings={[
+              commission: `${currencyFormat(directTotal)}`
+            }, { client: 'Referral', commission: `${currencyFormat(referralTotal)}` }] : []} headings={[
               {
                 title: 'Clients',
                 key: 'client'
@@ -164,7 +165,7 @@ const Commission = ({ title, data, from, setFrom, to, setTo, isLoading }: Commis
             ]} footer={<div className='grid-for-total'>
               <div className='box-for-total'>
                 <div className='grid-for-text'>Total:</div>
-                <div className='grid-for-number'>${(referralTotal ?? 0) + (directTotal ?? 0)}</div>
+                <div className='grid-for-number'>{currencyFormat((referralTotal ?? 0) + (directTotal ?? 0))}</div>
               </div>
             </div>}
             />
