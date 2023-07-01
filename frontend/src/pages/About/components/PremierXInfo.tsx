@@ -3,23 +3,19 @@ import { makeStyles } from '../../../utils/makeStyles';
 import { Trans, useTranslation } from "react-i18next";
 
 function PremierXInfo() {
-  const { classes } = useStyles()
+  const { classes } = useStyles();
   const [tr] = useTranslation();
 
-  const t = (key: string) => tr(`about.${key}`);
-
-  const missionTitle = t('mission-title');
-  const missionDescription = t('about.mission-description');
-  const whatIsPremierX = t('what-is-premierx');
-  const whatIsPremierXDescription = t('what-is-premierx-description');
-  const howWeDoItTitle = t('how-we-do-it-title');
-  const howWeDoItList = [0, 1, 2, 3, 4, 5].map((n) => t(`how-we-do-it[${n}]`));
+  const t = (key: string) => {
+    const translation = tr(`about.${key}`);
+    return translation || '';
+  };
 
   return (
     <div className={classes.container}>
       <div className={classes.imgContainer}>
         <div className={classes.mission}>
-          <h3>{missionTitle}</h3>
+          <h3>{t('mission-title')}</h3>
           <Trans i18nKey="about.mission-description" components={{ 1: <p />, 2: <span />, 3: <b /> }}>
             <p>
               <span><b /></span>
@@ -29,40 +25,20 @@ function PremierXInfo() {
       </div>
       <Box className={classes.columns}>
         <Grid item xs={12} sm={6}>
-          {missionTitle && (
-            <>
-              <Typography variant='h6' className={classes.subtitle}>
-                {missionTitle}
-              </Typography>
-              <Typography className={classes.text}>
-                {missionDescription}
-              </Typography>
-            </>
-          )}
-          {whatIsPremierX && (
-            <>
-              <Typography variant='h6' className={classes.subtitle}>
-                {whatIsPremierX}
-              </Typography>
-              <Typography className={classes.text}>
-                {whatIsPremierXDescription}
-              </Typography>
-            </>
-          )}
-          {howWeDoItTitle && (
-            <>
-              <Typography variant='h6' className={classes.subtitle}>
-                {howWeDoItTitle}
-              </Typography>
-              <div className={classes.text}>
-                <ul>
-                  {howWeDoItList.map((item, index) => (
-                    <li key={index}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            </>
-          )}
+          <Typography variant='h6' className={classes.subtitle}>
+            {t('what-is-premierx')}: 
+          </Typography>
+          <Typography className={classes.text}>
+            {t('what-is-premierx-description')}
+          </Typography>
+          <Typography variant='h6' className={classes.subtitle}>
+            {t('how-we-do-it-title')}
+          </Typography>
+          <div className={classes.text}>
+            <ul>
+              {[0, 1, 2, 3, 4, 5].map((n) => <li>{t(`how-we-do-it[${n}]`)}</li>)}
+            </ul>
+          </div>
         </Grid>
       </Box>
     </div>
