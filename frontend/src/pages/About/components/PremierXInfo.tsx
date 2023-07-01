@@ -11,14 +11,9 @@ function PremierXInfo() {
     return translation || '';
   };
 
-  const renderSubtitle = (key: string) => {
+  const getSubtitleText = (key: string) => {
     const subtitleText = t(key);
-    if (!subtitleText) return null;
-    return (
-      <Typography variant='h6' className={classes.subtitle}>
-        {subtitleText}
-      </Typography>
-    );
+    return subtitleText || null;
   };
 
   return (
@@ -41,7 +36,11 @@ function PremierXInfo() {
           <Typography className={classes.text}>
             {t('what-is-premierx-description')}
           </Typography>
-          {renderSubtitle('how-we-do-it-title')}
+          {getSubtitleText('how-we-do-it-title') && (
+            <Typography variant="h6" className={classes.subtitle}>
+              {t('how-we-do-it-title')}
+            </Typography>
+          )}
           <div className={classes.text}>
             <ul>
               {[0, 1, 2, 3, 4, 5].map((n) => <li>{t(`how-we-do-it[${n}]`)}</li>)}
