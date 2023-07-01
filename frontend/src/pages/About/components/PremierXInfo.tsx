@@ -11,7 +11,7 @@ function PremierXInfo() {
     return translation || '';
   };
 
-  const renderSubtitle = (key) => {
+  const renderSubtitle = (key: string) => {
     const subtitleText = t(key);
     if (!subtitleText) return null;
     return (
