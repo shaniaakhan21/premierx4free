@@ -31,9 +31,11 @@ function PremierXInfo() {
 					<Typography className={classes.text}>
 						{t('what-is-premierx-description')}
 					</Typography>
-					<Trans i18nKey="how-we-do-it-title" components={{ 1: <h6>{t('how-we-do-it-title')}</h6> }}>
-						<h6>{t('how-we-do-it-title')}</h6>
-					</Trans>
+					<Typography variant="h6" className={classes.subtitle}>
+						<Trans i18nKey="how-we-do-it-title" components={{ 1: <h6>{t('how-we-do-it-title')}</h6> }}>
+							<h6>{t('how-we-do-it-title')}</h6>
+						</Trans>
+					</Typography>
 					<br></br>
 					<div className={classes.text}>
 						<ul>
