@@ -38,6 +38,7 @@ function PremierXInfo() {
           </Typography>
           {getSubtitleText('how-we-do-it-title') && (
             <Trans i18nKey="how-we-do-it-title" components={{ 1: <h6 /> }}>
+				<h6></h6>
 		  </Trans>
           )} <br></br>
           <div className={classes.text}>
