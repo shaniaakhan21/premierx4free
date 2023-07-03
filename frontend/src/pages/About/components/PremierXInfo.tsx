@@ -36,11 +36,11 @@ function PremierXInfo() {
           <Typography className={classes.text}>
             {t('what-is-premierx-description')}
           </Typography>
-          {/* {getSubtitleText('how-we-do-it-title') && (
+          {getSubtitleText('how-we-do-it-title') && (
             <Typography variant="h6" className={classes.subtitle}>
               {t('how-we-do-it-title')}
             </Typography>
-          )} */}<br></br>
+          )} <br></br>
           <div className={classes.text}>
             <ul>
               {[0, 1, 2, 3, 4, 5].map((n) => <li>{t(`how-we-do-it[${n}]`)}</li>)}
