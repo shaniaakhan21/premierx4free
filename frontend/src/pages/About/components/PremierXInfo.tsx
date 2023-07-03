@@ -37,9 +37,8 @@ function PremierXInfo() {
             {t('what-is-premierx-description')}
           </Typography>
           {getSubtitleText('how-we-do-it-title') && (
-            <Typography variant="h6" className={classes.subtitle}>
-              {t('how-we-do-it-title')}
-            </Typography>
+            <Trans i18nKey="how-we-do-it-title">
+		  </Trans>
           )} <br></br>
           <div className={classes.text}>
             <ul>
